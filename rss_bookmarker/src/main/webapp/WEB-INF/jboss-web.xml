@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<jboss-web>
+        <security-domain>other</security-domain>
+        <context-root>rss-bookmarker</context-root>
+</jboss-web>
