@@ -15,7 +15,7 @@
 
 	<!-- Welcome page -->
 	<welcome-file-list>
-		<welcome-file>hello.xhtml</welcome-file>
+		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<!-- JSF mapping -->
@@ -42,7 +42,7 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>app</web-resource-name>
-			<url-pattern>/*</url-pattern>
+			<url-pattern>/secure/*</url-pattern>
 			<http-method>POST</http-method>
 			<http-method>GET</http-method>
 		</web-resource-collection>

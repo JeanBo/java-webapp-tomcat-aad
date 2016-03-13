@@ -8,11 +8,116 @@
 	<version>1.5</version>
 	<name>Rss Bookmarker</name>
 	<url>http://microsoft.com</url>
+
 	<properties>
-		<!-- PicketLink dependency versions -->
-		<version.picketlink.javaee.bom>2.7.0-SNAPSHOT</version.picketlink.javaee.bom>
+		<version.jboss.bom>9.0.0.Final</version.jboss.bom>
+		<version.glassfishjson>1.0.4</version.glassfishjson>
+		<version.compiler.plugin>3.1</version.compiler.plugin>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<version.war.plugin>2.5</version.war.plugin>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.wildfly.bom</groupId>
+				<artifactId>jboss-javaee-7.0-wildfly</artifactId>
+				<version>${version.jboss.bom}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>1.0.3.Final</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
+		<!-- Arquillian -->
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.container</groupId>
+			<artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
+			<version>1.0.0.CR3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.container</groupId>
+			<artifactId>arquillian-container-spi</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld</groupId>
+			<artifactId>weld-core</artifactId>
+			<version>1.1.5.Final</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Other test stuff -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>${version.glassfishjson}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld</groupId>
+			<artifactId>weld-core</artifactId>
+			<version>1.1.5.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>3.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.annotation</groupId>
+			<artifactId>jboss-annotations-api_1.2_spec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.4</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
@@ -82,10 +187,10 @@
 									<basedir>/opt/jboss/wildfly/standalone/deployments/</basedir>
 									<user>jboss:jboss:jboss</user>
 								</assembly>
-                                                                <runCmds>
-                                                                   <run>/opt/jboss/wildfly/bin/add-user.sh -a chris jboss4All</run>
-                                                                   <run>sed -i 's/microsoft/chris/g' /opt/jboss/wildfly/standalone/configuration/application-roles.properties</run>
-                                                                </runCmds>
+								<runCmds>
+									<run>/opt/jboss/wildfly/bin/add-user.sh -a chris jboss4All</run>
+									<run>sed -i 's/microsoft/chris/g' /opt/jboss/wildfly/standalone/configuration/application-roles.properties</run>
+								</runCmds>
 								<ports>
 									<port>8080</port>
 								</ports>
@@ -94,11 +199,15 @@
 								<ports>
 									<port>8080:8080</port>
 								</ports>
+								<volumes>
+									<bind>
+										<volume>/opt/rssfiles/:/tmp</volume>
+									</bind>
+								</volumes>
 							</run>
 						</image>
 					</images>
 				</configuration>
-<!--
 				<executions>
 					<execution>
 						<id>docker:build</id>
@@ -115,7 +224,6 @@
 						</goals>
 					</execution>
 				</executions>
--->
 			</plugin>
 		</plugins>
 	</build>

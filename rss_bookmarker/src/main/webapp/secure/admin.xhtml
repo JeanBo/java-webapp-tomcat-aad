@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>JSF 2.0 Hello World</title>
+</h:head>
+<h:body bgcolor="blue">
+
+	<!-- 
+	<h3>JSF 2.0 Hello World Example - welcome.xhtml</h3>
+	<h4>Welcome #{helloBean.name}</h4>
+	-->
+
+	<!-- 
+	<h:inputText value="#{helloBean.name}"></h:inputText>
+	<h:commandButton value="Welcome Me" action="welcome.xhtml"></h:commandButton>
+	-->
+	
+	<f:view>
+    	<f:event type="preRenderView" listener="#{adminController.init}"/>
+	</f:view>
+
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Filename : " />
+			<h:inputText value="#{adminController.filename}" />
+			<h:commandButton value="Create file"
+				action="#{adminController.createFile}" />
+		</h:panelGrid>
+
+		
+		<h:selectOneMenu value="files">
+    		<f:selectItems value="#{adminController.adminBean.fileList}" />
+		</h:selectOneMenu>
+
+
+	</h:form>
+
+</h:body>
+</html>
