@@ -174,10 +174,11 @@
 			<plugin>
 				<groupId>org.jolokia</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.13.2</version>
+				<version>0.13.9</version>
 				<configuration>
 					<images>
 						<image>
+							<alias>rss</alias>
 							<name>cvugrinec/rss_bookmarker:${version}</name>
 							<build>
 								<maintainer>cvugrinec@redhat.com</maintainer>
@@ -196,6 +197,7 @@
 								</ports>
 							</build>
 							<run>
+								<namingStrategy>alias</namingStrategy>
 								<ports>
 									<port>8080:8080</port>
 								</ports>
