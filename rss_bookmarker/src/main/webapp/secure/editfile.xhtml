@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Demo - Rss Feeder on Azure - edit page</title>
+</h:head>
+
+<h:body>
+
+<p id="demo"><h:outputText value="#{adminController.serverUrl}" /></p>
+
+
+<script>
+	function test(){
+	    return document.getElementById("demo").innerHTML;
+	}
+</script>
+	
+	<h:form id="editFile">
+		<input type="hidden" name="hidden1" value="#{adminController.serverUrl}" />
+		<h:inputTextarea rows="30" cols="100" value="#{adminController.fileContent}" />
+		<h:commandButton value="Save file" action="#{adminController.saveFile}">
+			<f:setPropertyActionListener target="#{adminController.selectedfile}" value="#{demo}" />
+		</h:commandButton>
+	</h:form>
+ 
+</h:body>
+</html>
