@@ -7,9 +7,19 @@
 
 <h:head>
 	<title>Demo - Rss Feeder on Azure - adminpage</title>
-</h:head>
-<h:body bgcolor="blue">
+	<link rel="stylesheet" type="text/css" href="../css/outlook.css" />
 
+</h:head>
+<h:body>
+
+	<h1>Rss Feeder on Azure - adminpage</h1>
+	<script>
+		function setFileNaam(){
+			var mystring = window.location.href;
+			mystring = mystring.replace('/rss-bookmarker/secure/admin.xhtml','/') +document.getElementById("deleteFile:selectFile").value;
+			document.getElementById("selected_filenaam").innerHTML =  '<a href="'+mystring+'">'+mystring+'</a>';
+		}
+	</script>
 	
 	<h:form id="createFile">
 		<h:panelGrid columns="3">
@@ -23,11 +33,14 @@
 	<h:form id="deleteFile">
 		<h:panelGrid columns="4">		
 			<h:outputLabel value="Files : " />
-			<h:selectOneMenu id="selectFile" value="#{adminController.selectedfile}">
+			<h:selectOneMenu id="selectFile" onchange="setFileNaam()" value="#{adminController.selectedfile}">
 	    		<f:selectItems value="#{adminController.adminBean.fileList}" var="rssFile" itemValue="#{rssFile.fileName}" itemLabel="#{rssFile.fileName}" />
 			</h:selectOneMenu>
 			<h:commandButton value="Delete file" action="#{adminController.deleteFile}" />
 			<h:commandButton value="Edit file" action="#{adminController.editFile}" />
+			<h:outputLabel value="Rss subscription : " />
+			<p id="selected_filenaam" />
+			
 		</h:panelGrid>
 	</h:form>
 
