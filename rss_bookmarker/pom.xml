@@ -163,7 +163,7 @@
 				<version>7.7.Final</version>
 			</plugin>
 			<plugin>
-				<groupId>org.jolokia</groupId>
+				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.13.9</version>
 				<configuration>
@@ -201,6 +201,7 @@
 						</image>
 					</images>
 				</configuration>
+<!--
 				<executions>
 					<execution>
 						<id>docker:build</id>
@@ -217,6 +218,7 @@
 						</goals>
 					</execution>
 				</executions>
+-->
 			</plugin>
 		</plugins>
 	</build>
