@@ -34,6 +34,7 @@
 
     <TextView
         android:id="@+id/location_address_view"
+        android:layout_toRightOf="@+id/stop_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -41,4 +42,13 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/text_margin_top"
         android:textSize="@dimen/default_text_size" />
+
+    <ListView
+        android:id="@+id/ridelist"
+        android:layout_alignParentBottom="@+id/location_address_view"
+        android:layout_marginTop="@dimen/text_margin_top_extra"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </RelativeLayout>

@@ -1,24 +1,12 @@
-/**
- * Copyright 2014 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 
 package nl.microsoft.bizmilesapp.azuredemo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
@@ -28,9 +16,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +32,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import nl.microsoft.bizmilesapp.azuredemo.R;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
@@ -48,14 +41,20 @@ import com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.squareup.okhttp.OkHttpClient;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.val;
 
 public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
-
 
     protected static final String TAG = "main-activity";
 
@@ -67,42 +66,59 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     private MobileServiceTable<ToDoItem> mToDoTable;
     private MobileServiceTable<Ride> mRidesTable;
 
+    private Ride ride;
 
     //  Screen elements
     protected Location mLastLocation;
-    protected boolean mAddressRequested;
+    protected Location startLocation;
+    protected Location stopLocation;
+
+    protected boolean mStartAddressRequested;
+    protected boolean mStopAddressRequested;
+
     protected String mAddressOutput;
-    private BizMilesAppReceiver mResultReceiver;
+    private BizMilesStartReceiver mStartResultReceiver = new BizMilesStartReceiver(new Handler());
+    private BizMilesStopReceiver mStopResultReceiver = new BizMilesStopReceiver(new Handler());
     protected TextView mLocationAddressTextView;
+    protected ListView mRidelist;
     ProgressBar mProgressBar;
 
     Button mStartButton;
     Button mStopButton;
 
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> arrayList;
+
     //  Google API stuff
     protected GoogleApiClient mGoogleApiClient;
     protected GoogleApiClient client;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        mResultReceiver = new BizMilesAppReceiver(new Handler());
-
         mLocationAddressTextView = (TextView) findViewById(R.id.location_address_view);
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mStartButton = (Button) findViewById(R.id.start_button);
         mStopButton = (Button) findViewById(R.id.stop_button);
+        mRidelist = (ListView) findViewById(R.id.ridelist);
+        stopLocation = null;
+        startLocation = null;
 
+        arrayList = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
+        mRidelist.setAdapter(adapter);
 
         // Set defaults, then update using values stored in the Bundle.
-        mAddressRequested = false;
+        mStartAddressRequested = false;
+        mStopAddressRequested = false;
         mAddressOutput = "";
         updateValuesFromBundle(savedInstanceState);
 
-        updateUIWidgets();
         buildGoogleApiClient();
+
         //  This was genereated by the ide for API indexing
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
@@ -112,6 +128,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
         mStopButton.setVisibility(View.INVISIBLE);
         mStopButton.setEnabled(false);
+
+        refreshItemsFromTable();
+        updateUIWidgets();
     }
 
     private synchronized void buildGoogleApiClient() {
@@ -129,11 +148,12 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     private void updateValuesFromBundle(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             if (savedInstanceState.keySet().contains(ADDRESS_REQUESTED_KEY)) {
-                mAddressRequested = savedInstanceState.getBoolean(ADDRESS_REQUESTED_KEY);
+                mStartAddressRequested = savedInstanceState.getBoolean(ADDRESS_REQUESTED_KEY);
+                mStopAddressRequested = savedInstanceState.getBoolean(ADDRESS_REQUESTED_KEY);
             }
             if (savedInstanceState.keySet().contains(LOCATION_ADDRESS_KEY)) {
                 mAddressOutput = savedInstanceState.getString(LOCATION_ADDRESS_KEY);
-                displayAddressOutput();
+                mLocationAddressTextView.setText(mAddressOutput);
             }
         }
     }
@@ -159,26 +179,35 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
 
     public void stopButtonHandler(View view){
+
+
+        executeStopIntentService();
+        mStartAddressRequested = true;
+        mStopAddressRequested = true;
+
         mStartButton.setVisibility(View.VISIBLE);
         mStartButton.setEnabled(true);
 
         mStopButton.setVisibility(View.INVISIBLE);
         mStopButton.setEnabled(false);
 
+        updateUIWidgets();
+
     }
 
     public void startButtonHandler(View view) {
 
-        startIntentService();
-        mAddressRequested = true;
-        refreshItemsFromTable();
-        updateUIWidgets();
+        executeStartIntentService();
+        mStartAddressRequested = true;
+        mStopAddressRequested = false;
 
         mStartButton.setVisibility(View.INVISIBLE);
         mStartButton.setEnabled(false);
 
         mStopButton.setVisibility(View.VISIBLE);
         mStopButton.setEnabled(true);
+        adapter.clear();
+        updateUIWidgets();
 
     }
 
@@ -188,24 +217,25 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             protected Void doInBackground(Void... params) {
 
                 try {
-                    final List<ToDoItem> results = mToDoTable.where().field("complete").eq(val(false)).execute().get();
+                    Calendar cal = GregorianCalendar.getInstance();
+                    if(cal.DAY_OF_YEAR>3)
+                        cal.set( Calendar.DAY_OF_YEAR, -3);
+                    final DateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm");
+                    final List<Ride> rides = mRidesTable.where().field("updatedAt").gt( cal.getTime()).execute().get();
 
-                    //Offline Sync
-                    //final List<ToDoItem> results = refreshItemsFromMobileServiceTableSyncTable();
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            //mAdapter.clear();
-
-                            for (ToDoItem item : results) {
-                                //mAdapter.add(item);
-                                Toast.makeText(MainActivity.this, item.getText(), Toast.LENGTH_SHORT).show();
+                            adapter.clear();
+                            for (Ride ride : rides) {
+                                arrayList.add(dateFormat.format(ride.getUpdated_at())+" : "+ride.getStartAddress()+","+ride.getKilometers());
                             }
+                            adapter.notifyDataSetChanged();
                         }
                     });
                 } catch (final Exception e) {
-
+                    Log.e(TAG, "Exception populating ride list from database, exception: "+e.getCause());
                 }
 
                 return null;
@@ -276,47 +306,54 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
      */
     @Override
     public void onConnected(Bundle connectionHint) {
-        // Gets the best and most recent location currently available, which may be null
-        // in rare cases when a location is not available.
+
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
         if (mLastLocation != null) {
             // Determine whether a Geocoder is available.
             if (!Geocoder.isPresent()) {
                 Toast.makeText(this, R.string.no_geocoder_available, Toast.LENGTH_LONG).show();
                 return;
             }
-            // It is possible that the user presses the button to get the address before the
-            // GoogleApiClient object successfully connects. In such a case, mAddressRequested
-            // is set to true, but no attempt is made to fetch the address (see
-            // fetchAddressButtonHandler()) . Instead, we start the intent service here if the
-            // user has requested an address, since we now have a connection to GoogleApiClient.
-            if (mAddressRequested) {
-                startIntentService();
+            if (mStartAddressRequested) {
+                executeStartIntentService();
+            }
+            if(mStopAddressRequested){
+                executeStopIntentService();
             }
         }
+
     }
 
-    /**
-     * Creates an intent, adds location data to it as an extra, and starts the intent service for
-     * fetching an address.
-     */
-    protected void startIntentService() {
+    protected void executeStopIntentService() {
 
-        if(!(mGoogleApiClient.isConnected() && mLastLocation != null))
+        if((!(mGoogleApiClient.isConnected()))){
+            Toast.makeText(MainActivity.this, "not connnected", Toast.LENGTH_SHORT).show();
             return;
+        }
+        Intent stopIntent = new Intent(this, FetchAddressIntentService.class);
+        stopIntent.putExtra(Constants.RECEIVER, mStopResultReceiver);
+        stopIntent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
+        startService(stopIntent);
+       // getActivity().finish();
+        //System.exit(0);
+    }
 
-        // Create an intent for passing to the intent service responsible for fetching the address.
+
+
+
+
+    protected void executeStartIntentService() {
+
+        if((!(mGoogleApiClient.isConnected()))){
+            Toast.makeText(MainActivity.this, "not connnected", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
         Intent intent = new Intent(this, FetchAddressIntentService.class);
-
-        // Pass the result receiver as an extra to the service.
-        intent.putExtra(Constants.RECEIVER, mResultReceiver);
-
-        // Pass the location data as an extra to the service.
+        intent.putExtra(Constants.RECEIVER, mStartResultReceiver);
         intent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
-
-        // Start the service. If the service isn't already running, it is instantiated and started
-        // (creating a process for it if needed); if it is running then it remains running. The
-        // service kills itself automatically once all intents are processed.
         startService(intent);
     }
 
@@ -336,49 +373,37 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         mGoogleApiClient.connect();
     }
 
-    /**
-     * Updates the address in the UI.
-     */
-    protected void displayAddressOutput() {
-        mLocationAddressTextView.setText(mAddressOutput);
-    }
 
     /**
      * Toggles the visibility of the progress bar. Enables or disables the Fetch Address button.
      */
     private void updateUIWidgets() {
-        if (mAddressRequested) {
-            mProgressBar.setVisibility(ProgressBar.VISIBLE);
+        mProgressBar.setVisibility(ProgressBar.GONE);
+
+        if (mStartAddressRequested) {
             mStartButton.setEnabled(false);
-        } else {
-            mProgressBar.setVisibility(ProgressBar.GONE);
+            mStopButton.setEnabled(true);
+        }
+        if(mStopAddressRequested){
             mStartButton.setEnabled(true);
+            mStopButton.setEnabled(false);
         }
     }
 
-    /**
-     * Shows a toast with the given text.
-     */
-    protected void showToast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save whether the address has been requested.
-        savedInstanceState.putBoolean(ADDRESS_REQUESTED_KEY, mAddressRequested);
+        savedInstanceState.putBoolean(ADDRESS_REQUESTED_KEY, mStartAddressRequested);
 
         // Save the address string.
         savedInstanceState.putString(LOCATION_ADDRESS_KEY, mAddressOutput);
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    /**
-     * Receiver for data sent from FetchAddressIntentService.
-     */
     @SuppressLint("ParcelCreator")
-    class BizMilesAppReceiver extends ResultReceiver {
-        public BizMilesAppReceiver(Handler handler) {
+    class BizMilesStartReceiver extends ResultReceiver {
+        public BizMilesStartReceiver(Handler handler) {
             super(handler);
         }
 
@@ -387,20 +412,51 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
             // Display the address string or an error message sent from the intent service.
             mAddressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
+            //Toast.makeText(MainActivity.this, "Start Address received is: "+mAddressOutput, Toast.LENGTH_SHORT).show();
 
-            Ride ride = new Ride();
+            ride = new Ride();
             ride.setStartAddress(mAddressOutput);
-            mRidesTable.insert(ride);
-            displayAddressOutput();
+            startLocation = mLastLocation;
 
-            // Show a toast message if an address was found.
-            if (resultCode == Constants.SUCCESS_RESULT) {
-                showToast(getString(R.string.address_found));
-            }
+            mLocationAddressTextView.setText(mAddressOutput);
 
-            // Reset. Enable the Fetch Address button and stop showing the progress bar.
-            mAddressRequested = false;
+            // Reset. Enable the Fetch Address button and stop showing the progress bar
+            mStartAddressRequested = true;
             updateUIWidgets();
+        }
+    }
+
+
+    @SuppressLint("ParcelCreator")
+    class BizMilesStopReceiver extends ResultReceiver {
+        public BizMilesStopReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+
+
+            Toast.makeText(MainActivity.this, "Stopped ride...", Toast.LENGTH_SHORT).show();
+            // Display the address string or an error message sent from the intent service.
+            mAddressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
+            stopLocation = mLastLocation;
+
+
+            float distance = 0;
+            if(startLocation !=null && stopLocation !=null ){
+                distance = startLocation.distanceTo(stopLocation);
+                Toast.makeText(MainActivity.this, "Calculated distance: "+distance, Toast.LENGTH_SHORT).show();
+            }
+            //  Inserting into database
+            ride.setKilometers(distance);
+            ride.setStopAddress(mAddressOutput);
+            mRidesTable.insert(ride);
+
+            mStopAddressRequested = true;
+            refreshItemsFromTable();
+            updateUIWidgets();
+
         }
     }
 }
