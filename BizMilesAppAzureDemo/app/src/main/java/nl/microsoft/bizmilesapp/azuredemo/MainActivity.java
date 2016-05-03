@@ -3,11 +3,10 @@
 package nl.microsoft.bizmilesapp.azuredemo;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -36,7 +34,9 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import nl.microsoft.bizmilesapp.azuredemo.R;
+
+import nl.microsoft.bizmilesapp.azuredemo.nl.microsoft.bizmilesapp.azuredemo.services.StartFetchAddressIntentService;
+import nl.microsoft.bizmilesapp.azuredemo.nl.microsoft.bizmilesapp.azuredemo.services.StopFetchAddressIntentService;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -50,20 +50,16 @@ import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 import com.squareup.okhttp.OkHttpClient;
 
-import java.io.IOException;
 import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.sql.Time;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.val;
@@ -83,21 +79,14 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     //  Screen elements
     protected Location mLastLocation;
-    protected Location startLocation;
-    protected Location stopLocation;
-
     protected boolean mStartAddressRequested;
     protected boolean mStopAddressRequested;
-
     protected String mAddressOutput;
-    private BizMilesStartReceiver mStartResultReceiver = new BizMilesStartReceiver(new Handler());
-    private BizMilesStopReceiver mStopResultReceiver = new BizMilesStopReceiver(new Handler());
     protected TextView mLocationAddressTextView;
     protected ListView mRidelist;
-    ProgressBar mProgressBar;
-
-    Button mStartButton;
-    Button mStopButton;
+    protected ProgressBar mProgressBar;
+    protected Button mStartButton;
+    protected Button mStopButton;
 
     private ArrayAdapter<String> adapter;
     private ArrayList<String> arrayList;
@@ -106,6 +95,13 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     protected GoogleApiClient mGoogleApiClient;
     protected GoogleApiClient client;
     protected LocationRequest mLocationRequest;
+
+    //  DroidServices
+    Intent stopFetchIntent = null;
+    Intent startFetchintent = null;
+
+    private BizMilesStartReceiver mStartResultReceiver = new BizMilesStartReceiver(new Handler());
+    private BizMilesStopReceiver mStopResultReceiver = new BizMilesStopReceiver(new Handler());
 
 
     @Override
@@ -119,8 +115,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         mStartButton = (Button) findViewById(R.id.start_button);
         mStopButton = (Button) findViewById(R.id.stop_button);
         mRidelist = (ListView) findViewById(R.id.ridelist);
-        stopLocation = null;
-        startLocation = null;
 
         arrayList = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
@@ -130,38 +124,56 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         mStartAddressRequested = false;
         mStopAddressRequested = false;
         mAddressOutput = "";
+
         updateValuesFromBundle(savedInstanceState);
 
         //  Google API init
         buildGoogleApiClient();
         //  This was genereated by the ide for API indexing
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        if(client==null)
+            client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         createLocationRequest();
 
         //  Azure API init
         createAzureMobileServiceClient();
-        authenticate();
+        authenticateOnAzure();
         mRidesTable = amsClient.getTable(Ride.class);
 
-        mStopButton.setVisibility(View.INVISIBLE);
-        mStopButton.setEnabled(false);
+
+        if(isMyServiceRunning(StartFetchAddressIntentService.class)){
+            Toast.makeText(MainActivity.this, "Service is still running", Toast.LENGTH_SHORT).show();
+            mStopButton.setVisibility(View.VISIBLE);
+            mStopButton.setEnabled(true);
+        }else{
+            if(isMyServiceRunning(StopFetchAddressIntentService.class)){
+                stopService(stopFetchIntent);
+            }
+            mStopButton.setVisibility(View.INVISIBLE);
+            mStopButton.setEnabled(false);
+        }
 
         updateUIWidgets();
+        refreshItemsFromTable();
+
     }
 
     private synchronized void createLocationRequest() {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        if(mLocationRequest==null){
+            mLocationRequest = new LocationRequest();
+            mLocationRequest.setInterval(10000);
+            mLocationRequest.setFastestInterval(5000);
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        }
     }
 
     private synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
+        if(mGoogleApiClient==null){
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
     }
 
 
@@ -182,27 +194,29 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
 
     private void createAzureMobileServiceClient(){
-        try {
-            amsClient = new MobileServiceClient("https://chris-mobileapp1.azurewebsites.net", this);
+        if(amsClient==null){
+            try {
+                amsClient = new MobileServiceClient(Constants.AZURE_SERVICE_URL, this);
 
-        } catch (MalformedURLException e) {
-
-        }
-
-        amsClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
-            @Override
-            public OkHttpClient createOkHttpClient() {
-                OkHttpClient client = new OkHttpClient();
-                client.setReadTimeout(20, TimeUnit.SECONDS);
-                client.setWriteTimeout(20, TimeUnit.SECONDS);
-                return client;
+            } catch (MalformedURLException e) {
+                Log.e(TAG, "Exception reaching azure mobile app on "+Constants.AZURE_SERVICE_URL+", exception: "+e.getCause());
             }
-        });
+
+            amsClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
+                @Override
+                public OkHttpClient createOkHttpClient() {
+                    OkHttpClient client = new OkHttpClient();
+                    client.setReadTimeout(20, TimeUnit.SECONDS);
+                    client.setWriteTimeout(20, TimeUnit.SECONDS);
+                    return client;
+                }
+            });
+        }
 
     }
 
 
-    private void authenticate() {
+    private void authenticateOnAzure() {
         ListenableFuture<MobileServiceUser> mLogin = amsClient.login(MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
 
         Futures.addCallback(mLogin, new FutureCallback<MobileServiceUser>() {
@@ -216,10 +230,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         });
     }
 
+
     public void stopButtonHandler(View view){
 
 
-        executeStopIntentService();
+        executeStopFetchIntentService();
         mStartAddressRequested = true;
         mStopAddressRequested = true;
 
@@ -235,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     public void startButtonHandler(View view) {
 
-        executeStartIntentService();
+        executeStartFetchIntentService();
         mStartAddressRequested = true;
         mStopAddressRequested = false;
 
@@ -267,8 +282,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                         public void run() {
                             adapter.clear();
                             for (Ride ride : rides) {
-                                arrayList.add(dateFormat.format(ride.getStarted_at())+" : "+ride.getStartAddress()+","+ride.getKilometers());
-                                //arrayList.add(ride.getUpdated_at()+" : "+ride.getStartAddress()+","+ride.getKilometers());
+                                //arrayList.add(dateFormat.format(ride.getStarted_at())+" : "+ride.getStartAddress()+","+ride.getKilometers());
+                                arrayList.add(dateFormat.format(ride.getStopped_at())+" : "+ride.getStartAddress()+","+ride.getKilometers());
+                                //arrayList.add(ride.getStartAddress()+","+ride.getKilometers());
                             }
                             adapter.notifyDataSetChanged();
                         }
@@ -332,7 +348,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             mGoogleApiClient.disconnect();
         }
         client.disconnect();
-        System.exit(0);
+        //System.exit(0);
     }
 
     /**
@@ -343,63 +359,41 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     }
 
-    private void setLocation(ActionTypes actionType){
-        if(!client.isConnected())
-            client.connect();
-        if(!mGoogleApiClient.isConnected())
-            mGoogleApiClient.connect();
 
-        //  Update
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-        switch(actionType){
-            case START:
-                startLocation = mLastLocation;
-                break;
-            case STOP:
-                stopLocation = mLastLocation;
-                break;
-            case CLEAR:
-                mLastLocation = null;
-                startLocation = null;
-                stopLocation = null;
-                mLocationAddressTextView.setText("");
-                break;
-        }
-        if (mLastLocation != null) {
-            // Determine whether a Geocoder is available.
-            if (!Geocoder.isPresent()) {
-                Toast.makeText(this, R.string.no_geocoder_available, Toast.LENGTH_LONG).show();
-                return;
-            }
-        }
-    }
-
-    protected void executeStopIntentService() {
-        setLocation(ActionTypes.STOP);
+    protected void executeStopFetchIntentService() {
         if(!(mGoogleApiClient.isConnected())){
             Toast.makeText(MainActivity.this, "not connnected", Toast.LENGTH_SHORT).show();
             return;
         }else{
-            Intent stopIntent = new Intent(this, FetchAddressIntentService.class);
-            stopIntent.putExtra(Constants.RECEIVER, mStopResultReceiver);
-            stopIntent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
-            startService(stopIntent);
+            stopFetchIntent = new Intent(this, StopFetchAddressIntentService.class);
+            stopFetchIntent.putExtra(Constants.RECEIVER, mStopResultReceiver);
+            stopFetchIntent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
+
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            //setLocation(ActionTypes.STOP);
+            stopFetchIntent.putExtra(Constants.STOP_LOCATION, mLastLocation);
+
+            startService(stopFetchIntent);
         }
     }
 
 
-    protected void executeStartIntentService() {
-        setLocation(ActionTypes.START);
+    protected void executeStartFetchIntentService() {
         if(!(mGoogleApiClient.isConnected())){
             Toast.makeText(MainActivity.this, "not connnected", Toast.LENGTH_SHORT).show();
             return;
         }else{
-            Intent intent = new Intent(this, FetchAddressIntentService.class);
-            intent.putExtra(Constants.RECEIVER, mStartResultReceiver);
-            intent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
-            startService(intent);
+            startFetchintent = new Intent(this, StartFetchAddressIntentService.class);
+            startFetchintent.putExtra(Constants.RECEIVER, mStartResultReceiver);
+            startFetchintent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
+
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            //setLocation(ActionTypes.STOP);
+            startFetchintent.putExtra(Constants.START_LOCATION, mLastLocation);
+
+            startService(startFetchintent);
         }
     }
 
@@ -448,6 +442,16 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         mLastLocation = location;
     }
 
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @SuppressLint("ParcelCreator")
     class BizMilesStartReceiver extends ResultReceiver {
         public BizMilesStartReceiver(Handler handler) {
@@ -459,11 +463,10 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
             // Display the address string or an error message sent from the intent service.
             mAddressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
-            //Toast.makeText(MainActivity.this, "Start Address received is: "+mAddressOutput, Toast.LENGTH_SHORT).show();
 
             ride = new Ride();
             ride.setStartAddress(mAddressOutput);
-            ride.setStarted_at(new Time(GregorianCalendar.getInstance().getTimeInMillis()));
+            ride.setStarted_at(GregorianCalendar.getInstance().getTime());
             mLocationAddressTextView.setText(mAddressOutput);
 
             // Reset. Enable the Fetch Address button and stop showing the progress bar
@@ -481,34 +484,50 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-
-
-            Toast.makeText(MainActivity.this, "Stopped ride...", Toast.LENGTH_SHORT).show();
-            // Display the address string or an error message sent from the intent service.
             mAddressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
+            Toast.makeText(MainActivity.this, "Stopped ride at: "+mAddressOutput, Toast.LENGTH_SHORT).show();
+            // Display the address string or an error message sent from the intent service.
+            Location startLocation = startFetchintent.getParcelableExtra(Constants.START_LOCATION);
+            Location stopLocation = stopFetchIntent.getParcelableExtra(Constants.STOP_LOCATION);
 
             float distance = 0;
             DecimalFormat df = new DecimalFormat("#.#");
             df.setRoundingMode(RoundingMode.CEILING);
+            boolean succeeded = false;
             if(startLocation !=null && stopLocation !=null ){
                 //distance = Float.parseFloat(df.format(startLocation.distanceTo(stopLocation)));
                 distance = startLocation.distanceTo(stopLocation)/1000;
                 Toast.makeText(MainActivity.this, "Calculated distance: "+distance, Toast.LENGTH_SHORT).show();
                 //  Inserting into database, only if distance >0;
                 if(distance>0){
-                    ride.setKilometers(distance);
-                    ride.setStopAddress(mAddressOutput);
-                    ride.setStopped_at(new Time(GregorianCalendar.getInstance().getTimeInMillis()));
-                    mRidesTable.insert(ride);
+                    try{
+                        ride.setKilometers(distance);
+                        ride.setStopAddress(mAddressOutput);
+                        ride.setStopped_at(GregorianCalendar.getInstance().getTime());
+                        mRidesTable.insert(ride);
+                        succeeded = true;
+                    }catch(Exception ex){
+                        Toast.makeText(MainActivity.this, "DB Exception while trying to persist ride", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "DB Exception while trying to persist ride : "+ex.getCause());
+
+                    }
                 }
             }
-            mStopAddressRequested = true;
-            setLocation(ActionTypes.CLEAR);
-            refreshItemsFromTable();
-            updateUIWidgets();
+            if(succeeded){
+                mStopAddressRequested = true;
+                //setLocation(ActionTypes.CLEAR);
+                refreshItemsFromTable();
+                updateUIWidgets();
+
+                //  Always cleanup old intents
+                stopService(startFetchintent);
+                stopService(stopFetchIntent);
+            }
 
         }
     }
+
+
 
     enum ActionTypes{
         START,STOP,CLEAR;

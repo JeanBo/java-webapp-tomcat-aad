@@ -1,4 +1,4 @@
-package nl.microsoft.bizmilesapp.azuredemo;
+package nl.microsoft.bizmilesapp.azuredemo.nl.microsoft.bizmilesapp.azuredemo.services;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -10,19 +10,20 @@ import android.os.ResultReceiver;
 import android.text.TextUtils;
 import android.util.Log;
 
-import nl.microsoft.bizmilesapp.azuredemo.R;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import nl.microsoft.bizmilesapp.azuredemo.Constants;
+import nl.microsoft.bizmilesapp.azuredemo.R;
 
 /**
  * Asynchronously handles an intent using a worker thread. Receives a ResultReceiver object and a
  * location through an intent. Tries to fetch the address for the location using a Geocoder, and
  * sends the result to the ResultReceiver.
  */
-public class FetchAddressIntentService extends IntentService {
+public class StopFetchAddressIntentService extends IntentService {
     private static final String TAG = "FetchAddressIS";
 
     /**
@@ -34,7 +35,7 @@ public class FetchAddressIntentService extends IntentService {
      * This constructor is required, and calls the super IntentService(String)
      * constructor with the name for a worker thread.
      */
-    public FetchAddressIntentService() {
+    public StopFetchAddressIntentService() {
         // Use the TAG to name the worker thread.
         super(TAG);
     }
@@ -42,7 +43,7 @@ public class FetchAddressIntentService extends IntentService {
     /**
      * Tries to get the location address using a Geocoder. If successful, sends an address to a
      * result receiver. If unsuccessful, sends an error message instead.
-     * Note: We define a {@link android.os.ResultReceiver} in * MainActivity to process content
+     * Note: We define a {@link ResultReceiver} in * MainActivity to process content
      * sent from this service.
      *
      * This service calls this method from the default worker thread with the intent that started
@@ -61,7 +62,7 @@ public class FetchAddressIntentService extends IntentService {
         }
 
         // Get the location passed to this service through an extra.
-        Location location = intent.getParcelableExtra(Constants.LOCATION_DATA_EXTRA);
+        Location location = intent.getParcelableExtra(Constants.STOP_LOCATION);
 
 
 

@@ -21,25 +21,48 @@ public class Ride {
     private float kilometers;
     @com.google.gson.annotations.SerializedName("id")
     private String mId;
+
     @com.google.gson.annotations.SerializedName("starttime")
-    private Time started_at;
+    private Date started_at;
     @com.google.gson.annotations.SerializedName("stoptime")
-    private Time stopped_at;
+    private Date stopped_at;
 
+    /*
+    @com.google.gson.annotations.SerializedName("createdAt")
+    private DateTimeOffset createdAt;
+    @com.google.gson.annotations.SerializedName("updatedAt")
+    private DateTimeOffset updatedAt;
 
-    public Time getStarted_at() {
+    public DateTimeOffset getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(DateTimeOffset createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public DateTimeOffset getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(DateTimeOffset updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+    */
+
+    public Date getStarted_at() {
         return started_at;
     }
 
-    public void setStarted_at(Time started_at) {
+    public void setStarted_at(Date started_at) {
         this.started_at = started_at;
     }
 
-    public Time getStopped_at() {
+    public Date getStopped_at() {
         return stopped_at;
     }
 
-    public void setStopped_at(Time stopped_at) {
+    public void setStopped_at(Date stopped_at) {
         this.stopped_at = stopped_at;
     }
 

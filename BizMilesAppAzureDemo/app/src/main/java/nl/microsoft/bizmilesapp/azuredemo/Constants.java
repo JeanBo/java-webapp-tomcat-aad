@@ -25,6 +25,7 @@ public final class Constants {
     //public static final String STOP_LOCATION_DATA_EXTRA = PACKAGE_NAME + ".STOP_LOCATION_DATA_EXTRA";
 
     public static final String START_LOCATION = "START_LOCATION";
-    //public static final String STOP_LOCATION = "STOP_LOCATION";
+    public static final String STOP_LOCATION = "STOP_LOCATION";
 
+    public static final String AZURE_SERVICE_URL = "https://chris-mobileapp1.azurewebsites.net";
 }

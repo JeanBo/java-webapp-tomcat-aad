@@ -28,13 +28,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Service to asynchronously fetch a location address using a Geocoder. Setting the
-        android:exported attribute to "false" stops other apps from starting this
-        service, even when using an explicit intent. -->
         <service
-            android:name="nl.microsoft.bizmilesapp.azuredemo.FetchAddressIntentService"
+            android:name=".nl.microsoft.bizmilesapp.azuredemo.services.StartFetchAddressIntentService"
             android:exported="false"/>
-
+        <service
+            android:name=".nl.microsoft.bizmilesapp.azuredemo.services.StopFetchAddressIntentService"
+            android:exported="false"/>
     </application>
 
 </manifest>
