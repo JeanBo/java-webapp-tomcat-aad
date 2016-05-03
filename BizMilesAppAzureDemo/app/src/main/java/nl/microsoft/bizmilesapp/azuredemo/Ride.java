@@ -2,6 +2,10 @@ package nl.microsoft.bizmilesapp.azuredemo;
 
 import android.location.Location;
 
+import com.microsoft.windowsazure.mobileservices.table.DateTimeOffset;
+
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -17,8 +21,27 @@ public class Ride {
     private float kilometers;
     @com.google.gson.annotations.SerializedName("id")
     private String mId;
-    @com.google.gson.annotations.SerializedName("updatedAt")
-    private Date updated_at;
+    @com.google.gson.annotations.SerializedName("starttime")
+    private Time started_at;
+    @com.google.gson.annotations.SerializedName("stoptime")
+    private Time stopped_at;
+
+
+    public Time getStarted_at() {
+        return started_at;
+    }
+
+    public void setStarted_at(Time started_at) {
+        this.started_at = started_at;
+    }
+
+    public Time getStopped_at() {
+        return stopped_at;
+    }
+
+    public void setStopped_at(Time stopped_at) {
+        this.stopped_at = stopped_at;
+    }
 
 
     public String getId() {
@@ -53,6 +76,7 @@ public class Ride {
         this.kilometers = kilometers;
     }
 
+
     public Ride() {
 
     }
@@ -62,11 +86,5 @@ public class Ride {
         return getStartAddress();
     }
 
-    public Date getUpdated_at() {
-        return updated_at;
-    }
 
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
-    }
 }
