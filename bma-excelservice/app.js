@@ -11,6 +11,10 @@ app.get('/createExcel', function (req, res) {
   res.send('OK');
 })
 
+app.get('/test', function (req, res) {
+  res.send('TEST OK');
+})
+
 function createExcelFile(filename){
 
   var workbook = excelbuilder.createWorkbook('./', filename)
@@ -51,7 +55,8 @@ function sendEmail(){
   });
 }
 
-var server = app.listen(8081, function () {
+app.set('port', process.env.PORT || 3000);
+var server = app.listen(app.get('port'), function () {
 
   var host = server.address().address
   var port = server.address().port

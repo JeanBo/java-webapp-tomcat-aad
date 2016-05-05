@@ -1,7 +1,7 @@
 # For documentation see https://github.com/tjanczuk/iisnode/blob/master/src/samples/configuration/iisnode.yml
 
-# loggingEnabled: false
-# debuggingEnabled: false
+loggingEnabled: true
+debuggingEnabled: true
 # devErrorsEnabled: false
 # node_env: production
 # nodeProcessCountPerApplication: 1

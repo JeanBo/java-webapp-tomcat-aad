@@ -11,7 +11,10 @@
     "express": "^4.13.3",
     "jade": "^1.11.0",
     "morgan": "^1.6.1",
+    "msexcel-builder": "0.0.2",
+    "nconf": "^0.8.4",
     "nodemailer": "^2.3.2",
+    "sendgrid": "^2.0.0",
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
