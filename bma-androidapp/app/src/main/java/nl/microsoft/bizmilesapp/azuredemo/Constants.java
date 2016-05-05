@@ -28,4 +28,8 @@ public final class Constants {
     public static final String STOP_LOCATION = "STOP_LOCATION";
 
     public static final String AZURE_SERVICE_URL = "https://chris-mobileapp1.azurewebsites.net";
+
+    public static final String START_LOCATION_ADDR = "START_LOCATION_ADDR";
+    public static final String START_TIME = "START_TIME";
+
 }

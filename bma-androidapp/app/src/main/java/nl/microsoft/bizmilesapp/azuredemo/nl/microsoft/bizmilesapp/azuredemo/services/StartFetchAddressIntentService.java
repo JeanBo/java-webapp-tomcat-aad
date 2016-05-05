@@ -15,6 +15,7 @@ import nl.microsoft.bizmilesapp.azuredemo.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -63,6 +64,7 @@ public class StartFetchAddressIntentService extends IntentService {
 
         // Get the location passed to this service through an extra.
         Location location = intent.getParcelableExtra(Constants.START_LOCATION);
+
 
 
 

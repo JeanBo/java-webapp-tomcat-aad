@@ -58,6 +58,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -75,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     private MobileServiceClient amsClient;
     private MobileServiceTable<Ride> mRidesTable;
 
-    private Ride ride;
 
     //  Screen elements
     protected Location mLastLocation;
@@ -135,10 +135,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         createLocationRequest();
 
         //  Azure API init
-        createAzureMobileServiceClient();
-        authenticateOnAzure();
-        mRidesTable = amsClient.getTable(Ride.class);
-
+        initAzureMSConnection();
 
         if(isMyServiceRunning(StartFetchAddressIntentService.class)){
             Toast.makeText(MainActivity.this, "Service is still running", Toast.LENGTH_SHORT).show();
@@ -155,6 +152,12 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         updateUIWidgets();
         refreshItemsFromTable();
 
+    }
+
+    private void initAzureMSConnection(){
+        createAzureMobileServiceClient();
+        authenticateOnAzure();
+        mRidesTable = amsClient.getTable(Ride.class);
     }
 
     private synchronized void createLocationRequest() {
@@ -194,24 +197,22 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
 
     private void createAzureMobileServiceClient(){
-        if(amsClient==null){
-            try {
-                amsClient = new MobileServiceClient(Constants.AZURE_SERVICE_URL, this);
+        try {
+            amsClient = new MobileServiceClient(Constants.AZURE_SERVICE_URL, this);
 
-            } catch (MalformedURLException e) {
-                Log.e(TAG, "Exception reaching azure mobile app on "+Constants.AZURE_SERVICE_URL+", exception: "+e.getCause());
-            }
-
-            amsClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
-                @Override
-                public OkHttpClient createOkHttpClient() {
-                    OkHttpClient client = new OkHttpClient();
-                    client.setReadTimeout(20, TimeUnit.SECONDS);
-                    client.setWriteTimeout(20, TimeUnit.SECONDS);
-                    return client;
-                }
-            });
+        } catch (MalformedURLException e) {
+            Log.e(TAG, "Exception reaching azure mobile app on "+Constants.AZURE_SERVICE_URL+", exception: "+e.getCause());
         }
+
+        amsClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
+            @Override
+            public OkHttpClient createOkHttpClient() {
+                OkHttpClient client = new OkHttpClient();
+                client.setReadTimeout(20, TimeUnit.SECONDS);
+                client.setWriteTimeout(20, TimeUnit.SECONDS);
+                return client;
+            }
+        });
 
     }
 
@@ -360,42 +361,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
 
 
-    protected void executeStopFetchIntentService() {
-        if(!(mGoogleApiClient.isConnected())){
-            Toast.makeText(MainActivity.this, "not connnected", Toast.LENGTH_SHORT).show();
-            return;
-        }else{
-            stopFetchIntent = new Intent(this, StopFetchAddressIntentService.class);
-            stopFetchIntent.putExtra(Constants.RECEIVER, mStopResultReceiver);
-            stopFetchIntent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
-
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            //setLocation(ActionTypes.STOP);
-            stopFetchIntent.putExtra(Constants.STOP_LOCATION, mLastLocation);
-
-            startService(stopFetchIntent);
-        }
-    }
-
-
-    protected void executeStartFetchIntentService() {
-        if(!(mGoogleApiClient.isConnected())){
-            Toast.makeText(MainActivity.this, "not connnected", Toast.LENGTH_SHORT).show();
-            return;
-        }else{
-            startFetchintent = new Intent(this, StartFetchAddressIntentService.class);
-            startFetchintent.putExtra(Constants.RECEIVER, mStartResultReceiver);
-            startFetchintent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
-
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            //setLocation(ActionTypes.STOP);
-            startFetchintent.putExtra(Constants.START_LOCATION, mLastLocation);
-
-            startService(startFetchintent);
-        }
-    }
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
@@ -452,6 +417,25 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         return false;
     }
 
+
+    protected void executeStartFetchIntentService() {
+        if(!(mGoogleApiClient.isConnected())){
+            Toast.makeText(MainActivity.this, "not connnected", Toast.LENGTH_SHORT).show();
+            return;
+        }else{
+            startFetchintent = new Intent(this, StartFetchAddressIntentService.class);
+            startFetchintent.putExtra(Constants.RECEIVER, mStartResultReceiver);
+            startFetchintent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
+            startFetchintent.putExtra(Constants.START_TIME,  new Long(GregorianCalendar.getInstance().getTimeInMillis()).toString());
+
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            startFetchintent.putExtra(Constants.START_LOCATION, mLastLocation);
+            startService(startFetchintent);
+        }
+    }
+
+
     @SuppressLint("ParcelCreator")
     class BizMilesStartReceiver extends ResultReceiver {
         public BizMilesStartReceiver(Handler handler) {
@@ -464,10 +448,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             // Display the address string or an error message sent from the intent service.
             mAddressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
 
-            ride = new Ride();
-            ride.setStartAddress(mAddressOutput);
-            ride.setStarted_at(GregorianCalendar.getInstance().getTime());
+            startFetchintent.putExtra(Constants.START_LOCATION_ADDR,mAddressOutput);
             mLocationAddressTextView.setText(mAddressOutput);
+
 
             // Reset. Enable the Fetch Address button and stop showing the progress bar
             mStartAddressRequested = true;
@@ -475,6 +458,23 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         }
     }
 
+
+    protected void executeStopFetchIntentService() {
+        if(!(mGoogleApiClient.isConnected())){
+            Toast.makeText(MainActivity.this, "not connnected", Toast.LENGTH_SHORT).show();
+            return;
+        }else{
+            stopFetchIntent = new Intent(this, StopFetchAddressIntentService.class);
+            stopFetchIntent.putExtra(Constants.RECEIVER, mStopResultReceiver);
+            stopFetchIntent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
+
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            stopFetchIntent.putExtra(Constants.STOP_LOCATION, mLastLocation);
+
+            startService(stopFetchIntent);
+        }
+    }
 
     @SuppressLint("ParcelCreator")
     class BizMilesStopReceiver extends ResultReceiver {
@@ -501,6 +501,16 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                 //  Inserting into database, only if distance >0;
                 if(distance>0){
                     try{
+
+                        if(amsClient==null || amsClient.getContext()==null){
+                            initAzureMSConnection();
+                        }
+
+                        Ride ride = new Ride();
+                        ride.setStartAddress(startFetchintent.getStringExtra(Constants.START_LOCATION_ADDR));
+                        long startTime = new Long(startFetchintent.getStringExtra(Constants.START_TIME)).longValue();
+                        ride.setStarted_at(new Date(startTime));
+
                         ride.setKilometers(distance);
                         ride.setStopAddress(mAddressOutput);
                         ride.setStopped_at(GregorianCalendar.getInstance().getTime());
@@ -528,8 +538,4 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
 
 
-
-    enum ActionTypes{
-        START,STOP,CLEAR;
-    }
 }

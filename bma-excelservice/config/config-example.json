@@ -1,0 +1,8 @@
+{
+    "sendgrid_username" : "azure_dc03c",
+    "sendgrid_password" : "XXXXX_SECRET_XXXXX"
+    "azure-ms_username" : "chris@chris-APPNAME",
+    "azure-ms_password" : "XXXXX_SECRET_XXXXX"
+    "azure-ms_server" : "NAME"
+    "azure-ms_database" : "NAME_OF_DB"
+}
