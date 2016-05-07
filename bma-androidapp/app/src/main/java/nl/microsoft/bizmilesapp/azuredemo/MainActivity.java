@@ -8,7 +8,6 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.location.Geocoder;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Uri;
@@ -17,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -49,19 +49,16 @@ import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider;
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
 import com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory;
-import com.microsoft.windowsazure.mobileservices.table.DateTimeOffset;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 import com.squareup.okhttp.OkHttpClient;
 
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -270,29 +267,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         });
     }
 
-    public void sendmailButtonHandler(View view) {
-        if(!isOnline()){
-            Toast.makeText(MainActivity.this, Constants.MSG_NO_INTERNET, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        String url = "";
-        try{
-            String mailAdress = mMailadres.getText().toString();
-            if(!isMailAddresValid(mailAdress)){
-                Toast.makeText(MainActivity.this, "Invalid email address entered", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            url = Constants.AZURE_EXCELSERVICE_URL+"/sendExcel/"+mailAdress;
-            new GetHttpServiceTask().execute(url);
-        }catch (Exception ex){
-            Log.e(TAG, "Exception calling: "+url+" ,caused by: "+ex.getCause());
-            Toast.makeText(MainActivity.this, "Exception calling excel service: "+ex.getMessage(), Toast.LENGTH_SHORT).show();
-
-        }
-
-
-    }
-
     private boolean isMailAddresValid(String mailAddress){
         boolean result = false;
         try {
@@ -308,6 +282,31 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             Log.e(TAG, "invalid email address "+mailAddress+", exception: "+e.getCause());
         }
         return result;
+    }
+
+
+    public void sendmailButtonHandler(View view) {
+        if(!isOnline()){
+            Toast.makeText(MainActivity.this, Constants.MSG_NO_INTERNET, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String url = "";
+        try{
+            String mailAdress = mMailadres.getText().toString();
+            if(!isMailAddresValid(mailAdress)){
+                Toast.makeText(MainActivity.this, "Invalid email address entered", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            url = Constants.AZURE_EXCELSERVICE_URL+"/sendExcel/"+mailAdress;
+            callExcelService(url);
+            mMailadres.clearFocus();
+        }catch (Exception ex){
+            Log.e(TAG, "Exception calling: "+url+" ,caused by: "+ex.getCause());
+            Toast.makeText(MainActivity.this, "Exception calling excel service: "+ex.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+
+
     }
 
     public void stopButtonHandler(View view){
@@ -621,56 +620,64 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
 
 
-    private class GetHttpServiceTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
 
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                if(amsDBClient==null || amsDBClient.getCurrentUser()==null){
-                    initAzureMSConnection();
+    private void callExcelService(final String urlParam) {
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                final int response = 0;
+                final String myurl = urlParam;
+                try {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(amsDBClient==null || amsDBClient.getCurrentUser()==null){
+                                initAzureMSConnection();
+                            }
+                            HttpURLConnection conn = null;
+                            try{
+                                URL url = new URL(myurl);
+                                conn = (HttpURLConnection) url.openConnection();
+                                conn.setReadTimeout(10000 /* milliseconds */);
+                                conn.setConnectTimeout(15000 /* milliseconds */);
+                                conn.setRequestMethod("GET");
+                                conn.setDoInput(true);
+
+                                HttpURLConnection.setFollowRedirects(true);
+
+                                // Hack needed for conn.connect(); (crashes otherwise)
+                                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                                StrictMode.setThreadPolicy(policy);
+                                conn.connect();
+
+                                //  If security is enabled on Azure service, this fix is needed
+                                if(conn.getResponseCode() == HttpURLConnection.HTTP_MOVED_TEMP || conn.getResponseCode() == HttpURLConnection.HTTP_MOVED_PERM){
+                                    String stringUrl = conn.getHeaderField("Location");
+                                    conn = (HttpURLConnection) new URL(stringUrl).openConnection();
+                                    conn.connect();
+                                }
+                            }catch (Exception ex){
+                                Log.e(TAG, "Exception calling : "+myurl+" cause: "+ex.getCause());
+
+                            } finally {
+                                try{
+                                    conn.disconnect();
+                                    Toast.makeText(MainActivity.this, "Called service, response was: "+conn.getResponseCode(), Toast.LENGTH_SHORT).show();
+                                }catch (IOException ioe){
+                                    Log.e(TAG, "IOException closing connection for : "+myurl+" cause: "+ioe.getCause());
+                                }
+                            }
+
+                        }
+                    });
+                } catch (final Exception e) {
+                    Log.e(TAG, "Exception populating ride list from database, exception: "+e.getCause());
                 }
-                return getUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
+                return null;
             }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-            //textView.setText(result);
-        }
-
-        private String getUrl(String myurl) throws IOException {
-            int response = 0;
-            HttpURLConnection conn = null;
-
-            try {
-                URL url = new URL(myurl);
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(10000 /* milliseconds */);
-                conn.setConnectTimeout(15000 /* milliseconds */);
-                conn.setRequestMethod("GET");
-                conn.setDoInput(true);
-
-                HttpURLConnection.setFollowRedirects(true);
-
-                conn.connect();
-                response = conn.getResponseCode();
-                //  If security is enabled on Azure service, this fix is needed
-                if(response == HttpURLConnection.HTTP_MOVED_TEMP || response == HttpURLConnection.HTTP_MOVED_PERM){
-                    String stringUrl = conn.getHeaderField("Location");
-                    conn = (HttpURLConnection) new URL(stringUrl).openConnection();
-                    conn.connect();
-                    response = conn.getResponseCode();
-                }
-            } finally {
-                Toast.makeText(MainActivity.this, "Called service, response was: "+response, Toast.LENGTH_SHORT).show();
-            }
-            //  Not interested in http result stuff, just the resultcode (returning nothing)
-            return new Integer(response).toString();
-        }
-
+        };
+        runAsyncTask(task);
     }
 
 
