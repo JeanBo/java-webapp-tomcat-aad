@@ -3,12 +3,14 @@
 package nl.microsoft.bizmilesapp.azuredemo;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -18,8 +20,10 @@ import android.os.ResultReceiver;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,8 +54,13 @@ import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 import com.squareup.okhttp.OkHttpClient;
 
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.RoundingMode;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -62,6 +71,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+//import javax.mail.internet.AddressException;
+//import javax.mail.internet.InternetAddress;
 
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.val;
 
@@ -73,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     protected static final String LOCATION_ADDRESS_KEY = "location-address";
 
     //  Azure Stuff
-    private MobileServiceClient amsClient;
+    private MobileServiceClient amsDBClient;
     private MobileServiceTable<Ride> mRidesTable;
 
 
@@ -87,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     protected ProgressBar mProgressBar;
     protected Button mStartButton;
     protected Button mStopButton;
+    protected Button mSendMailButton;
+    protected EditText mMailadres;
 
     private ArrayAdapter<String> adapter;
     private ArrayList<String> arrayList;
@@ -114,7 +130,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mStartButton = (Button) findViewById(R.id.start_button);
         mStopButton = (Button) findViewById(R.id.stop_button);
+        mSendMailButton = (Button) findViewById(R.id.sendmail_button);
         mRidelist = (ListView) findViewById(R.id.ridelist);
+        mMailadres = (EditText) findViewById(R.id.mailadres);
 
         arrayList = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
@@ -149,15 +167,37 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             mStopButton.setEnabled(false);
         }
 
+        mMailadres.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         updateUIWidgets();
         refreshItemsFromTable();
 
     }
 
+    private void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+
+    private boolean isOnline() {
+        ConnectivityManager cm =  (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null &&
+                cm.getActiveNetworkInfo().isConnectedOrConnecting();
+    }
+
     private void initAzureMSConnection(){
-        createAzureMobileServiceClient();
+        createAzureMobileServiceClients();
         authenticateOnAzure();
-        mRidesTable = amsClient.getTable(Ride.class);
+        mRidesTable = amsDBClient.getTable(Ride.class);
     }
 
     private synchronized void createLocationRequest() {
@@ -196,15 +236,14 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         }
     }
 
-    private void createAzureMobileServiceClient(){
+    private void createAzureMobileServiceClients(){
         try {
-            amsClient = new MobileServiceClient(Constants.AZURE_SERVICE_URL, this);
-
+            amsDBClient = new MobileServiceClient(Constants.AZURE_DBSERVICE_URL, this);
         } catch (MalformedURLException e) {
-            Log.e(TAG, "Exception reaching azure mobile app on "+Constants.AZURE_SERVICE_URL+", exception: "+e.getCause());
+            Log.e(TAG, "Exception reaching azure mobile app on "+Constants.AZURE_DBSERVICE_URL+", exception: "+e.getCause());
         }
 
-        amsClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
+        amsDBClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
             @Override
             public OkHttpClient createOkHttpClient() {
                 OkHttpClient client = new OkHttpClient();
@@ -218,7 +257,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
 
     private void authenticateOnAzure() {
-        ListenableFuture<MobileServiceUser> mLogin = amsClient.login(MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
+        ListenableFuture<MobileServiceUser> mLogin = amsDBClient.login(MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
 
         Futures.addCallback(mLogin, new FutureCallback<MobileServiceUser>() {
             @Override
@@ -231,9 +270,52 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         });
     }
 
+    public void sendmailButtonHandler(View view) {
+        if(!isOnline()){
+            Toast.makeText(MainActivity.this, Constants.MSG_NO_INTERNET, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String url = "";
+        try{
+            String mailAdress = mMailadres.getText().toString();
+            if(!isMailAddresValid(mailAdress)){
+                Toast.makeText(MainActivity.this, "Invalid email address entered", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            url = Constants.AZURE_EXCELSERVICE_URL+"/sendExcel/"+mailAdress;
+            new GetHttpServiceTask().execute(url);
+        }catch (Exception ex){
+            Log.e(TAG, "Exception calling: "+url+" ,caused by: "+ex.getCause());
+            Toast.makeText(MainActivity.this, "Exception calling excel service: "+ex.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+
+
+    }
+
+    private boolean isMailAddresValid(String mailAddress){
+        boolean result = false;
+        try {
+            String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+            CharSequence inputStr = mailAddress;
+
+            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(inputStr);
+            if (matcher.matches()) {
+                result = true;
+            }
+        } catch(Exception e){ //catch (AddressException e) {
+            Log.e(TAG, "invalid email address "+mailAddress+", exception: "+e.getCause());
+        }
+        return result;
+    }
 
     public void stopButtonHandler(View view){
 
+        if(!isOnline()){
+            Toast.makeText(MainActivity.this, Constants.MSG_NO_INTERNET, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         executeStopFetchIntentService();
         mStartAddressRequested = true;
@@ -250,6 +332,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
 
     public void startButtonHandler(View view) {
+
+        if(!isOnline()){
+            Toast.makeText(MainActivity.this, Constants.MSG_NO_INTERNET , Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         executeStartFetchIntentService();
         mStartAddressRequested = true;
@@ -315,11 +402,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         super.onStart();
 
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
+                Action.TYPE_VIEW,
+                "Main Page",
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://nl.microsoft.bizmilesapp.azuredemo/http/host/path")
@@ -335,11 +419,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
+                Action.TYPE_VIEW,
+                "Main Page",
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://nl.microsoft.bizmilesapp.azuredemo/http/host/path")
@@ -502,7 +583,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                 if(distance>0){
                     try{
 
-                        if(amsClient==null || amsClient.getContext()==null){
+                        if(amsDBClient==null){
                             initAzureMSConnection();
                         }
 
@@ -532,9 +613,64 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                 //  Always cleanup old intents
                 stopService(startFetchintent);
                 stopService(stopFetchIntent);
+            }else{
+                Toast.makeText(MainActivity.this, "Something went wrong saving the ride, km > 0 ?...", Toast.LENGTH_SHORT).show();
             }
 
         }
+    }
+
+
+    private class GetHttpServiceTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            // params comes from the execute() call: params[0] is the url.
+            try {
+                if(amsDBClient==null || amsDBClient.getCurrentUser()==null){
+                    initAzureMSConnection();
+                }
+                return getUrl(urls[0]);
+            } catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            //textView.setText(result);
+        }
+
+        private String getUrl(String myurl) throws IOException {
+            int response = 0;
+            HttpURLConnection conn = null;
+
+            try {
+                URL url = new URL(myurl);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(10000 /* milliseconds */);
+                conn.setConnectTimeout(15000 /* milliseconds */);
+                conn.setRequestMethod("GET");
+                conn.setDoInput(true);
+
+                HttpURLConnection.setFollowRedirects(true);
+
+                conn.connect();
+                response = conn.getResponseCode();
+                //  If security is enabled on Azure service, this fix is needed
+                if(response == HttpURLConnection.HTTP_MOVED_TEMP || response == HttpURLConnection.HTTP_MOVED_PERM){
+                    String stringUrl = conn.getHeaderField("Location");
+                    conn = (HttpURLConnection) new URL(stringUrl).openConnection();
+                    conn.connect();
+                    response = conn.getResponseCode();
+                }
+            } finally {
+                Toast.makeText(MainActivity.this, "Called service, response was: "+response, Toast.LENGTH_SHORT).show();
+            }
+            //  Not interested in http result stuff, just the resultcode (returning nothing)
+            return new Integer(response).toString();
+        }
+
     }
 
 

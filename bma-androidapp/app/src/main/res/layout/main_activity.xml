@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -41,6 +43,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/text_margin_top"
+        android:layout_marginBottom="50dp"
         android:textSize="@dimen/default_text_size" />
 
     <ListView
@@ -49,6 +52,26 @@
         android:layout_marginTop="@dimen/text_margin_top_extra"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="mail report"
+        android:id="@+id/sendmail_button"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/location_address_view"
+        android:layout_toEndOf="@+id/location_address_view"
+        android:onClick="sendmailButtonHandler" /> />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mailadres"
+        android:layout_alignTop="@+id/sendmail_button"
+        android:layout_alignRight="@+id/ridelist"
+        android:layout_alignEnd="@+id/ridelist"
+        android:layout_toRightOf="@+id/sendmail_button"
+        android:layout_toEndOf="@+id/sendmail_button" />
 
 
 </RelativeLayout>

@@ -27,9 +27,12 @@ public final class Constants {
     public static final String START_LOCATION = "START_LOCATION";
     public static final String STOP_LOCATION = "STOP_LOCATION";
 
-    public static final String AZURE_SERVICE_URL = "https://chris-mobileapp1.azurewebsites.net";
+    public static final String AZURE_DBSERVICE_URL = "https://chris-mobileapp1.azurewebsites.net";
+    public static final String AZURE_EXCELSERVICE_URL = "http://bma-excelservice.azurewebsites.net";
 
     public static final String START_LOCATION_ADDR = "START_LOCATION_ADDR";
     public static final String START_TIME = "START_TIME";
+
+    public static final String MSG_NO_INTERNET = "No internet connection :(";
 
 }
