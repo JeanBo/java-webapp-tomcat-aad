@@ -1,4 +1,4 @@
-package nl.microsoft.bizmilesapp.azuredemo;
+package nl.microsoft.bizmilesapp.azuredemo.nl.microsoft.bizmilesapp.azuredemo.models;
 
 import android.location.Location;
 

@@ -39,6 +39,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import nl.microsoft.bizmilesapp.azuredemo.nl.microsoft.bizmilesapp.azuredemo.models.Ride;
 import nl.microsoft.bizmilesapp.azuredemo.nl.microsoft.bizmilesapp.azuredemo.services.StartFetchAddressIntentService;
 import nl.microsoft.bizmilesapp.azuredemo.nl.microsoft.bizmilesapp.azuredemo.services.StopFetchAddressIntentService;
 
@@ -67,12 +68,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//import javax.mail.internet.AddressException;
-//import javax.mail.internet.InternetAddress;
 
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.val;
 
@@ -267,23 +270,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         });
     }
 
-    private boolean isMailAddresValid(String mailAddress){
-        boolean result = false;
-        try {
-            String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-            CharSequence inputStr = mailAddress;
-
-            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-            Matcher matcher = pattern.matcher(inputStr);
-            if (matcher.matches()) {
-                result = true;
-            }
-        } catch(Exception e){ //catch (AddressException e) {
-            Log.e(TAG, "invalid email address "+mailAddress+", exception: "+e.getCause());
-        }
-        return result;
-    }
-
 
     public void sendmailButtonHandler(View view) {
         if(!isOnline()){
@@ -293,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         String url = "";
         try{
             String mailAdress = mMailadres.getText().toString();
-            if(!isMailAddresValid(mailAdress)){
+            if(!BmaUtils.isMailAddresValid(mailAdress)){
                 Toast.makeText(MainActivity.this, "Invalid email address entered", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -383,17 +369,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                 return null;
             }
         };
-        runAsyncTask(task);
+        BmaUtils.runAsyncTask(task);
     }
 
 
-    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        } else {
-            return task.execute();
-        }
-    }
+
 
 
     @Override
@@ -415,8 +395,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     @Override
     protected void onStop() {
         super.onStop();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW,
                 "Main Page",
@@ -429,7 +407,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             mGoogleApiClient.disconnect();
         }
         client.disconnect();
-        //System.exit(0);
     }
 
     /**
@@ -556,6 +533,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         }
     }
 
+
     @SuppressLint("ParcelCreator")
     class BizMilesStopReceiver extends ResultReceiver {
         public BizMilesStopReceiver(Handler handler) {
@@ -565,7 +543,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             mAddressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
+            mLocationAddressTextView.setText(mAddressOutput);
             Toast.makeText(MainActivity.this, "Stopped ride at: "+mAddressOutput, Toast.LENGTH_SHORT).show();
+
             // Display the address string or an error message sent from the intent service.
             Location startLocation = startFetchintent.getParcelableExtra(Constants.START_LOCATION);
             Location stopLocation = stopFetchIntent.getParcelableExtra(Constants.STOP_LOCATION);
@@ -575,9 +555,24 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             df.setRoundingMode(RoundingMode.CEILING);
             boolean succeeded = false;
             if(startLocation !=null && stopLocation !=null ){
-                //distance = Float.parseFloat(df.format(startLocation.distanceTo(stopLocation)));
-                distance = startLocation.distanceTo(stopLocation)/1000;
-                Toast.makeText(MainActivity.this, "Calculated distance: "+distance, Toast.LENGTH_SHORT).show();
+                // This is the distance in a straight line...not what we want...
+                //distance = startLocation.distanceTo(stopLocation)/1000;
+                synchronized (this) {
+                    final ExecutorService service;
+                    final Future<Float> task;
+                    service = Executors.newFixedThreadPool(1);
+                    task    = service.submit(new CalculateDistance(startLocation,stopLocation));
+                    Float dist = new Float(0);
+                    try {
+                        dist = task.get(); //
+                    } catch(final InterruptedException ex) {
+                        Log.e(TAG, "InterruptedException calling CalculateDistance thread : "+ex.getCause());
+                    } catch(final ExecutionException ex) {
+                        Log.e(TAG, "Exception calling CalculateDistance thread : "+ex.getCause());
+                    }
+                    distance = dist.floatValue();
+                    Toast.makeText(MainActivity.this, "Calculated distance: " + distance, Toast.LENGTH_SHORT).show();
+                }
                 //  Inserting into database, only if distance >0;
                 if(distance>0){
                     try{
@@ -623,61 +618,56 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     private void callExcelService(final String urlParam) {
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                final int response = 0;
-                final String myurl = urlParam;
-                try {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(amsDBClient==null || amsDBClient.getCurrentUser()==null){
-                                initAzureMSConnection();
-                            }
-                            HttpURLConnection conn = null;
-                            try{
-                                URL url = new URL(myurl);
-                                conn = (HttpURLConnection) url.openConnection();
-                                conn.setReadTimeout(10000 /* milliseconds */);
-                                conn.setConnectTimeout(15000 /* milliseconds */);
-                                conn.setRequestMethod("GET");
-                                conn.setDoInput(true);
-
-                                HttpURLConnection.setFollowRedirects(true);
-
-                                // Hack needed for conn.connect(); (crashes otherwise)
-                                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                                StrictMode.setThreadPolicy(policy);
-                                conn.connect();
-
-                                //  If security is enabled on Azure service, this fix is needed
-                                if(conn.getResponseCode() == HttpURLConnection.HTTP_MOVED_TEMP || conn.getResponseCode() == HttpURLConnection.HTTP_MOVED_PERM){
-                                    String stringUrl = conn.getHeaderField("Location");
-                                    conn = (HttpURLConnection) new URL(stringUrl).openConnection();
-                                    conn.connect();
-                                }
-                            }catch (Exception ex){
-                                Log.e(TAG, "Exception calling : "+myurl+" cause: "+ex.getCause());
-
-                            } finally {
-                                try{
-                                    conn.disconnect();
-                                    Toast.makeText(MainActivity.this, "Called service, response was: "+conn.getResponseCode(), Toast.LENGTH_SHORT).show();
-                                }catch (IOException ioe){
-                                    Log.e(TAG, "IOException closing connection for : "+myurl+" cause: "+ioe.getCause());
-                                }
-                            }
-
+        @Override
+        protected Void doInBackground(Void... params) {
+            final int response = 0;
+            final String myurl = urlParam;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(amsDBClient==null || amsDBClient.getCurrentUser()==null){
+                            initAzureMSConnection();
                         }
-                    });
-                } catch (final Exception e) {
-                    Log.e(TAG, "Exception populating ride list from database, exception: "+e.getCause());
-                }
+                        HttpURLConnection conn = null;
+                        try{
+                            URL url = new URL(myurl);
+                            conn = (HttpURLConnection) url.openConnection();
+                            conn.setReadTimeout(10000 /* milliseconds */);
+                            conn.setConnectTimeout(15000 /* milliseconds */);
+                            conn.setRequestMethod("GET");
+                            conn.setDoInput(true);
+
+                            HttpURLConnection.setFollowRedirects(true);
+
+                            // Hack needed for conn.connect(); (crashes otherwise)
+                            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                            StrictMode.setThreadPolicy(policy);
+                            conn.connect();
+
+                            //  If security is enabled on Azure service, this fix is needed
+                            if(conn.getResponseCode() == HttpURLConnection.HTTP_MOVED_TEMP || conn.getResponseCode() == HttpURLConnection.HTTP_MOVED_PERM){
+                                String stringUrl = conn.getHeaderField("Location");
+                                conn = (HttpURLConnection) new URL(stringUrl).openConnection();
+                                conn.connect();
+                            }
+                        }catch (Exception ex){
+                            Log.e(TAG, "Exception calling : "+myurl+" cause: "+ex.getCause());
+
+                        } finally {
+                            try{
+                                conn.disconnect();
+                                Toast.makeText(MainActivity.this, "Called service, response was: "+conn.getResponseCode(), Toast.LENGTH_SHORT).show();
+                            }catch (IOException ioe){
+                                Log.e(TAG, "IOException closing connection for : "+myurl+" cause: "+ioe.getCause());
+                            }
+                        }
+
+                    }
+                });
                 return null;
             }
         };
-        runAsyncTask(task);
+        BmaUtils.runAsyncTask(task);
     }
 
 
