@@ -3,6 +3,7 @@ var sql = require('mssql');
 var nconf = require('nconf');
 nconf.file({ file: './config/config-prod.json' });
 var dateFormat = require('dateformat');
+var fs = require('fs');
 
 
 var config = {
@@ -17,6 +18,13 @@ var config = {
 
 module.exports = {
   createExcelFile: function (filename) {
+
+  fs.exists(filename, function(exists) {
+    if(exists) {
+      fs.unlink(filename);
+    }
+  }
+   
     var workbook = excelbuilder.createWorkbook('./', filename)
 
     // Create a new worksheet with 10 columns and 12 rows
