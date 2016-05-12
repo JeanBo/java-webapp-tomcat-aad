@@ -5,7 +5,9 @@ package nl.microsoft.bizmilesapp.azuredemo;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.location.Location;
@@ -80,6 +82,8 @@ import java.util.regex.Pattern;
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.val;
 
 public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener,LocationListener  {
+
+    private Ride rideToSave;
 
     protected static final String TAG = "main-activity";
 
@@ -178,6 +182,42 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
         updateUIWidgets();
         refreshItemsFromTable();
+
+    }
+
+
+    private void saveRide(){
+
+        boolean succeeded = false;
+        try{
+
+            //  Inserting into database, only if distance >0;
+            if(rideToSave!=null && rideToSave.getKilometers()>0) {
+
+                if (amsDBClient == null) {
+                    initAzureMSConnection();
+                }
+
+                mRidesTable.insert(rideToSave);
+                succeeded = true;
+            }
+        }catch(Exception ex){
+            Toast.makeText(MainActivity.this, "DB Exception while trying to persist ride", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "DB Exception while trying to persist ride : "+ex.getCause());
+        }
+
+        if(succeeded){
+            mStopAddressRequested = true;
+            //setLocation(ActionTypes.CLEAR);
+            refreshItemsFromTable();
+            updateUIWidgets();
+
+            //  Always cleanup old intents
+            stopService(startFetchintent);
+            stopService(stopFetchIntent);
+        }else{
+            Toast.makeText(MainActivity.this, "Something went wrong saving the ride, km > 0 ?...", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -530,6 +570,28 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             stopFetchIntent.putExtra(Constants.STOP_LOCATION, mLastLocation);
 
             startService(stopFetchIntent);
+            new AlertDialog.Builder(this)
+                    .setTitle("Check Determined EndLocation")
+                    .setMessage("Is the End Location OK?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            if(rideToSave!=null) {
+                                Toast.makeText(MainActivity.this, "Saving ride with Calculated distance: " + rideToSave.getKilometers(), Toast.LENGTH_SHORT).show();
+                                saveRide();
+                                return;
+                            }else{
+                                Toast.makeText(MainActivity.this, "Failed saving ride", Toast.LENGTH_SHORT).show();
+                            }
+                        }})
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            executeStopFetchIntentService();
+                            return;
+                        }}).show();
+
         }
     }
 
@@ -542,9 +604,10 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
+
             mAddressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
             mLocationAddressTextView.setText(mAddressOutput);
-            Toast.makeText(MainActivity.this, "Stopped ride at: "+mAddressOutput, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Stopped ride at: "+mAddressOutput, Toast.LENGTH_SHORT).show();
 
             // Display the address string or an error message sent from the intent service.
             Location startLocation = startFetchintent.getParcelableExtra(Constants.START_LOCATION);
@@ -571,46 +634,19 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                         Log.e(TAG, "Exception calling CalculateDistance thread : "+ex.getCause());
                     }
                     distance = dist.floatValue();
-                    Toast.makeText(MainActivity.this, "Calculated distance: " + distance, Toast.LENGTH_SHORT).show();
                 }
-                //  Inserting into database, only if distance >0;
-                if(distance>0){
-                    try{
 
-                        if(amsDBClient==null){
-                            initAzureMSConnection();
-                        }
+                Ride ride = new Ride();
+                ride.setStartAddress(startFetchintent.getStringExtra(Constants.START_LOCATION_ADDR));
+                long startTime = new Long(startFetchintent.getStringExtra(Constants.START_TIME)).longValue();
+                ride.setStarted_at(new Date(startTime));
 
-                        Ride ride = new Ride();
-                        ride.setStartAddress(startFetchintent.getStringExtra(Constants.START_LOCATION_ADDR));
-                        long startTime = new Long(startFetchintent.getStringExtra(Constants.START_TIME)).longValue();
-                        ride.setStarted_at(new Date(startTime));
+                ride.setKilometers(distance);
+                ride.setStopAddress(mAddressOutput);
+                ride.setStopped_at(GregorianCalendar.getInstance().getTime());
+                rideToSave = ride;
 
-                        ride.setKilometers(distance);
-                        ride.setStopAddress(mAddressOutput);
-                        ride.setStopped_at(GregorianCalendar.getInstance().getTime());
-                        mRidesTable.insert(ride);
-                        succeeded = true;
-                    }catch(Exception ex){
-                        Toast.makeText(MainActivity.this, "DB Exception while trying to persist ride", Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "DB Exception while trying to persist ride : "+ex.getCause());
-
-                    }
-                }
             }
-            if(succeeded){
-                mStopAddressRequested = true;
-                //setLocation(ActionTypes.CLEAR);
-                refreshItemsFromTable();
-                updateUIWidgets();
-
-                //  Always cleanup old intents
-                stopService(startFetchintent);
-                stopService(stopFetchIntent);
-            }else{
-                Toast.makeText(MainActivity.this, "Something went wrong saving the ride, km > 0 ?...", Toast.LENGTH_SHORT).show();
-            }
-
         }
     }
 
