@@ -5,6 +5,7 @@ nconf.file({ file: './config/config-prod.json' });
 var dateFormat = require('dateformat');
 var fs = require('fs');
 
+process.env.TZ = 'Europe/Amsterdam' 
 
 var config = {
     user: nconf.get('azure-ms_username'),
