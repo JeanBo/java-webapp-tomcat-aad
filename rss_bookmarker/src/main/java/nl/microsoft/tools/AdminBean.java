@@ -48,7 +48,7 @@ public class AdminBean {
 			if (file.isFile() && file.getName().endsWith(".xml")) {
 				RssFile rssFile = new RssFile();
 				rssFile.setFileName(file.getName());
-				fileList.add(rssFile)asdasdasd;
+				fileList.add(rssFile);
 			}
 		}
 	}
