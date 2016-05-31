@@ -28,7 +28,7 @@ public class AppBean {
     String remoteAddr;
     int counter;
     int redisCounter = 0;
-    Jedis jedis = new Jedis("redis");
+    Jedis jedis = new Jedis("1.1.1.1");
     
     public int getCounter() {
 		return counter;

@@ -6,7 +6,7 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "cvugrinec/java-webapp-redisdemo:2.0",
+      "image": "cvugrinec/java-webapp-redisdemo:2.1",
       "network": "BRIDGE",
       "portMappings": [{ "containerPort": 8080, "hostPort": 0, "servicePort": 10001, "protocol": "tcp" } ]
     }
