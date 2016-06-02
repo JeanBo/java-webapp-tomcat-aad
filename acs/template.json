@@ -47,11 +47,11 @@
   },
   "variables": {
     "adminUsername":"chris",
-    "agentCount":"3",
-    "agentsEndpointDNSNamePrefix":"logicalapp2-agents",
+    "agentCount":"5",
+    "agentsEndpointDNSNamePrefix":"acsdemo1-agents",
     "agentVMSize":"[parameters('agentVMSize')]",
     "masterCount":"[parameters('masterCount')]",
-    "mastersEndpointDNSNamePrefix":"logicalapp2-mgmt",
+    "mastersEndpointDNSNamePrefix":"acsdemo1-mgmt",
     "orchestratorType":"[parameters('orchestratorType')]",
     "sshRSAPublicKey":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6+7fRb5zGJTntgNa5wVyPcBOUy/KcFfkdr7wZIPXf9ezqc7NrsPDs4pLwp/7P9gawaIyMkHnkNXZppR76OMgpv9DdeLwr+MQYNvref4TLSE7YBlU9uZFZIIs6WIv+biqhzehjQw19sR8zhW/r5CupQgb1KZLCqK7Uah3N5IqvL0dyOlt11gy4fCteKlCPEtFYYldV/h6EJPj3DQfzrF0JdbXNW7J4+XD7lPV3RBiluFeVZ4iDurxut5Zn8Y/aM+Bx/QONhbdC/T4xe6r0Kcm0+t+zcozCbuW88hSk9KYXG+RBZ3WefGNjV1tT81+DvwATkOr1HtFEOYW2Tzq5+idN chris@macbook-air-chris.local"
   },
