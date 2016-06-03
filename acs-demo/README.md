@@ -1,4 +1,4 @@
-# Documentation for the Azure Container Service Demo
+# Documentation for the Azure Container Service Demo (mesos template)
 
 In the Azure Container Service Demo I demo the following
  * Create an ACS environment, use the source 01-createAcsDcos.sh
