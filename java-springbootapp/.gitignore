@@ -5,3 +5,6 @@ build/
 local.properties
 .DS_Store
 /bin/
+.classpath
+.project
+.settings

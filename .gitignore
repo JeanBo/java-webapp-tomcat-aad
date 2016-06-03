@@ -1,3 +1,7 @@
 node_modules/
 public/components
 .sass-cache
+azure_swiss_army_knife
+acs-demo/acs-mesos-deploy.json
+RemoteSystemsTempFiles/
+.metadata/
