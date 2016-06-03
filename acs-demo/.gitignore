@@ -1,2 +1,5 @@
-template.json
 acs-mesos-deploy.json
+../azure_swiss_army_knife/
+../java-springbootapp/.classpath
+../java-springbootapp/.project
+../java-springbootapp/.settings/
