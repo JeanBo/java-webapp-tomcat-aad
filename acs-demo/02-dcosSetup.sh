@@ -37,6 +37,7 @@ then
 
   nsgName=$(azure network nsg list -g $resourcegroup| grep agent | grep public | awk '{print $2}')
   azure network nsg rule create -g $resourcegroup -a $nsgName -n haproxy-rule -c Allow -p Tcp -r Inbound -y 410 -f Internet -u 9090
+  exit 0
 fi
 
 

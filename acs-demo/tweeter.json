@@ -45,7 +45,7 @@
     }
   ],
   "labels": {
-    "HAPROXY_0_VHOST": "http://demo2-agents.northeurope.cloudapp.azure.com:9090",
+    "HAPROXY_0_VHOST": "http://eve1-agents.northeurope.cloudapp.azure.com:9090",
     "HAPROXY_GROUP": "external",
     "VIP_0": "1.1.1.1:30000"
   },
