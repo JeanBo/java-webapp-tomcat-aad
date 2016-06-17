@@ -11,7 +11,7 @@
       "portMappings": [ {
         "containerPort": 6379,
         "hostPort": 0,
-        "servicePort": 10101,
+        "servicePort": 10001,
         "protocol": "tcp",
         "name": "redis",
         "labels": { "VIP_0": "1.1.1.1:6379" }

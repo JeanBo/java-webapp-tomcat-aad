@@ -4,7 +4,7 @@
   "cpus": 0.25,
   "mem": 256,
   "disk": 0,
-  "instances": 3,
+  "instances": 1,
   "container": {
     "type": "DOCKER",
     "volumes": [],
@@ -15,7 +15,7 @@
         {
           "containerPort": 3000,
           "hostPort": 0,
-          "servicePort": 10000,
+          "servicePort": 10001,
           "protocol": "tcp",
           "labels": {
             "VIP_0": "1.1.1.1:30000"
@@ -51,7 +51,7 @@
   },
   "portDefinitions": [
     {
-      "port": 10000,
+      "port": 10001,
       "protocol": "tcp",
       "labels": {}
     }

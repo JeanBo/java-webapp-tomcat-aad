@@ -1,21 +1,23 @@
 {
-  "id": "twitterapp",
+  "id": "rss-bookmarker",
   "mem": 512,
   "cpus": 1.0,
   "instances": 2,
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "cvugrinec/twitterapp:1.2",
+      "image": "cvugrinec/rss_bookmarker:1.5",
       "network": "BRIDGE",
-      "portMappings": [{ "containerPort": 8080, "hostPort": 0, "servicePort": 10002, "protocol": "tcp" } ]
+      "portMappings": [
+        { "containerPort": 8080, "hostPort": 0, "servicePort": 10003, "protocol": "tcp" }
+      ]
     }
   },
   "healthChecks": [
     {
       "protocol": "HTTP",
       "portIndex": 0,
-      "path": "/status"
+      "path": "/rss-bookmarker/"
     }
   ],
   "labels":{

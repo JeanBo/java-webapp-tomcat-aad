@@ -12,19 +12,13 @@
 #
 ##########################################
 
-if [ "$#" -ne 4 ]
+if [ "$#" -ne 1 ]
 then
   echo "please provide the following parameters: "
   echo "- resourcegroup"
-  echo "- app Port"
-  echo "- rulenumber (> 400)"
-  echo "- rulename"
   exit 1
 fi
 resourcegroup=$1
-appPort=$2
-rulenumber=$3
-rulename=$4
 
 # only install if not already installed
 lbInstall=`dcos package list | grep -i marathon-lb`
@@ -41,8 +35,8 @@ then
 fi
 
 
-lbName=$(azure group show $resourcegroup | grep -i lb | grep agent | grep Name | sed 's/^.*[:][ ]//')
-azure network lb rule create -g $resourcegroup --lb-name $lbName -n $rulename -p tcp -f $appPort -b $appPort
+#lbName=$(azure group show $resourcegroup | grep -i lb | grep agent | grep Name | sed 's/^.*[:][ ]//')
+#azure network lb rule create -g $resourcegroup --lb-name $lbName -n $rulename -p tcp -f $appPort -b $appPort
 
-nsgName=$(azure network nsg list -g $resourcegroup| grep agent | grep public | awk '{print $2}')
-azure network nsg rule create -g $resourcegroup -a $nsgName -n $rulename-rule -c Allow -p Tcp -r Inbound -y $rulenumber -f Internet -u $appPort
+#nsgName=$(azure network nsg list -g $resourcegroup| grep agent | grep public | awk '{print $2}')
+#azure network nsg rule create -g $resourcegroup -a $nsgName -n $rulename-rule -c Allow -p Tcp -r Inbound -y $rulenumber -f Internet -u $appPort
