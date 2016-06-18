@@ -23,7 +23,7 @@ serviceport=$3
 rulenr=$4
 
 # deploy app
-# dcos marathon app add $jsonappfile
+dcos marathon app add $jsonappfile
 
 # config loadbalancer for app
 lbName=$(azure group show $resourcegroupname | grep -i lb | grep agent | grep Name | sed 's/^.*[:][ ]//')

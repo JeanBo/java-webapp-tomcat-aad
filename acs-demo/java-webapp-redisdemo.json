@@ -1,0 +1,24 @@
+{
+  "id": "java-webapp-redisdemo",
+  "mem": 512,
+  "cpus": 1.0,
+  "instances": 2,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "cvugrinec/java-webapp-redisdemo:2.1",
+      "network": "BRIDGE",
+      "portMappings": [{ "containerPort": 8080, "hostPort": 0, "servicePort": 10002, "protocol": "tcp" } ]
+    }
+  },
+  "healthChecks": [
+    {
+      "protocol": "HTTP",
+      "portIndex": 0,
+      "path": "/java-webapp-redisdemo/"
+    }
+  ],
+  "labels":{
+    "HAPROXY_GROUP":"external"
+  }
+}
