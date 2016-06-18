@@ -1,0 +1,31 @@
+{
+  "id": "helloworld",
+  "cpus": 0.2,
+  "instances": 2,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "eves/helloworld:2.0",
+      "network": "BRIDGE",
+      "portMappings": [ {
+        "containerPort": 8080,
+        "hostPort": 0,
+        "servicePort": 10006,
+        "protocol": "tcp",
+        "name": "helloworld"
+      }],
+      "parameters": [{ "key": "name", "value": "helloworld" }]
+    },
+    "forcePullImage": true
+  },
+  "healthChecks": [
+    {
+      "protocol": "HTTP",
+      "portIndex": 0,
+      "path": "/"
+    }
+  ],
+  "labels":{
+    "HAPROXY_GROUP":"external"
+  }
+}
