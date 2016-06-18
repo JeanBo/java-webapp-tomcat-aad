@@ -1,4 +1,4 @@
-FROM centos:6
+FROM alpine
 MAINTAINER chvugrinec@microsoft.com
-COPY hello.sh /opt
-CMD ["/opt/hello.sh","chris"]
+COPY hello.sh /etc
+CMD ["/bin/sh","/etc/hello.sh","chris"]
