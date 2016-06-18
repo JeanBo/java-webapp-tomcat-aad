@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.microsoft.demo</groupId>
 	<packaging>war</packaging>
-	<version>2.1</version>
+	<version>${version}</version>
 	<name>webapp redis demo</name>
 	<url>http://microsoft.com</url>
 
