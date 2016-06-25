@@ -20,8 +20,9 @@ module.exports = {
     });
 
     sendgrid.send(email, function(err, json){
-      if(err) { return console.error(err); }
-      console.log(json);
+      if(err) {
+        return console.error(err); 
+      }
     });
   }
 

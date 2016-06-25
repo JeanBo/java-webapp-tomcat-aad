@@ -1,4 +1,0 @@
-email:asasdsa@asdasd
-app:adasds
-image:RedHat:RHEL:7.2:latest
-amount:1

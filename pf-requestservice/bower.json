@@ -1,5 +1,5 @@
 {
-  "name": "bma-excelservice",
+  "name": "pf-requestservice",
   "version": "0.0.1",
   "ignore": [
     "**/.*",

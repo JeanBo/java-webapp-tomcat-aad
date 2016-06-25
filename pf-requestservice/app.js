@@ -14,22 +14,24 @@ function writetofile(req,res,filename){
   var stream = fs.createWriteStream("requests/"+filename);
   stream.once('open', function(fd) {
     console.log("request created, file: requests/"+filename);
-    stream.write('email:' + req.body.email +'\n');
-    stream.write('app:' + req.body.name +'\n');
-    stream.write('image:' + req.body.image +'\n');
-    stream.write('amount:' + req.body.nr + '\n');
+    stream.write('{\n');
+    stream.write('\"email\" : \"' + req.body.email +'\",\n');
+    stream.write('\"app\" : \"'+ req.body.name +'\",\n');
+    stream.write('\"image\" : \"' + req.body.image +'\",\n');
+    stream.write('\"amount\" : \"' + req.body.nr + '\"\n');
+    stream.write('}');
     stream.end();
   });
 
 }
 
 app.post('/sendRequest', function (req, res) {
-  var filename = "request-"+wrapped;
+  res.redirect('http://google.com');
+  var filename = "request-"+wrapped+".json";
   writetofile(req,res,filename);
   setTimeout(function() {
      mailer.send(filename);
   },2000);
-  res.send('OK');
 })
 
 

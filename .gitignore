@@ -7,3 +7,4 @@ azure_swiss_army_knife
 acs-demo/acs-mesos-deploy.json
 RemoteSystemsTempFiles/
 .metadata/
+pf-requestservice/requests/request*

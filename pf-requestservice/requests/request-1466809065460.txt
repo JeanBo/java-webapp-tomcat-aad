@@ -1,4 +1,0 @@
-email:asasa@aasas
-app:asasas
-image:RedHat:RHEL:7.2:latest
-amount:1

@@ -12,7 +12,7 @@
 <h1>Provisioning Azure NN</h1>
 <div style="width: 100%; overflow: hidden;"> 
 
-  <form action="/" id="requestForm">
+  <form id="requestForm">
         <div style="display: block; margin-left: 20px; margin-right: auto; width: 500px; border: groove;">
           <!--
             TODO: Zal gebruikt worden voor de resource group
@@ -71,14 +71,9 @@
 // Attach a submit handler to the form
 $( "#requestForm" ).submit(function( event ) {
 
-    var selImg = $("#selectedimage").val();
     $.post("http://localhost:3000/sendRequest",
-       {name:$("#appname").val(),email:$("#email").val(),nr:$("#nr").val(),image:$("#selectedimage").val()},
-       function(data, textStatus){
-                alert("Response from server: " + data);
-       }       
-
-       );
+       {name:$("#appname").val(),email:$("#email").val(),nr:$("#nr").val(),image:$("#selectedimage").val()}
+    );
 });
 </script>
  

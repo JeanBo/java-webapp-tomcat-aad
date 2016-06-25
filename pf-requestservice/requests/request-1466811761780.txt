@@ -1,4 +1,0 @@
-email:SADASD@ASDASD
-app:ASDADASD2
-image:RedHat:RHEL:7.2:latest
-amount:3
