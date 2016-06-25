@@ -1,0 +1,4 @@
+email:chrisvugrinec@gmail.com
+app:asdasdas
+image:RedHat:RHEL:7.2:latest
+amount:13

@@ -1,0 +1,4 @@
+email:asdas@asdsa
+app:sdasd
+image:RedHat:RHEL:7.2:latest
+amount:2

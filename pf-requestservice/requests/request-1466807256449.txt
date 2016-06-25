@@ -1,0 +1,4 @@
+email:sdada@dasdas.com
+app:adada
+image:RedHat:RHEL:7.2:latest
+amount:1

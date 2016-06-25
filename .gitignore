@@ -1,4 +1,6 @@
 node_modules/
+.DS_Store
+acs-demo/.DS_Store
 public/components
 .sass-cache
 azure_swiss_army_knife

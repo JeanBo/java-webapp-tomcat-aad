@@ -1,0 +1,4 @@
+email:chrsd@zdsds
+app:saasas
+image:RedHat:RHEL:7.2:latest
+amount:4

@@ -1,0 +1,4 @@
+email:chris@asdasd
+app:app1
+image:Red Hat Enterprise Linux 7.2
+amount:13

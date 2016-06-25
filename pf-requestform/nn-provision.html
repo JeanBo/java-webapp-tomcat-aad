@@ -1,0 +1,86 @@
+<!doctype html>
+<link rel="stylesheet" type="text/css" href="css/nn.css" />
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.post demo</title>
+  <script src="js/jquery.js"></script>
+</head>
+<body>
+
+
+<h1>Provisioning Azure NN</h1>
+<div style="width: 100%; overflow: hidden;"> 
+
+  <form action="/" id="requestForm">
+        <div style="display: block; margin-left: 20px; margin-right: auto; width: 500px; border: groove;">
+          <!--
+            TODO: Zal gebruikt worden voor de resource group
+          -->
+          <h3 class="c-header__menu-sub__heading">app info</h3>
+          <br />
+          <div style="float: left;"><label for="name">App Name:</label></div>
+          <div style="margin-left: 150px;"><input type="text" placeholder="Name" required="true" id="appname" /></div>
+          <br/>
+        </div>
+        <br />
+
+        <!--
+            TODO: Moet uit info van ingelogde user komen...Active Directory???
+        -->
+        <div style="display: block; margin-left: 20px; margin-right: auto; width: 500px; border: groove;">
+          <h3 class="c-header__menu-sub__heading">user info</h3>
+          <br />
+          <div style="float: left;"><label for="email">Email:</label></div>
+          <div style="margin-left: 150px;"><input type="email" placeholder="Email" autofocus="true" required="true" id="email" /></div>
+          <br />
+        </div>
+        <br />
+
+        <!--
+            TODO: moet uit database komen (backend) en gechecked worden op input (frontend)
+        -->
+        <div style="display: block; margin-left: 20px; margin-right: auto; width: 700px; border: groove;">
+
+          <h3  class="c-header__menu-sub__heading">iaas info</h3>
+          <br />
+          <div style="float: left;"><label for="email">OS:</label></div>
+          <div style="margin-left: 150px;">
+            <input type="text" required="true" list="os" id="selectedimage" value="RedHat:RHEL:7.2:latest"  />
+            <datalist id="os">
+              <option value="RedHat:RHEL:7.2:latest">
+              <option value="Red Hat Enterprise Linux 6.8">
+              <option value="Red Hat Enterprise Linux 7.2">
+              <option value="Red Hat Enterprise Linux 7.2">
+              <option value="Windows Server 2008 R2 SP1">
+              <option value="Windows Server 2012 R2 Datacenter">
+              <option value="Windows Server 2016 Technical Preview 5">
+          </datalist>
+          <label for="name">Nr of machines:</label>
+          <input type="number" required="true" id="nr" min="1" max="100" /> <button type="submit">Request</button></div>
+          <br />
+         </div>
+  </form>
+</div>
+
+<br />
+<!-- the result of the search will be rendered inside this div -->
+<div id="result"></div>
+ 
+<script>
+// Attach a submit handler to the form
+$( "#requestForm" ).submit(function( event ) {
+
+    var selImg = $("#selectedimage").val();
+    $.post("http://localhost:3000/sendRequest",
+       {name:$("#appname").val(),email:$("#email").val(),nr:$("#nr").val(),image:$("#selectedimage").val()},
+       function(data, textStatus){
+                alert("Response from server: " + data);
+       }       
+
+       );
+});
+</script>
+ 
+</body>
+</html>

@@ -1,0 +1,4 @@
+email:dskdjskj@aasa
+app:app1
+image:RedHat:RHEL:7.2:latest
+amount:2
