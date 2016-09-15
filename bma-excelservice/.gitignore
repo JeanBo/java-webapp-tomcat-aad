@@ -3,3 +3,4 @@ public/components
 .sass-cache
 config/config-prod.json
 excel
+npm-debug.log
