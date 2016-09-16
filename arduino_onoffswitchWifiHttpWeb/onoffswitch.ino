@@ -2,10 +2,9 @@
 #include <WiFi.h>
 
 
-char ssid[] = "YOUR WIFI ID";
-char pass[] = "PASSWORD";
-int keyIndex = 0;           
-// static lan address
+char ssid[] = "put the name of your wifi AP here";      //  your network SSID (name)
+char pass[] = "putt your own password here!";   // your network password
+int keyIndex = 0;                 // your network key Index number (needed only for WEP)
 IPAddress ip(192, 168, 1, 104);
   
 int status = WL_IDLE_STATUS;
@@ -48,7 +47,7 @@ void setup() {
 
   pinMode(8, OUTPUT);
 
-  startWifiServer();
+    startWifiServer();
   
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
@@ -57,6 +56,7 @@ void setup() {
   }  
   
   printWifiStatus(); 
+  
 }
 
 
@@ -65,60 +65,42 @@ void loop() {
   WiFiClient client = server.available();   // listen for incoming clients
   if (!client) {
     return;
+  }else{
+    //  This means there is a Client
+    while(client.connected()){
+      
+      if(client.available()){
+          String request = client.readStringUntil('\r');  
+          client.flush();
+         
+          if (request.indexOf("/LAMP1=AAN") != -1) {
+            if (digitalRead(8) != HIGH){
+              counter++;                
+              Serial.println("Putting Lamp 1 ON...");
+              Serial.println(counter);
+              digitalWrite(8, HIGH);
+              delay(100);
+              client.stop();
+            }
+          }else if (request.indexOf("/LAMP1=UIT") != -1){
+            if (digitalRead(8) != LOW){
+              counter++;
+              Serial.println("Putting Lamp 1 OFF...");
+              Serial.println(counter);
+              digitalWrite(8, LOW);
+              delay(100);
+              client.stop();
+            }
+          }else{
+//            client.stop();
+          }
+      }      
+    }
+    
+    
   }
   
-  counter=0;
-  while(client && (!client.available())){
-    counter++;
-    delay(1000);
-    Serial.println("Client not available yet, counter: ");
-    Serial.println(counter);
-
-    if(counter >= 120 ){
-      counter=0;
-      startWifiServer(); 
-      break;
-    }
-  }
-        
-  String request = client.readStringUntil('\r');
-  client.flush();
-
-  if (request.indexOf("/LAMP1=AAN") != -1) {
-    if (digitalRead(8) != HIGH){
-      Serial.println("Putting Lamp 1 ON...");
-      digitalWrite(8, HIGH);                     
-    }
-  } else if (request.indexOf("/LAMP1=UIT") != -1){
-    if (digitalRead(8) != LOW){
-      Serial.println("Putting Lamp 1 OFF...");
-      digitalWrite(8, LOW);
-    }
-  }
-  /*
-  else if (client) {                             // if you get a client,
-    client.println("HTTP/1.1 200 OK");
-    client.println("Content-type:text/html");
-    client.println();
-  
-    // the content of the HTTP response follows the header:
-    client.print("Click <a href=\"/LAMP1=AAN\">here</a> LAMP 1 AAN<br>");
-    client.print("Click <a href=\"/LAMP1=UIT\">here</a> LAMP 1 UIT<br>");
-  
-    // The HTTP response ends with another blank line:
-    client.println();
-  }
-  */
-  // Miliseconds, give time to close connection
-  delay(1000);
-//  client.stop();
-
 }
-
-void softReset(){
-  asm volatile ("  jmp 0");
-}
-
 
 void printWifiStatus() {
   // print the SSID of the network you're attached to:
@@ -140,4 +122,36 @@ void printWifiStatus() {
   Serial.println(ip);
 }
 
+  /*
+  else{
+      
+      unsigned long timeout = millis();
+      while (client.available() == 0) {
+        if (millis() - timeout > 5000) {
+          Serial.println(">>> Client Timeout !");
+          //printStatus(client,'NOK');
+          client.stop();
+          return;
+        }
+    }
+    
+  }
+  
+void printStatus(WiFiClient client, char message[]){
+
+    client.println("HTTP/1.1 200 OK");
+    client.println("Content-type:text/html");
+    client.println();
+    client.println(message);    
+    // The HTTP response ends with another blank line:
+    client.println();
+}
+
+void softReset(){
+  asm volatile ("  jmp 0");
+}
+
+
+
+*/
 
