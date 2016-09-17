@@ -1,18 +1,24 @@
+#include <EEPROM.h>
 #include <SPI.h>
 #include <WiFi.h>
 
 
-char ssid[] = "put the name of your wifi AP here";      //  your network SSID (name)
-char pass[] = "putt your own password here!";   // your network password
-int keyIndex = 0;                 // your network key Index number (needed only for WEP)
+char ssid[] = "YOUR WIFI SSID";      //  your network SSID (name)
+char pass[] = "YOUR PASS!";   // your network password
 IPAddress ip(192, 168, 1, 104);
+int LAMP1_PIN = 8;
+int RESET_PIN = 5;
   
 int status = WL_IDLE_STATUS;
-
 int counter = 0;
+int loopCounter = 0;
+
 WiFiServer server(80);
 
-void startWifiServer(){
+
+WiFiServer startWifiServer(){
+  
+  
   //  Setting static IP
   WiFi.config(ip);
 
@@ -28,41 +34,53 @@ void startWifiServer(){
     // wait 10 seconds for connection:
     delay(10000);
   }
-  server.begin();                           // start the web server on port 80
+  server.begin();
+  return server;
 }
 
 
-void cls(){
-  Serial.flush();
-  for (int i=0; i<10; i++) {
-    Serial.println("\n");  
-  }
-}
 
 void setup() {
   
+  Serial.println("Setup...");
+
+  
+  digitalWrite(RESET_PIN, HIGH);
+  delay(200);
+
+  pinMode(RESET_PIN, OUTPUT);
+  pinMode(LAMP1_PIN, OUTPUT);
 
   //start serial connection
   Serial.begin(9600);
 
-  pinMode(8, OUTPUT);
 
-    startWifiServer();
+  startWifiServer();
   
-  // check for the presence of the shield:
+  /* check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
     Serial.println("WiFi shield not present");
     while (true);       // don't continue
   }  
-  
+  */
   printWifiStatus(); 
-  
+  delay(200);
 }
 
 
 
 void loop() {
+
   WiFiClient client = server.available();   // listen for incoming clients
+  loopCounter++;
+
+  Serial.println(loopCounter);  
+  if(loopCounter>=200){
+    loopCounter=0;
+    softReset();
+  }
+  delay(1000);
+  
   if (!client) {
     return;
   }else{
@@ -74,32 +92,34 @@ void loop() {
           client.flush();
          
           if (request.indexOf("/LAMP1=AAN") != -1) {
-            if (digitalRead(8) != HIGH){
+            if (digitalRead(LAMP1_PIN) != HIGH){
               counter++;                
               Serial.println("Putting Lamp 1 ON...");
               Serial.println(counter);
-              digitalWrite(8, HIGH);
+              digitalWrite(LAMP1_PIN, HIGH);
               delay(100);
               client.stop();
             }
           }else if (request.indexOf("/LAMP1=UIT") != -1){
-            if (digitalRead(8) != LOW){
+            if (digitalRead(LAMP1_PIN) != LOW){
               counter++;
               Serial.println("Putting Lamp 1 OFF...");
               Serial.println(counter);
-              digitalWrite(8, LOW);
+              digitalWrite(LAMP1_PIN, LOW);
               delay(100);
               client.stop();
             }
-          }else{
-//            client.stop();
+          }else if (request.indexOf("/RESET") != -1){
+            delay(100);
+            client.stop();
+            softReset();
           }
       }      
     }
     
     
   }
-  
+
 }
 
 void printWifiStatus() {
@@ -122,36 +142,16 @@ void printWifiStatus() {
   Serial.println(ip);
 }
 
-  /*
-  else{
-      
-      unsigned long timeout = millis();
-      while (client.available() == 0) {
-        if (millis() - timeout > 5000) {
-          Serial.println(">>> Client Timeout !");
-          //printStatus(client,'NOK');
-          client.stop();
-          return;
-        }
-    }
-    
-  }
-  
-void printStatus(WiFiClient client, char message[]){
-
-    client.println("HTTP/1.1 200 OK");
-    client.println("Content-type:text/html");
-    client.println();
-    client.println(message);    
-    // The HTTP response ends with another blank line:
-    client.println();
-}
-
 void softReset(){
-  asm volatile ("  jmp 0");
+  // Clearing memory
+  for(int i=0; i< EEPROM.length(); i++){
+    EEPROM.write(i,0);
+  }
+  setup();
+//  asm volatile ("  jmp 0");
 }
 
-
-
-*/
+void hardReset(){
+  digitalWrite(RESET_PIN,LOW);
+}
 
