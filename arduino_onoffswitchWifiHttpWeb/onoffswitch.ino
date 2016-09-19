@@ -1,24 +1,34 @@
+#include <Adafruit_SleepyDog.h>
+
+
 #include <EEPROM.h>
 #include <SPI.h>
 #include <WiFi.h>
 
 
-char ssid[] = "YOUR WIFI SSID";      //  your network SSID (name)
-char pass[] = "YOUR PASS!";   // your network password
+char ssid[] = "SSID goes here";      //  your network SSID (name)
+char pass[] = "Passwd goes here";   // your network password
 IPAddress ip(192, 168, 1, 104);
+IPAddress googleIp(172,217,17,78);
+IPAddress localhost(127, 0, 0, 1);
+
 int LAMP1_PIN = 8;
 int RESET_PIN = 5;
   
 int status = WL_IDLE_STATUS;
+int LOOPLIMIT = 50;
 int counter = 0;
 int loopCounter = 0;
+boolean lastConnected = false;
+unsigned long lastConnectionTime = 0;
+const unsigned long postingInterval = 10*1000;
 
 WiFiServer server(80);
+WiFiClient wclient;
 
 
 WiFiServer startWifiServer(){
-  
-  
+    
   //  Setting static IP
   WiFi.config(ip);
 
@@ -41,8 +51,12 @@ WiFiServer startWifiServer(){
 
 
 void setup() {
-  
+
+  Serial.begin(9600);
+
   Serial.println("Setup...");
+  Serial.print(F("Firmware version: "));
+  Serial.println(WiFi.firmwareVersion());
 
   
   digitalWrite(RESET_PIN, HIGH);
@@ -51,22 +65,12 @@ void setup() {
   pinMode(RESET_PIN, OUTPUT);
   pinMode(LAMP1_PIN, OUTPUT);
 
-  //start serial connection
-  Serial.begin(9600);
-
 
   startWifiServer();
-  
-  /* check for the presence of the shield:
-  if (WiFi.status() == WL_NO_SHIELD) {
-    Serial.println("WiFi shield not present");
-    while (true);       // don't continue
-  }  
-  */
   printWifiStatus(); 
   delay(200);
-}
 
+}
 
 
 void loop() {
@@ -75,9 +79,16 @@ void loop() {
   loopCounter++;
 
   Serial.println(loopCounter);  
-  if(loopCounter>=200){
+  
+  if(loopCounter>=LOOPLIMIT){
     loopCounter=0;
-    softReset();
+    if(!client){
+      status = WiFi.begin(ssid, pass);
+      if ( status != WL_CONNECTED) {
+        Serial.println("Server not available..rebooting");
+        wdReset();          
+      }
+    }
   }
   delay(1000);
   
@@ -89,7 +100,6 @@ void loop() {
       
       if(client.available()){
           String request = client.readStringUntil('\r');  
-          client.flush();
          
           if (request.indexOf("/LAMP1=AAN") != -1) {
             if (digitalRead(LAMP1_PIN) != HIGH){
@@ -109,12 +119,25 @@ void loop() {
               delay(100);
               client.stop();
             }
+          }else if (request.indexOf("/CHECK") != -1){
+            client.println("HTTP/1.1 200 OK");
+            client.println("Content-Type: text/html");
+            client.println("Connection: close");
+            client.println();
+            client.println("<!DOCTYPE HTML>");
+            client.println("<html>");
+            client.println("OK");
+            client.println("</html>");
+            delay(100);
+            //break;
+            client.stop();
           }else if (request.indexOf("/RESET") != -1){
             delay(100);
             client.stop();
-            softReset();
+            wdReset();
           }
-      }      
+      }
+      client.flush();
     }
     
     
@@ -140,6 +163,14 @@ void printWifiStatus() {
   // print where to go in a browser:
   Serial.print("To see this page in action, open a browser to http://");
   Serial.println(ip);
+}
+
+void wdReset(){
+//  int countdownMS = Watchdog.enable(4000);
+  Watchdog.reset();
+  Serial.print("Get ready, the watchdog will reset in ");
+  //Serial.print(countdownMS, DEC);
+  Serial.println(" milliseconds!");
 }
 
 void softReset(){
