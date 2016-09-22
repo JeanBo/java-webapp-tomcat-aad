@@ -8,8 +8,8 @@
 #include <TimeLib.h>
 
 
-char ssid[] = "datalinks-wifi";      //  your network SSID (name)
-char pass[] = "***REMOVED***";   // your network password
+char ssid[] = "SSID";      //  your network SSID (name)
+char pass[] = "PASSWORD!";   // your network password
 IPAddress ip(192, 168, 1, 104);
 //IPAddress googleIp(172,217,17,78);
 //IPAddress localhost(127, 0, 0, 1);
