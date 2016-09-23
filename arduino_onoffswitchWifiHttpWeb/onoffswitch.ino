@@ -8,8 +8,8 @@
 #include <TimeLib.h>
 
 
-char ssid[] = "SSID";      //  your network SSID (name)
-char pass[] = "PASSWORD!";   // your network password
+char ssid[] = "here your wifi sid";      //  your network SSID (name)
+char pass[] = "here your pass";   // your network password
 IPAddress ip(192, 168, 1, 104);
 //IPAddress googleIp(172,217,17,78);
 //IPAddress localhost(127, 0, 0, 1);
@@ -18,7 +18,6 @@ IPAddress ip(192, 168, 1, 104);
 int LAMP1_PIN = 8;
 int RESET_PIN = 5;
   
-int status = WL_IDLE_STATUS;
 int LOOPLIMIT = 50;
 int counter = 0;
 int loopCounter = 0;
@@ -27,25 +26,28 @@ int loopCounter = 0;
 WiFiServer server(80);
 
 
-WiFiServer startWifiServer(){
+int startWifiServer(){
     
   //  Setting static IP
   WiFi.config(ip);
-
-  status = WiFi.begin(ssid, pass);
+  int status = WL_IDLE_STATUS;
+  int retryCounter = 0;
   
   // attempt to connect to Wifi network:
   while (status != WL_CONNECTED) {
-    Serial.print("Attempting to connect to Network named: ");
-    Serial.println(ssid);                   // print the network name (SSID);
-
+    retryCounter++;
+    Serial.print("Attempting to connect to Network, attempt nr: ");
+    Serial.print(retryCounter);
     // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
     status = WiFi.begin(ssid, pass);
+    if(retryCounter>=5){
+      return status;
+    }
     // wait 10 seconds for connection:
     delay(10000);
   }
   server.begin();
-  return server;
+  return status;
 }
 
 
@@ -66,6 +68,7 @@ void setup() {
   pinMode(RESET_PIN, OUTPUT);
   pinMode(LAMP1_PIN, OUTPUT);
 
+//  Setup of SD Card
   /*  SD Card init
   if (!SD.begin(4)) {
     Serial.println("initialization of SD Card failed!");
@@ -85,40 +88,19 @@ void setup() {
 void loop() {
 
   WiFiClient client = server.available();   // listen for incoming clients
-  /*loopCounter++;
+  /*
+  loopCounter++;
 
-  Serial.println(loopCounter);  
-
-  time_t t = processSyncMessage();
-  if (t != 0) {
-    setTime(t);
-  }
-  
+  //  Every n (LOOPLIMIT) amount of seconds do this check
   if(loopCounter>=LOOPLIMIT){
-    loopCounter=0;
-    if(!client){
-      status = WiFi.begin(ssid, pass);
-      if ( status != WL_CONNECTED) {
-        Serial.println("Server not available..rebooting");
-        logFile = SD.open("logs.txt", FILE_WRITE);
-        logFile.println("System reboot at: ");
-        logFile.print(day());
-        logFile.print("-");
-        logFile.print(month());
-        logFile.print(" [ ");
-        logFile.print(hour());
-        logFile.print(":");
-        logFile.print(minute());
-        logFile.print(":");
-        logFile.print(second());          
-        logFile.print(" ]");
-        logFile.close();
-        wdReset();          
-      }
+    loopCounter=0;              //  Setting the counter back to 0 again
+    if(startWifiServer() != WL_CONNECTED){
+      wdReset();                  
     }
   }
-  delay(1000);
   */
+
+  //  Only enter this code if there is a client request comming in
   if (!client) {
     return;
   }else{
@@ -166,10 +148,8 @@ void loop() {
       }
       client.flush();
     }
-    
-    
   }
-
+  delay(1000);    //  Waiting 1 second
 }
 
 
