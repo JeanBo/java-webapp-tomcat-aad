@@ -1,18 +1,14 @@
 #include <Adafruit_SleepyDog.h>
-
-
 #include <EEPROM.h>
 #include <SPI.h>
 #include <WiFi.h>
-//#include <SD.h>
 #include <TimeLib.h>
+//#include <SD.h>
 
 
 char ssid[] = "YOUR SSID";      //  your network SSID (name)
 char pass[] = "XXXX";   // your network password
 //IPAddress ip(192, 168, 1, 104);
-//IPAddress googleIp(172,217,17,78);
-//IPAddress localhost(127, 0, 0, 1);
 //File logFile;
 
 int LAMP1_PIN = 8;
@@ -28,7 +24,7 @@ WiFiServer server(80);
 
 int startWifiServer(){
     
-  //  Setting static IP
+  //  Setting static IP, changed to DHCP by configging router to assign proper IP to this MAC
   //WiFi.config(ip);
   int status = WL_IDLE_STATUS;
   int retryCounter = 0;
@@ -39,13 +35,14 @@ int startWifiServer(){
     Serial.print("Attempting to connect to Network, attempt nr: ");
     Serial.print(retryCounter);
     Serial.println("");
-    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+    // Connect to WPA/WPA2 network
     status = WiFi.begin(ssid, pass);
+    // If status still not connected after 5 times --> RESET
     if(retryCounter>=5 && status != WL_CONNECTED ){
       wdReset();
     }
     // wait 2 seconds for connection:
-    delay(200);
+    delay(2000);
   }
   Serial.println("Starting the (web) server ");
   server.begin();
@@ -86,19 +83,18 @@ void setup() {
   pinMode(RESET_PIN, OUTPUT);
   pinMode(LAMP1_PIN, OUTPUT);
 
-//  Setup of SD Card
+  //  Setup of SD Card
   /*  SD Card init
   if (!SD.begin(4)) {
     Serial.println("initialization of SD Card failed!");
     return;
   }
-*/
+  */
   //  Wifishield
   startWifiServer();
   printWifiStatus(); 
   delay(200);
 
-  //  Setup of WDTimer
 }
 
 
@@ -169,7 +165,6 @@ void loop() {
 }
 
 
-
 void printWifiStatus() {
 
   // print the SSID of the network you're attached to:
@@ -200,18 +195,10 @@ void wdReset(){
     EEPROM.write(i,0);
   }
   Watchdog.reset();
-  //Serial.print("Get ready, the watchdog will reset in ");
-  //Serial.print(countdownMS, DEC);
-  //Serial.println(" milliseconds!");
 }
 
 /*
 void softReset(){
-  // Clearing memory
-  for(int i=0; i< EEPROM.length(); i++){
-    EEPROM.write(i,0);
-  }
-  setup();
   asm volatile ("  jmp 0");
 }
 */
@@ -219,21 +206,3 @@ void softReset(){
 void hardReset(){
   digitalWrite(RESET_PIN,LOW);
 }
-
-#define TIME_HEADER  "T"   // Header tag for serial time sync message
-
-unsigned long processSyncMessage() {
-  unsigned long pctime = 0L;
-  const unsigned long DEFAULT_TIME = 1357041600; // Jan 1 2013 
-
-  if(Serial.find(TIME_HEADER)) {
-     pctime = Serial.parseInt();
-     return pctime;
-     if( pctime < DEFAULT_TIME) { // check the value is a valid time (greater than Jan 1 2013)
-       pctime = 0L; // return 0 to indicate that the time is not valid
-     }
-  }
-  return pctime;
-}
-
-
