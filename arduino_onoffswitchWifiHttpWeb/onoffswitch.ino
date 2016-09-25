@@ -8,9 +8,9 @@
 #include <TimeLib.h>
 
 
-char ssid[] = "here your wifi sid";      //  your network SSID (name)
-char pass[] = "here your pass";   // your network password
-IPAddress ip(192, 168, 1, 104);
+char ssid[] = "YOUR SSID";      //  your network SSID (name)
+char pass[] = "XXXX";   // your network password
+//IPAddress ip(192, 168, 1, 104);
 //IPAddress googleIp(172,217,17,78);
 //IPAddress localhost(127, 0, 0, 1);
 //File logFile;
@@ -18,7 +18,7 @@ IPAddress ip(192, 168, 1, 104);
 int LAMP1_PIN = 8;
 int RESET_PIN = 5;
   
-int LOOPLIMIT = 50;
+int LOOPLIMIT = 100;
 int counter = 0;
 int loopCounter = 0;
 
@@ -29,7 +29,7 @@ WiFiServer server(80);
 int startWifiServer(){
     
   //  Setting static IP
-  WiFi.config(ip);
+  //WiFi.config(ip);
   int status = WL_IDLE_STATUS;
   int retryCounter = 0;
   
@@ -38,14 +38,16 @@ int startWifiServer(){
     retryCounter++;
     Serial.print("Attempting to connect to Network, attempt nr: ");
     Serial.print(retryCounter);
+    Serial.println("");
     // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
     status = WiFi.begin(ssid, pass);
-    if(retryCounter>=5){
-      return status;
+    if(retryCounter>=5 && status != WL_CONNECTED ){
+      wdReset();
     }
-    // wait 10 seconds for connection:
-    delay(10000);
+    // wait 2 seconds for connection:
+    delay(200);
   }
+  Serial.println("Starting the (web) server ");
   server.begin();
   return status;
 }
@@ -57,8 +59,24 @@ void setup() {
   Serial.begin(9600);
 
   Serial.println("Setup...");
-  Serial.print(F("Firmware version: "));
+  Serial.println("Firmware version: "));
   Serial.println(WiFi.firmwareVersion());
+
+  byte mac[6];  
+  WiFi.macAddress(mac);
+  Serial.print("MAC: ");
+  Serial.print(mac[5],HEX);
+  Serial.print(":");
+  Serial.print(mac[4],HEX);
+  Serial.print(":");
+  Serial.print(mac[3],HEX);
+  Serial.print(":");
+  Serial.print(mac[2],HEX);
+  Serial.print(":");
+  Serial.print(mac[1],HEX);
+  Serial.print(":");
+  Serial.println(mac[0],HEX);
+
 
 
   //  Setup of pins  
@@ -80,28 +98,27 @@ void setup() {
   printWifiStatus(); 
   delay(200);
 
-  //  Setup of Time
-
+  //  Setup of WDTimer
 }
 
 
 void loop() {
 
   WiFiClient client = server.available();   // listen for incoming clients
-  /*
-  loopCounter++;
-
+  
   //  Every n (LOOPLIMIT) amount of seconds do this check
   if(loopCounter>=LOOPLIMIT){
     loopCounter=0;              //  Setting the counter back to 0 again
-    if(startWifiServer() != WL_CONNECTED){
-      wdReset();                  
-    }
+    startWifiServer();
   }
-  */
+  
 
   //  Only enter this code if there is a client request comming in
   if (!client) {
+    delay(1000);    //  Waiting 1 second
+    loopCounter++;
+    Serial.println("loopcounter: ");
+    Serial.print(loopCounter);
     return;
   }else{
     //  This means there is a Client
@@ -149,12 +166,12 @@ void loop() {
       client.flush();
     }
   }
-  delay(1000);    //  Waiting 1 second
 }
 
 
 
 void printWifiStatus() {
+
   // print the SSID of the network you're attached to:
   Serial.print("SSID: ");
   Serial.println(WiFi.SSID());
@@ -172,10 +189,11 @@ void printWifiStatus() {
   // print where to go in a browser:
   Serial.print("To see this page in action, open a browser to http://");
   Serial.println(ip);
+
 }
 
 void wdReset(){
-//  int countdownMS = Watchdog.enable(4000);
+  int countdownMS = Watchdog.enable(1000);
   Serial.print("Get ready, the watchdog will reset ");
   // Clearing memory
   for(int i=0; i< EEPROM.length(); i++){
