@@ -44,7 +44,7 @@ apt-get install npm
 npm install
 apt-get install nodejs
 apt-get --purge remove node
-if [ ! -f /etc/pam.d/common-auth ] 
+if [ ! -f /usr/bin/node ] 
 then
   ln -s /usr/bin/nodejs /usr/bin/node
 fi
