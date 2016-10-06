@@ -44,7 +44,6 @@ if (username && password) {
        // within ADAL framework, the next three lines are a temp workaround this problem
        if(tokenResponse.error == 'user_password_expired' && tokenResponse.error_codes[0] == '50055' ){
           // Provisioning the user to the OS
-          getent passwd $PAM_USER || useradd -m $PAM_USER
           exec("/usr/bin/getent passwd $PAM_USER || useradd -m $PAM_USER")
           process.exit(0);
        }else{
