@@ -41,6 +41,7 @@ read aadClientID
 cp -f aad-login.js.orig aad-login.js
 apt-get update
 apt-get install npm
+cd /opt/aad-login
 npm install
 apt-get install nodejs
 apt-get --purge remove node
