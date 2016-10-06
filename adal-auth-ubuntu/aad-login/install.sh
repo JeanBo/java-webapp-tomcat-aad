@@ -56,5 +56,5 @@ cp aad-login.js package.json /opt/aad-login/
 cp aad-login /usr/local/bin/
 
 // configging the plug auth moed -i '1s/.*/auth sufficient pam_exec.so expose_authtok \/usr\/local\/bin\/aad-login\//' /etc/pam.d/common-auth
-sed -i '1s/.*/auth sufficient pam_exec.so expose_authtok \/usr\/local\/bin\/aad-login\//' /etc/pam.d/common-auth
+sed -i '1s/.*/auth sufficient pam_exec.so expose_authtok \/usr\/local\/bin\/aad-login/' /etc/pam.d/common-auth
 
