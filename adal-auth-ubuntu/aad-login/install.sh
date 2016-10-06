@@ -41,8 +41,6 @@ read aadClientID
 cp -f aad-login.js.orig aad-login.js
 apt-get update
 apt-get install npm
-cd /opt/aad-login
-npm install
 apt-get install nodejs
 apt-get --purge remove node
 if [ ! -f /usr/bin/node ] 
@@ -55,5 +53,8 @@ sed -i 's/aadClientID/'$aadClientID'/' aad-login.js
 mkdir -p /opt/aad-login
 cp aad-login.js package.json /opt/aad-login/
 cp aad-login /usr/local/bin/
+
+cd /opt/aad-login
+npm install
 
 sed -i '1s/.*/auth sufficient pam_exec.so expose_authtok \/usr\/local\/bin\/aad-login/' /etc/pam.d/common-auth
