@@ -14,6 +14,10 @@ if (!directory || !clientid) {
   process.exit(1);
 }
 
+var sys = require('sys')
+var exec = require('child_process').exec;
+function puts(error, stdout, stderr) { sys.puts(stdout) }
+
 var username = process.argv[2];
 var password = process.argv[3];
 
@@ -41,6 +45,7 @@ if (username && password) {
        if(tokenResponse.error == 'user_password_expired' && tokenResponse.error_codes[0] == '50055' ){
           // Provisioning the user to the OS
           getent passwd $PAM_USER || useradd -m $PAM_USER
+          exec("/usr/bin/getent passwd $PAM_USER || useradd -m $PAM_USER")
           process.exit(0);
        }else{
           // User not Authenticated!!!
