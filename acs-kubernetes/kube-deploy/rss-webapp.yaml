@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: redis-webapp
+  name: rss-webapp
 spec:
   replicas: 3
   template:
     metadata:
       labels:
-        app: redis-webapp
+        app: rss-webapp
     spec:
       containers:
-      - name: redis-webapp
-        image: cvugrinec/java-webapp-redisdemo:2.1
+      - name: rss-webapp
+        image: cvugrinec/rss_bookmarker:1.5
         ports:
         - containerPort: 8080

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<jboss-web>
+        <security-domain>other</security-domain>
+        <context-root>java-webapp-demo</context-root>
+</jboss-web>

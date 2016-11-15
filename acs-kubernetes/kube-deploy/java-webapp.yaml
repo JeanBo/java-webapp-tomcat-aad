@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: redis-webapp
+  name: java-webapp-demo
 spec:
   replicas: 3
   template:
     metadata:
       labels:
-        app: redis-webapp
+        app: java-webapp-demo
     spec:
       containers:
-      - name: redis-webapp
-        image: cvugrinec/java-webapp-redisdemo:2.1
+      - name: java-webapp-demo
+        image: cvugrinec/java-webapp-demo
         ports:
         - containerPort: 8080
