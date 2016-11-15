@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Implementation-Title: Datalinks SimpleJar
+Implementation-Version: 1.0
+Class-Path: commons-lang3-3.0.jar
+Main-Class: nl.datalinks.acsdemo.simplejar.Main
+
