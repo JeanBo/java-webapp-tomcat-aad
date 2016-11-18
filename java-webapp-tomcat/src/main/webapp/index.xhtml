@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Java Webapp Tomcat Demo</title>
+	<link rel="stylesheet" type="text/css" href="css/outlook.css" />
+</h:head>
+
+<f:metadata>
+  <f:event type="preRenderView" listener="#{appBean.init}"/>
+</f:metadata>
+
+<h:body>
+	<h1>Page info</h1>
+	<h2>Url: #{appBean.serverUrl}</h2>
+	<!-- 
+		<h2>Server: #{appBean.serverName}:#{appBean.serverPort}</h2>
+	-->
+	<h2>DockerHostName: #{appBean.hostname}</h2>
+	<h2>Remote: #{appBean.remoteAddr}:#{appBean.remotePort} - #{appBean.remoteHost}</h2>
+	<h2>Local counter: #{appBean.counter}</h2>
+	
+</h:body>
+</html>

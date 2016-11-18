@@ -374,7 +374,7 @@
     }
   },
   "variables": {
-    "agentpool1AccountName": "[concat(variables('storageAccountBaseName'), 'agnt0')]",
+    "agentpool1AccountName": "[uniqueString('storageAccountBaseName')]",
     "agentpool1AvailabilitySet": "[concat('agentpool1-availabilitySet-', variables('nameSuffix'))]",
     "agentpool1Count": "[parameters('agentpool1Count')]",
     "agentpool1Index": 0,

@@ -57,6 +57,6 @@
     "value": "123QWEasd"
   },
   "sshRSAPublicKey": {
-    "value": ""
+    "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcdlNaYqD0tOeP8wNiuXMzx3kN9ZrVzJr0BcYb4SLn4hkHnp6U1O2q/qaRSb36qf/apKAV8R012o15Vic6iaYle1cfMjPgXrii2mSlnSa0RyAn/kqV3zWYn5r+ivWK5polemqagsdgqI9WblDzN+1knuCfYedvJ0eBOtSeo2iuRBJfVOefOUu09bX0REf68s061EHtNIPtgxqM9xQ7UpVDWxE09dFIA5bWmuOn0ZiE3gd2ZQuCsp2O/wSZnXA2kO3PbPNcSNUfVGgj30gzaXMcXET7btIRwBaBsy+GpBXTDDcfiocuTyQR6VbWPQjAKKuPG534QyW+w3pLFN2aS6ct chris@Air-chris.lan"
   }
 }

@@ -1,8 +1,8 @@
-azure login
+#azure login
 azure account show
 echo "enter subscription id"
-read subid
-azure account set --name $subid
+#read subid
+#azure account set --name $subid
 
 
 echo "enter resourcegroup name"
@@ -12,7 +12,7 @@ read dname
 
 azure group create \
     --name=$rgroupname \
-    --location="east us>"
+    --location="east us"
 
 azure group deployment create \
     --name=$dname \
