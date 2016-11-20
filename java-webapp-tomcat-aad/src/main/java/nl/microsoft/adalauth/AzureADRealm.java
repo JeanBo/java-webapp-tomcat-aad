@@ -2,7 +2,6 @@ package nl.microsoft.adalauth;
 
 import com.microsoft.aad.adal4j.AuthenticationContext;
 import com.microsoft.aad.adal4j.AuthenticationResult;
-import com.microsoft.aad.adal4j.UserInfo;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -17,10 +16,9 @@ import javax.naming.ServiceUnavailableException;
 public class AzureADRealm { 
 
     private final static String AUTHORITY = "https://login.windows.net/common";
-    private final static String CLIENT_ID = "be8bf5da-160b-46f3-aa01-b6eb78fbf5a5";
+    private final static String CLIENT_ID = "ff1460aa-d41c-4fab-8d84-7954d2d07a93";
     private final static String TOKEN_URL = "https://graph.windows.net";
     
-    private final static String AUTH_TPYE = "Authentication done by using Azure Active Directory";
     private final static Logger logger = Logger.getLogger(AzureADRealm.class.getName());
 
     private boolean validate(String username, char[] password) {
@@ -58,8 +56,6 @@ public class AzureADRealm {
         if (result == null) {
             throw new ServiceUnavailableException("authentication result was null");
         }
-        UserInfo userInfo = result.getUserInfo();
-        
         return result;
     }
 

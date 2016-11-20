@@ -16,12 +16,11 @@ Create and build your app with the following command:
 * this image is based on cvugrinec/tomcat:1.8 which contains a slightly modified tomcat install:
   * in /usr/local/tomcat/conf there is a jaas.config ( src is in src/main/resources/jaas.config )
   * in $JAVA_HOME/lib/security/java.security I added the following line: login.config.url.1=file:/usr/local/tomcat/conf/jaas.config
-* create 
-
-* you can change/ add users by editing the following file:  src/main/tomcat/tomcat-users.xml 
-* access the counter app with the following url: http://localhost:8080/java-webapp-tomcat
-* you can access the secret part of the app (see the web.xml) by accessing the following url: http://localhost:8080/java-webapp-tomcat/secure
-* you can find the username password info in the tomcat-users.xml file, default demo/demo123
+* create an application in Azure AD using the classic portal, the role mapping in the new portal didnt work for me
+* in the same directory where the app service principal is created create a user
+* to see the counter: go to the following url: http://localhost:8080/java-webapp-tomcat-aad
+* you can access the secret part of the app (see the web.xml) by accessing the following url: http://localhost:8080/java-webapp-tomcat-aad/secure
+* you can login with the user you just created in AAD
 
 ## How does it work
 
@@ -32,4 +31,7 @@ Create and build your app with the following command:
   * the assemby.xml file in the src/main/docker folder container the references to files that need to be copied from local to the docker image
   * the runCmd tags do commands on the newly created docker image 
 * authenication is configured in the src/main/webapp/WEB-INF/web.xml file
-* the web.xml file refers to a realm that has been configured in the tomcat-users configuration file
+* this project also contains a context.xml file (src/main/webapp/META-INF/context.xml) which does the following:
+  * defines that the app uses a custom authentication using the JAAS framework : org.apache.catalina.realm.JAASRealm"
+  * the collection of users (REALM) is within the JAAS realm and handled by the app with appName=WebAppTcLogin
+* this appName is mapped to a context which is configured in the $JAVA_HOME/lib/security/java.security to point to the jaas.config file, in this file you will see that the WebAppTcLogin is mapped to the nl.microsoft.adalauth.AzureADLoginModule class.
