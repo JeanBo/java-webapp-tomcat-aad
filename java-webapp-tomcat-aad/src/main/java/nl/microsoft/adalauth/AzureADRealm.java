@@ -16,7 +16,7 @@ import javax.naming.ServiceUnavailableException;
 public class AzureADRealm { 
 
     private final static String AUTHORITY = "https://login.windows.net/common";
-    private final static String CLIENT_ID = "ff1460aa-d41c-4fab-8d84-7954d2d07a93";
+    private final static String CLIENT_ID = "[ YOUR AZURE ID APP ID GOES HERE]";
     private final static String TOKEN_URL = "https://graph.windows.net";
     
     private final static Logger logger = Logger.getLogger(AzureADRealm.class.getName());
