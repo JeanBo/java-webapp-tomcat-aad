@@ -1,6 +1,6 @@
 #azure login
 azure account show
-echo "enter subscription id"
+#echo "enter subscription id"
 #read subid
 #azure account set --name $subid
 

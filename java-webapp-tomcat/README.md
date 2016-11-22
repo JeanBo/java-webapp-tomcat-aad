@@ -1,5 +1,9 @@
 # Java WebApp on Tomcat
 
+Please note that this is NOT the way to use AAD in a production environment.
+This is Demo code to show how you can (mis)use AAD as a LDAP solution.
+In future I will create a federated authentication solution using AAD.
+
 ## What is it
 
 A simple java webapp that demonstrates the following:
