@@ -20,8 +20,8 @@ azure account show
 #read subid
 #azure account set --name $subid
 
-#echo "enter resourcegroup name"
-#read rgroupname
+echo "enter resourcegroup name"
+read rgroupname
 
 apt-get install uuid-runtime
 dname=`uuidgen`
