@@ -211,7 +211,7 @@
     }
   },
   "variables": {
-    "agentpool1AccountName": "[concat(variables('storageAccountBaseName'), 'agnt0')]",
+    "agentpool1AccountName": "[uniqueString(concat(variables('storageAccountBaseName'), 'agnt0'))]",
     "agentpool1AvailabilitySet": "[concat('agentpool1-availabilitySet-', variables('nameSuffix'))]",
     "agentpool1Count": "[parameters('agentpool1Count')]",
     "agentpool1Index": 0,
@@ -249,7 +249,7 @@
     "masterLbName": "[concat(variables('orchestratorName'), '-master-lb-', variables('nameSuffix'))]",
     "masterPrivateIp": "[parameters('firstConsecutiveStaticIP')]",
     "masterPublicIPAddressName": "[concat(variables('orchestratorName'), '-master-ip-', variables('masterFqdnPrefix'), '-', variables('nameSuffix'))]",
-    "masterStorageAccountName": "[concat(variables('storageAccountBaseName'), 'mstr0')]",
+    "masterStorageAccountName": "[uniqueString(concat(variables('storageAccountBaseName'), 'mstr0'))]",
     "masterVMNamePrefix": "[concat(variables('orchestratorName'), '-master-', variables('nameSuffix'), '-')]",
     "masterVMSize": "[parameters('masterVMSize')]",
     "maxStorageAccountsPerAgent": "[div(variables('maxVMsPerPool'),variables('maxVMsPerStorageAccount'))]",
