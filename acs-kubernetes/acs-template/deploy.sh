@@ -22,13 +22,13 @@ azure account show
 
 #echo "enter resourcegroup name"
 #read rgroupname
+
+apt-get install uuid-runtime
 dname=`uuidgen`
 
 
-sed -in 's/ENDPOINTPREFIX/'$dname'/' azuredeploy.parameters.json
+#sed -in 's/ENDPOINTPREFIX/'$dname'/' azuredeploy.parameters.json
 
-
-exit 1
 azure group create \
     --name=$rgroupname \
     --location="east us"

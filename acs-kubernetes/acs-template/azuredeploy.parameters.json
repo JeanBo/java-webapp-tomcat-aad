@@ -42,7 +42,7 @@
     "value": "azureuser"
   },
   "masterEndpointDNSNamePrefix": {
-    "value": "ENDPOINTPREFIX"
+    "value": ""
   },
   "masterSubnet": {
     "value": "10.240.0.0/16"
