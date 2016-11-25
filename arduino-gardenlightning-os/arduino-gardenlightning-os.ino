@@ -17,7 +17,7 @@
 #include <EthernetV2_0.h>
 
 byte mac[] = {  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-IPAddress ip(192,168,1,104);
+IPAddress ip(192,168,2,115);
 EthernetServer server(80); 
 
 int ETHERNETSHIELD_PIN = 4;
@@ -56,7 +56,7 @@ void loop() {
             if (digitalRead(LAMP1_PIN) != HIGH){
               Serial.println("Putting Lamp 1 ON...");
               digitalWrite(LAMP1_PIN, HIGH);
-              giveOutput(client,"LAMP1 ON");
+              //giveOutput(client,"LAMP1 ON");
               delay(100);
               client.stop();
             }
@@ -64,23 +64,23 @@ void loop() {
             if (digitalRead(LAMP1_PIN) != LOW){
               Serial.println("Putting Lamp 1 OFF...");
               digitalWrite(LAMP1_PIN, LOW);
-              giveOutput(client,"LAMP1 OFF");
+              //giveOutput(client,"LAMP1 OFF");
               delay(100);
               client.stop();
             }
-          }else if (request.indexOf("/LAMP2=AAN") != -1) {
+          }else if (request.indexOf("/LAMP=AAN") != -1) {
             if (digitalRead(LAMP2_PIN) != HIGH){
               Serial.println("Putting Lamp 2 ON...");
               digitalWrite(LAMP2_PIN, HIGH);
-              giveOutput(client,"LAMP2 ON");
+              //giveOutput(client,"LAMP2 ON");
               delay(100);
               client.stop();
             }
-          }else if (request.indexOf("/LAMP2=UIT") != -1){
+          }else if (request.indexOf("/LAMP=UIT") != -1){
             if (digitalRead(LAMP2_PIN) != LOW){
               Serial.println("Putting Lamp 2 OFF...");
               digitalWrite(LAMP2_PIN, LOW);
-              giveOutput(client,"LAMP2 OFF");
+              //giveOutput(client,"LAMP2 OFF");
               delay(100);
               client.stop();
             }
