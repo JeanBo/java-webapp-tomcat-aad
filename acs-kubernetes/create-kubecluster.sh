@@ -43,5 +43,6 @@ azure group deployment create \
     --parameters-file="azuredeploy.parameters.json"
 
 mkdir ~/.kube 
-echo "copy the kube master config to your machine"
+echo "NOW copy the kube master config to your machine...and you are good to go"
 echo "scp azureuser@a${id}z.eastus.cloudapp.azure.com:~/.kube/config ~/.kube/config"
+cd /root/microsoft/acs-kubernetes/kube-deploy
