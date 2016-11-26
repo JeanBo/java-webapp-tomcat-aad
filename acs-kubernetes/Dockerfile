@@ -19,4 +19,3 @@ RUN apt-get update && \
   mkdir ~/.ssh && \
   mkdir $HOME/gopath && \
   ssh-keygen -t rsa -f  ~/.ssh/id_rsa -P ""
-#CMD ["yum","-y","git"]
