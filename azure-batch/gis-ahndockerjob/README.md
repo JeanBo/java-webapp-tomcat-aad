@@ -15,12 +15,14 @@ This way Data Scientists with a specialization on AHN data (something with the H
   * azure redis cache (from azure markettplace)
   * a private docker registry (from azure marketplace)
 
-setup a redis cache and config the ACCESS key in the config.txt file (in the resources folder)
-setup a storage account and config the SHARED ACCESS URL in the config.txt file (in the resources folder)
-Setup your azure batch account, and config the ACCESS key in the startjob.cfg file (in the resources folder)
+* setup
+  * setup a redis cache and config the ACCESS key in the config.txt file (in the resources folder)
+  * setup a storage account and config the SHARED ACCESS URL in the config.txt file (in the resources folder)
+  * Setup your azure batch account, and config the ACCESS key in the startjob.cfg file (in the resources folder)
 
-Run the init job to populate the Redis Cache
-You can start the job by executing the start.sh script. This will call all the required azure batch API via the Python program (see startjob.py)
+* start
+  * Run the init job to populate the Redis Cache
+  * You can start the job by executing the start.sh script. This will call all the required azure batch API via the Python program (see startjob.py)
 
 Hint, use the Azure Batch Explorer to see what is going on...for now, this is only available as a Windows Binary
 
