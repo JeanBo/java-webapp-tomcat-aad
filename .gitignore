@@ -9,3 +9,4 @@ RemoteSystemsTempFiles/
 .metadata/
 pf-requestservice/requests/request*
 /java-webapp-tomcat-aad/nbproject/
+acs-kubernetes/acs-template/backup/

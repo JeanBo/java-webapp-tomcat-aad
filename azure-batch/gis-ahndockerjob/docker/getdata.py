@@ -12,6 +12,9 @@ keys = r.keys()
 
 for key in keys:
   value = r.get(key)
+  print 'value: ',value
   print 'removing key from cache: ',key
   r.delete(key)
-  call(["/opt/scripts/get.sh", value])
+  if value:
+    call(["/opt/scripts/get.sh", value])
+
