@@ -8,7 +8,7 @@ This way Data Scientists with a specialization on AHN data (something with the H
 
 ## How to
 
-*pre requisites:
+* pre requisites:
   * azure account
   * azure batch account
   * azure storage account
