@@ -12,6 +12,6 @@ batchserviceurl=https://gisbatch.westeurope.batch.azure.com/
 storageaccountname=gisstoragedata
 storageaccountkey=[YOUR STORAGE ACCOUNT KEY]
 storageaccountsuffix=core.windows.net
-DOCKER]
+[DOCKER]
 dockerreguser=chris
 dockerregpassword=[generated docker reg password]
