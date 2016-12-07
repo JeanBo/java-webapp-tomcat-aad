@@ -38,7 +38,7 @@ def do_dockerstuff(batch_client, block_blob_client, job_id, pool_id, docker_user
         'cd /opt/scripts/config',
         'wget '+common.helpers._read_stream_as_string('\"'+config_url+'\" -O /opt/scripts/config/config.txt','utf-8'),
         'docker login chris-microsoft.azurecr.io -u '+docker_user+' -p '+docker_password,
-        'docker run -i -v `pwd`:/opt/scripts/config '+container_image+' /opt/scripts/getdata.sh',
+        'docker run -i -v `pwd`:/opt/scripts/config '+docker_image+' /opt/scripts/getdata.sh',
   ]
   task_name=common.helpers.generate_unique_resource_name(_TASK_NAME)
   print('adding task: '+task_name)
@@ -139,9 +139,8 @@ if __name__ == '__main__':
 
     # submit job and add a task
     for node in nodes:
-      print('docker user: '+docker_user)
-      print('docker pwd: '+docker_password)
-      task_id = do_dockerstuff(batch_client, block_blob_client, job_id, pool_id, docker_user, docker_password)
+      #print('docker user: '+docker_user)
+      task_id = do_dockerstuff(batch_client, block_blob_client, job_id, pool_id, docker_user, docker_password, docker_image)
 
     # wait for tasks to complete
     common.helpers.wait_for_tasks_to_complete( batch_client, job_id, datetime.timedelta(minutes=15))
