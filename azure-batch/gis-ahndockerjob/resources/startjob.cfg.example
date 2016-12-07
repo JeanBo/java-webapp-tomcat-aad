@@ -15,3 +15,4 @@ storageaccountsuffix=core.windows.net
 [DOCKER]
 dockerreguser=chris
 dockerregpassword=[generated docker reg password]
+dockerimage=chris-microsoft.azurecr.io/gis-azureshipyarjob:2.2

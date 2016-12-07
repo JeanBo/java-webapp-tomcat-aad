@@ -28,7 +28,7 @@ _STARTTASK_RESOURCE_FILE = 'install-docker.sh'
 _STARTTASK_SHELL_SCRIPT_PATH = os.path.join('resources', _STARTTASK_RESOURCE_FILE)
 
 
-def do_dockerstuff(batch_client, block_blob_client, job_id, pool_id, docker_user, docker_password):
+def do_dockerstuff(batch_client, block_blob_client, job_id, pool_id, docker_user, docker_password,docker_image):
 
   # upload scripts
   config_url = common.helpers.upload_blob_and_create_sas(block_blob_client,_CONTAINER_NAME,'config.txt',os.path.join('resources','config.txt'),datetime.datetime.utcnow() + datetime.timedelta(hours=1))
@@ -38,7 +38,7 @@ def do_dockerstuff(batch_client, block_blob_client, job_id, pool_id, docker_user
         'cd /opt/scripts/config',
         'wget '+common.helpers._read_stream_as_string('\"'+config_url+'\" -O /opt/scripts/config/config.txt','utf-8'),
         'docker login chris-microsoft.azurecr.io -u '+docker_user+' -p '+docker_password,
-        'docker run -i -v `pwd`:/opt/scripts/config  chris-microsoft.azurecr.io/gis-azureshipyarjob:2.2 /opt/scripts/getdata.sh',
+        'docker run -i -v `pwd`:/opt/scripts/config '+container_image+' /opt/scripts/getdata.sh',
   ]
   task_name=common.helpers.generate_unique_resource_name(_TASK_NAME)
   print('adding task: '+task_name)
@@ -110,10 +110,13 @@ if __name__ == '__main__':
 
   docker_user = app_config.get( 'DOCKER', 'dockerreguser')
   docker_password = app_config.get( 'DOCKER', 'dockerregpassword')
+  docker_image = app_config.get( 'DOCKER', 'dockerimage')
 
   credentials = batchauth.SharedKeyCredentials(batch_account_name, batch_account_key)
   batch_client = batch.BatchServiceClient(credentials, base_url=batch_service_url)
   block_blob_client = azureblob.BlockBlobService( account_name=storage_account_name, account_key=storage_account_key, endpoint_suffix=storage_account_suffix)
+
+
 
   job_id = common.helpers.generate_unique_resource_name(_JOB_PREFIX)
   print('creating job with id: '+job_id)
