@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "vmName": {
-      "value": "puppetAgent2"
+      "value": "puppetagent3"
     },
     "vnetName": {
       "value": "vnet01"
@@ -18,16 +18,16 @@
       "value": "Standard_D2"
     },
     "dnsNameForPublicIP": {
-      "value": "chris-puppetagent2"
+      "value": "chris-puppetagent3"
     },
     "pupmstrFQDN":{
-      "value":"pupmstr.cloudapp.net"
+      "value":"puppetzdemo.eastus.cloudapp.azure.com"
     },
     "pupmstrIP":{
       "value":"192.168.1.1"
     },
     "pupmstrInternalFQDN":{
-      "value":"chris-puppetmaster.westeurope.cloudapp.azure.com"
+      "value":"puppetzdemo.eastus.cloudapp.azure.com"
     }
   }
 }

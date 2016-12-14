@@ -13,6 +13,7 @@ This demo shows you how to setup an initial puppet configuration on Azure with t
 
 * setup
   * 1st setup the puppetmaster; https://ms.portal.azure.com/?flight=1#create/puppet.puppet-enterprise-2016-1puppet-enterprise-2016-1
+https://gallery.azure.com/artifact/20161101/puppet.puppet-enterprise-2016-1puppet-enterprise-2016-1.1.0.3/Artifacts/mainTemplate.json
 
 ## How does it work
 
