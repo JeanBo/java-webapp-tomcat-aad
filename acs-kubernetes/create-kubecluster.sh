@@ -1,6 +1,6 @@
 #!//bin/bash
 
-az login
+#az login
 azure account show
 echo "Enter sub id"
 read subscription
