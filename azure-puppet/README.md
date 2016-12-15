@@ -1,6 +1,6 @@
 # Documentation Azure Puppet
 
-See it in action: XXXX,  sorry for the timegaps in the movie...had a busy dat with a lot of interruptions.
+See it in action: XXXX,  sorry for the timegaps in the movie...had a busy day with a lot of interruptions ;)
 
 ## What is it
 
@@ -13,8 +13,7 @@ The Puppet version used here is: 2016.1  Enterprise Edition.
 
 * setup
   * create the puppet master
-    * https://ms.portal.azure.com/?flight=1#create/puppet.puppet-enterprise-2016-1puppet-enterprise-2016-1
-    * here is the template: https://gallery.azure.com/artifact/20161101/puppet.puppet-enterprise-2016-1puppet-enterprise-2016-1.1.0.3/Artifacts/mainTemplate.json
+    * By following this link, https://ms.portal.azure.com/?flight=1#create/puppet.puppet-enterprise-2016-1puppet-enterprise-2016-1 or you can use this template file yourself: https://gallery.azure.com/artifact/20161101/puppet.puppet-enterprise-2016-1puppet-enterprise-2016-1.1.0.3/Artifacts/mainTemplate.json
   * create the 2 agents with the scripts
     * change the properties in the template file: templates/az-puppetagent-parameters.json
       * change the hostnames
