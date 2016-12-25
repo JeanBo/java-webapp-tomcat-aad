@@ -13,7 +13,7 @@ then
   rm x1 x3 privkey.pem  cert*
 fi
 # make sure you do this 1st
-# azure login
+azure login
 echo "your app name"
 read app
 openssl req -x509 -days 3650 -newkey rsa:2048 -out cert.pem -nodes -subj "/CN=$app"
