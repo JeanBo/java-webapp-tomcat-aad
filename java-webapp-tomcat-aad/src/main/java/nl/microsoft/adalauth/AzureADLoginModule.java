@@ -1,6 +1,6 @@
 package nl.microsoft.adalauth;
 
-import com.microsoft.aad.adal4j.AuthenticationResult;
+
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.security.auth.Subject;
@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import javax.security.auth.callback.UnsupportedCallbackException;
+
+import com.microsoft.aad.adal4j.AuthenticationResult;
 import nl.microsoft.adalauth.jaas.RolePrincipal;
 import nl.microsoft.adalauth.jaas.UserPrincipal;
 
@@ -57,6 +59,7 @@ public class AzureADLoginModule implements LoginModule {
         
         logger.log(Level.INFO, "Trying to login user: {0} with password {1}",new String[]{login,password});
         AuthenticationResult aResult = null;
+
         try {
             aResult = AzureADRealm.getAccessTokenFromUserCredentials(login, password);
             logger.log(Level.INFO, "Access Token - {0}", aResult.getAccessToken());
