@@ -9,23 +9,31 @@ A simple java webapp that demonstrates the following:
 * tomcat authentication, using a custom authenticator based on JAAS framework and using com.microsoft.azure.adal4j lib
 * automatic creation of docker container using docker-maven-plugin
 
-## HowTO
+NOTE : The base project was copied from https://github.com/cvugrinec/microsoft/tree/master/java-webapp-tomcat-aad/
+* Changes had to be made to upgrade the tools used and also the image it was based on (which is no longer available)
+   *  Used to create a docker image named: cvugrinec/java-webapp-tomcat-aad:1.1 (see pom.xml, the docker-maven-plugin part)
+   *  Used to run the docker image with:  docker run -p 8080:8080 cvugrinec/java-webapp-tomcat-aad:1.1 
 
+## HowTO
 Create and build your app with the following command:
 * mvn clean install docker:build
-* this will create a docker image named: cvugrinec/java-webapp-tomcat-aad:1.1 (see pom.xml, the docker-maven-plugin part)
-* run the docker image with:  docker run -p 8080:8080 cvugrinec/java-webapp-tomcat-aad:1.1
-* this image is based on cvugrinec/tomcat:1.8 which contains a slightly modified tomcat install:
-  * in /usr/local/tomcat/conf there is a jaas.config ( src is in src/main/resources/jaas.config )
-  * in $JAVA_HOME/lib/security/java.security I added the following line: login.config.url.1=file:/usr/local/tomcat/conf/jaas.config
-* create an application in Azure AD using the classic portal, the role mapping in the new portal didnt work for me
-* in the same directory where the app service principal is created create a user
+  * builds the docker project chop/java-webapp-tomcat-aad locally
+* Use the docker project image as a base: **chop/java-webapp-tomcat-aad**  
+  * RUN with :
+    * docker run -p 8080:8080 --mount type=bind,src=$(pwd)/resources/jaas.config,dst=/usr/local/tomcat/conf/jaas.config   chop/java-webapp-tomcat-aad 
+  * this image is based on  docker.io/library/tomcat:8.5 which contains a slightly modified tomcat install:
+    * in /usr/local/tomcat/conf there is a jaas.config ( src is in src/main/resources/jaas.config )
+    * in $JAVA_HOME/lib/security/java.security I added the following line: login.config.url.1=file:/usr/local/tomcat/conf/jaas.config
+  * DOCKER container jeanbod/tomcat8ad:1.1 is created in this project, check Dockerfile. 
+    * It is based on docker.io/library/tomcat:8.5
+    * It is the base container for this projects docker container chop/java-webapp-tomcat-aad
+* create an application in Azure AD using the classic portal
+  * in the same directory where the app service principal is created create a user
 * to see the counter: go to the following url: http://localhost:8080/java-webapp-tomcat-aad
 * you can access the secret part of the app (see the web.xml) by accessing the following url: http://localhost:8080/java-webapp-tomcat-aad/secure
 * you can login with the user you just created in AAD
 
 ## How does it work
-
 * you can see the maven configuration in the pom.xml file
 * the docker images is being build by the maven plugin: io.fabric.docker-maven-plugin
 * the docker-maven-plugin configures the following:
