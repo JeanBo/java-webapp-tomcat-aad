@@ -15,8 +15,8 @@ A simple java webapp that demonstrates the following:
 
 Create and build your app with the following command:
 * mvn clean install docker:build
-* this will create a docker image named: cvugrinec/java-webapp-tomcat:1.0 (see pom.xml, the docker-maven-plugin part)
-* run the docker image with:  docker run -p 8080:8080 cvugrinec/java-webapp-tomcat:1.0
+* this will create a docker image named: jeanbod/tomcat-webapp:8.5 (see pom.xml, the docker-maven-plugin part)
+* run the docker image with:  docker run -p 8080:8080 jeanbod/tomcat-webapp:8.5
 * you can change/ add users by editing the following file:  src/main/tomcat/tomcat-users.xml 
 * access the counter app with the following url: http://localhost:8080/java-webapp-tomcat
 * you can access the secret part of the app (see the web.xml) by accessing the following url: http://localhost:8080/java-webapp-tomcat/secure
