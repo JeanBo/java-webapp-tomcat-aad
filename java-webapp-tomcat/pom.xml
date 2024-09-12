@@ -24,11 +24,11 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-                <dependency>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-simple</artifactId>
-                        <version>1.6.4</version>
-                </dependency>
+		<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>1.6.4</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>javax.el-api</artifactId>
@@ -193,16 +193,29 @@
 
 	</dependencies>
 	<build>
+		<resources>
+			<resource>
+				<directory>src\main\java</directory>
+				<includes><include>**/*.html</include></includes>
+				<excludes><exclude>**/*.java</exclude></excludes>
+			</resource>
+		</resources>
+
+
 		<finalName>java-webapp-tomcat</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.1</version>
+				<version>3.13.0</version>
 				<configuration>
-					<source>17</source>
-					<target>17</target>
+					<source>8</source>
+					<target>8</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.4.0</version>
 			</plugin>
 			<plugin>
 				<groupId>io.fabric8</groupId>
@@ -215,7 +228,8 @@
 							<name>jeanbod/tomcat-webapp:8.5</name>
 							<build>
 								<maintainer>jean@chop.co.za</maintainer>
-								<from>docker.io/library/tomcat:8.5</from>
+								<!--<from>docker.io/library/tomcat:8.5</from>-->
+								<from>tomcat:8.5.69-jdk8-openjdk</from>
 								<assembly>
 									<descriptor>assembly.xml</descriptor>
 									<basedir>/usr/local/tomcat/webapps/</basedir>

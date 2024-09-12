@@ -85,6 +85,42 @@
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
+        <!-- =============================================================== -->
+        <!-- Jean's own dependencies start here -->
+        <!-- =============================================================== -->
+        <!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-core -->
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-core</artifactId>
+            <version>7.18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket</artifactId>
+            <version>7.18.0</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-extensions</artifactId>
+            <version>7.18.0</version>
+        </dependency>
+        <dependency>
+        <groupId>org.apache.wicket</groupId>
+        <artifactId>wicket-auth-roles</artifactId>
+        <version>7.18.0</version>
+    </dependency>
+        <dependency>
+        <groupId>org.apache.wicket</groupId>
+        <artifactId>wicket-datetime</artifactId>
+        <version>7.18.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.wicket</groupId>
+        <artifactId>wicket-request</artifactId>
+        <version>7.18.0</version>
+    </dependency>
+
     </dependencies>
     <build>
         <finalName>java-webapp-tomcat-aad</finalName>
