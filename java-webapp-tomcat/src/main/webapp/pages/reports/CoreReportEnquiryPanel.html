@@ -1,0 +1,144 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS_layout-window.css" rel="stylesheet" type="text/css"></link>
+
+</head>
+<body>
+ 
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner">
+        <!-- <p align="center">
+          <span id="TopBannerHeader">SRS Application</span>
+          <br/><span wicket:id="pageName"></span>
+        </p> -->
+        
+        <table width="100%" class="TopBanner">
+			<tr>
+				<td width="30%" align="left">
+					<label wicket:id="userIdLabel">User:</label>
+					<span wicket:id="userId">JZB0608</span>
+				</td>
+	          	<td width="40%" align="center"><span id="TopBannerHeader">SRS Application</span></td>
+	          	<td width="30%" align="right">
+	          		<label wicket:id="applicationVersionLabel">Version:</label>
+					<span wicket:id="applicationVersion" class="TopBanner_Info">4.0.0</span>
+	          	</td>
+			</tr>
+			<tr>
+	          	<td align="left">
+	          		<label wicket:id="serverNameLabel">Server:</label>
+					<span wicket:id="serverName">jzb0608</span>
+				</td>
+	          	<td align="center"><span id="TopBannerHeader" wicket:id="pageName">Base page</span></td>
+	          	<td align="right">
+	          		<div id="bysy_indicator" style="width:80px">
+   	    				Busy ... &nbsp;<img src="/SRSAppWeb/images/busy_indicator.gif"/>&nbsp;
+   	  				</div>
+	          	</td>
+	        </tr>
+	      </table>
+        
+        
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+ <!-- Content -->
+ <div id="maincontent">
+	<span wicket:id="messages" class="feedbackPanel"></span>
+	
+ 	<wicket:panel>
+ 	<div wicket:id="searchContextWindow"></div>
+ 	<div style="width: 100%; float:left;" >
+ 	  <form wicket:id="searchForm" style="margin-bottom:3px; margin-top:1px; padding-top:0px;">
+ 	  	<table class="filterTable">
+			<tr>
+			<td>
+			 	  	<span class="headLabel">Request Kind</span><br/>
+			   		<select wicket:id="requestKindType" style="width:220px" tabindex="3">
+	 	  					<option>Request Kind type</option>
+		 	  		</select>
+		 	  	</td>
+		 	  	<td>
+					<span class="headLabel">Period</span><br/>
+			   		<select wicket:id="period" tabindex="6" style="width:270px;">
+			   		<option>2009/12/06 - 2010/01/09 - Last Production Month</option>
+	 				<option>2009/12/06 - 2010/01/09 - Last 2 Production Month</option>
+		 	  		</select>
+		 	  	</td>
+		 	  
+		 	  	<td>
+					<table>
+						<tr>
+						<td style="padding-left:0px">
+					 	  	<span class="headLabel">Start Date</span><br/>
+						   	<input wicket:id="startDate" type="text" value="09/12/2009" style="width:66px" maxlength="10" />
+
+						</td>
+						<td style="padding-left:6px;">
+						  	<span class="headLabel">End Date</span><br/>
+					   		<input wicket:id="endDate" type="text" value="09/12/2009" style="width:66px" maxlength="10"/>
+
+						 </td>
+						 </tr>
+				</table>
+			</td>
+		 	  	</tr>
+		 	  	<tr>
+		 	  <td>
+					<span class="headLabel">From Consultant</span><br/>
+			   		<input wicket:id="fromConsultant" style="width:170px" tabindex="1"/>&nbsp;&nbsp;
+			   		<button type="submit" tabindex="10" wicket:id="contextFromSearchButton">Search</button>
+		 	  	</td>
+		 	  	<td>
+			 	  	<span class="headLabel">To Consultant </span><br/>
+			   		<input wicket:id="toConsultant" style="width:170px" tabindex="1"/>&nbsp;&nbsp;
+			   		<button type="submit" tabindex="10" wicket:id="contextToSearchButton">Search</button>
+			   		
+		 	  	</td>
+		   		
+		 	  
+		 	  	<td>
+		   			<span class="headLabel">Contract Number</span><br/>
+			   		<input wicket:id="contractNumber" style="width:170px" tabindex="1" value="JZB0608 - Bodemer, Jean"/>
+		 	  	</td>
+		 	  	</tr>
+		 	  	<tr>
+		 	  	<td>
+		   			<span class="headLabel">Requester(UACF ID)</span><br/>
+			   		<input wicket:id="userType" style="width:170px" tabindex="1" value="JZB0608 - Bodemer, Jean"/>
+		 	  	</td>
+			</tr>
+			</table>
+		<div class="formDividerLight" />
+		
+		<table>
+			<tr>
+				<td width="200px">
+					<button type="submit" tabindex="10" wicket:id="searchButton">Search</button>
+				</td>
+				<td>
+					<form wicket:id="exportForm" style="margin:0px; padding:0px;">
+						 <button type="submit" tabindex="12"  wicket:id="exportButton">Export to CSV</button>	
+					</form>  
+				</td>
+			</tr>
+		</table>
+
+	  </form>  
+	  
+	  
+
+	  <div wicket:id="searchResultPanel" style="width:98%;font-size: 8pt; font-family: Calibri, Arial;">
+	  </div>
+	  </div>
+ 	</wicket:panel>
+ </div> <!-- end maincontent -->
+</body>
+</html>

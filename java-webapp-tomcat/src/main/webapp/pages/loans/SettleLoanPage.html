@@ -1,0 +1,26 @@
+<wicket:extend>
+	<form wicket:id="settleLoanForm" class="cssform">
+		<table width=50%>
+			<tr>
+				<td class="field" width="35%"><span wicket:id="requestLabel"></span></td>
+				<td><span wicket:id="requestOid" class="fieldview smallCol"></span></td>
+			</tr>
+			<tr>
+				<td class="field" width="35%">Settlement Date</td>
+				<td><span wicket:id="settlementDate" class="fieldview smallCol"></span></td>
+			</tr>
+			<tr>
+				<td class="field" width="35%">Current Account Balance</td>
+				<td><span wicket:id="currentAccountBalance" class="fieldview smallCol"></span></td>
+			</tr>
+			<tr>
+				<td class="field" width="35%">Loan Balance</td>
+				<td><span wicket:id="loanBalance" class="fieldview smallCol"></span></td>
+			</tr>
+		</table>		
+		<p>		
+			<input type="submit" wicket:id="back" value="Back"/>
+			<input type="submit" wicket:id="save" value="Save"/>
+		</p>
+	</form>
+</wicket:extend>

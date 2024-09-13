@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Agency Pool Account Into Pool</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+</head>
+<body>
+	<wicket:panel>
+		<wicket:extend>
+		<form wicket:id='agencyIntoPoolAccountForm'>
+			<table>
+				<tr>				
+					<td colspan='2'><strong>INTO POOL ACCOUNT</strong></td><br/>
+				</tr>	
+			</table>
+			<hr/>
+			<table>
+				<tr align="right" wicket:id="poolIntofeedBack"  class="feedbackPanel"></tr>
+			</table>
+			<table style="width: 65%;height: 33.33%">
+				<tr>
+					<td valign="top">
+						<table width="33%">
+							<tr wicket:id="tenure"/>
+							<tr wicket:id="currentAQC"/>
+							<tr wicket:id="intoPoolRateDerived"/>
+							<tr wicket:id="effectiveIntoPoolRate"/>
+						</table>
+						
+					</td>
+					
+				</tr>
+				<tr>
+				<td valign="top">
+				<table style="width: 90%;height: 33.33%;">
+				    <tbody><tr><td wicket:id="override"/> <td wicket:id="overrideStart"/><td wicket:id="overrideEnd"/></tr></tbody>
+				</table>
+				</td>
+				</tr>
+				<tr>
+				<td valign="top">
+				<table style="width: 100%;height: 40%;">
+				    <tr><td wicket:id="futureOverride"/> <td wicket:id="futureOverrideStart"/><td wicket:id="futureOverrideEnd"/></tr>
+				</table>
+				</td>
+				</tr>
+			</table>
+		</form>
+		</wicket:extend>
+	</wicket:panel>
+	<br>
+	<br>
+</body>
+</html>

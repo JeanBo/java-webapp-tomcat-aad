@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Agreement Details Panel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+</head>
+<body>
+<wicket:extend>
+	<div wicket:id="historyWindow"/>	
+	<form wicket:id="searchForm">
+	<br/>
+	<div class="GUIFieldContainer">
+		<b>Provident Fund Details</b>
+		<hr/>
+		<table width="700px">
+			<tr>
+				<td valign="top">
+					<table width="100%"><tr wicket:id="leftPanel"/></table>
+				</td>
+				<td valign="top">
+					<table width="100%"><tr wicket:id="rightPanel"/></table>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top" colspan="2">
+					<table><tr wicket:id="middleRowPanel"/></table>
+				</td>				
+			</tr>
+			<tr>
+				<td><input type="button" value="History" wicket:id="historyButton"></td>
+			</tr>
+		</table>
+		<br/>
+		<div wicket:id="requestDetail">
+			<b>Most Recent Calculation Detail</b>
+			<hr/>
+			<table width="700px">
+				<tr>
+					<td valign="top">
+						<table width="100%"><tr wicket:id="leftCalcPanel"/></table>
+					</td>
+					<td valign="top">
+						<table width="100%"><tr wicket:id="rightCalcPanel"/></table>
+					</td>
+				</tr>			
+			</table>
+			<br/>
+			<div wicket:id="calcGrid"/>	
+			
+		</div>
+		<br/>
+			<b>Beneficiaries List</b>
+			<hr/>
+			<br />
+			<div wicket:id="providentFundBeneficiaryGrid"></div>
+			<input wicket:id="addBeneficiaryButton" type="button" value="Add"/>&nbsp;
+			<input wicket:id="removeBeneficiaryButton" type="button" value="Remove"/>
+	</div>	
+	</form>
+</wicket:extend>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+</head>
+<body>		
+<wicket:panel>
+
+		<img src="/SRSAppWeb/images/question.png" title="Additional info shown on mouse over">
+				&nbsp;Hover mouse over descriptions for additional info
+		</img>
+
+		<div class="GUIFieldContainer" wicket:id="payeContainer">
+			<b>PAYE Request</b>
+			<hr />
+			<table width="350px">
+				<tr>
+					<td align="right" class="GUIFieldLabel" style="min-width: 200px"
+						width="200PX"><span class="headLabel">PAYE due
+							including this settlement</span></td>
+					<td class="GUIFieldComponent" width="35%" align="right"><span
+						wicket:id="totalPayeTaxPeriodToDateDue">R 12'000.00</span></td>
+				</tr>
+				<tr>
+					<td align="right" class="GUIFieldLabel" style="min-width: 200px"
+						width="200PX"><span class="headLabel">PAYE up to this
+							Settlement (subtract)</span></td>
+					<td class="GUIFieldComponent" width="35%" align="right"><span
+						wicket:id="payeTaxPeriodToDatePaid">R 10'000.00</span></td>
+				</tr>
+				<tr>
+					<td align="right" class="GUIFieldLabel"><span
+						class="headLabel">PAYE deducted</span></td>
+					<td class="GUIFieldComponent" align="right"><span  title="Negative values indicate a refund"
+						wicket:id="totalPayeAmountPerCompany" class="underlineTotal">R
+							2'000.00</span></td>
+				</tr>
+				<tr>
+					<td colspan="2"><br /></td>
+				</tr>
+				<tr wicket:id="rowValuesOne">
+					<td align="right" class="GUIFieldLabel"><span
+						class="headLabel" wicket:id="rowOneLabel">Directive
+							Effective Start Date</span></td>
+					<td class="GUIFieldComponent" align="right"><span
+						wicket:id="rowOneValue">2020-03-10</span></td>
+				</tr>
+			</table>
+			
+		</div>
+		
+		<br />
+		<hr />
+		<br />
+		<div wicket:id="payeProperties"></div>
+		<br/>
+</wicket:panel>
+
+</body>
+</html>

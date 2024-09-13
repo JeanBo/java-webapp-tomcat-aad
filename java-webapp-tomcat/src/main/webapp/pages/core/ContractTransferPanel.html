@@ -1,0 +1,48 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link href="/SRSAppWeb/css/BPO_Style.css" rel="stylesheet"
+	type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css" rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS_layout-window.css" rel="stylesheet"
+	type="text/css"></link>
+
+</head>
+<body>
+<wicket:panel>
+
+	<div wicket:id="searchPartyWindow"></div>
+	<form wicket:id="searchForm"
+		style="margin-bottom:3px; margin-top:10px; padding-top:0px; margin-bottom:15px">
+
+<wicket:extend>
+	
+		<div wicket:id="transferList"></div>
+		<br />
+		<hr />
+		<br />
+		<input type="button" value="Add" wicket:id="addButton" />&nbsp;
+			<input type="button" value="Remove" wicket:id="removeButton" />
+			<br />
+			<br />
+			<br />
+<b>	*Note for Error Code	</b>
+		 <p style="color:red; margin-top: 0;">
+		<b>1.</b> From consultant is missing  <b>2.</b> To Consultant is missing  <b>3.</b> To and From consultant are same <b>4.</b> To consultant status is in-active <br />
+	<b>5.</b> Contract number missing <b>6.</b> Repeated contract number <b>7.</b> Invalid contract number <br/>
+	<b>8.</b> There is an outstanding request[Process Book Transfer] needing authorisation 	<b>9.</b> There is an outstanding request[Process Segment Transfer] needing authorisation <br />
+	<b>10.</b> To consultant branchcode or consultant code is in exclusion list. <b>11.</b> From Consultant not found.	<br />
+	<b>12.</b> Please enter 6 digit PRI Code. <b>13.</b> Please enter 14 digit PRI Code.	<br />
+	<b>14.</b> PRI Code not required. <b>15.</b> Invalid PRI Code.			</p>
+			
+		</wicket:extend>
+		
+	</form>
+
+</wicket:panel>
+</body>
+</html>

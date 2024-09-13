@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="BizTalkServiceInstance"
+	targetNamespace="http://lib.biz.expo.enq.generic.geocoding"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex"
+	xmlns:wsa10="http://www.w3.org/2005/08/addressing"
+	xmlns:tns="http://lib.biz.expo.enq.generic.geocoding"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
+	xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+	xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+	xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+	<wsdl:documentation>
+		<CreationInfo Created="2015-12-18 09:52:45Z" />
+	</wsdl:documentation>
+	<wsp:Policy wsu:Id="WSHttpBinding_ITwoWayAsync_policy">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<http:BasicAuthentication
+					xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http" />
+				<sp:TransportBinding
+					xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+					<wsp:Policy>
+						<sp:TransportToken>
+							<wsp:Policy>
+								<sp:HttpsToken RequireClientCertificate="false" />
+							</wsp:Policy>
+						</sp:TransportToken>
+						<sp:AlgorithmSuite>
+							<wsp:Policy>
+								<sp:Basic256 />
+							</wsp:Policy>
+						</sp:AlgorithmSuite>
+						<sp:Layout>
+							<wsp:Policy>
+								<sp:Strict />
+							</wsp:Policy>
+						</sp:Layout>
+					</wsp:Policy>
+				</sp:TransportBinding>
+				<wsaw:UsingAddressing />
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+	<wsdl:types>
+		<xsd:schema
+			targetNamespace="http://lib.biz.expo.enq.generic.geocoding/Imports">
+			<xsd:import
+				schemaLocation="https://dbizapp1.liberty.fin-za.net:443/Lib.Biz.Enq.Generic/GeocodingWcf/Geocoding.svc?xsd=xsd2"
+				namespace="http://lib.biz.expo.enq.generic.geocoding" />
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message
+		name="Geocoding_GeocodingOperation_InputMessage">
+		<wsdl:part name="part" element="tns:GetLocation" />
+	</wsdl:message>
+	<wsdl:message
+		name="Geocoding_GeocodingOperation_OutputMessage">
+		<wsdl:part name="part" element="tns:GetLocationResponse" />
+	</wsdl:message>
+	<wsdl:portType name="Geocoding">
+		<wsdl:documentation />
+		<wsdl:operation name="GeocodingOperation">
+			<wsdl:documentation />
+			<wsdl:input
+				message="tns:Geocoding_GeocodingOperation_InputMessage" />
+			<wsdl:output
+				message="tns:Geocoding_GeocodingOperation_OutputMessage" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="WSHttpBinding_ITwoWayAsync"
+		type="tns:Geocoding">
+		<wsp:PolicyReference
+			URI="#WSHttpBinding_ITwoWayAsync_policy" />
+		<soap12:binding
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="GeocodingOperation">
+			<wsdl:documentation />
+			<soap12:operation soapAction="GeocodingOperation"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal"
+					encodingStyle="http://www.w3.org/2003/05/soap-encoding" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"
+					encodingStyle="http://www.w3.org/2003/05/soap-encoding" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="BizTalkServiceInstance">
+		<wsdl:port name="WSHttpBinding_ITwoWayAsync"
+			binding="tns:WSHttpBinding_ITwoWayAsync">
+			<soap12:address
+				location="https://dbizapp1.liberty.fin-za.net/Lib.Biz.Enq.Generic/GeocodingWcf/Geocoding.svc" />
+			<wsa10:EndpointReference>
+				<wsa10:Address>https://dbizapp1.liberty.fin-za.net/Lib.Biz.Enq.Generic/GeocodingWcf/Geocoding.svc
+				</wsa10:Address>
+			</wsa10:EndpointReference>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

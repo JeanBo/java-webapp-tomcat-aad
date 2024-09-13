@@ -1,0 +1,59 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS_layout-window.css" rel="stylesheet" type="text/css"></link>
+
+</head>
+<body>
+ 
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner">
+        <p align="center">
+          <span id="TopBannerHeader">SRS Application</span>
+          <br/><span wicket:id="pageName"></span>
+        </p>
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+  
+  
+ <!-- Content -->
+ <div id="maincontent">
+	<span wicket:id="messages" class="feedbackPanel"></span>
+ 	<wicket:panel>	
+		<table width="100%">
+ 	  	   <tr>
+ 	         <td width="100px" style="font-weight: bold;">Name:</td>
+			 <td>
+ 	  			<input wicket:id="name" type="text" tabindex="2"></input>
+			</td>
+		  </tr>
+		  <tr>
+ 	         <td style="font-weight: bold;">Type:</td>
+			 <td><select wicket:id="type" tabindex="3">
+			 	<option>Branch</option>
+			 </select> 	  			
+			</td>
+		  </tr>
+		  <tr>
+ 	         <td style="font-weight: bold;">Channel:</td>
+			 <td><select wicket:id="channel" tabindex="4">
+			 	<option>Agency</option>
+			 </select> 	  		
+			</td>
+		  </tr>
+		  <tr>
+			  <td colspan="2">Please choose either a type, channel or both along with the name</td>
+		  </tr>
+		</table>
+ 	  
+ 	</wicket:panel>
+ </div> <!-- end maincontent -->
+</body>
+</html>

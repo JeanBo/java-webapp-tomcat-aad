@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>ReleaseFutureEarningPanel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+</head>
+<body>
+<wicket:panel>
+<!-- 
+	<form wicket:id="selectionForm">
+	    <table><tr>
+			<td>Please select the agreement:</td>
+			<td><input type="button" wicket:id = "searchButton" value="Search"></td></tr>
+			<tr>
+			<td></td>
+			</tr>
+		</table>
+<!--    <input type="text" wicket:id="agreementDetail" readonly="readonly" size="1" /> -->
+<!-- 		<span wicket:id="agmdetails">to be replaced </span>  -->
+<!--  </form>    --> 
+	
+<hr>
+
+<!-- 
+<form wicket:id="frmProduct">
+	<div wicket:id="prod"></div>
+	<input type="button" wicket:id="searchFEButton" value="Search FE">
+</form>
+ -->
+ <div wicket:id="feGrid"></div>
+	
+<!-- <div wicket:id="searchSecurityWindow"></div> -->
+<table>
+	<tr>
+		<td><input type="button" wicket:id="releaseFEButton" value = "Release FE"></td>
+		<td> 
+			<form wicket:id="exportForm" style="margin:0px; padding:0px;">
+						 <button type="submit" wicket:id="exportResultButton">Export to CSV</button>	
+			</form>  
+		</td>	
+	</tr>
+</table>
+</wicket:panel>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+</head>
+<body>		
+<wicket:panel>
+	<div wicket:id="repeatingPanel" style="padding-right:5px" width="95%">
+		<br/>
+	 	<div style="border: 1px dashed black; padding-left:5px; padding-right:5px; padding-bottom:2px; padding-top:2px; margin-top:0px">	
+	 		<table width="95%">
+	 			<tr>
+ 					<td width="28px">
+						<input type="image" wicket:id="showPanelImg" src="/SRSAppWeb/images/minus.png"/>
+ 					</td>
+ 						
+					<td>
+						<table width="95%">
+							<tr>
+								<td class="headLabel"><u>Request ID</u></td>
+								<td class="headLabel"><u>Kind</u></td>
+								<td class="headLabel"><u>Status</u></td>
+							</tr>
+							<tr wicket:id="requestRow">
+								<td><span wicket:id="requestId">12345678910</span></td>
+								<td><span wicket:id="requestKind">Maintain Party Details (59)</span></td>
+								<td><span wicket:id="requestStatus">Requires Authorisation</span></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+	 		
+	 		<div style="width:99%;  height:2px; border-bottom: 2px solid #1F2241"></div>
+	 		
+	 		<div style="padding-top:6px"></div>
+	 		
+	 		<div wicket:id="panelIdWrapper"  style="min-height:200px;height:auto">
+	 		
+				<div wicket:id="panelId" width="95%">
+					<p>Panel Goes Here - And will be replaced</p>
+
+				</div> <!-- end of panelId -->
+			
+			
+				<!-- ================================================================================================ -->
+				<div wicket:id="historySection">
+					<div style="width:99%;  height:2px; border-bottom: 2px solid orange"></div>
+					<table width="95%">
+			 			<tr>
+		 					<td width="28px">
+								<input type="image" wicket:id="showHistoryImg" src="/SRSAppWeb/images/minus.png" title="Click to show history"/>
+		 					</td>
+		 						
+							<td><b><u>History</u></b>	</td>
+						</tr>
+					</table>
+						
+					<div wicket:id="historyPanelWrapper" style="margin:2px">
+					
+						<div style="border: 1px dashed orange;">		
+									
+							<div wicket:id="historyPanel" style="width:99%; padding:5px">
+				
+								<div style="padding-top: 10px; padding-bottom: 5px;">
+							
+								<!-- Example code, to be replaced by wicket -->
+								<table width="100%">
+									<tbody><tr>
+										<td colspan="2" valign="top">
+										<table><tbody><tr>    
+										  <td class="GUIFieldLabel" id="idba" align="right">Business Name</td>
+										  <td class="GUIFieldComponent" id="idbb"><span>STANFIN 2</span></td>
+										  </tr><tr>    
+												  <td class="GUIFieldLabel" id="idbc" align="right">Suffix</td>
+												  <td class="GUIFieldComponent" id="idbd">
+												<span></span>
+											</td>
+											</tr><tr>    
+												  <td class="GUIFieldLabel" id="idbe" align="right">Registration Number</td>
+												  <td class="GUIFieldComponent" id="idbf">
+												<span>1969/017128/06</span>
+											
+											</td>
+											</tr></tbody></table>
+														</td>			
+													</tr>
+													<tr>
+														<td valign="top">
+														<table>
+															<tbody><tr>    
+												  <td class="GUIFieldLabel" id="idc0" align="right">Reg. Date From</td>
+											
+												  <td class="GUIFieldComponent" id="idc1">
+												<span>09/09/2004</span>
+											</td>
+											</tr></tbody></table></td>
+														<td valign="top">
+														<table>
+															<tbody><tr>    
+												  <td class="GUIFieldLabel" id="idc2" align="right">Reg. Date To</td>
+												  <td class="GUIFieldComponent" id="idc3"><span></span>
+											</td>
+											</tr>
+										</tbody></table>
+										</td>
+									</tr>
+								</tbody></table>
+								</div>
+
+				
+							</div> <!-- end historyPanel -->
+						</div> <!--  end border -->
+						
+					</div> <!--  endHistoryPanelWrapper -->
+					
+		 		</div> <!-- end historySection -->
+	
+		 		<!-- ================================================================================================ -->
+			
+			</div>	<!-- end of panelIdWrapper -->
+			
+			
+		</div> <!-- end of border -->
+		
+		<div wicket:id="bottomBar" style="width:99%; padding-top:25px; padding-bottom:20px" align="center">
+			<div style="width:50%; height:2px; border-bottom: 2px solid #1F2241"></div>
+		</div>
+	</div> <!-- end of repeatingPanel -->
+	
+	
+	<div wicket:id="authorisePanel" style="padding-top:20px">
+		<div style="width:99%; height:2px; border-bottom: 2px solid #1F2241; padding-bottom:10px"></div>
+		<form wicket:id="authoriseForm" action="" >
+			<div wicket:id="authoriseTable" style="width:98%">
+			</div>
+			<br/>
+			<span wicket:id="messages" class="feedbackPanel" style="padding-top:10px">  </span>
+			<br/>
+			
+			<table>
+				<tr><td>
+			<button wicket:id="authoriseButton">Authorise</button>
+			<button wicket:id="declineButton" style="margin-left:50px">Decline</button>
+				</td></tr>
+			</table>
+		</form>
+	</div>
+
+</wicket:panel>
+
+</body>
+</html>

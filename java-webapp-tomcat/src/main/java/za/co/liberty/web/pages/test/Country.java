@@ -24,7 +24,7 @@ public enum Country {
 		"Central African Republic"), TD("Chad"), CL("Chile"), CN("China"), CX("Christmas Island"), CC(
 		"Cocos Islands"), CO("Colombia"), KM("Comoros"), CG("Congo"), CK("Cook Islands"), CR(
 		"Costa Rica"), HR("Croatia"), CU("Cuba"), CY("Cyprus"), CZ("Czech Republic"), CI(
-		"Côte d'Ivoire"), DK("Denmark"), DJ("Djibouti"), DM("Dominica"), DO("Dominican Republic"), EC(
+		"Cote dIvoire"), DK("Denmark"), DJ("Djibouti"), DM("Dominica"), DO("Dominican Republic"), EC(
 		"Ecuador"), EG("Egypt"), SV("El Salvador"), GQ("Equatorial Guinea"), ER("Eritrea"), EE(
 		"Estonia"), ET("Ethiopia"), FK("Falkland Islands"), FO("Faroe Islands"), FJ("Fiji"), FI(
 		"Finland"), FR("France"), GF("French Guiana"), PF("French Polynesia"), TF(
@@ -47,7 +47,7 @@ public enum Country {
 		"Oman"), PK("Pakistan"), PW("Palau"), PS("Palestine"), PA("Panama"), PG("Papua New Guinea"), PY(
 		"Paraguay"), PE("Peru"), PH("Philippines"), PN("Pitcairn"), PL("Poland"), PT("Portugal"), PR(
 		"Puerto Rico"), QA("Qatar"), RE("Reunion"), RO("Romania"), RU("Russia"), RW("Rwanda"), BL(
-		"Saint Barthélemy"), SH("Saint Helena"), KN("Saint Kitts And Nevis"), LC("Saint Lucia"), MF(
+		"Saint Barthelemy"), SH("Saint Helena"), KN("Saint Kitts And Nevis"), LC("Saint Lucia"), MF(
 		"Saint Martin"), PM("Saint Pierre And Miquelon"), VC("Saint Vincent And The Grenadines"), WS(
 		"Samoa"), SM("San Marino"), ST("Sao Tome And Principe"), SA("Saudi Arabia"), SN("Senegal"), RS(
 		"Serbia"), CS("Serbia and Montenegro"), SC("Seychelles"), SL("Sierra Leone"), SG(
@@ -62,7 +62,7 @@ public enum Country {
 		"United States"), UM("United States Minor Outlying Islands"), UY("Uruguay"), UZ(
 		"Uzbekistan"), VU("Vanuatu"), VA("Vatican"), VE("Venezuela"), VN("Vietnam"), WF(
 		"Wallis And Futuna"), EH("Western Sahara"), YE("Yemen"), ZM("Zambia"), ZW("Zimbabwe"), AX(
-		"Åland Islands");
+		"Aland Islands");
 
 	private final String displayName;
 

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Report Tracking</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+</head>
+<body>
+<wicket:panel>		
+	<form wicket:id="reportForm">	
+		<div style="padding: 15px 15px 15px 15px;">
+			<div style="padding: 15px 0px 15px 0px; width: 100%;" wicket:id="searchContainer"> 
+				<table cellpadding="5px">
+					<tr>
+						<td colspan="4">Search statement dates</td>
+					</tr>
+					<tr>
+						<!-- <td style="padding-right: 10px; font-weight: bold;">From</td>
+						<td><span wicket:id="searchCriteria.start"/></td>
+						<td style="padding-right: 10px; font-weight: bold;">To</td>
+						<td><span wicket:id="searchCriteria.end"/></td> -->
+						<td colspan="4">
+							<a style="padding-right: 10px; font-weight: bold;">From</a>
+							<span wicket:id="searchCriteria.start"/>
+							<a style="padding-right: 10px; padding-left: 10px; font-weight: bold;">To</a>
+							<span wicket:id="searchCriteria.end"/>
+						 </td>
+					</tr>
+					<tr>
+						<td colspan="4">Limit search results</td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Maximum Results</td>
+						<td><input type="text" size="5" maxlength="5" wicket:id="maxResults"/></td>
+						<td></td>
+						<td><button type="button" wicket:id="searchButton">Search</button></td>
+					</tr>
+				</table>
+			</div>
+			<div style="padding: 15px 0px 15px 0px; width: 100%;"> 
+				<div wicket:id="reportingStatus"/>
+			</div>
+			<div style="padding: 15px 0px 15px 0px; width: 100%;" wicket:id="statusPanel"> 
+				<table>
+					<tr><td width="500px">
+				<!-- Reporting Status -->
+					<table cellpadding="5px">
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Statement Kind</td>
+						<td><span wicket:id="statementKind"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Start Date</td>
+						<td><span wicket:id="startDate"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">End Date</td>
+						<td><span wicket:id="endDate"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Last Run Date</td>
+						<td><span wicket:id="lastRunDate"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Produced Bank Tape</td>
+						<td><input type="checkbox" wicket:id="bankTapeProduced"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Statement Produced</td>
+						<td><input type="checkbox" wicket:id="statementProduced"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Statement Reason</td>
+						<td><span wicket:id="statementReason"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Document Produced</td>
+						<td><input type="checkbox" wicket:id="documentContentId"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Document Printed</td>
+						<td><input type="checkbox" wicket:id="documentPrinted"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Document Emailed</td>
+						<td><input type="checkbox" wicket:id="documentEmailed"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">StopStatement Distribution</td>
+						<td><input type="checkbox" wicket:id="stopStatementDistribution"/></td>
+					</tr>
+					
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Email Address</td>
+						<td><span wicket:id="emailAddress"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;">Document Reason</td>
+						<td><span wicket:id="documentReason"/></td>
+					</tr>
+					<tr>
+						<td style="padding-right: 10px; font-weight: bold;" valign="top">Error Message</td>
+						<td><span wicket:id="errorMessage"/></td>
+					</tr>
+					</table>
+					</td>
+					<td valign="top">
+					<!-- Electronic Document -->
+					<table cellpadding="5px" wicket:id="electronicDocumentContainer">
+						<tr>
+							<td style="padding-right: 10px; font-weight: bold;" valign="top">Electronic Document Id</td>
+							<td><span wicket:id="electronicDocumentId"/></td>
+						</tr>
+						<tr>
+							<td style="padding-right: 10px; font-weight: bold;" valign="top">Document Status Id</td>
+							<td><span wicket:id="documentStatusId"/></td>
+						</tr>
+						<tr>
+							<td style="padding-right: 10px; font-weight: bold;" valign="top">Document Status</td>
+							<td><span wicket:id="documentStatus"/></td>
+						</tr>
+					</table>
+					</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</form>	
+</wicket:panel>
+</body>
+</html>

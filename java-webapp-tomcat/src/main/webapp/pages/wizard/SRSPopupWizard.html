@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>SRS Application</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link href="/SRSAppWeb/css/BPO_Style.css" rel="stylesheet"
+	type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css" rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css" rel="stylesheet"
+	type="text/css"></link>
+<link href="/SRSAppWeb/css/dialog_box.css" rel="stylesheet"
+	type="text/css"></link>
+
+<script type="text/javascript" src="/SRSAppWeb/js/BusyIndicator.js"></script>
+<script type="text/javascript" src="/SRSAppWeb/js/dialog_box.js"></script>
+<script type="text/javascript">	
+  	function hideOverlay(){  		
+  		overlay(false);
+  	}  	
+      function overlay(display){      	
+		var thediv=document.getElementById('overlay');
+		if(display){
+			if (typeof Wicket != 'undefined') {
+  				Wicket.Ajax.registerPostCallHandler(hideOverlay);
+  				Wicket.Ajax.registerFailureHandler(hideOverlay);
+  			}
+			thediv.style.display = "";		
+		}else{
+			thediv.style.display = "none";		
+		}
+		return false;
+	}
+ </script>
+</head>
+
+<body>
+<wicket:panel>
+	<form wicket:id="form">	
+	<div style="margin-top: 40px; left: 0; top: 0; right: 0; position: fixed; z-index: 5000; margin-left: 1%; margin-right: 3%; width: 96%; overflow: hidden; background-color: white;">
+	<table width="90%" style="margin-left: 3%; margin-right: 3%; width: 94%; " bgcolor="white">
+		<tr>
+			<td>
+			<div align="center" wicket:id="header">Header</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<hr style="width: 5%" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<div align="center" wicket:id="buttons"><input type="button"
+				value="next" /></div>
+				<div style="border-bottom: 2px solid #1F2241; padding-top: 5px;"/>
+			</td>
+		</tr>						
+	</table>
+	</div>
+	<div style="margin-top: 70px;">
+		<span wicket:id="feedback">Feedback</span>
+		<span wicket:id="overview">OverView</span>
+		<div wicket:id="view">View</div>
+	</div>
+	<div wicket:id="dialogWindow"/>
+	</form>
+</wicket:panel> 
+</body>
+</html>

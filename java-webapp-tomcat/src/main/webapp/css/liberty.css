@@ -1,0 +1,1087 @@
+.highlight {color:#E17000}
+.subdued {color:#999}
+.error {color:red;font-weight:bold}
+.success {color:#390;font-weight:bold}
+.caption {color:#999;font-size:11px}
+.date {font-weight: bold; font-size:82%;color:#bbb;display:block;letter-spacing: 1px}
+
+/* LAYOUT - HEADER */
+.header {
+text-align: left;
+font-family: Verdana, Geneva, Arial, Helvetica, sans-serif ;
+font-weight: normal;
+font-size: 18px;
+color: white;
+width: 100%;
+background-color: #0080c0;
+border-collapse: collapse;
+border-spacing: 4px;
+margin-top:5px
+}
+.info 
+{
+float:right;
+background-color: #2c2e78;
+color: white;
+text-align: left;
+font-size: 8px;
+font-style: normal;
+font-family: Verdana;
+width: 100%;
+border: none;
+}
+.infoL 
+{
+float:left;
+background-color: #2c2e78;
+color: white;
+text-align: left;
+border: none; 
+font-size: 8px;
+font-style: normal;
+font-family: Verdana;
+width: 80%;
+}
+.left 
+{
+float: left;
+background-color: #2c2e78;
+color: white;
+padding: 4px;
+letter-spacing: 2px;
+text-transform: uppercase;
+text-align: left;
+padding: 6px 6px 6px 6px;
+width: 80%;
+height: 80px;
+	border-color: steelblue;
+	font-weight: 700;
+	font-style: italic;
+	font-family: Verdana;
+	border-top-width: 3px;
+	border-bottom-width: 3px;
+	border-right-width: 3px;
+	border-left-width: 3px;
+	border-style: solid;
+	
+	
+	
+}
+.right 
+{
+float: right;
+position:absolute;  
+background-repeat: no-repeat;
+background-position: center;
+background-color: #2c2e78;
+background-image: url("/SRSAppWeb/images/liblogo_new.jpg");
+padding: 4px;
+width: 20%;
+height: 80px;
+border-color: steelblue;
+border-top-width: 3 px;
+border-bottom-width: 3px;
+border-right-width: 3px;
+border-left-width: 1px;
+border-style: solid;
+
+}
+/*
+div.menu      {float:left; 
+				margin:0;
+				height: 500px;
+				width: 160px;
+				padding-top: 12px;
+				padding-left: 10px;
+				background-repeat: repeat-y;
+				background-color: steelblue;
+				border-right-style: solid;
+				border-right-color: #00457c
+}
+*/
+*{margin:0; padding:0; border: 0;}
+html, body {height:100%}
+body {
+	font: 70%/1.5em Verdana, Tahoma, arial, sans-serif;
+	text-align: center;
+	/* background-image: url("/SRSAppWeb/images/waterlogo.gif"); */
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: #f9feff;
+	background-attachment: scroll;
+}
+/*
+a, a:visited {
+	text-decoration: none;
+	color: #0066CC; 
+	background: inherit;
+}
+a:hover {
+	color: #FF3300;
+	background: inherit;
+	text-decoration: underline;
+}
+*/
+h1, h2, h3, h4, h5 {
+	font-family: Tahoma, Verdana, 'Trebuchet MS', Sans-serif;
+	font-weight: Bold;
+	padding: 3px 0 0 0;	
+}
+h1 {
+	font-size: 240%;
+}
+h2 {
+	font-size: 225%;
+	color: #006699;
+	margin-bottom: 3px;
+}
+h3 {
+	font-size: 195%;
+	color: #006699; 
+}
+h4{
+	font-size: 185%;
+	color: #006699;
+}
+h5{
+	font-size: 180%;
+	color: #006699;
+	text-transform: uppercase;
+}
+img{
+	border: 0px;
+	background: transparent;
+}
+#container{
+	width: 802px;
+	text-align: left;
+	margin: 0px auto;
+	border: 1px solid #1e5589;
+	padding-left: 1px;
+}
+#content{
+	width:100%;
+	padding-top: 5px;
+}
+
+#rightcontent{
+	display:inline /*Fix IE floating margin bug*/;
+	padding-right: 3px;
+	padding-bottom: 1px;
+	width: 155px;
+	float: right;
+	overflow:visible !important /*Firefox*/; 
+	overflow:hidden /*IE6*/;
+}
+
+#leftcontent{
+	display:inline /*Fix IE floating margin bug*/; 
+	padding-left: 3px;
+	width: 155px;
+	float: left;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	overflow:visible !important /*Firefox*/; 
+	overflow:hidden /*IE6*/;
+}
+#midcontent{
+	display:inline; /*Fix IE floating margin bug*/; 
+	margin:0 0 0 5px;
+	width: 475px;
+	float:left;
+	text-align: justify;
+	overflow:visible !important /*Firefox*/; 
+	overflow:hidden /*IE6*/;
+}
+#header{
+	margin-top: 1px;
+	height:115px;
+	width:800px;
+	background: #003366 url(/SRSAppWeb/images/header.jpg);
+	font-family: "MS Serif", "New York", serif;
+ }
+#headleft{
+ 	width: 570px;
+	background: transparent;
+ 	float: left;
+}
+#headright{
+ 	width: 220px;
+	padding: 5px 5px 0 0;
+	background: transparent;
+	float: right;
+}
+#header #headright #logininfo{
+	padding-top: 7px;
+	color: white; 
+	font: bolder 8.0pt 'Trebuchet MS', Arial, Sans-serif;
+	text-decoration: none;
+	text-align: right;
+}
+#header #headright #logininfo a{
+	color: #81A7C4;
+	text-decoration: none;
+}
+#header #headright #logininfo a:hover{
+	color: White;
+	text-decoration: underline;
+}
+#header #headleft h1{
+ 	padding: 20px 0 0 25px;
+	font: bolder 2.6em 'Trebuchet MS', Arial, Sans-serif;
+	color: White;
+}
+#header #headleft h2{
+ 	padding: 32px 0 0 25px;
+	color: #03477C; 
+	font: bolder 1.2em 'Trebuchet MS', Arial, Sans-serif;
+	text-decoration: none;
+}
+.inputtext{
+	color: #003366;
+	height: 20px;
+	line-height: 20px;
+	padding: 0 3px;
+	background: url(/SRSAppWeb/images/textboxbg.jpg) repeat-x;
+	border: 1px solid #A4C9E0;
+	float: right;
+	margin-right: 3px;
+}
+.inputbutton{
+	height: 22px;
+	border: 0;
+	padding: 0 2px;
+	background: #034f8a url(/SRSAppWeb/images/buttonbg.jpg) repeat-x;
+	color: White;
+	float: right;
+	font-weight: bold;
+	font-size: 10px;
+}
+/*
+.navigation{
+	width:152px;
+	border: 1px solid #81A7C4;
+	margin-bottom: 3px;
+}
+.navhead{
+	background: #427BA6 url(/SRSAppWeb/images/navhead.jpg) repeat-y;
+	height: 23px;
+	padding: 1px 0 0 5px;
+	margin-bottom: 1px;
+	font: bold 1.3em Verdana, 'Trebuchet MS', Sans-serif;
+	color: White;
+}
+
+.menu {
+	width: 160px;
+	padding: 20px 20px 20px 20px;
+	font-size: 1.2em;
+	
+.menu li {
+	margin-bottom: 1px;
+	list-style-type: none;
+	white-space: nowrap;
+}
+.menu li a {
+	font-weight: bold;
+	text-decoration: none;
+	color: #3399CC;
+	display: block;
+	height: 20px;
+	line-height: 20px;
+	padding:0 0 0 0px;
+	background: #81A7C4 url(/SRSAppWeb/images/menubg.jpg) repeat-x;
+}	
+}
+*/
+.menu      {float:left; 
+				margin:0;
+				height: 600px;
+				width: 145px;
+				padding-top: 10px;
+				padding-left: 10px;
+				padding-bottom: 10px;
+				padding-right: 10px;
+				background-repeat: repeat-y;
+				background-color: steelblue;
+				border-right-style: solid;
+				border-right-color: #81A7C4
+}
+
+.menu li         {float: left; width: 160px; padding: 0 5px 0 0px; margin: 0;}
+.menu a       {display: block;
+	color: #FFFFFF; padding: 5px 0 5px 20px; margin: 0 0 1px 0; text-decoration: none;
+	background-image: url("/SRSAppWeb/images/buttonbg.jpg");
+	background-repeat: repeat-x;
+	background-position: center right;
+	background-color: #81A7C4; 
+	font-weight: 200;
+	font-style: italic}
+.menu #disabledButton {display: block;
+	color: silver; padding: 5px 0 5px 20px; margin: 0 0 1px 0; text-decoration: none;
+	background-image: url("/SRSAppWeb/images/buttonbg.jpg");
+	background-repeat: repeat-x;
+	background-position: center right;
+	background-color: #81A7C4; 
+	font-weight: 200;
+	font-style: italic}	
+.menu a:hover {color: #FFFFFF;
+	background-image: url("/SRSAppWeb/images/aro_t.png");
+	background-repeat: no-repeat;
+	background-position: center left;
+	background-color:#81A7C4;
+	}
+/*
+.menu li a:visited {
+	color: #3399CC;
+}
+
+.menu li a:hover {
+	background: #3399CC;
+	color: White;
+}
+
+.menu li a:active {
+	background: #034f8a;
+	color: White;
+}
+.menu li ul{font-size:1em; font-weight:normal;background: #3399CC;}
+.menu li ul li{margin:1px 0 1px 15px;}
+.menu li ul a{
+	font-weight:normal;
+	background: White url(/SRSAppWeb/images/bulletlist.gif) no-repeat 2px center; 
+	border: 1px solid #BDDFFF;
+	padding-left: 10px;
+}
+.menu li ul a:hover{
+	background: #3399CC;
+	border: 1px solid #3399CC;
+}
+*/
+blockquote {
+	margin: 5px 0;
+	padding: 5px 5px 5px 30px;
+	border-top: 1px solid #BFE0FF;
+	border-bottom: 1px solid #BFE0FF;
+	background: #F0F5FF url(/SRSAppWeb/images/quote.gif) no-repeat 5px 5px;
+	text-align: justify;
+}
+p {
+	padding: 5px;
+}
+.box{
+	width:152px;
+	margin-bottom: 5px;
+	border: 1px solid #81A7C4;
+	padding: 0 0 5px 0;
+	display: block;
+}
+.boxpad{
+	padding: 0 5px 0 5px;
+}
+.boxhead{
+	height: 23px;
+	line-height: 23px;
+	padding: 1px 0 0 5px;
+	margin-bottom: 1px;
+	border-bottom: 1px solid #81A7C4;
+	color: #006699;
+}
+.newsdate{
+	padding-left: 5px;
+}
+.news{
+	display: block;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.newsfooter {
+	margin: 0 5px 10px 5px;
+	font-size: 90%;	
+	text-align: right;
+}
+.newsfooter .newsmore {
+	background: url(/SRSAppWeb/images/morenews.png) no-repeat left center;
+	padding: 0 0 0 15px;
+	text-align: right;
+}
+.posthead {
+	height: 22px;
+	line-height: 22px;
+	padding: 0;
+	padding-left: 17px;
+	background: #FAFAFA url(/SRSAppWeb/images/bullettitle.gif) no-repeat 2px center;
+	border-top: 1px solid #BFE6FF;
+	border-bottom: 1px solid #BFE6FF;
+	color: #006699;
+}
+.postcontent {
+	padding: 5px 5px 10px 5px;
+	text-align: justify;
+}
+.postfooter {
+	background-color: #FAFAFA;
+	padding: 3px 5px; 
+	margin: 0 5px 10px 5px;
+	border: 1px solid #f2f2f2;
+	font-size: 90%;	
+	text-align: right;
+}
+.postfooter .readmore {
+	background: url(/SRSAppWeb/images/page.gif) no-repeat left center;
+	padding-left: 20px;
+}
+.postfooter .comments {
+	background: url(/SRSAppWeb/images/comment.gif) no-repeat left center;
+	padding-left: 20px;
+	margin-left: 10px;
+}
+.postfooter .date {
+	background: url(/SRSAppWeb/images/clock.gif) no-repeat left center;
+	padding-left: 20px;
+	margin-left: 10px;
+}
+.coode {
+  padding: 5px;
+  margin: 0 0 10px 0;
+  text-align: left;
+  display: block;
+  overflow: auto;  
+  font: 1em 'Lucida Console', 'courier new', monospace ;
+  background: #FAFAFA;
+  border: 1px solid #f2f2f2;
+  white-space: pre;
+}
+.unlist{
+	padding: 0 0 0 5px;
+	font-size: 0.8em;
+}
+.unlist li{
+	list-style: none;
+	margin: 0 0 0 5px;
+	padding-left: 12px;
+	background: url(/SRSAppWeb/images/arrowpixel.gif) no-repeat 0px 2px;
+}
+.unlist li ul li{
+	list-style: none;
+	margin: 0 0 0 5px;
+	padding-left: 12px;
+	background: url(/SRSAppWeb/images/arrowpixel.gif) no-repeat 0px center;
+}
+.unlist li a{
+	background: none;
+	font-weight: bold;
+}
+.unlist li ul li a{
+	background: none;
+	font-weight: bold;
+}
+.ollist{
+	padding: 0 0 0 5px;
+	font-size: 0.8em;
+}
+.ollist li{
+	list-style-type: decimal;
+	margin: 0 0 0 25px;
+}
+.ollist li a{
+	font-weight: bold;
+}
+.deflist{
+	margin:0 0 0 10px;
+	font-size: 0.8em;
+}
+.deflist dt{
+	padding:0 0 0 12px;
+	background: url(/SRSAppWeb/images/arrowpixel.gif) no-repeat 0px 50%;
+	text-decoration:none;
+}
+.deflist dd{
+	margin:0 0 0 10px;
+	padding:0 0 0 12px;
+	background: url(/SRSAppWeb/images/arrowpixel.gif) no-repeat 0px 50%;
+	text-decoration:none;
+}
+.deflist dd a, .deflist dt a{
+	background: none;
+	font-weight: bold;
+}
+.left{
+	float: left;
+	padding: 2px 8px 2px 2px;
+}
+.right{
+	float: right;
+	padding: 2px 2px 2px 8px;
+}
+.center{ 
+	display: block;
+  	text-align: center;
+  	margin: 0 auto;
+	padding: 3px 0 3px 0;
+}
+
+div.colwrap{
+	padding:0 5px 5px 0;
+	display: inline-block;
+}
+
+.colleft{
+	float:left;
+	width: 45%;
+	margin-bottom:5px;
+}
+.colmiddle{
+	float:left;
+	width: 25%;
+	margin-left: 10px;
+	margin-bottom:5px;
+}
+.colright{
+	float:right;
+	width: 25%;
+	margin-bottom:5px;
+}
+.adverts{
+	list-style: none;
+	text-align: center;
+	margin: 5px 0 0 0;
+}
+.adverts li{
+	margin-bottom: 3px;
+}
+.sponsors{
+	list-style: square;
+	margin: 0 0 0 25px;
+	color: #0099CC;
+}
+.loginform {
+	margin: 5px 0 5px 0;
+}
+.loginform label {
+	font-weight:bold;
+	margin:5px 0;
+	color: #333333;
+}
+.loginform input {
+	padding: 0 3px;
+	border:1px solid #B4D6E6;
+	background: url(/SRSAppWeb/images/textboxbg.jpg) repeat-x;
+	height: 20px;
+	width: 90px;
+	line-height: 20px;
+}
+.loginform input.button { 
+	height: 24px;
+	border: 0; 
+	background: #034f8a url(/SRSAppWeb/images/buttonbg.jpg) repeat-x;
+	color: White;
+	font-weight: bold;
+	margin-top: 5px;
+	width: 70px;
+}
+/*Modified by Pritam*/
+.foorm {
+	
+	border: 1px solid #B4D6E6; 
+	background-color: #FAFAFA;
+	margin: 5px 0 5px 0;
+	vertical-align: baseline;
+	width: 65%;
+	margin-left: 0%; 
+	margin-top: 12%;
+	
+}
+.foorm label {
+	display:block;
+	font-weight:bold;
+	margin:5px 0;
+	color: #333333;
+}
+.foorm input {
+	padding: 0 3px;
+	border:1px solid #B4D6E6;
+	/*background: url(/SRSAppWeb/images/textboxbg.jpg) repeat-x;*/
+	height: 20px;
+	line-height: 20px;
+}
+.foorm select {
+	border:1px solid #B4D6E6;
+	width: auto;
+}
+.foorm textarea {
+	width:95%;
+	padding:2px;
+	border:1px solid #B4D6E6;
+	height:100px;
+	display: inline;
+	margin: 0 0 5px 0; 
+}
+.foorm input.button { 
+	height: 24px;
+	border: 0; 
+	background: #034f8a url(/SRSAppWeb/images/buttonbg.jpg) repeat-x;
+	color: White;
+	font-weight: bold;
+}
+table {
+	margin: 5px; 
+	border-collapse: collapse;
+	border: 2px solid #EBEBEB;
+}
+th { 
+ border: none;
+ font-size: 130%;
+ color: #006699;
+ text-transform: uppercase;
+ text-align: center;
+ 
+}
+/* th {
+	padding-right: 12px;
+	padding-left: 12px;
+	background: #3399CC;
+	height: 25px;
+	text-align: left;
+	border: 1px solid White;
+	margin-bottom: 1px;
+} */
+tr {
+	height: 25px
+}
+td {
+	padding-right: 8px; 
+	padding-left: 8px; 
+	border: 1px solid White;
+}
+tr.rowlight {
+	background: #FBFBFB;
+}
+tr.rowdark {
+	background: #F1F1F1;
+}
+.dropcap
+{
+	float: left;
+	width: .7em;
+	font-size: 4em;
+	line-height: 75%;
+	color: #3399CC;
+	font-family: "Times New Roman", Times, serif;
+}
+.clear{
+	clear: both;
+}
+.clearwrap{
+	clear: both;
+	margin: 0;
+}
+.gallery{
+	padding: 5px;
+	display: inline-block;
+}
+.gallery a {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+/*	border: 1px solid #ccc;
+	background: #E6E6E6;*/
+	background: #FAFAFA;
+	border: 1px solid #BFE6FF;
+}
+.gallery a img {
+	display: block;
+	padding: 5px;
+	width: 65px;
+}
+.imp {
+	font-size: 0.8em;
+	color: red;
+}
+#footer{
+	clear: both;
+	width:800px;
+	height: 100px;
+	background: url(/SRSAppWeb/images/fotter.jpg);
+	text-align: right;
+}
+#footer h2{
+	padding: 70px 10px 0 0;
+	color: white; 
+	text-decoration: none;
+   font: bold 8.0pt Tahoma, Arial, Helvetica;
+}
+#footer a{color: #81A7C4; background-color:inherit; font-weight:bold;}
+#footer a:hover{color: White; background-color:inherit;}
+
+#item         {float: left; width: 160px; padding: 0 5px 0 0px; margin: 0;}
+#item a       {display: block;
+	color: #FFFFFF; padding: 5px 0 5px 20px; margin: 0 0 1px 0; text-decoration: none;
+	background-image: url("/SRSAppWeb/images/bg_m3.gif");
+	background-repeat: repeat-y;
+	background-position: center right;
+	background-color: #00457c;
+	font-weight: 200;
+	font-style: italic}
+#item a:hover {color: #FFFFFF;
+	background-image: url("/SRSAppWeb/images/aro_t.png");
+	background-repeat: no-repeat;
+	background-position: center left;
+	background-color: #00457c;}
+
+.labelcell { 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ color: #3670A7; 
+ background-color: transparent; 
+ width: 220px; 
+} 
+
+.fieldcell { 
+ background-color: #F2F7FB; 
+ color: #000000; 
+ text-align: right; 
+ margin-right: 0px; 
+ padding-right: 0px; 
+} 
+
+.smalllabelcell { 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: transparent; 
+ color: #3670A7; 
+ width: 100px; 
+} 
+
+fieldcell input { 
+ width: 200px; 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: #D7E5F2; 
+ border:1px solid #B4D6E6;
+ background: url(/SRSAppWeb/images/textboxbg.jpg) repeat-x;
+ color: #102132; 
+ border: 1px solid #284279; 
+ margin-right: 0px; 
+} 
+
+.smallfieldcell { 
+ background-color: #F2F7FB; 
+ color: #000000; 
+ text-align: right; 
+  
+}
+.smallfieldcellError { 
+ background-color: #ff8080; 
+ color: #000000; 
+ text-align: right; 
+  
+}
+
+.smallfieldcell input { 
+ font-family: verdana;
+ font-size: 12px;
+ list-style-type: none;
+ background-color: white;
+}
+ 
+
+.smallfieldcell select { 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: #D7E5F2; 
+ font-family: verdana;
+ color: #102132; 
+ border: 1px solid #284279; 
+ size: auto;
+}
+
+.button input { 
+width: 100px; 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: #b0d7fd; 
+ color: #102132; 
+ border: 1px solid #284279; 
+ margin-left: 12px; 
+ margin-top: 3px; 
+ margin-bottom: 2px;
+ float: right;
+}
+
+/* table.frmTable { 
+ float: right;
+ background-color: #F9FBFD; 
+ color: #000000; 
+ width: 440px; 
+ border: 1px solid #D7E5F2; 
+ border-collapse: collapse; 
+ width: 50%; 
+ margin-top: 10%;
+ margin-left: 15%; 
+ margin-right: 15%;
+ 
+} */
+
+td { 
+ border: 1px solid #D7E5F2; 
+ padding-left: 4px; 
+ 
+}
+
+/* Errors */ 
+
+.errorform {
+	
+	background-color: #FAFAFA;
+	margin: 5px 0 5px 0;
+	vertical-align: baseline;
+	width: 65%;
+	margin-left: 17.5%; 
+	margin-top: 5%;;
+	border-width: 1px;
+	border-color: #fbb3b8;
+	border-style: solid
+	
+	
+}
+.errorform label {
+	display:block;
+	font-weight:bold;
+	margin:5px 0;
+	color: #333333;
+}
+.errorform input {
+	padding: 0 3px;
+	border:1px solid #B4D6E6;
+	background: url(/SRSAppWeb/images/textboxbg.jpg) repeat-x;
+	height: 25px;
+	line-height: 25px;
+}
+.errorform select {
+	border:1px solid #B4D6E6;
+	width: 100px;
+}
+.errorform textarea {
+	width:95%;
+	padding:2px;
+	border:1px solid #B4D6E6;
+	height:100px;
+	display: inline;
+	margin: 0 0 5px 0; 
+}
+.errorform input.button { 
+	height: 24px;
+	border: 0; 
+	background: #034f8a url(/SRSAppWeb/images/buttonbg.jpg) repeat-x;
+	color: White;
+	font-weight: bold;
+}
+
+.errorform table {
+	margin: 5px; 
+	border-collapse: collapse;
+	border: 2px solid #EBEBEB;
+}
+
+.errorform th { 
+ border: none;
+ font-size: 130%;
+ color: #fa969f;
+ text-transform: uppercase;
+ text-align: center;
+ 
+}
+.errorform tr {
+	height: 25px;
+	width: 65% 
+}
+.errorform td {
+	padding-right: 8px; 
+	padding-left: 8px; 
+	border: 1px solid White;
+}
+.errorform tr.rowlight {
+	background: #FBFBFB;
+}
+.errorform tr.rowdark {
+	background: #F1F1F1;
+}
+
+.errorlabelcell { 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ color: #3670A7; 
+ background-color: transparent; 
+ width: 220px; 
+} 
+
+.errorfieldcell { 
+ background-color: #f9e3f1; 
+ color: #000000; 
+ text-align: right; 
+ margin-right: 0px; 
+ padding-right: 0px; 
+} 
+
+.errorsmalllabelcell { 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: transparent; 
+ color: #3670A7; 
+ width: 100px; 
+} 
+
+
+.errorsmallfieldcell { 
+ 
+ font: 10px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: #fa969f; 
+ color: #102132; 
+ border: 1px solid #284279; 
+} 
+
+
+.button input { 
+width: 100px; 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: #b0d7fd; 
+ color: #102132; 
+ border: 1px solid #284279; 
+ margin-left: 12px; 
+ margin-top: 3px; 
+ margin-bottom: 2px;
+ float: right;
+}
+/*Added by Pritam*/
+.mytabpanel {
+  float:center; 
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+
+}
+
+.mytabpanel ul {
+  margin:0;
+  list-style:none;
+}
+  
+.mytabpanel li {
+ float: left; padding: 0 5px 0 0px; margin: 0;
+}
+  
+.mytabpanel a {
+    display: block;
+	color: #FFFFFF; padding: 5px 0 5px 20px; margin: 0 0 1px 0; text-decoration: none;
+	background-image: url("/SRSAppWeb/images/buttonbg.jpg");
+	background-repeat: repeat-x;
+	background-position: left;
+	background-color: #81A7C4; 
+	font-weight: bold;
+	font-style: italic
+}
+
+.mytabpanel a:hover {
+    color: #FFFFFF;
+	background-image: url("/SRSAppWeb/images/aro_t.png");
+	background-repeat: no-repeat;
+	background-position: center left;
+	background-color:#81A7C4;
+}
+  
+.mytabpanel li.selected a {
+  color:#333;
+}
+ 
+.mytab {
+  padding: 5px;
+}
+
+.contextForm {
+	
+	border: 1px solid #B4D6E6; 
+	background-color: #FAFAFA;
+	margin: 5px 0px 5px 0px;
+	vertical-align: baseline;
+	width: 80%;
+	margin-left: -20%; 
+	margin-top: 2%;
+	
+}
+.contextForm label {
+	display:block;
+	font-weight:bold;
+	font-family: verdana;
+	font-size: 12px;
+	margin:5px 0;
+	color: #333333;
+}
+.contextForm input {
+	padding: 0 3px;
+	border:1px solid #B4D6E6;
+	background: url(/SRSAppWeb/images/textboxbg.jpg) repeat-x;
+	height: 25px;
+	line-height: 25px;
+}
+.contextForm select {
+	border:1px solid #B4D6E6;
+	width: 100px;
+}
+.contextForm textarea {
+	width:95%;
+	padding:2px;
+	border:1px solid #B4D6E6;
+	height:100px;
+	display: inline;
+	margin: 0 0 5px 0; 
+}
+.contextForm input.button { 
+	height: 24px;
+	border: 0; 
+	background: #034f8a url(/SRSAppWeb/images/buttonbg.jpg) repeat-x;
+	color: White;
+	font-weight: bold;
+}
+
+.loginForm {
+	
+	border: 1px solid #B4D6E6; 
+	background-color: #FAFAFA;
+	margin: 5px 0 5px 0;
+	vertical-align: baseline;
+	width: 65%;
+	margin-left: 17.5%; 
+	margin-top: 15%;
+	
+	
+}
+.loginForm label {
+	display:block;
+	font-weight:bold;
+	margin:5px 0;
+	color: #333333;
+}
+.loginForm input {
+	padding: 0 3px;
+	border:1px solid #B4D6E6;
+	background: url(/SRSAppWeb/images/textboxbg.jpg) repeat-x;
+	height: 25px;
+	line-height: 25px;
+}
+
+.loginForm input.button { 
+	height: 24px;
+	border: 0; 
+	background: #034f8a url(/SRSAppWeb/images/buttonbg.jpg) repeat-x;
+	color: White;
+	font-weight: bold;
+}
+
+.logincell { 
+ background-color: #F2F7FB; 
+ color: #000000; 
+ text-align: right; 
+}  
+
+
+.logincell input { 
+ width: 100px; 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: #D7E5F2; 
+ color: #102132; 
+ border: 1px solid #284279; 
+} 

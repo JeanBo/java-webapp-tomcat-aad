@@ -1,0 +1,78 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+<wicket:head>
+<style type="text/css">
+
+
+
+</style>
+</wicket:head>
+
+</head>
+
+<body>
+
+  <!-- Left -->
+  <div id="framecontentLeft">
+    <div style="padding-top: 10px">
+      <center><img src="/SRSAppWeb/images/bpo/Liberty_SRS_New.gif" border="0" alt=""/></center>
+    </div>
+    <div wicket:id="menucontainer">
+      <div class="linkMenu">
+	    <ul>
+	      <hr id="linkMenuLine"/>
+		  <li><a href="#agreement">Agreements</a></li>
+		  <hr id="linkMenuLine"/>
+  		  <li><a href="#party" >Party</a></li>
+  		  <hr id="linkMenuLine"/>
+		  <li><a href="#transaction">Transactions</a></li>
+		  <hr id="linkMenuLine"/>
+	    </ul>
+      </div> <!-- end linkMenu -->
+	</div> <!-- end menucontainer -->
+  </div> <!-- end framecontentLeft -->
+
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner"> 
+        <p align="center">
+          <span id="TopBannerHeader">SRS Application</span>
+          <br/><span wicket:id="pageName">Base page</span>
+        </p>
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+
+ <!-- Content -->
+ <div id="maincontent">
+
+	<div wicket:id="contextPanel">
+		<div style="height: 50px; border-bottom: 3px solid #1F2241;margin-bottom: 20px;">
+		</div>
+	</div> 
+	
+	<span wicket:id="messages" class="error"></span>
+	
+	<wicket:panel>
+
+	<form class="cssform" wicket:id="mainForm" style="cssform">
+		<div wicket:id="repeatingField"/>
+	</form> 
+	
+	<div class="cssformDivider"/>
+	
+	</wicket:panel>
+		
+	<br/>
+  </div> <!-- end mainContent -->
+  
+</body>
+</html>

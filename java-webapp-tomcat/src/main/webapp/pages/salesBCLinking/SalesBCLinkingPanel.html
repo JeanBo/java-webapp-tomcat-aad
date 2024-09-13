@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Sales BC Linking Panel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+  <wicket:link>
+		<script type="text/javascript" src="/SRSAppWeb/js/jquery.js"></script>
+		<script type="text/javascript" src="/SRSAppWeb/js/jquery.blockui.js"></script>
+	</wicket:link>
+	
+	
+</head>
+<body>
+<wicket:panel>
+<form wicket:id="bcPanelForm" style="margin-top:0px;margin-bottom:0px">
+<div id="overlay" style="display: none;"><table width='100%' height='100%'><tr><td align='center' valign='middle' width='100%' height='100%'>Please be patient, we are busy loading your request<br/><img src="/SRSAppWeb/images/loading2.gif"/></td></tr></table></div>
+ 
+<table width="300px" align="left">
+<tr>
+	<span wicket:id="currenRelMessages" class="feedbackPanel"></span>
+	<span wicket:id="feedback" class="feedbackPanel"></span>
+</tr>
+</table>
+<br>
+<table align="left">
+<tr align="left">
+<td>
+<button wicket:id="maintainBtn" align="left">Maintain</button>
+</td>
+<td>
+<button wicket:id="cancelBtn" align="left">Cancel</button>
+</td>
+<td>
+<button wicket:id="authBtn" align="left">Authorisation</button>
+</td>
+</tr>
+</table>
+<br>
+<br>
+<div wicket:id="requestViewWindow"></div>
+	<br>
+	<div class="GUIFieldContainer">
+		<b>Servicing Panel Details</b>
+		<hr/>
+		<table>
+			<tr>
+				<td  width="175px" align="left"><b>Panel Name:</b></td>
+				<td align="left"><label wicket:id="panelName" /></td>
+			</tr>
+			<tr>
+				<td  width="175px" align="left"><b>Servicing Consultant Name:</b></td>
+				<td align="left"><label wicket:id="consultantName" /></td>
+			</tr>
+
+			<tr>
+				<td  width="175px" align="left"><b>Consultant Code:</b></td>
+				<td align="left"><label wicket:id="consultantCode" /></td>
+			</tr>
+			<tr>
+				<td  width="175px" align="left"><b>MCC Code:</b></td>
+				<td align="left"><label wicket:id="mcccode" /></td>
+			</tr>
+			<tr>
+				<td  width="175px" align="left"><b>Service Type:</b></td>
+				<td align="left"><label wicket:id="serviceType" /></td>
+			</tr>
+			<tr>
+				<td  width="175px" align="left"><b>Branch Name:</b></td>
+				<td align="left"><label wicket:id="branchName" /></td>
+			</tr>
+			<tr>
+				<td  width="175px" align="left"><b>Status:</b></td>
+				<td align="left"><label wicket:id="status"/></td>
+			</tr>
+		</table>
+	</div>
+	<div class="GUIFieldContainer">
+		<b><label wicket:id="currServRelLabel" /></b>
+	<hr/>
+	
+	<div wicket:id="adviserRelTablePanel"></div>
+	<br>
+	<label wicket:id="endDateLabel"/><select wicket:id="endDateField" style="width:200px"/>
+	<button wicket:id="endLinkBtn">End Link</button>
+	<br><br>
+		<b><label wicket:id="advSearch" /></b>
+		<hr/>
+		<table class="filterTable">
+			<tr>
+			<span wicket:id="searchMessages" class="feedbackPanel"></span>
+			</tr>
+			<tr>
+		   		<td>
+			   		<span class="headLabel"><label wicket:id="thirteenDC" /></span><br/>
+			   		<input wicket:id="tdcSearch" style="width:170px" tabindex="1"/>
+			   		<!-- Search Button here -->
+		 	  	</td>
+		 	  	<td>
+		   			<span class="headLabel"><label wicket:id="srsAgmt" /></span><br/>
+			   		<input wicket:id="agreementSearch" style="width:170px" tabindex="1"/>
+			   	</td>
+		 	  </tr>
+		 	  <tr>
+		 	  	<td><span class="headLabel"><label wicket:id="or" /></span><br/></td>
+		 	  </tr>
+		      <tr>
+		        <td>
+		 			<span class="headLabel"><label wicket:id="servPanelName" /></span><br/>
+		 			<input wicket:id="panelNameSearch" style="width:170px" tabindex="1"/>
+		 		</td>
+		 		<td>
+		 			<span class="headLabel"><label wicket:id="panelResult" /></span><br/>
+		 			 <select wicket:id="searchServicingPanel" style="width:200px">
+              		</select>
+		 		</td>
+		 </tr>
+		 </table>	  	
+	</div>
+	<div wicket:id="adviserTable"></div>
+	<span class="headLabel"><label wicket:id="startDateLabel" /></span>
+	<select wicket:id="startDateField" style="width:200px"/>
+	<button wicket:id="addNewLinkBtn">Add New Link</button>
+</form>	
+</wicket:panel>
+
+</body>
+</html>

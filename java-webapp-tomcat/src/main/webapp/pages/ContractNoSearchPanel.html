@@ -1,0 +1,81 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+</head>
+
+<body>
+
+ <div id="maincontent">
+	<wicket:panel>
+  		<form wicket:id="contractNoSrchForm" >
+		
+			<table width="100%">
+				<hr/>
+				<tr>
+				 	<td colspan="1" width="170px"><font color="red">*</font>&nbsp;Contract Number:</td>
+					<td colspan="1">
+						<div style="padding-bottom: 5px">
+							<input wicket:id="contractNo" type="text" tabindex="1"></input>
+						</div>
+		   			</td>
+		   		</tr>
+		   		<tr>
+		   			<td colspan="3" align="center" style="background-color:#f3f3f3;font: bold">SEARCH CRITERIA</td>
+		   		</tr>
+			</table>
+			<table width="100%">
+				<tr>
+					<td align="left" width="140px">
+						<div style="padding-top: 10px;"><font color="red">*</font>&nbsp;Date Type</div>
+					</td>
+					<td align="left" width="120px">
+						<div style="padding-top: 10px"><font color="red" >*</font>&nbsp;Date From</div>
+					</td>
+					<td align="left" width="120px">
+						<div style="padding-top: 10px"><font color="red">*</font>&nbsp;Date To</div>
+					</td>
+					<td align="left" width="210px">
+						<div style="padding-top: 10px">Commission Kind</div>
+					</td>
+					<td width="120px">&nbsp;</td>
+				</tr>
+				<tr>
+					<td>
+						<select wicket:id="dateType" tabindex="2"></select>
+					</td>
+					<td>
+						<input wicket:id="dateFrom" type="text"  tabindex="3" maxlength="10" style="width:85px"/>
+					</td>
+					<td>
+						<input wicket:id="dateTo" type="text"  maxlength="10" tabindex="4" style="width:85px"/>
+					</td> 
+					<td>
+						<select wicket:id="commKind" tabindex="5"></select>
+					</td>
+					<td>
+						<input  type="submit" value="Search" tabindex="6"/>&nbsp;<input type="button" value="Reset" wicket:id="resetBtn" tabindex="7"/>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" width="140px">&nbsp;</td>
+					<td align="left" width="120px">DDMMYYYY</td>
+					<td align="left" width="120px">DDMMYYYY</td>
+					<td align="center" width="210px">&nbsp;</td>
+					<td width="120px">&nbsp;</td>
+				</tr>
+			</table>
+		</form>
+	</wicket:panel>
+	<hr/>
+ </div>
+  
+</body>
+</html>

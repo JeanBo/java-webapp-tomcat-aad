@@ -1,0 +1,108 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+ <!-- Left -->
+  <div id="framecontentLeft">
+    <div style="padding-top: 10px">
+      <center><img src="/SRSAppWeb/images/bpo/Liberty_SRS_New.gif" border="0" alt=""/></center>
+    </div>
+
+	<div class="linkMenu" id="menucontainer" >
+	  <ul>
+	    <hr id="linkMenuLine"/>
+		
+			<li>
+			  <a wicket:id="menuitem" href="../../app/Home/">
+			  Home</a>
+			</li>
+			<hr id="linkMenuLine"/>
+		
+			<li>
+			  <a wicket:id="menuitem" href="../../app/ContractNoEnquiyPage/">
+			  Contract Number Enquiry</a>
+			</li>
+			<hr id="linkMenuLine"/>
+		
+			<li>
+			  <a wicket:id="menuitem" href="../../app/OldSRS/">
+			  Old SRS</a>
+			</li>
+			<hr id="linkMenuLine"/>
+		
+	  </ul>
+	</div>
+  </div> <!-- end framecontentLeft -->
+
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner">
+        <p align="center">
+          <span id="TopBannerHeader">SRS Application</span>
+          <br/><span wicket:id="pageName"></span>
+        </p>
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+   <!-- Content -->
+ <div id="maincontent">
+	<div wicket:id="contextPanel">
+		
+		<wicket:panel>
+			<div style="border-bottom: 3px solid #1F2241;margin-bottom: 3px;">
+
+	
+	<form wicket:id="contextForm" style="margin-bottom:2px;">	
+		<div wicket:id="modalWindow"></div>
+		
+		<table class="contextTable" width="100%" border="0" style="cell-padding">	
+			<tr wicket:id="rowValues">
+				  <td width="10%"><span wicket:id="colDescription1" class="headLabel">Agmt No:</span></td> 
+			   	  <td width="20%">
+			   		<span wicket:id="colValue1">612</span>
+			      </td>
+			      
+				  <td width="10%"><span wicket:id="colDescription2" class="headLabel">Agmt No:</span></td> 
+			   	  <td width="30%">
+			   		<span wicket:id="colValue2">612</span>
+			      </td>
+			      
+			      <td width="10%"><span wicket:id="colDescription3" class="headLabel">Agmt No:</span></td> 
+			   	  <td width="20%">
+			   		<span wicket:id="colValue3">612</span>
+			      </td>
+			</tr>
+			<tr>
+				  <td width="10%" valign="top"><span wicket:id="colDescription1" class="headLabel">Agmt No:</span></td> 
+			   	  <td width="20%" valign="top">
+			   		<span wicket:id="colValue1">612</span>
+			      </td>
+			      
+			      <td width="10%" valign="top"><span wicket:id="colDescription2" class="headLabel">Agmt No:</span></td> 
+			   	  <td width="30%" valign="top">
+			   		<span wicket:id="colValue2">612</span>
+			      </td>
+
+				  <td  width="30%" colspan="2" align="right" style="padding-right:5px;padding-top:3px;">
+				 	 
+					<input wicket:id="searchButton" type="submit" value="Search" class="button" style="height:21px;"/>
+					
+				  </td> 
+			</tr>
+		</table>
+	</form>
+	
+	</div><!-- end border -->
+	</wicket:panel>
+	
+	</div></div>
+</body>
+</html>

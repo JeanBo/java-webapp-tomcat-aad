@@ -1,0 +1,111 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link href="/SRSAppWeb/css/BPO_Style.css" rel="stylesheet"
+	type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css" rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS_layout-window.css" rel="stylesheet"
+	type="text/css"></link>
+
+</head>
+<body>
+
+<wicket:panel>
+<wicket:extend>
+	<div wicket:id="searchPartyWindow"></div>
+	<form wicket:id="searchForm"
+		style="margin-bottom:3px; margin-top:10px; padding-top:0px; margin-bottom:15px">
+
+	<table class="filterTable">
+		<tr>
+			<td>
+			<table>
+				<tr>
+					<td><span class="headLabel">Request Kind</span><br />
+					<select wicket:id="requestKind" style="width:270px" tabindex="2">
+						<option>Select</option>
+					</select></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="headLabel">Transfer
+					Advisory Fee</span><br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox"
+						wicket:id="advisoryFee" /></td>
+				</tr>
+			</table>
+			</td>
+			<td>&nbsp;</td>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+	</table>
+
+	<div class="GUIFieldContainer"><b>From Consultant</b>
+	<hr />
+	<table cellspacing="2px">
+		<tr>
+			<td valign="top">
+			<table>
+				<tr>
+					<td><span class="headLabel">Name: </span></td>
+					<td><span wicket:id="fromConsultantName"></span></td>
+				</tr>
+				<tr>
+					<td><span class="headLabel">Consultant Id: </span></td>
+					<td><span wicket:id="fromConsultantID"></span></td>
+				</tr>
+				<tr>
+					<td><span class="headLabel">Consultant Status: </span></td>
+					<td><span wicket:id="fromConsultantStatus"></span></td>
+				</tr>
+			</table>
+			</td>
+		</tr>
+	</table>
+	</div>
+
+	<div class="GUIFieldContainer"><b>To Consultant</b>
+	<hr />
+	<table cellspacing="2px">
+		<tr>
+			<td valign="top">
+			<table>
+				<tr>
+					<td><span class="headLabel">Search: </span></td>
+					<td>
+					<button type="submit" tabindex="10" wicket:id="contextSearchButton">Search</button>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="headLabel">Name: </span></td>
+					<td><span wicket:id="toConsultantName"></span></td>
+				</tr>
+				<tr>
+					<td><span class="headLabel">Consultant Id: </span></td>
+					<td><span wicket:id="toConsultantID"></span></td>
+				</tr>
+				<tr>
+					<td><span class="headLabel">Consultant Status: </span></td>
+					<td><span wicket:id="toConsultantStatus"></span></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+				</tr>
+			</table>
+			</td>
+		</tr>
+	</table>
+	</div>
+	</form>
+	</wicket:extend>
+</wicket:panel>
+</body>
+</html>

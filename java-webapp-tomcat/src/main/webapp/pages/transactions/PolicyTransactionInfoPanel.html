@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+	</head>
+
+	<body>
+	
+		 <div id="maincontent">
+			<wicket:panel>
+			
+			<wicket:extend>
+		  		<form wicket:id="fieldsForm">
+		  			<table width="99%">
+		  				<tr>
+		  					<td>
+		  						<table>
+		  							<tr>
+					  					<td>Info Kind <b style="color:red;">*</b></td>
+		  								<td><select wicket:id="infoKindType" style="width: 200px"></select></td>
+					  				</tr>
+		  							<tr>
+					  					<td>Policy Reference <b style="color:red;">*</b></td>
+					  					<td><input wicket:id = "policyReference" type="text" style="width: 200px" maxlength="15"/></td>
+					  				</tr>
+					  				<tr>
+					  					<td>Owner Name <b style="color:red;">*</b></td>
+		  								<td><input wicket:id="ownerName" type="text" style="width: 200px" maxlength="50"/></td>
+					  				</tr>
+					  				<tr>
+					  					<td>Policy Start Date <b style="color:red;">*</b></td>
+					  					<td>
+					  						<input wicket:id="policyStartDate" type="text" value="09/12/2009" style="width:75px" maxlength="10" />
+										   	  						
+					  					</td>
+					  				</tr>
+					  				<tr>
+					  					<td>Product Reference <b style="color:red;">*</b></td>
+		  								<td><select wicket:id="productReference" style="width: 280px"></select></td>
+					  				</tr>
+					  				<tr>
+					  					<td>Effective Date  <b style="color:red;">*</b></td>
+					  					<td>
+					  						<input wicket:id="effectiveDate" type="text" value="09/12/2009" style="width:75px" maxlength="10" />
+										   	   			  						
+					  					</td>
+					  				</tr>					  				
+		  						</table>
+		  					</td>
+		  					<td style="padding-left:30px" valign="top">
+		  						<div wicket:id="premiumContainer">
+			  					<table>
+									<tr>
+					  					<td width="170">Premium Frequency <b style="color:red;">*</b></td>
+					  					<td>
+					  						<select wicket:id="premiumFrequency"></select>
+					  					</td>
+					  				</tr>
+					  				<tr>
+					  					<td>Amount <b style="color:red;">*</b></td>
+					  					<td><input wicket:id="amount" type="text" style="width: 150px"/></td>
+					  				</tr>
+		  						</table>
+		  						</div>
+		  						<div wicket:id="riskPremiumContainer">
+				  					<table>
+										<tr>
+						  					<td width="170">Term <b style="color:red;">*</b></td>
+						  					<td>
+						  						<input wicket:id="term" type="text" style="width: 50px"/>
+						  					</td>
+						  				</tr>
+						  				<tr>
+						  					<td>Active Policy Months <b style="color:red;">*</b></td>
+						  					<td><input wicket:id="activePolicyMonths" type="text" style="width: 50px"/></td>
+						  				</tr>
+						  				<tr>
+						  					<td>Premiums Received Count <b style="color:red;">*</b></td>
+						  					<td><input wicket:id="premiumsReceivedCount" type="text" style="width: 50px"/></td>
+						  				</tr>
+						  				<tr>
+						  					<td>Is Lapse<b style="color:red;">*</b></td>
+						  					<td><input wicket:id="isLapse" type="checkbox" style="width: 100px"/></td>
+						  				</tr>
+			  						</table>
+		  						</div>
+		  						
+		  						<div wicket:id="aumContainer">
+		  						<table>
+		  							<tr>
+		  								<td>Fund Code  <b style="color:red;">*</b></td>
+					  					<td><select wicket:id="fundCode" style="width: 250px"></select></td>
+		  							</tr>
+		  							<tr>
+					  					<td>Fund Unit Count <b style="color:red;">*</b></td>
+					  					<td><input wicket:id="fundUnitCount" type="text" style="width: 200px"/></td>
+		  							</tr>
+		  							<tr>
+					  					<td>Fund Unit Price <b style="color:red;">*</b></td>
+					  					<td><input wicket:id="fundUnitPrice" type="text" style="width: 200px"/></td>
+					  				</tr>
+					  				<tr>
+					  					<td>Fund Pricing Date <b style="color:red;">*</b></td>
+					  					<td><input wicket:id="pricingDate" type="text" value="09/12/2009" style="width:75px" maxlength="10" />
+										     						
+					  					</td>
+					  				</tr>
+					  				<tr>
+					  					<td>Fund Asset Value</td>
+					  					<td><input wicket:id="fundAssetValue" type="text" style="width: 200px" disabled="disabled"/></td>
+					  				</tr>
+					  				<tr>
+					  				<td>DFM Model <b style="color: red;"></b></td>
+					  				<td><select wicket:id="aumdfmModelField" style="width: 250px"></select></td>
+					  				</tr>
+		  						</table>
+		  						</div>
+		  						<div wicket:id="guardBankContainer">
+		  						<table>	
+		  						   <tr>
+		  							    <td width="170">Fund Code  <b style="color:red;">*</b></td>
+					  				    <td><select wicket:id="gbankfundCode" style="width: 250px"></select></td>
+		  							</tr>
+		  							 <tr>
+		  							    <td>Product Name <b style="color:red;">*</b></td>
+		  							    <td><span wicket:id="productLbl"></span></td>
+		  							</tr>
+		  							<tr>
+					  					<td>Fund Pricing Date <b style="color:red;">*</b></td>
+					  					<td><input wicket:id="gbankPricingDate" type="text" value="09/12/2009" style="width:75px" maxlength="10" />
+										   	 	  						
+					  					</td>
+					  				</tr>	  							
+		  							<tr>
+		  								<td>PCR Code  <b style="color:red;">*</b></td>
+					  					<td><select wicket:id="pcrCode" style="width: 200px"></select></td>
+		  							</tr>
+		  							<tr>
+					  					<td>Transaction Code <b style="color:red;">*</b></td>
+					  					<td><input wicket:id="transCode" type="text" style="width: 200px"/></td>
+		  							</tr>
+		  							<tr>
+					  					<td>Commission Amount <b style="color:red;">*</b></td>
+					  					<td><input wicket:id="commAmount" type="text" style="width: 200px"/></td>
+					  				</tr>					  				
+		  						</table>
+		  						</div>
+		  						<div wicket:id="inn8PcrContainer">
+		  						<table>	
+		  						   <tr>
+		  							    <td width="170">Fund Code  <b style="color:red;">*</b></td>
+					  				    <td><select wicket:id="inn8fundCode" style="width: 250px"></select></td>
+		  							</tr>	
+		  							 <tr>
+		  							    <td>Fund Category <b style="color:red;">*</b></td>
+		  							    <td><span wicket:id="fundCategoryLbl"></span></td>
+		  							  </tr>						
+		  							
+		  							<tr>
+		  							    <td>DFM Model <b style="color:red;"></b></td>
+					  				    <td><select wicket:id="dfmModel" style="width: 250px"></select></td>
+		  							</tr>
+		  							<tr>
+					  					<td>Transaction Type <b style="color:red;">*</b></td>
+					  					<td><select wicket:id="transactionType" style="width: 250px"></select></td>
+		  							</tr>
+		  							<tr>
+					  					<td>Conversion Rate <b style="color:red;">*</b></td>
+					  					<td><input wicket:id="conversionRate" type="text" style="width: 200px"/></td>
+					  				</tr>					  				
+		  						</table>
+		  						</div>
+		  						<div wicket:id="inn8CommContainer">
+		  						<table>	
+		  						   <tr>
+		  							    <td width="170">Commission Type Code  <b style="color:red;">*</b></td>
+					  				    <td><select wicket:id="commTypeCode" style="width: 250px"></select></td>
+		  							</tr>
+		  							<tr>
+					  					<td>Conversion Rate <b style="color:red;">*</b></td>
+										<td><input wicket:id="inn8CommConversionRate" type="text"
+											style="width: 200px" /></td>
+									</tr>
+								</table>
+							</div>
+							<div wicket:id="gipPcrContainer">
+								<table>
+									<tr>
+										<td width="170">Fund Code <b style="color: red;">*</b></td>
+										<td><select wicket:id="gipfundCode" style="width: 250px"></select></td>
+									</tr>
+									<tr>
+										<td>Fund Category <b style="color: red;">*</b></td>
+										<td><span wicket:id="gipfundCategoryLblField"></span></td>
+									</tr>
+									<tr>
+										<td>DFM Model <b style="color: red;"></b></td>
+										<td><select wicket:id="gipdfmModelField"
+											style="width: 250px"></select></td>
+									</tr>
+									<tr>
+										<td>Transaction Code <b style="color: red;">*</b></td>
+										<td><select wicket:id="giptransactionTypeField"
+											style="width: 250px"></select></td>
+									</tr>
+									<tr>
+										<td>Conversion Rate </td>
+										<td><input wicket:id="gipconversionRate" type="text"
+											style="width: 200px" /></td>
+									</tr>
+									<tr>
+										<td>Investment Source <b style="color: red;">*</b></td>
+										<td><select wicket:id="gipinvestmentSourceField"></select></td>
+									</tr>
+									<tr>
+										<td>Contribution Increase Indicator <b style="color: red;">*</b></td>
+										<td><select wicket:id="gipciiField"></select></td>
+									</tr>
+								</table>
+							</div>
+							<div wicket:id="gipCommContainer">
+								<table>
+									<tr>
+										<td width="170">Commission Type Code <b
+											style="color: red;">*</b></td>
+										<td><select wicket:id="gipcommTypeCode"
+											style="width: 250px"></select></td>
+									</tr>
+									<tr>
+										<td>Conversion Rate <b style="color: red;">*</b></td>
+										<td><input wicket:id="gipCommConversionRate"
+											type="text" style="width: 200px" /></td>
+									</tr>
+									<tr>
+										<td>Investment Source <b style="color: red;">*</b></td>
+										<td><select wicket:id="gipcommIS"></select></td>
+									</tr>
+									<tr>
+										<td>Contribution Increase Indicator <b style="color: red;">*</b></td>
+										<td><select wicket:id="gipcommCII"></select></td>
+					  				</tr>					  				
+		  						</table>
+		  						</div>
+		  					</td>
+		  				</tr>
+		  			</table>
+					
+					<br/>
+		  			<div wicket:id="additionalFieldsPanel"></div>
+		  			
+		  			<br/>
+		  			
+		  			<div class="formDividerLight" />
+		  			
+		  		</form>
+		  		
+		  		</wicket:extend>
+		  	</wicket:panel>
+		  </div>
+	  </body>
+  </html>

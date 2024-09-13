@@ -1,0 +1,118 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS_layout-window.css" rel="stylesheet" type="text/css"></link>
+
+</head>
+<body>
+ 
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner">
+        <!-- <p align="center">
+          <span id="TopBannerHeader">SRS Application</span>
+          <br/><span wicket:id="pageName"></span>
+        </p> -->
+        
+        <table width="100%" class="TopBanner">
+			<tr>
+				<td width="30%" align="left">
+					<label wicket:id="userIdLabel">User:</label>
+					<span wicket:id="userId">JZB0608</span>
+				</td>
+	          	<td width="40%" align="center"><span id="TopBannerHeader">SRS Application</span></td>
+	          	<td width="30%" align="right">
+	          		<label wicket:id="applicationVersionLabel">Version:</label>
+					<span wicket:id="applicationVersion" class="TopBanner_Info">4.0.0</span>
+	          	</td>
+			</tr>
+			<tr>
+	          	<td align="left">
+	          		<label wicket:id="serverNameLabel">Server:</label>
+					<span wicket:id="serverName">jzb0608</span>
+				</td>
+	          	<td align="center"><span id="TopBannerHeader" wicket:id="pageName">Base page</span></td>
+	          	<td align="right">
+	          		<div id="bysy_indicator" style="width:80px">
+   	    				Busy ... &nbsp;<img src="/SRSAppWeb/images/busy_indicator.gif"/>&nbsp;
+   	  				</div>
+	          	</td>
+	        </tr>
+	      </table>
+        
+        
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+ <!-- Content -->
+ <div id="maincontent">
+	<span wicket:id="messages" class="feedbackPanel"></span>
+ 	<wicket:extend>
+ 	
+ 	  <form wicket:id="searchForm" style="margin-bottom:3px; margin-top:0px; padding-top:0px;">
+		
+		<table style="width:680px">
+		   <tr><td width="680" colspan="2">Search Type</td></tr>
+ 	  	   <tr>
+ 	         <td valign="top" width="280">
+ 	            <table width="100%" height="100%">
+ 	         		<tr>
+ 	         			<td>
+		 	    		<!-- Search type selection -->
+ 	  					<select wicket:id="searchType" style="width:250px;" tabindex="1">
+ 	  						<option>13 Digit Consultant Code</option>
+			 	  			<option>Compass Code</option>
+ 			 	 			<option>Liberty Active Code</option>
+	 	  					<option>Compass Code</option>
+ 	  						<option>ID Number</option>
+	 	  				</select>
+	 	  				</td>
+	 	  			</tr>
+	 	  			<tr>
+	 	  				<td>
+							<button type="submit" tabindex="10" wicket:id="searchButton">Search</button>						
+						</td>
+					</tr>
+					<tr>
+						<td>				
+							<input wicket:id="includeAgreementCheck" type="checkbox"/>Include Agreements
+						</td>
+					</tr>
+				</table>
+			</td>
+ 	  	
+ 	  		<td valign="top" align="left" width="400">
+	 		  	<!-- Search values -->
+ 		  		<div wicket:id="searchPanel">
+ 	  				Search value:&nbsp;<input type="text"></input>
+		 	  	</div>	
+			</td>
+		  </tr>
+		  
+		</table>
+	  </form> 
+	  
+ 	  <div class="formDivider"/>
+   	  
+   	  <div wicket:id="searchMessages" class="feedbackPanel" style="margin:0px;padding:0px">
+   	  </div>
+   
+ 	  <div wicket:id="searchResultPanel">
+ 	  </div>
+ 	  
+ 	  <button wicket:id="selectButton">Select</button> 
+ 	  
+ 	  <form wicket:id="selectForm" style="margin-top:4px;margin-bottom:1px">
+ 	  	
+ 	  	<button wicket:id="nextButton">Next</button> 
+ 	  </form>
+ 	   
+ 	</wicket:extend>
+ </div> <!-- end maincontent -->
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Agreement Details Panel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+</head>
+<body>
+<wicket:panel>
+	<wicket:extend>
+	<table>
+		<tr>
+			<td width="100px" wicket:id="teamNameLabel">Team Name:</td>
+			<td><input type="text" wicket:id="teamName" maxlength="100" size="50"></td>
+		</tr>
+		<tr>
+			<td width="100px" wicket:id="teamCategoryNameLabel">Category Name:</td>
+			<td><select wicket:id="CategoryLink"/></td>
+		</tr>
+		<tr>
+<!--		<td width="100px">UACIF ID:</td>-->
+<!--		<td><div wicket:id="UACIFID"/></td>-->
+		<td width="100px" wicket:id="uacfId">UACF ID:</td>
+		<td><input type="text" wicket:id="gridButtonPanel"></td>
+		<td><input type="button" wicket:id="addButton" value="Add"></td>
+		<td><input type="button" wicket:id="removeButton" value="Remove"></td>
+		<td><input type="button" wicket:id="searchButton" value="Search"></td>
+		</tr>
+		<tr>
+			<td width="100px">Team Members:</td>
+		</tr>
+	</table>
+	<div wicket:id="searchSecurityWindow"></div>
+	<div wicket:id="PartyLink"></div>
+	</wicket:extend>
+</wicket:panel>
+</body>
+</html>

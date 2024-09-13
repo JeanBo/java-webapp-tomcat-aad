@@ -1,0 +1,92 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>MaintainenceButtonsSelectionPanel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+<wicket:head>
+<style type="text/css">
+
+</style>
+</wicket:head>
+
+</head>
+
+<body>
+
+  <!-- Left -->
+  <div id="framecontentLeft">
+    <div style="padding-top: 10px">
+      <center><img src="/SRSAppWeb/images/bpo/Liberty_SRS_New.gif" border="0" alt=""/></center>
+    </div>
+    <div wicket:id="menucontainer">
+      <div class="linkMenu">
+	    <ul>
+	      <hr id="linkMenuLine"/>
+		  <li><a href="#agreement">Agreements</a></li>
+		  <hr id="linkMenuLine"/>
+  		  <li><a href="#party" >Party</a></li>
+  		  <hr id="linkMenuLine"/>
+		  <li><a href="#transaction">Transactions</a></li>
+		  <hr id="linkMenuLine"/>
+	    </ul>
+      </div> <!-- end linkMenu -->
+	</div> <!-- end menucontainer -->
+  </div> <!-- end framecontentLeft -->
+
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner"> 
+        <p align="center">
+          <span id="TopBannerHeader">SRS Application</span>
+          <br/><span wicket:id="pageName">Base page</span>
+        </p>
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+
+ <!-- Content -->
+ <div id="maincontent">
+
+	<span wicket:id="messages" class="error"></span>
+	
+	<wicket:panel>
+	  <table width="100%" border="0">
+	    <tr>	     
+          <td align="left" valign="bottom">
+            <div wicket:id="controlButtonPanel">
+              <input type="button" value="Maintain"/>&nbsp;<input type="button" value="Add New"/>
+            </div>
+          </td>
+        </tr>
+	  </table>
+	  </wicket:panel>
+	  
+	  <br/>
+	  <div class="formDivider"/>
+	  
+	  <div wicket:id="internalMessages" class="error"></div>
+	  <br/>
+	  	  
+	  <form wicket:id="otherForm">
+		
+	    <div wicket:id="menuItemPanel"></div>
+	  
+	  	<div wicket:id="navigationButtonPanel">
+	  		<input type="button" value="Save"/>&nbsp;<input type="button" value="Cancel"/>
+	  	</div>
+
+      </form>
+		
+	<br/>
+  </div> <!-- end mainContent -->
+  
+</body>
+</html>
+
+

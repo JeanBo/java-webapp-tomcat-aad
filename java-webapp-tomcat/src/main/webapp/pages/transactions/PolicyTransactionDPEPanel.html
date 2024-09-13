@@ -1,0 +1,121 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+	</head>
+
+	<body>
+	
+		 <div id="maincontent">
+			<wicket:panel>
+			
+			<wicket:extend>
+		  		<form wicket:id="dpeFieldsForm">
+		  			<table width="100%">
+		  				<tr>
+		  					<td>
+		  						<table>
+		  							<tr>
+		  								<td colspan = "2" align="center"><strong>Basic DPE Fields</strong></td>
+		  							</tr>
+		  							<tr>
+		  								<td>Policy Reference <b style="color:red;">*</b></td>
+					  					<td><input wicket:id="policyReference" type="text" style="width: 170px"/></td>
+					  				</tr>
+					  				<tr>
+					  					<td>Owner Name <b style="color:red;">*</b></td>
+		  								<td><input wicket:id="ownerName" type="text" style="width: 170px"/></td>
+					  				</tr>
+					  				<tr>
+					  					<td>Policy Start Date <b style="color:red;">*</b></td>
+					  					<td>
+					  						<input wicket:id="policyStartDate" type="text" value="DD/MM/YYYY" style="width:75px" maxlength="10" />
+										   						
+					  					</td>
+					  				</tr>
+					  				<tr>
+					  					<td>Effective Date <b style="color:red;">*</b></td>
+					  					<td>
+					  						<input wicket:id="effectiveDate" type="text" value="09/12/2009" style="width:75px" maxlength="10" />
+										   		  						
+					  					</td>
+					  				</tr>
+					  				<tr>
+					  					<td>Commission Kind  <b style="color:red;">*</b></td>
+					  					<td>
+					  						<select wicket:id="commissionKind" style="width: 170px"></select>
+					  					</td>
+					  				</tr>
+					  				<tr>
+					  					<td>Movement Type <b style="color:red;">*</b></td>
+					  					<td>
+					  						<select wicket:id="movementType"></select>
+					  					</td>
+					  				</tr>
+					  				<tr>
+					  					<td>Premium Frequency <b style="color:red;">*</b></td>
+					  					<td>
+					  						<select wicket:id="premiumFrequency"></select>
+					  					</td>
+					  				</tr>
+					  				<tr>
+					  					<td>Product Name <b style="color:red;">*</b></td>
+					  					<td>
+					  						<select wicket:id="productName" style="width: 170px"></select>
+					  					</td>
+					  				</tr>
+					  				<tr>
+					  					<td>Movement Code <b style="color:red;">*</b></td>
+					  					<td>
+					  						<input wicket:id="movementCode"/>
+					  					</td>
+					  				</tr>
+					  				<tr>
+					  					<td>Amount <b style="color:red;">*</b></td>
+					  					<td>
+					  						<input wicket:id="depAmount"/>
+					  					</td>
+					  				</tr>
+					  				<tr>
+		  								<td>
+		  									<button wicket:id="additionalFieldsButton">Show</button>
+		  								</td>
+		  								<td>
+		  									&nbsp;
+		  								</td>
+		  							</tr>
+		  						</table>
+		  					</td>
+		  					<td valign="top">
+		  						<table width="100%">
+		  						<tr>
+		  								<td valign="top" align="center">
+		  									<strong>Additional DPE Fields</strong><br/>
+		  								</td>
+		  							</tr>
+		  						
+		  							<tr>
+		  								<td>
+		  									<div wicket:id="dpeAdditionalFields"></div>
+		  								</td>
+		  							</tr>
+		  						</table>
+		  					</td>
+		  				</tr>
+		  			</table>
+		  			<br/>
+
+		  		</form>
+		  		
+		  		</wicket:extend>
+		  	</wicket:panel>
+		  </div>
+	  </body>
+  </html>

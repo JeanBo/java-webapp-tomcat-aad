@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<title>SRS Application</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+	<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/dialog_box.css"	rel="stylesheet" type="text/css"></link>	
+</head>
+
+<body>
+ <div id="mainBorder">
+ <!-- Left -->
+  <div id="framecontentLeft">
+    <div style="padding-top: 10px">
+      <center><img src="/SRSAppWeb/images/bpo/Liberty_SRS_New.gif" border="0" alt=""/></center>
+    </div>
+    <div id="id1c">
+	<div class="linkMenu" id="menucontainer" >
+	  <ul>	    
+		
+	  </ul>
+	</div>
+</div> <!-- end menucontainer -->
+  </div> <!-- end framecontentLeft -->
+
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner">
+	      <table width="100%" class="TopBanner">
+			<tr>
+	          	<td width="40%" align="center"><span id="TopBannerHeader">SRS Application
+	          		<i><span></span></i></span>
+	          	</td>	        
+			</tr>
+			<tr>	         
+	          	<td align="right" valign="top">	          		
+	          	</td>
+	        </tr>
+	      </table>
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+
+ <!-- Content -->
+ <div id="maincontent">
+ 
+	
+ <table width="90%" align="center">		
+ 	<tr>
+ 		<td>
+ 			<div class="errorMessage" style="width:95%;margin-left:1px;margin-right:1px">
+ 			<table>
+				<tr><td><img src="/SRSAppWeb/images/Warning_icon.png" /></td>
+				<td style="padding-left:10px">
+
+		 				<div style="align-content: left">
+							<B><span wicket:id="mainError">Main message in bold</span></B>
+							<br/><br/><span wicket:id="additionalError">Additional message</span>
+						</div>
+				</td></tr>
+			</table>
+			</div>
+ 		</td>
+ 	</tr>
+ 			
+	<tr>
+		<td>					
+		   <br/>
+		   
+		   <div wicket:id="whyContainer">
+			   <p><img src="/SRSAppWeb/images/question.png" /> <b>Why did this happen :</b> 
+					<span wicket:id="whyLabel"></span>
+			   </p> 
+			</div>    
+			
+			<div wicket:id="whatContainer">
+			   <p><img src="/SRSAppWeb/images/question.png" /> <b>What should I do :</b>  
+			   <span wicket:id="whatLabel"></span></p>
+			</div>		   
+			
+			<div wicket:id="what2Container">
+				<p><img src="/SRSAppWeb/images/question.png" /> 
+					<b><span wicket:id="what2QuestionLabel"></span> :</b>  
+					<span wicket:id="what2Label"></span></p>
+		    </div>
+		</td>
+				
+	</tr>
+</table>
+	</div>	
+	<br/>
+  </div> 
+</body>
+</html>

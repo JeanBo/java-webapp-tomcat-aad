@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>SegmentPanel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+</head>  
+<body>
+<wicket:panel>
+<wicket:extend>
+<table>
+
+<tr>
+	<td  width="150px">Segment Name:</td>
+	<td><select wicket:id="segmentName" /></td>
+</tr>
+
+<tr>
+	<td>Context Type:</td>
+	<td><select wicket:id="segmentContextType" /></td>
+</tr>
+<tr>
+	<td>Context ID:</td>
+	<td><input type="text" wicket:id="segmentContextID" /></td>
+	
+</tr>
+<tr>
+	<td>Risk AQC:</td>
+	<td><input type="text" wicket:id="riskCode" maxlength="3" size="3" /></td>
+</tr>
+<tr>
+	<td>Invest AQC:</td>
+	<td><input type="text" wicket:id="investCode" maxlength="3" size="3" /></td>
+</tr>
+<tr>
+	<td>ELM Risk AQC:</td>
+	<td><input type="text" wicket:id="elmRiskCode" maxlength="3" size="3" /></td>
+</tr>
+<tr>
+	<td>ELM Invest AQC:</td>
+	<td><input type="text" wicket:id="elmInvestCode" maxlength="3" size="3" /></td>
+</tr>
+
+</table>
+</wicket:extend>
+</wicket:panel>
+</body>
+</html>

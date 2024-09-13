@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Banking Details Panel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+<wicket:extend>
+	<div wicket:id="bankingDetailsRequestHistoryWindow"/>
+	<form wicket:id="bankingDetailsForm" style="margin-top:0px;margin-bottom:0px">	
+	<div class="warningMessage" style="width:95%;margin-left:20px;margin-right:20px" wicket:id="paysToContainer">
+		<div style="margin-left:10px" wicket:id="paysToMessage">
+		Agreement has 'PaysTo' role with agreement 46502-this is 46502 agreement's banking details
+		</div>
+	</div>
+	<div class="GUIFieldContainer">
+		<b>FINANCIAL DETAILS </b>
+		<hr/>
+		<table>
+			<tr>			
+				<td valign="top">
+					<table><tr wicket:id="displayFinancialDetailsView"/></table>
+				</td>
+				</tr>
+		</table>
+	</div>
+
+	<b>BANK/BRANCH DETAILS</b><span wicket:id="bankingDetailsSource">Banking Details Source Place Holder</span>	
+	<div class="GUIFieldContainer" wicket:id="bankBranchContainer">
+		<hr/>
+		<table>
+			<tr>
+				<td valign="top">
+					<table><tr wicket:id="leftPanel"/></table>
+				</td>
+				<td valign="top">
+					<table><td wicket:id="bratLinkPanel"/>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<b>ACCOUNT DETAILS</b>
+	<div class="GUIFieldContainer" wicket:id="accountContainer">
+		<hr/>
+		<table>
+			<tr>
+				<td valign="top">
+					<table><tr wicket:id="leftPanel"/></table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	 <br/><br/><b>VERIFICATION RESULTS </b><span wicket:id="validationVersion">Version Place Holder</span><hr/>
+		<div wicket:id="avsPanel">
+	</div>
+	</form>	
+</wicket:extend>
+</body>
+</html>

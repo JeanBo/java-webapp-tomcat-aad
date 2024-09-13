@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>NavigateTreeInformationPanel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+	<script type="text/javascript" src="/SRSAppWeb/js/BusyIndicator.js"></script>
+	<script type="text/javascript" src="/SRSAppWeb/js/dialog_box.js"></script>
+</head>
+<body>
+<wicket:extend>
+
+<table style="border: 1px solid #eee" cellpadding="1" cellspacing="1">
+		<tr>
+			<td wicket:id="partyOidNodeLabel"></td>
+			<td wicket:id="partyOidLabel"></td>
+			<td width="10"></td>
+			<td wicket:id="partyNameNodeLabel" size="50"></td>
+			<td wicket:id="partyNameLabel"></td>
+		</tr>	
+</table>
+<form wicket:id="gridForm">
+	<div wicket:id="subAgreementGrid"></div>
+	<table>
+		<tr>
+			<td><input type="button" wicket:id="buttonExport" id="buttonExport" value="Export to Excel"></td>
+			<td><input type="button" wicket:id="buttonRetrieveAll" id="buttonRetrieveAll" value="Retrieve all Agreements"></td>
+		</tr>
+	</table>
+</form>
+<table><tr><td>
+	<div wicket:id="informLabel"></div>
+	</td></tr>
+</table>
+<!-- Plus/Minus inside the expand dotted table: -->
+<!-- <div wicket:id="nodeDetailsWrapper">  -->
+
+<div style="border: 2px solid orange;">
+	<table>
+  		<tr>	
+			<td>
+	 			<input type="image" wicket:id="showHistoryImg" src="/SRSAppWeb/images/plus.png" title="Click to show details"/>
+			</td>
+			<td wicket:id="tblHeading"><b><u>xxxxxxx Node Details</u></b></td>
+  		</tr>
+	</table>
+</div>
+<table style="border: 1px dashed orange;"><tr><td>
+    <div wicket:id="nodeDetailsWrapper" >
+      <!--  <div style="border: 1px dashed orange;"> -->
+    	<div wicket:id="hierarchyNodeDetail"></div>
+		 <div wicket:id="addressGrid"> </div>
+	  <!--  </div>	-->
+	</div>	
+</td></tr></table>
+
+</wicket:extend>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<title>SRS Application</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+	<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/dialog_box.css"	rel="stylesheet" type="text/css"></link>	
+</head>
+
+<body>
+ <div id="mainBorder">
+ <!-- Left -->
+  <div id="framecontentLeft">
+    <div style="padding-top: 10px">
+      <center><img src="/SRSAppWeb/images/bpo/Liberty_SRS_New.gif" border="0" alt=""/></center>
+    </div>
+    <div id="id1c">
+	<div class="linkMenu" id="menucontainer" >
+	  <ul>	    
+		
+	  </ul>
+	</div>
+</div> <!-- end menucontainer -->
+  </div> <!-- end framecontentLeft -->
+
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner">
+	      <table width="100%" class="TopBanner">
+			<tr>
+	          	<td width="40%" align="center"><span id="TopBannerHeader">SRS Application
+	          		<i><span></span></i></span>
+	          	</td>	        
+			</tr>
+			<tr>	         
+	          	<td align="right" valign="top">	          		
+	          	</td>
+	        </tr>
+	      </table>
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+
+ <!-- Content -->
+ <div id="maincontent">
+ 
+	
+ <table width="90%" align="center">		
+ 	<tr>
+ 		<td>
+ 			<div class="errorMessage" style="width:95%;margin-left:1px;margin-right:1px">
+ 			<table>
+				<tr><td><img src="/SRSAppWeb/images/Warning_icon.png" /></td>
+				<td style="padding-left:10px">
+
+		 				<div style="align-content: left">
+							<B>Multiple concurrent user sessions were detected for user <i><span wicket:id="userId">{userId}.</span></i> </B>
+							<br/><br/><span wicket:id="timestamp">{timestamp}</span> - The current session has been invalidated as a more recent session for the same user
+				   is still active.
+						</div>
+				</td></tr>
+			</table>
+			</div>
+ 		</td>
+ 	</tr>
+ 			
+	<tr>
+		<td>					
+		   <br/>
+		   
+		   <p><img src="/SRSAppWeb/images/question.png" /> <b>Why did this happen :</b> The same user is using SRS from multiple machines or multiple
+		   browser sessions at the same time.
+		   </p>  
+		   
+		   <p><img src="/SRSAppWeb/images/question.png" /> <b>What should I do :</b>  Close the browser and login again.</p>
+				   
+			<p><img src="/SRSAppWeb/images/question.png" /> <b>What should I do if this keeps happening :</b>  Change your password and ensure you don't share
+		   your credentials.</p>
+		</td>
+				
+	</tr>
+</table>
+	</div>	
+	<br/>
+  </div> 
+</body>
+</html>

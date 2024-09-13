@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Agreement Details Panel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+</head>
+<body>
+<wicket:extend>
+	<div wicket:id="roleModelWindow"></div>		
+	<br/>
+	<div wicket:id="searchPartyWindow"></div>
+	<div wicket:id="historyWindow"></div>	
+	<form wicket:id="nodeForm">	
+		<table>				
+				<tr>
+					<td align="right">Name:*</td>
+					<td width="200px">
+					<span wicket:id="businessName"></span>
+					</td>
+					<td align="right">Type:*</td>
+					<td><span wicket:id="type"></span>
+					</td>
+				</tr>
+				<tr>							
+					<td align="right"><span wicket:id="branchCodeName">Branch Code:*</span></td>
+					<td>
+					<span wicket:id="branchCode"></span>
+					</td>
+					<td align="right"><span wicket:id="channelName">Channel:*</span></td>
+					<td>
+					<span wicket:id="channel"></span>
+					</td>	
+				</tr>
+				<tr>
+					<td align="right"><span wicket:id="costCenterName">Cost Center:*</span></td>
+					<td><span wicket:id="costCenter"></span></td>	
+					<td align="right">Status:&nbsp;</td>
+					<td><span wicket:id="status"/></td>				
+				</tr>
+				<tr>
+					<td align="right">Start Date:*</td>
+					<td><span wicket:id="effectiveFrom"/></td>
+					<td align="right">Status Change Date:&nbsp;</td>
+					<td><span wicket:id="statusChangeDate"/></td>
+				</tr>
+				<tr>
+					<td align="right">End Date:&nbsp;</td>
+					<td><span wicket:id="effectiveTo"/></td>
+					<td align="right">Termination Date:&nbsp;</td>
+					<td><span wicket:id="terminationDate"/></td>
+				</tr>		
+				<tr>
+					<td align="right"><span wicket:id="externalTypeLabel">External Type:*</span></td>
+					<td><span wicket:id="externalType"/></td>
+				</tr>	
+				<tr wicket:id="rolesPopupView">
+					<td colspan="4" valign="top">Click <a wicket:id="rolesPopupButton" href="#">here</a> to View the Agreements linked to this node</td>
+				</tr>
+				<tr wicket:id="nodesPopupView">
+					<td colspan="4" valign="top">Click <a wicket:id="nodesPopupButton" href="#">here</a> to View the Direct Children Nodes linked to this node</td>
+				</tr>			
+			</table>
+	<hr/><br />
+	Parent Node:<br />
+	<div wicket:id="nodeList"></div>
+	<br />
+	<input type="button" value="Add" wicket:id="AddFutureParentButton">&nbsp;<input
+						type="button" value="Remove" wicket:id="RemoveFutureParentButton">&nbsp;
+						<input type="button" value="History" wicket:id="ParentHistoryButton">
+<hr/>
+<br />
+					LBF Nodes:<br />
+	<div wicket:id="lbfndpList"></div>
+	<br />
+	<hr/>
+					<br />
+					Employees:<br />
+					<div wicket:id="employeeList"></div>
+					<br />
+					<input type="button" value="Add" wicket:id="AddEmployeeButton">&nbsp;<input
+						type="button" value="Remove" wicket:id="RemoveEmployeeButton">&nbsp;
+						<input type="button" value="History" wicket:id="EmployeeHistoryButton">
+</form>	
+</wicket:extend>
+</body>
+</html>

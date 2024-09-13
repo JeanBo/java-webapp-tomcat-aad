@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<title>SRS Application</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+	<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+	<link href="/SRSAppWeb/css/dialog_box.css"	rel="stylesheet" type="text/css"></link>	
+	
+	<script type="text/javascript" src="/SRSAppWeb/js/BusyIndicator.js"></script>
+	<script type="text/javascript" src="/SRSAppWeb/js/dialog_box.js"></script>
+<script type="text/javascript">	
+  	function hideOverlay(){  		
+  		overlay(false);
+  	}  	
+    function overlay(display){      	
+
+		var thediv=document.getElementById('overlay');
+		if(display){
+			if (typeof Wicket != 'undefined') {
+  				Wicket.Event.subscribe('/ajax/call/done', function(jqEvent, attributes, jqXHR, errorThrown, textStatus) {
+		 			hideOverlay();
+	  			});
+  			}
+			thediv.style.display = "";		
+		} else if (display == "test") {
+			thediv.style.display = "";		
+		}else{
+			thediv.style.display = "none";		
+		}
+		return false;
+	}
+ </script>
+</head>
+
+<body>
+<div id="overlay" style="display: none;"><table width='100%' height='100%'><tr><td align='center' valign='middle' width='100%' height='100%'>Please be patient, we are busy loading your request<br/><img src="/SRSAppWeb/images/loading2.gif"/></td></tr></table></div>
+ <div id="mainBorder">
+ <!-- Left -->
+  <div id="framecontentLeft">
+    <div style="padding-top: 0px">
+      <center><img src="/SRSAppWeb/images/bpo/Liberty_SRS_New.gif" border="0" alt=""/></center>
+    </div>
+    <div wicket:id="menucontainer">
+      <div class="linkMenu">
+	    <ul>
+	      <hr id="linkMenuLine"/>
+		  <li><a href="#agreement">Agreements</a></li>
+		  <hr id="linkMenuLine"/>
+  		  <li><a href="#party" >Party</a></li>
+  		  <hr id="linkMenuLine"/>
+		  <li><a href="#transaction">Transactions</a></li>
+		  <hr id="linkMenuLine"/>
+	    </ul>
+      </div> <!-- end linkMenu -->
+	</div> <!-- end menucontainer -->
+  </div> <!-- end framecontentLeft -->
+
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner">
+	      <table width="100%" class="TopBanner">
+			<tr>
+				<td width="30%" align="left">
+					<label wicket:id="userIdLabel">User:</label>
+					<span wicket:id="userId">JZB0608</span>
+				</td>
+	          	<td width="40%" align="center"><span id="TopBannerHeader">SRS Application
+	          		<i><span wicket:id="systemMode"></span></i></span>
+	          		</td>
+	          	<td width="30%" align="right">
+	          		<label wicket:id="applicationVersionLabel">Version:</label>
+					<span wicket:id="applicationVersion" class="TopBanner_Info">4.0.0</span>
+	          	</td>
+			</tr>
+			<tr>
+	          	<td align="left" valign="top">
+	          		<label wicket:id="serverNameLabel">Server:</label>
+					<span wicket:id="serverName">jzb0608</span>
+				</td>
+	          	<td align="center" valign="top"><span id="TopBannerHeader" wicket:id="pageName">Base page</span></td>
+	          	<td align="right" valign="top">
+	          		<div id="bysy_indicator" style="width:80px">
+   	    				Busy ... &nbsp;<img src="/SRSAppWeb/images/busy_indicator.gif"/>&nbsp;
+   	  				</div>
+	          	</td>
+	        </tr>
+	      </table>
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+
+ <!-- Content -->
+ <div id="maincontent">
+
+	<div id="dialogDiv">
+	</div>
+	
+	<div wicket:id="contextPanel">
+		<div style="height: 20px; border-bottom: 3px solid #1F2241;margin-bottom: 20px;">
+		</div>
+	</div> 
+	<span wicket:id="messages" class="feedbackPanel">
+    </span>
+
+   	<wicket:child>
+
+      <B>Please select the required Contract Number and click Next.</B><BR/><BR/>
+      <TABLE>
+		<TR>
+          <TD width="20%"><b>Name:</b>
+          
+          </TD>
+          <TD width="80%"><b>Piet Pompies</b>
+          	<a href="javascript:showDialog('Warning','You must enter all required information.','warning');">
+ 				Warning</a>
+ 		</TD>
+        </TR>
+	<TR>
+      <TD width="20%"><b>Date of Birth:</b></TD>
+      <TD width="80%"><b>10/10/1976</b></TD>
+    </TR>
+</TABLE>
+<HR/><BR/>
+<!--Display Summary for each Contract-->
+<TABLE>
+	<TR id='dispHead'> 
+		<TD id='brd' width="5%" align="center">&nbsp;</TD>
+		<TD id='brd' width="24%" align="center"><B>Contract Number</B></TD>
+		<TD id='brd' width="25%" align="center"><B>Principal Benefit</B></TD>
+		<TD id='brd' width="21%" align="center"><B>Status</B></TD>
+		<TD id='brd' width="25%" align="center"><B>Paid to Date</B></TD>
+	</TR>
+		<TR>
+			<TD id='brd' width="5%" align="center">
+			  <INPUT type="hidden" name="SelectPols" value=false/>
+			  <INPUT Type="checkbox" name="SelContract" value="2"/>
+			</TD>
+			<TD id='brd' width="24%" align="center">56793351221&nbsp;</TD>
+				<TD id='brd' width="25%" align="center">LIP LEVEL&nbsp;</TD>
+			<TD id='brd' width="21%" align="center">IN FORCE&nbsp;</TD>
+			<TD id='brd' width="25%" align="center">01/04/2008&nbsp;</TD>
+		</TR>
+		<TR>
+		  <TD id='brd' width="5%" align="center">
+		    <INPUT type="hidden" name="SelectPols" value=false/>
+		    <INPUT Type="checkbox" name="SelContract" value="3"/></TD>
+			<TD id='brd' width="24%" align="center">0011752311&nbsp;</TD>
+			<TD id='brd' width="25%" align="center">EXCEL INV MC&nbsp;</TD>
+			<TD id='brd' width="21%" align="center">SURRENDER&nbsp;</TD>
+			<TD id='brd' width="25%" align="center">01/11/2001&nbsp;</TD>
+		</TR>
+      </TABLE>
+      
+      <BR/><HR/>
+      <TABLE>
+	    <TR>
+		  <TD align="right"> 
+		    <input class="submit" type="submit" name="cmdNext" value="Next "/>
+		  </TD>
+	    </TR>
+      </TABLE>
+      
+	</wicket:child>
+	<br/>
+  </div> <!-- end mainContent -->
+  </div>
+</body>
+</html>

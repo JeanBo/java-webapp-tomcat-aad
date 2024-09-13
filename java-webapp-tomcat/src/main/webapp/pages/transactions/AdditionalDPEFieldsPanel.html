@@ -1,0 +1,110 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+	</head>
+	<body>
+		<wicket:panel>
+		<wicket:extend>
+			<table>
+				<!-- <tr>
+					<td colspan = "2" align="center"><button wicket:id="additionalFieldsButton">Show</button><strong>&nbsp; Additional DPE Fields</strong></td>
+				</tr> -->
+				<tr>
+					<td>Commission Frequency</td>
+					<td>
+						<select wicket:id="commissionFrequency"></select>
+					</td>
+				</tr>
+				<tr>
+					<td>Growth Pension</td>
+					<td>
+						<input wicket:id="growthPension" type="checkbox"/>
+					</td>
+				</tr>
+				<tr>
+					<td>Commission Balance</td>
+					<td>
+						<input wicket:id="commissionBalance" type="checkbox"/>
+					</td>
+				</tr>
+				<tr>
+					<td>Movement Effective Date</td>
+					<td>
+						<input wicket:id="movementEffectiveDate" type="text" value="09/12/2009" style="width:75px" maxlength="10" />
+			  		  						
+					</td>
+				</tr>
+				<tr>
+					<td>Benefit Type</td>
+					<td>
+						<select wicket:id="benefitType" style="width: 170px"></select>
+					</td>
+				</tr>
+				<tr>
+					<td>Commission Term</td>
+					<td>
+						<input wicket:id="commissionTerm"/>
+					</td>
+				</tr>
+				<tr>
+					<td>Max Commission Term</td>
+					<td>
+						<input wicket:id="maxCommissionTerm"/>
+					</td>
+				</tr>
+				<tr>
+					<td>Upfront Commission %</td>
+					<td>
+						<select wicket:id="upfrontCommission"></select>
+					</td>
+				</tr>
+				<tr>
+					<td>GL Company Code</td>
+					<td>
+						<select wicket:id="glCompanyCode"></select>
+					</td>
+				</tr>
+				<tr>
+					<td>Business Unit</td>
+					<td>
+						<select wicket:id="businessUnit"></select>
+					</td>
+				</tr>
+				<tr>
+					<td>Policy In-force</td>
+					<td>
+						<input wicket:id="policyInForce" type="checkbox"/>
+					</td>
+				</tr>
+				<tr>
+					<td>Number of Months</td>
+					<td>
+						<select wicket:id="numberOfMonths"></select>
+					</td>
+				</tr>
+				<tr>
+					<td>Source System Reference</td>
+					<td>
+						<input wicket:id="sourceSystemReference" style="width: 170px"/>
+					</td>
+				</tr>
+				<tr>
+					<td>Benefit Group</td>
+					<td>
+						<select wicket:id="benefitGroup" style="width: 170px"></select>
+					</td>
+				</tr>
+			</table>
+		
+			</wicket:extend>
+		</wicket:panel>
+	</body>
+</html>

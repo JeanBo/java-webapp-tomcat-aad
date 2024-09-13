@@ -1,0 +1,110 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+
+ <!-- Left -->
+  <div id="framecontentLeft">
+    <div style="padding-top: 10px">
+      <center><img src="/SRSAppWeb/images/bpo/Liberty_smwhite.gif" border="0" alt=""/></center>
+    </div>
+    <div wicket:id="menucontainer">
+      <div class="linkMenu">
+	    <ul>
+	      <hr id="linkMenuLine"/>
+		  <li><a href="#agreement">Agreements</a></li>
+		  <hr id="linkMenuLine"/>
+  		  <li><a href="#party" >Party</a></li>
+  		  <hr id="linkMenuLine"/>
+		  <li><a href="#transaction">Transactions</a></li>
+		  <hr id="linkMenuLine"/>
+	    </ul>
+      </div> <!-- end linkMenu -->
+	</div> <!-- end menucontainer -->
+  </div> <!-- end framecontentLeft -->
+
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner">
+        <p>
+          <span id="TopBannerHeader">SRS Application</span>
+          <br/>Base page
+        </p>
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+
+ <!-- Content -->
+ <div id="maincontent">
+<wicket:panel>
+
+<form wicket:id="testForm" >
+	
+	<table class="foorm">
+	
+	<th colspan="4" >Test Controls</th> 
+	<tr>
+		
+		<td colspan="1" class="labelcell" width="50"><label for="text1">Text field:</label></td> 
+   		<td colspan="2" class="smallfieldcell" width="400">  
+    	   <input wicket:id="text1" type="text"  tabindex="1" />
+   		</td> 
+   		<td class="labelcell" width="100">Plain text field (required)</td>
+	</tr>
+	<tr>
+		<td colspan="1" class="labelcell"><label for="number1">Number field:</label></td> 
+   		<td colspan="2" class="smallfieldcell" >  
+    	   <input wicket:id="number1" type="text"  tabindex="2" />
+   		</td> 
+   		<td class="labelcell">Numbers only (1 to 100)</td>
+	</tr>
+	<tr>
+		<td colspan="1" class="labelcell"><label for="numberList">Number List:</label></td> 
+   		<td colspan="2" class="smallfieldcell" >  
+   			<select wicket:id="numberList">
+   				<option>1</option>
+   			</select>
+   		</td> 
+   		<td class="labelcell">Pick one from the list</td>
+	</tr>
+	<tr>
+		<td colspan="1" class="labelcell"><label for="radioList">Number Choice:</label></td> 
+   		<td colspan="3" class="labelcell">  
+   		
+   			<span wicket:id="radioList">
+	   			<input type="radio">Test One</input>
+       			<input type="radio">Test Two</input>
+   			</span>
+   		</td> 
+	</tr>
+	<tr>  
+   		<td colspan="4"  class="button" >  
+    	   <input  type="submit" tabindex="1" value="Submit" /> 
+   		</td> 
+	</tr>
+	<tr>
+		<td colspan="4" align="right">
+		  <div class="buttonwrapper">
+            <a class="squarebutton" href="something">
+              <span>New submit</span>
+            </a>
+          </div>
+		</td>
+	</tr>
+  </table>
+</form>
+
+</wicket:panel>
+	<br/>
+  </div> <!-- mainContent -->
+  
+</body>
+</html>

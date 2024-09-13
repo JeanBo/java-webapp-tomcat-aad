@@ -1,0 +1,797 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script id='dynaScript' type='text/javascript'></script>
+<script type='text/javascript'>
+// Warning: Making any modification to this file is a breach to the license agreement and will get yourself into a lawsuit eventually.
+//== FlatCalendarXP 9.2.224 Lite Edition,  Copyright 2003-2005 Idemfactor Solutions, Inc.
+// Lite Edition is only allowed in use with non-commercial and not-for-profit websites. Monetary penalties will be incurred by misuse.
+// Please purchase the commercial edition if you plan to use it within a commercial website, any commercial firm's intranet and/or any products.
+var gd=new Date(), gToday=[gd.getFullYear(),gd.getMonth()+1,gd.getDate()];
+var ua=navigator.userAgent.toLowerCase();
+var KO=ua.match(/konqueror\/(\d+)/),KO3=KO&&KO[1]==3, SA=ua.match(/safari\/(\d+)/),SA1=SA&&SA[1]<86; KO=!!KO; SA=!!SA;
+var MAC=/mac/.test(ua),OP=!!self.opera,WEBTV=/webtv/.test(ua),IE=/msie/.test(ua)&&!OP&&!WEBTV&&!SA&&!KO,GK=/gecko/.test(ua);
+var NN4=IE4=NS6=false,IE5=IE&&![].push&&!IE4;
+var gfSelf=fGetById(parent.document,self.name);
+var gTheme=self.name.split(":");
+var gCurMonth=eval(gTheme[0]); gCurMonth=fCalibrate(gCurMonth[0],gCurMonth[1]);
+var gContainer=parent,gDays=[31,31,28,31,30,31,30,31,31,30,31,30,31];
+var fOnResize,fRepaint,fHoliday,fOnChange,fAfterSelected,fOnDrag,gcOtherDayBG,fOnWeekClick,fIsSelected,fParseInput,fFormatInput,fOnDoWClick,fOnload;
+var __agenda=[], popkey=["Lite"], flatkey=["Lite"], __stub=[];
+var MILLIDAY=86400000, giInitDelay=200, _lineThru=true, _noBound=false;
+if (![].push) Array.prototype.push=function () {
+	for (var i=0; i<arguments.length; i++)
+		this[this.length]=arguments[i];
+	return this.length;
+}
+
+function varDate() {
+	alert("Missing or invalid licence for FlatCalendarXP!\nPlease make sure the licence file is in the right place.");
+}
+
+function fCalibrate(y,m) {
+	if (m<1) { y--; m+=12; }
+	else if (m>12) { y++; m-=12; }
+	return [y,m];
+}
+
+function fGetById(doc, id) {
+	return doc.getElementById(id);
+}
+
+function fLoadScript(url) {
+	if (!(IE4||IE&&MAC)) fGetById(document, "dynaScript").src=url;
+}
+
+function fFilterNull(str) {
+	return str==null||str=="null"?null:str;
+}
+
+function fAddEvent(y,m,d,message,action,bgcolor,fgcolor,bgimg,boxit,html,etc) {
+	var ag=gbShareAgenda?eval(gsAgShared):__agenda;
+	ag[y+"-"+m+"-"+d]=[message,fFilterNull(action),fFilterNull(bgcolor),fFilterNull(fgcolor),fFilterNull(bgimg),fFilterNull(boxit)?boxit+""=="true":null,fFilterNull(html),etc];
+}
+
+function fGetEvent(y,m,d) {
+	var ag=gbShareAgenda?eval(gsAgShared):__agenda, id=y+"-"+m+"-"+d;
+	return ag[id]?ag[id].slice(0):null;
+}
+
+function fRemoveEvent(y,m,d) {
+	var ag=gbShareAgenda?eval(gsAgShared):__agenda;
+	ag[y+"-"+m+"-"+d]=null;
+}
+
+function fWeekOffset(dow) {
+	return dow<=3?1:0;
+}
+
+function fGetDays(y) {
+	gDays[2]=y%4==0&&y%100!=0||y%400==0?29:28;
+	return gDays;
+}
+//Normal.js
+///////// JS theme file for FlatCalendarXP 9.0 /////////
+// This file is totally configurable. You may remove all the comments in this file to minimize the download size.
+// Since the plugins are loaded after theme config, sometimes we would redefine(override) some theme options there for convenience.
+////////////////////////////////////////////////////////
+
+var gMonths=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var gWeekDay=["Su","Mo","Tu","We","Th","Fr","Sa"];	// weekday caption from Sunday to Saturday
+
+var gBegin=[1980,1,1];	// calendar date range begin from [Year,Month,Date]. Using gToday here will make it start from today.
+var gEnd=[2030,12,31];	// calendar date range end at [Year,Month,Date]
+var gsOutOfRange="Sorry, you may not go beyond the designated range!";	// out-of-date-range error message. If set to "", no alerts will popup on such error.
+var guOutOfRange=null;	// the background image url for the out-range dates. e.g. "outrange.gif"
+
+var giFirstDOW=0;	// indicates the first day of week. 0:Sunday; 1-6:Monday-Saturday.
+
+var gcCalBG="#6699cc";	// the background color of the outer calendar panel.
+var guCalBG=null;	//  the background image url for the inner table.
+var gcCalFrame="#778899";	// the background color of the inner table, showing as a frame.
+var gsInnerTable="border=0 cellpadding=2 cellspacing=1";	// HTML tag properties of the inner <table> tag, which holds all the calendar cells.
+var gsOuterTable=NN4?"border=1 cellpadding=3 cellspacing=0":"border=0 cellpadding=1 cellspacing=2";	// HTML tag properties of the outmost container <table> tag, which holds the top, middle and bottom sections.
+
+var gbHideTop=false;	// true: hide the top section; false: show it according to the following settings
+//KKK
+var giDCStyle=0;
+//var giDCStyle=0;	// the style of month-controls in top section.	0: use predefined html dropdowns & gsNavPrev/Next; 1: use gsCalTitle & gsNavPrev/Next; 2: use only gsCalTitle;
+//KKK
+var gsCalTitle="gMonths[gCurMonth[1]-1]";
+//var gsCalTitle="gMonths[gCurMonth[1]-1]+' '+gCurMonth[0]";	// dynamic statement to be eval()'ed as the title when giDCStyle>0.
+var gbDCSeq=true;	// (effective only when giDCStyle is 0) true: show month box before year box; false: vice-versa;
+var gsYearInBox="i";	// dynamic statement to be eval()'ed as the text shown in the year box. e.g. "'A.D.'+i" will show "A.D.2001"
+var gsNavPrev="<INPUT id='navPrev' type='button' value='&lt;' class='MonthNav' onmousedown='showPrevMon()' onmouseup='stopShowMon()' onmouseout='stopShowMon();if(this.blur)this.blur()'>";	// the content of the left month navigator
+var gsNavNext="<INPUT id='navNext' type='button' value='&gt;' class='MonthNav' onmousedown='showNextMon()' onmouseup='stopShowMon()' onmouseout='stopShowMon();if(this.blur)this.blur()'>";	// the content of the right month navigator
+
+//KKK
+var gbHideBottom=true;
+//var gbHideBottom=false;	// true: hide the bottom section; false: show it with gsBottom.
+var gsBottom="<A href='javascript:void(0)' class='BottomAnchor' onclick='if(this.blur)this.blur();if(!fSetDate(gToday[0],gToday[1],gToday[2]))alert(\"You cannot select today!\");return false;' onmouseover='return true;' >Today : "+gMonths[gToday[1]-1]+" "+gToday[2]+", "+gToday[0]+"</A>";	// the content of the bottom section.
+
+var giCellWidth=18;	// calendar cell width; if set to -1, it'll be auto-adjusted so as to ensure the width of the entire calendar fits in with the calendar's direct parent tag. NN4 doesn't support -1.
+var giCellHeight=14;	// calendar cell height;
+var giHeadHeight=14;	// calendar head row height;
+var giWeekWidth=14;	// calendar week-number-column width;
+var giHeadTop=1;	// calendar head row top offset;
+var giWeekTop=0;	// calendar week-number-column top offset;
+
+var gcCellBG="#e5e5e5";	// default background color of the cells. Use "" for transparent!!!
+var gsCellHTML="";	// default HTML contents for days without any agenda, usually an image tag.
+var guCellBGImg="";	// url of default background image for each calendar cell.
+var gsAction=" ";	// default action to be eval()'ed on everyday except the days with agendas, which have their own actions defined in agendas.
+var gsDays="dayNo";	// the dynamic statement to be eval()'ed into each day cell.
+
+var giWeekCol=-1;	// -1: disable week-number-column;  0~7: show week numbers at the designated column.
+var gsWeekHead="#";	// the text shown in the table head of week-number-column.
+var gsWeeks="weekNo";	// the dynamic statement to be eval()'ed into the week-number-column. e.g. "'week '+weekNo" will show "week 1", "week 2" ...
+
+var gcWorkday="black";	// Workday font color
+var gcSat="black";	// Saturday font color
+var gcSatBG="#99ccff";	// Saturday background color
+var gcSun="black";	// Sunday font color
+var gcSunBG="#99ccff";	// Sunday background color
+
+var gcOtherDay="silver";	// the font color of days in other months; It's of no use when giShowOther is set to hide.
+var gcOtherDayBG=gcCellBG;	// the background color of days in other months. when giShowOther set to hiding, it'll substitute the gcOtherDay.
+//KKK
+var giShowOther=2+4+8;
+//var giShowOther=2;	// control the look of days in OTHER months. 1: show date & agendas effects; 2: show selected & today effects; 4: hide days in previous month; 8: hide days in next month; 16: when set with 4 and/or 8, the days will be visible but not selectable.  NOTE: values can be added up to create mixed effects.
+
+var gbFocus=true;	// whether to enable the gcToggle highlight whenever mouse pointer focuses over a calendar cell.
+var gcToggle="yellow";	// the highlight color for the focused cell
+
+var gcFGToday="red";	// the font color for today 
+var gcBGToday="white";	// the background color for today 
+var guTodayBGImg="";	// url of image as today's background
+var giMarkToday=1+2; // Effects for today - 0: nothing; 1: set background color with gcBGToday; 2: draw a box with gcBGToday; 4: bold the font; 8: set font color with gcFGToday; 16: set background image with guTodayBGImg; - they can be added up to create mixed effects.
+var gsTodayTip="Today";	// tooltip for today
+
+var gcFGSelected="white";	// the font color for the selected date
+var gcBGSelected="#DB5141";	// the background color for the selected date
+var guSelectedBGImg="";	// url of image as background of the selected date
+var giMarkSelected=2;	// Effects for selected date - 0: nothing; 1: set background color with gcBGSelected; 2: draw a box with gcBGSelected; 4: bold the font; 8: set font color with gcFGSelected; 16: set background image with guSelectedBGImg; - they can be added up to create mixed effects.
+var gsSelectedTip="";	// tooltip for selected dates
+
+var gbBoldAgenda=true;	// whether to boldface the dates with agendas.
+var gbInvertBold=false;	// true: invert the boldface effect set by gbBoldAgenda; false: no inverts.
+//
+var gbShrink2fit=false;
+//var gbShrink2fit=true;	// whether to hide the week line if none of its day belongs to the current month.
+var gdSelect=[0,0,0];	// default selected date in format of [year, month, day]; [0,0,0] means no default date selected.
+var giFreeDiv=0;	// The number of absolutely positioned layers you want to customize, they will be named as "freeDiv0", "freeDiv1"...
+var gAgendaMask=[-1,-1,-1,null,null,-1,null];	// [message, action, bgcolor, fgcolor, bgimg, boxit, html] - Set the relevant bit to -1 to keep the original agenda/event value of that bit intact. Any other value will be used to override the original one defined in agenda.js. Check the tutorial for details.
+
+var giResizeDelay=KO3?150:50;	// delay in milliseconds before resizing the calendar panel. Calendar may have incorrect initial size if this value is too small.
+var gbFlatBorder=false;	// flat the .CalCell css border of any agenda date by setting it to solid style. NOTE: it should always be set to false if .CalCell has no explicit border size.
+var gbInvertBorder=false;	// true: invert the effect caused by gbFlatBorder; false: no change.
+var gbShareAgenda=true;	// if set to true, a global agenda store will be created and used to share across calendars. Check tutorials for details.
+var gsAgShared="gContainer._cxp_agenda";	// shared agenda store name used when gbShareAgenda is true.
+var gbCacheAgenda=false;	// false: will prevent the agenda url from being cached; true: cached as normal js file.
+var giShowInterval=250;	// interval time in milliseconds that controls the auto-traverse speed.
+//End Normal.js
+//Plugins.js
+/////////////////// Plug-in file for CalendarXP 9.0 /////////////////
+// This file is totally configurable. You may remove all the comments in this file to minimize the download size.
+/////////////////////////////////////////////////////////////////////
+
+///////////// Calendar Onchange Handler ////////////////////////////
+// It's triggered whenever the calendar gets changed to y(ear),m(onth),d(ay)
+// d = 0 means the calendar is about to switch to the month of (y,m); 
+// d > 0 means a specific date [y,m,d] is about to be selected.
+// e is a reference to the triggering event object
+// Return a true value will cancel the change action.
+// NOTE: DO NOT define this handler unless you really need to use it.
+////////////////////////////////////////////////////////////////////
+// function fOnChange(y,m,d,e) {}
+
+
+///////////// Calendar AfterSelected Handler ///////////////////////
+// It's triggered whenever a date gets fully selected.
+// The selected date is passed in as y(ear),m(onth),d(ay)
+// e is a reference to the triggering event object
+// NOTE: DO NOT define this handler unless you really need to use it.
+////////////////////////////////////////////////////////////////////
+// function fAfterSelected(y,m,d,e) {}
+
+
+///////////// Calendar Cell OnDrag Handler ///////////////////////
+// It triggered when you try to drag a calendar cell. (y,m,d) is the cell date. 
+// aStat = 0 means a mousedown is detected (dragstart)
+// aStat = 1 means a mouseover between dragstart and dragend is detected (dragover)
+// aStat = 2 means a mouseup is detected (dragend)
+// e is a reference to the triggering event object
+// Return true (when aStat=0) to skip the set-date process, as well as any related event handlers (e.g. fAfterSelect).
+// NOTE: DO NOT define this handler unless you really need to use it.
+////////////////////////////////////////////////////////////////////
+function fOnDrag(y,m,d,aStat,e) {
+	if (aStat==0) {
+		var bRangeClick=e?fCheckKeyPressed(1+2+4,e):false;	// use ctrl, shift or alt to select range end
+		if (fIsSelected(y,m,d))
+			fRemoveRange(y,m,d,bRangeClick||(e?e.button==2||e.which==3:false));
+		else
+			fAddRange(y,m,d,bRangeClick);
+		fRepaint();
+	} else if (aStat==1)
+		if (!fIsSelected(y,m,d)) {
+			fAddRange(y,m,d,true);
+			fRepaint();
+		}
+	return true; // cancel setDate action, 'cause we use multi-select now.
+}
+
+
+////////////////// Calendar OnResize Handler ///////////////////////
+// It's triggered after the calendar panel has finished drawing.
+// NOTE: DO NOT define this handler unless you really need to use it.
+////////////////////////////////////////////////////////////////////
+// function fOnResize() {}
+
+
+////////////////// Calendar fOnWeekClick Handler ///////////////////////
+// It's triggered when the week number is clicked.
+// NOTE: DO NOT define this handler unless you really need to use it.
+////////////////////////////////////////////////////////////////////
+// function fOnWeekClick(year, weekNo) {}
+
+////////////////// Calendar fOnDoWClick Handler ///////////////////////
+// It's triggered when the week head (day of week) is clicked.
+// dow ranged from 0-6 while 0 denotes Sunday, 6 denotes Saturday.
+// NOTE: DO NOT define this handler unless you really need to use it.
+////////////////////////////////////////////////////////////////////
+function fOnDoWClick(year, month, dow) {
+	var eom=fGetDays(year)[month];
+	var d=fGetDateByDOW(year,month,1,dow);
+	while (d<=eom) {
+		if (_dowClicked[dow]==true) {
+			fRemoveRange(year,month,d,false);
+		} else {
+			fAddRange(year,month,d,false);
+		}
+		d+=7;
+	}
+	_dowClicked[dow]=_dowClicked[dow]?false:true;
+	fRepaint();
+}
+var _dowClicked=[];
+
+////////////////// Calendar fIsSelected Callback ///////////////////////
+// It's triggered for every date passed in as y(ear) m(onth) d(ay). And if 
+// the return value is true, that date will be rendered using the giMarkSelected,
+// gcFGSelected, gcBGSelected and guSelectedBGImg theme options.
+// NOTE: If NOT defined here, the engine will create one that checks the gdSelect only.
+////////////////////////////////////////////////////////////////////
+function fIsSelected(y,m,d) {
+	if (_pds.length==0) return false;
+	var dt=Date.UTC(y,m-1,d);
+	for (var i=0; i<_pds.length; i++)
+		if (_pds[i][0]<=dt&&dt<=_pds[i][1])
+			return true;
+	return false;
+}
+
+////////////////// Calendar fOnload Handler ///////////////////////
+// It's triggered when the calendar engine is fully loaded by the browser.
+// NOTE: DO NOT define this handler unless you really need to use it.
+////////////////////////////////////////////////////////////////////
+// function fOnload() {}
+
+
+// ====== predefined utility functions for use with agendas. ========
+// load an url in the window/frame designated by "framename".
+function popup(url,framename) {	
+	var w=parent.open(url,framename,"top=200,left=200,width=400,height=200,scrollbars=1,resizable=1");
+	if (w&&url.split(":")[0]=="mailto") w.close();
+	else if (w&&!framename) w.focus();
+}
+
+// ====== Following are self-defined and/or custom-built functions! =======
+
+// ======= the following plugin is coded for the multi-select plugin ========
+// If you define a fAddListItem(strDate) and a fRemoveListItem(strDate) in the 
+// container page, they will be called whenever dates are adding or removing from
+// the range. You may make use of them to populate the listbox on your page.
+// The format of param strDate can be modified in fDateString() function
+// ------------------------------------------------------------------------
+//KKK
+//giMarkSelected=1+2+4;	// change the effects of selection
+//KKK
+//gcBGSelected="#fffacd";	// set the background color of selection
+//KKK
+//giShowOther=1+2;	// allow agendas to show up in other months.
+
+var _pds=[];	// selected date periods. It's an array of 1 or more time periods in array format [startdate,enddate]. (startdate and enddate are represented in UTC milliseconds)
+var _ls=null;	// last selected date, in UTC milliseconds.
+
+function fDateString(y,m,d) {
+	return fPad0(d)+"-"+fPad0(m)+"-"+y;
+}
+
+function fPad0(n) {
+	return n<10?"0"+n:n;
+}
+
+function fCheckKeyPressed(key,e) {
+	var ALT=1, CTRL=2, SHIFT=4, pr=false;
+	if (key&&ALT) pr=NN4?e.modifiers&1:e.altKey;
+	if (!pr&&key&&CTRL) pr=NN4?e.modifiers&2:e.ctrlKey;
+	if (!pr&&key&&SHIFT) pr=NN4?e.modifiers&4:e.shiftKey;
+	return pr;
+}
+
+function fAddDate(y,m,d) {
+	var ag=fGetAgenda(y,m,d,false);
+	if (fIsSelected(y,m,d)||ag[1]==null) return;
+	if (gContainer.fAddListItem) gContainer.fAddListItem(fDateString(y,m,d));
+}
+
+function fRemoveDate(y,m,d) {
+	if (gContainer.fRemoveListItem) gContainer.fRemoveListItem(fDateString(y,m,d));
+}
+
+function fAddRange(y,m,d,bBatch) {
+	var dt=Date.UTC(y,m-1,d);
+	if (_ls==null||!bBatch) {
+		fAddDate(y,m,d);
+		_ls=dt;
+		_pds.push([dt,dt]);
+	} else {
+		var pd=[_ls,_ls];
+		_ls=dt;
+		if (dt<pd[0]) pd[0]=dt;
+		else if (pd[1]<dt) pd[1]=dt;
+		for (var i=pd[0];i<=pd[1];i+=MILLIDAY) {
+			var di=new Date(i);
+			fAddDate(di.getUTCFullYear(),di.getUTCMonth()+1,di.getUTCDate());
+		}
+		_pds.push(pd);
+	}
+	fMergePDS();
+}
+
+function fSort(a,b) {
+	return a[0]<b[0]?-1:a[0]>b[0]?1:0;
+}
+
+function fMergePDS() {
+	if (_pds.length<=1) return;
+	_pds.sort(fSort);
+	var tmpd=[_pds[0]];
+	for (var i=0,j=1; j<_pds.length; j++)
+		if (tmpd[i][1]<_pds[j][0]-MILLIDAY) {
+			i=tmpd.length;
+			tmpd[i]=_pds[j];
+		} else
+			tmpd[i][1]=Math.max(tmpd[i][1],_pds[j][1]);
+	_pds=tmpd;
+}
+
+function fRemoveRange(y,m,d,bBatch) {
+	var dt=Date.UTC(y,m-1,d);
+	for (var i=0; i<_pds.length; i++)
+		if (_pds[i][0]<=dt&&_pds[i][1]>=dt) break;
+	if (i==_pds.length) return;
+	if (bBatch||_pds[i][0]==_pds[i][1]) {
+		for (var k=_pds[i][0];k<=_pds[i][1];k+=MILLIDAY) {
+			var dk=new Date(k);
+			fRemoveDate(dk.getUTCFullYear(),dk.getUTCMonth()+1,dk.getUTCDate());
+		}
+		fSplice(_pds,i);
+	} else {
+		fRemoveDate(y,m,d);
+		if (dt<_pds[i][1]) _pds.push([dt+MILLIDAY,_pds[i][1]]);
+		if (_pds[i][0]<dt) _pds[i][1]=dt-MILLIDAY;
+		else fSplice(_pds,i);
+	}
+	_ls=null;
+}
+
+function fClearAll() {
+	for (var i=_pds.length-1; i>=0; i--) {
+		var d=new Date(_pds[i][0]);
+		fRemoveRange(d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),true);
+	}
+}
+
+function fSplice(arr,n) { // made for IE5, push() had already been implemented in the engine
+	for (var i=n; i<arr.length-1; i++) arr[i]=arr[i+1];
+	arr[i]=null;
+	arr.length--;
+}
+//End Plugin.js
+</script>
+<link href="/SRSAppWeb/css/normal.css"	rel="stylesheet" type="text/css"></link>
+</head>
+<body leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 hspace=0 vspace=0 onload="if(fOnload)fOnload();fRepaint()" onselectstart="return false" ondraggesture="return false" ondragstart="return false" oncontextmenu="return false" onmouseup="gContainer.defaultStatus='Powered by FlatCalendarXP 9.2 Lite Edition (c)2003-2005 Idemfactor Solutions, Inc.';fDragIt(0,0,0,2,event);return true;">
+<script type='text/javascript'>
+gCurMonth=fCalibrate(gCurMonth[0],gCurMonth[1]);
+gdSelect=gdSelect.slice(0); gBegin=gBegin.slice(0); gEnd=gEnd.slice(0);
+if (!_noBound){if (gCurMonth[0]>gEnd[0]||gCurMonth[0]==gEnd[0]&&gCurMonth[1]>gEnd[1]) gCurMonth=gEnd.slice(0);
+if (gCurMonth[0]<gBegin[0]||gCurMonth[0]==gBegin[0]&&gCurMonth[1]<gBegin[1]) gCurMonth=gBegin.slice(0);}
+var gdBegin,gdEnd,gcbMon,gcbYear,gcTemp;
+var giSat=(6-giFirstDOW)%7,giSun=(7-giFirstDOW)%7,gRange=[],__cal=[];
+gWeekDay=gWeekDay.slice(giFirstDOW).concat(gWeekDay.slice(0,giFirstDOW));
+for (var i=0;i<6;i++) { __cal[i]=[]; for (var j=0;j<7;j++) __cal[i][j]=[]; }
+
+if (!fIsSelected)
+	fIsSelected=function(y,m,d) {
+		return gdSelect[2]==d&&gdSelect[1]==m&&gdSelect[0]==y;
+	}
+
+if (fOnDrag&&!(IE&&MAC||OP)) {
+	var __om=IE4||IE5?gContainer.document.onmouseover:gContainer.document.onmouseup;
+	if (IE4||IE5) gContainer.document.onmouseover=fOm;
+	else gContainer.document.onmouseup=fOm;
+}
+function fOm(e){
+	if(!e)e=gContainer.event;var t=e.target?e.target:e.srcElement;
+	if(t.name!=self.name)__lastDrag=null;if(__om)__om(e)
+}
+
+var __lastDrag=null;
+function fDragIt(y,m,d,aStat,e) {
+	if (!fOnDrag||!(__lastDrag&&aStat>0||aStat==0)) return false;
+	var dt=[y,m,d];
+	if (aStat==1&&__lastDrag+''==dt+'') return false;
+	__lastDrag=aStat==2||IE&&MAC||OP?null:dt;
+	return fOnDrag(dt[0],dt[1],dt[2],aStat,e);
+}
+
+function fRepaint() {
+	fSetCal(gCurMonth[0],gCurMonth[1],0,false,null);
+}
+
+function fUpdSelect(y,m,d) {
+	gdSelect[0]=y; gdSelect[1]=m; gdSelect[2]=d;
+}
+
+
+function fGetXY(a,offset) {
+	var p=offset?offset.slice(0):[0,0],tn;
+	while(a) {
+		tn=a.tagName.toUpperCase();
+		p[0]+=a.offsetLeft-(!KO3&&tn=="DIV"&&a.scrollLeft?a.scrollLeft:0);
+		p[1]+=a.offsetTop-(!KO3&&tn=="DIV"&&a.scrollTop?a.scrollTop:0);
+		if (tn=="BODY") break;
+		a=a.offsetParent;
+	}
+	return p;
+}
+
+function fInitRange(r) {
+	gRange=r?r:[];
+	var rb=gRange[0]?r[0]:gBegin;
+	gdBegin=new Date(rb[0],rb[1]-1,rb[2]);
+	gRange[0]=rb;
+	var re=gRange[1]?r[1]:gEnd;
+	gdEnd=new Date(re[0],re[1]-1,re[2]);
+	gRange[1]=re;
+
+	if (gcbYear) {
+	 	for(var i=0;i+rb[0]<=re[0];i++) gcbYear.options[i]=new Option(i+rb[0],i+rb[0]);
+ 		for(var j=gcbYear.options.length-1;j>=i;j--) gcbYear.options[j]=null;
+	}
+}
+
+function fGetAgenda(y,m,d,taint) {
+	var s=fCalibrate(y,m),cm=gCurMonth;
+	var def=["",gsAction,gcCellBG,null,guCellBGImg,false,gsCellHTML];
+	if (taint) if ((giShowOther&4)&&(s[0]<cm[0]||s[0]==cm[0]&&s[1]<cm[1])||(giShowOther&8)&&(s[0]>cm[0]||s[0]==cm[0]&&s[1]>cm[1]))
+		return null;
+	var ag=fHoliday?fHoliday(s[0],s[1],d):fGetEvent(y,m,d);
+	if (ag==null) ag=def;
+	else {
+		for (var i=0;i<7;i++) {
+			if (gAgendaMask[i]!=-1) ag[i]=gAgendaMask[i];
+			if (ag[i]==null&&i!=1) ag[i]=def[i];
+		}
+		if (taint&&s[1]!=cm[1]&&!(giShowOther&1)) {
+			def[0]=ag[0]; def[1]=ag[1]; ag=null; ag=def;
+		}
+	}
+	if (taint&&s[1]!=cm[1]) {
+		if (gcOtherDayBG&&ag[2]==gcCellBG) ag[2]=gcOtherDayBG;
+		ag[3]=gcOtherDay;
+	}
+	if (!fValidRange(s[0],s[1],d)) {
+		ag[0]=gsOutOfRange; ag[1]=null;
+		if (guOutOfRange) ag[4]=guOutOfRange;
+	}
+	return ag;
+}
+
+function fGetDOW(y,m,d) {
+	return (7+(new Date(y,m-1,d).getDay())-giFirstDOW)%7;
+}
+
+function fGetWeekNo(y,m,d) {
+	var dow=fGetDOW(y,1,1);
+	return Math.ceil(((Date.UTC(y,m-1,d)-Date.UTC(y,0,1))/MILLIDAY+dow-6)/7)+fWeekOffset(dow);
+}
+
+function fW2Date(y,w,wd) { // w > 0, wd > 0
+	var dow=fGetDOW(y,1,1);
+	if (dow<=3) w--;
+	var date=new Date(new Date(y,0,1)-0+(w*7+wd-dow-1)*MILLIDAY);
+	return [date.getFullYear(),date.getMonth()+1,date.getDate()];
+}
+
+function fDate2W(y,m,d) {
+	var w=fGetWeekNo(y,m,d), wd=fGetDOW(y,m,d)+1;
+	if (w==0) { y--; w=fGetWeekNo(y,12,31); }
+	else if (w>52) {
+		var w1=fGetWeekNo(y+1,1,1);
+		if (w1>0) { y++; w=w1; }
+	}
+	return [y,w,wd];
+}
+
+function fGetDateByDOW(y,m,q,dow) { // q: 1-5; dow: 0-6
+	var dom=new Date(y,m-1,1).getDay();
+	var d=7*q-6+dow-dom;
+	if (dom>dow) d+=7;
+	if (d>fGetDays(y)[m]) d-=7;
+	return d;	// 1-31
+}
+
+function fValidRange(y,m,d) {
+	for (var i=3; i<gRange.length; i++)
+		if (gRange[i][2]==d&&gRange[i][1]==m&&gRange[i][0]==y)
+			return false;
+	var dt=new Date(y,m-1,d);
+	return (dt>=gdBegin)&&(dt<=gdEnd);
+}
+
+function fBuildCal(y,m) {
+	var days=fGetDays(y),iDay1=fGetDOW(y,m,1);
+	var iLast=days[m-1]-iDay1+1,iDate=1,iNext=1;
+	for (var d=0;d<7;d++) {
+		__cal[0][d][0]=d<iDay1?m-1:m;
+		__cal[0][d][1]=d<iDay1?iLast+d:iDate++;
+	}
+	for (var w=1;w<6;w++)
+		for (var d=0;d<7;d++) {
+			__cal[w][d][0]=iDate<=days[m]?m:m+1;
+			__cal[w][d][1]=iDate<=days[m]?iDate++:iNext++;
+		}
+}
+
+function fIsOutRange(y,m) {
+	return (y>gRange[1][0]||y<gRange[0][0]||y==gRange[0][0]&&m<gRange[0][1]||y==gRange[1][0]&&m>gRange[1][1]);
+}
+function fBfRange(y,m) {
+	return y<gRange[0][0]||y==gRange[0][0]&&m<=gRange[0][1];
+}
+function fAfRange(y,m) {
+	return y>gRange[1][0]||y==gRange[1][0]&&m>=gRange[1][1];
+}
+function fToggleNavs(y,m) {
+	var n=fGetById(document,"navPrev"); if(n)n.style.visibility=fBfRange(y,m)?"hidden":"visible";
+	n=fGetById(document,"navNext"); if(n)n.style.visibility=fAfRange(y,m)?"hidden":"visible";
+}
+
+function fCheckRange(y,m) {
+	if (!_noBound&&fIsOutRange(y,m)) {
+		stopShowMon();
+		if (gsOutOfRange!="") alert(gsOutOfRange);
+		return false;
+	}
+	return true;
+}
+
+function fSetCal(y,m,d,bTriggerOnChg,e) {
+	var t=fCalibrate(parseInt(y,10),parseInt(m,10));
+	y=t[0];	m=t[1];
+	if (!fCheckRange(y,m)||bTriggerOnChg&&fOnChange&&fOnChange(y,m,d,e)) {
+		if (gcbMon) gcbMon.options[gCurMonth[1]-1].selected=true;
+		if (gcbYear) gcbYear.options[gCurMonth[0]-gcbYear.options[0].value].selected=true;
+		return false;
+	}
+	if (d>0) fUpdSelect(y,m,d);
+	var iDiv=fGetById(document,"innerDiv");
+	fGetById(document,"innerDiv").innerHTML=fDrawCal(y,m);
+	if (gcbMon) gcbMon.options[m-1].selected=true;
+	if (gcbYear) gcbYear.options[y-gcbYear.options[0].value].selected=true;
+	if (!gbHideTop&&giDCStyle>0) fGetById(document,"calTitle").innerHTML=eval(gsCalTitle)+"\n";
+	fToggleNavs(y,m);
+	gcTemp=null;
+	setTimeout("fResize()",giInitDelay+giResizeDelay);
+	return true;
+}
+
+function fResize() {
+	if (fOnResize) fOnResize();
+	giInitDelay=0;
+	var ptb=fGetById(document,"outerTable");
+	if (!ptb) return;
+	var ow=ptb.offsetWidth;
+	var oh=ptb.offsetHeight;
+	if (ow) gfSelf.style.width=ow+"px";
+	if (oh) gfSelf.style.height=oh+"px";
+}
+
+function fSetDate(y,m,d,taint,e) {
+	var ag=fGetAgenda(y,m,d,taint);
+	if (ag==null||ag[1]==null) return false;
+	if (!fSetCal(y,m,d,true,e)) return false;
+	eval(ag[1].replace(/\n/g,"\\n"));
+	if (fAfterSelected) fAfterSelected(y,m,d,e);
+	return true;
+}
+
+function fPrevMonth(e) {
+	return fSetCal(gCurMonth[0],gCurMonth[1]-1,0,true,e);
+}
+function fNextMonth(e) {
+	return fSetCal(gCurMonth[0],gCurMonth[1]+1,0,true,e);
+}
+function showPrevMon() {
+	if (!__stub[1]&&fPrevMonth()&&!fBfRange(gCurMonth[0],gCurMonth[1])) __stub[1]=setInterval("fPrevMonth()", giShowInterval);
+}
+function showNextMon() {
+	if (!__stub[1]&&fNextMonth()&&!fAfRange(gCurMonth[0],gCurMonth[1])) __stub[1]=setInterval("fNextMonth()", giShowInterval);
+}
+function stopShowMon() {
+	clearInterval(__stub[1]); __stub[1]=null;
+}
+
+function fMouseOver(t) {
+	if (!gbFocus) return;
+	gcTemp=t.style.backgroundColor;
+	t.style.backgroundColor=gcToggle;
+}
+
+function fMouseOut(t) {
+	if (!gbFocus||gcTemp==null) return;
+	t.style.backgroundColor=gcTemp?gcTemp:"transparent";
+}
+
+function fHint(t,id) {
+	t.title=__tis[id];
+	gContainer.status=__tis[id];
+}
+
+
+
+var __sWH="<td class='WeekHead'><div style='position:relative;width:"+giWeekWidth+"px;top:"+giHeadTop+"px;'>",
+__sWC="<td class='WeekCol'><div style='position:relative;width:100%;top:"+giWeekTop+"px;'>",
+__sCC=" class='CalCol'><div class='CalCell' style='position:relative;width:100%;height:"+giCellHeight+"px;",
+__sDIVTD="</div></td>",
+__tis=[];
+
+function fDrawCal(y,m) {
+	var cw=giCellWidth<0?Math.floor((gfSelf.parentNode.offsetWidth-(giWeekCol>=0?giWeekWidth:0))/7)-6:giCellWidth;
+	var td,htm,bo,ag,i,c,c1,dayNo,dc,cbg,isT,isS,weekNo,cd,ex,bfb,sCellDate,sWkCol,weekYear;
+	var ms=giMarkSelected,ht=giMarkToday;
+	var a=["<TABLE width='100%' ",gsInnerTable,"><tr>"];
+	gCurMonth[0]=y; gCurMonth[1]=m;
+	fBuildCal(y,m);
+	for (var wd=0,i=0; i<8; i++)
+		if (i==giWeekCol) a.push(__sWH,gsWeekHead,__sDIVTD);
+		else if (i!=7||giWeekCol>=0) {
+			var sDoW=fOnDoWClick?"<a class='DoWAnchor' href='javascript:void(0)' onfocus='if(this.blur)this.blur()' onclick='fOnDoWClick("
+       +y+","+m+","+(giFirstDOW+wd)%7+");return false;'>"+gWeekDay[wd]+"</a>":"<span class='DoWAnchor'>"+gWeekDay[wd]+"</span>"
+			a.push("<td class='CalHead'><div style='position:relative;width:",cw,"px;height:",giHeadHeight,"px;top:",giHeadTop,"px;'>",sDoW,__sDIVTD); wd++;
+		}
+	a.push("</tr>");
+	if (giWeekCol>=0) {
+		var w=fDate2W(y,m,1);
+		weekYear=w[0];
+		weekNo=w[1];
+	}
+	for (var week=0; week<6; week++) {
+		ex=week>3&&__cal[week][0][1]<20;
+		if (gbShrink2fit&&ex) continue;
+		a.push("<tr>");
+		for (var day=-1,i=0; i<8; i++)
+			if (i==giWeekCol) {
+				sWkCol=fOnWeekClick?"<a class='WeekAnchor' href='javascript:void(0)' onfocus='if(this.blur)this.blur()' onclick='fOnWeekClick("+weekYear+","
+       +weekNo+");return false;'>"+eval(gsWeeks)+"</a>":"<span class='WeekAnchor'>"+eval(gsWeeks)+"</span>";
+				a.push(__sWC,(giShowOther&8)&&!(giShowOther&16)&&ex?"<span class='WeekAnchor'>&nbsp;</span>":sWkCol,__sDIVTD);
+				if (m==1&&weekNo>50||m==12&&weekNo>=52&&weekNo>=fDate2W(y,12,31)[1]) {
+					weekNo=0; weekYear++;
+				}
+				weekNo++;
+			} else if (i!=7||giWeekCol>=0) {
+				day++; dayNo=__cal[week][day][1];
+				var tid=week*10+day;
+				cd=fCalibrate(y,__cal[week][day][0]);
+				isT=gToday[2]==dayNo&&gToday[1]==cd[1]&&gToday[0]==cd[0];
+				ag=fGetAgenda(cd[0],cd[1],dayNo,true);
+				if (ag==null) {
+					dc=giShowOther&16&&(week<2&&(giShowOther&4)||week>3&&(giShowOther&8))?gcOtherDay:"";
+					cbg=null; bo=false; __tis[tid]=td=htm=""; bfb=gbFlatBorder; c=c1=gcOtherDayBG;
+				} else {
+					isS=fIsSelected(cd[0],cd[1],dayNo)&&ag[1]!=null;
+					cbg=ag[4]; dc=ag[3]==null?day==giSun?gcSun:day==giSat?gcSat:gcWorkday:ag[3];
+					if (cd[1]==m||(giShowOther&2)) {
+						c=isS&&(ms&2)?gcBGSelected:isT&&(ht&2)?gcBGToday:ag[2];
+						c1=isS&&(ms&1)?gcBGSelected:ag[2]!=gcCellBG&&ag[5]!=true?ag[2]:isT&&(ht&1)?gcBGToday:gcCellBG;
+						bo=isS&&(ms&4)||isT&&(ht&4);
+						dc=isS&&(ms&8)?gcFGSelected:isT&&(ht&8)?gcFGToday:dc;
+						cbg=isS&&(ms&16)?guSelectedBGImg:isT&&(ht&16)?guTodayBGImg:cbg;
+					} else {
+						bo=false; c=ag[2]; c1=ag[5]==true?gcCellBG:c;
+					}
+					bo=gbBoldAgenda&&ag[0]&&ag[0]!=gsOutOfRange||bo;
+					bfb=gbFlatBorder&&c1!=gcCellBG;
+					htm=ag[6]?ag[6]:"";
+					td=ag[1]==null&&_lineThru?";text-decoration:line-through":"";
+					__tis[tid]=isS&&gsSelectedTip?gsSelectedTip:ag[0]?ag[0]:isT&&gsTodayTip?gsTodayTip:"";
+					if (gcSunBG&&day==giSun) { c1=c1==gcCellBG?gcSunBG:c1; c=c==gcCellBG?gcSunBG:c; }
+					if (gcSatBG&&day==giSat) { c1=c1==gcCellBG?gcSatBG:c1; c=c==gcCellBG?gcSatBG:c; }
+				}
+				if (gbInvertBold) bo=!bo;
+				if (gbInvertBorder) bfb=!bfb;
+				sCellDate=cd[0]+","+cd[1]+","+dayNo;
+				a.push("<td valign='top'");if(c)a.push(" bgcolor='",c,"'");if(bfb)a.push(" style='border-style:solid;border-color:",c1,"'");a.push(__sCC);if(c1)a.push(";background-color:",c1);
+				if(cbg)a.push(";background-image:url(",cbg,")");if(dc=="")a.push("' ><span class='CellAnchor'>&nbsp;</span>",__sDIVTD);else{
+				a.push("' onmouseover='fHint(this,",tid,");fMouseOver(this);fDragIt(",sCellDate,",1,event);return true' onmouseout='fMouseOut(this)' onmousedown='if(!fDragIt(",sCellDate,",0,event))fSetDate(",sCellDate,",true,event);return false' onmouseup='fDragIt(",sCellDate,",2,event)'><A href='javascript:void(0)' class='CellAnchor' style='color:",dc);
+				if(bo)a.push(";font-weight:bold");a.push(td,"' onmouseover='fHint(this,",tid,")' onfocus='if(this.blur)this.blur()'>",eval(gsDays),"</A>",htm,__sDIVTD);}
+				ag=null;
+			}
+		a.push("</tr>");
+	}
+	a.push("</TABLE>\n");
+	return a.join('');
+}
+
+with (document) {
+	body.bgColor=gcCalBG;
+	var a=["<TABLE id='outerTable' ",gsOuterTable,"><FORM name='cxpTopForm'>"];
+	if (!gbHideTop)
+	if (giDCStyle==2)
+		a.push("<TR><TD class='CalTop' nowrap><SPAN id='calTitle' class='CalTitle'>",eval(gsCalTitle),"</SPAN></TD></TR>");
+	else if (giDCStyle==1){
+		a.push("<TR><TD class='CalTop' nowrap><table border=0 cellspacing=0 cellpadding=0 width='100%'><tr><TD align='left' nowrap>",gsNavPrev,"</TD><TD class='CalTitle' nowrap><SPAN id='calTitle'>");
+		a.push(eval(gsCalTitle));
+		a.push("</SPAN></TD><TD align='right' nowrap>",gsNavNext,"</TD></tr></table></TD></TR>");
+	} else {
+		a.push("<TR><TD class='CalTop' nowrap>",gsNavPrev," ");
+		var mstr=["<SELECT id='MonSelect' class='CalTitle' onchange='fSetCal(gcbYear.value, gcbMon.value,0,true,event)'>"];
+		for (var i=0; i<12; i++) mstr.push("<OPTION value='",i+1,"'>",gMonths[i],"</OPTION>");
+		mstr.push("</SELECT>"); mstr=mstr.join('');
+		var ystr=["<SELECT id='YearSelect' class='CalTitle' onchange='fSetCal(gcbYear.value, gcbMon.value,0,true,event)'>"];
+		for(var i=gBegin[0];i<=gEnd[0];i++)
+			ystr.push("<OPTION value='",i,"'>",i,"</OPTION>");
+		ystr.push("</SELECT>"); ystr=ystr.join('');
+		if (gbDCSeq) a.push(mstr,ystr);
+		else a.push(ystr,mstr);
+		a.push(" ",gsNavNext,"</TD></TR>");
+	}
+	a.push("</FORM><TR><TD class='CalMiddle'><DIV id='innerDiv' style='background:",gcCalFrame,guCalBG?" url("+guCalBG+") ":"",";'></DIV></TD></TR>");
+	if (!gbHideBottom) a.push("<FORM name='cxpBottomForm'><TR><TD class='CalBottom' nowrap>",gsBottom,"</TD></TR></FORM>");
+	a.push("</TABLE>");
+	for (var i=0;i<giFreeDiv;i++)
+		a.push("<DIV class='FreeDiv' id='freeDiv",i,"' style='position:absolute;visibility:hidden;z-index:500'></DIV>");
+	write(a.join(''));
+	close();
+}
+</script>
+<a href="http://www.calendarxp.net/calendar/javascript_calendar.htm" style="display:none">(c)2003-2005 Idemfactor Solutions Inc.</a>
+<script type='text/javascript'>
+if (giDCStyle==0) {
+	gcbMon=fGetById(document,"MonSelect");
+	gcbYear=fGetById(document,"YearSelect");
+}
+function fAgReady(ctxName) {
+	var ctx=eval("gContainer."+ctxName);
+	if (ctx) {
+		clearInterval(__stub[0]);
+		fHoliday=ctx.fHoliday;
+		fRepaint();
+	}
+}
+fInitRange();
+var __isAS=gTheme[2]&&gTheme[2].substring(0,6)=="share[";
+if (gbShareAgenda==true) {
+	if (!eval(gsAgShared)) eval(gsAgShared+"=[]");
+	if (__isAS) __stub[0]=setInterval("fAgReady('"+gTheme[2].split('[')[1].split(']')[0]+"')",350);
+}
+if (gTheme[2]&&!__isAS) document.write("<scr"+"ipt type='text/javascript' src='"+gTheme[2]+(gbCacheAgenda?"":(/\?/.test(gTheme[2])?"&":"?")+gd.getTime())+"'></scr"+"ipt>");
+</script>
+<script type='text/javascript'>
+if (gTheme[1]) eval("parent."+gTheme[1]+"=parent.frames[self.name]");
+</script>
+</body>
+</html>

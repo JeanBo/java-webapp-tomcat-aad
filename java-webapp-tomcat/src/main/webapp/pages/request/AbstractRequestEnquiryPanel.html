@@ -1,0 +1,183 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS_layout-window.css" rel="stylesheet" type="text/css"></link>
+
+</head>
+<body>
+ 
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner">
+        <!-- <p align="center">
+          <span id="TopBannerHeader">SRS Application</span>
+          <br/><span wicket:id="pageName"></span>
+        </p> -->
+        
+        <table width="100%" class="TopBanner">
+			<tr>
+				<td width="30%" align="left">
+					<label wicket:id="userIdLabel">User:</label>
+					<span wicket:id="userId">JZB0608</span>
+				</td>
+	          	<td width="40%" align="center"><span id="TopBannerHeader">SRS Application</span></td>
+	          	<td width="30%" align="right">
+	          		<label wicket:id="applicationVersionLabel">Version:</label>
+					<span wicket:id="applicationVersion" class="TopBanner_Info">4.0.0</span>
+	          	</td>
+			</tr>
+			<tr>
+	          	<td align="left">
+	          		<label wicket:id="serverNameLabel">Server:</label>
+					<span wicket:id="serverName">jzb0608</span>
+				</td>
+	          	<td align="center"><span id="TopBannerHeader" wicket:id="pageName">Base page</span></td>
+	          	<td align="right">
+	          		<div id="bysy_indicator" style="width:80px">
+   	    				Busy ... &nbsp;<img src="/SRSAppWeb/images/busy_indicator.gif"/>&nbsp;
+   	  				</div>
+	          	</td>
+	        </tr>
+	      </table>
+        
+        
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+ <!-- Content -->
+ <div id="maincontent">
+	<span wicket:id="messages" class="feedbackPanel"></span>
+	
+ 	<wicket:panel>
+ 	<div style="width: 100%; float:left;" >
+ 	  <form wicket:id="searchForm" style="margin-bottom:3px; margin-top:1px; padding-top:0px;">
+ 	  
+ 	  <wicket:child>
+ 	  
+	  	<table class="filterTable">
+			<tr>
+		   		<td>
+		   			<span class="headLabel">Context Type</span><br/>
+			   		<select style="width:150px" tabindex="1">
+	 	  					<option>13 Digit Consultant Code</option>
+		 	  		</select>
+		 	  	</td>
+		 	  	<td>
+			 	  	<span class="headLabel">Category</span><br/>
+			   		<select style="width:200px" tabindex="2">
+	 	  					<option>Request Category type</option>
+		 	  		</select>
+		 	  	</td>
+		 	  	<td>
+			 	  	<span class="headLabel">Request Kind</span><br/>
+			   		<select style="width:300px" tabindex="3">
+	 	  					<option>Request Kind type</option>
+		 	  		</select>
+		 	  	</td>
+		 	  	<td>
+			 	  	<span class="headLabel">Status</span><br/>
+			   		<select style="width:200px" tabindex="4">
+	 	  					<option>Request Status type</option>
+		 	  		</select>
+		 	  	</td>
+		   </tr>
+		   	<tr >
+		   		<td>
+
+		 	  	</td>
+		 	  	<td>
+			 	  	<span class="headLabel">Period Type</span><br/>
+			   		<select tabindex="6" style="width:200px;">
+			   		<option>Requested Date</option>
+	 				<option>Request Date</option>
+		 	  		</select>
+		 	  	</td>
+		 	  	<td>
+					<span class="headLabel">Period</span><br/>
+			   		<select tabindex="6" style="width:300px;">
+			   		<option>06/12/09 - 09/01/10 - Last Production Month</option>
+	 				<option>06/12/09 - 09/01/10 - Last 2 Production Month</option>
+		 	  		</select>
+		 	  	</td>
+		 	  	<td>
+					<table>
+						<tr>
+						<td style="padding-left:0px">
+					 	  	<span class="headLabel">Start Date</span><br/>
+						   	<input type="text" value="09/12/2009" style="width:75px" maxlength="10" />
+						   	<span>
+								<img src="/SRSAppWeb/images/development/calendar_icon_1.gif" style="cursor: pointer; border: none;"/>
+							</span>
+						</td>
+						<td>
+						  	<span class="headLabel">End Date</span><br/>
+					   		<input type="text" value="09/12/2009" style="width:75px" maxlength="10"/>
+					   		<span>
+						    	<img src="/SRSAppWeb/images/development/calendar_icon_1.gif" style="cursor: pointer; border: none;" />
+						    </span>
+						 </td>
+						 </tr>
+				    </table>
+		 	  	</td>
+		   </tr>
+		</table>
+
+		</wicket:child>
+		<div class="formDividerLight" />
+		
+		<table>
+			<tr>
+				<td width="200px">
+					 
+					<button type="submit" tabindex="10" wicket:id="searchButton">Search</button>
+					
+					<button type="submit" tabindex="11" wicket:id="nextButton" style="margin-left:20px">Next</button>
+				</td>
+				<td>
+					<form wicket:id="exportForm" style="margin:0px; padding:0px;">
+						 <button type="button" tabindex="12"  wicket:id="exportButton">Export to CSV</button>	
+					</form>  
+				</td>
+			</tr>
+		</table>
+	  </form>  
+	 
+	   <div wicket:id="searchTotalPanel" style="width:100%;font-size: 8pt; font-family: Calibri, Arial;">
+	   </div>
+	   <div class="formDividerLight" />
+
+	  <div wicket:id="searchResultPanel" style="width:100%;font-size: 8pt; font-family: Calibri, Arial;">
+	  </div>
+	  	  
+	  <form wicket:id="selectForm" style="margin:0px; padding:0px; padding-top:3px;">
+	       <table>
+				<tr><td>
+			      <button tabindex="13" wicket:id="selectButton">View</button>
+			      <button tabindex="14" wicket:id="editButton">Edit</button>
+			      <button tabindex="15" wicket:id="bulkAuthoriseButton" style="margin-left:50px">Bulk Authorise</button>
+			      <button tabindex="16" wicket:id="bulkDeclineButton" style="margin-left:20px">Bulk Decline</button>
+				</td></tr>
+			</table>
+		  
+  		  <div wicket:id="modalViewWindow"></div>
+	  </form>
+
+	  <!-- 
+ 	  <div wicket:id="searchResultPanel">
+ 	  </div>
+ 	  
+ 	  <form wicket:id="selectForm" style="margin-top:4px;margin-bottom:1px">
+ 	  	<button wicket:id="selectButton">Select</button> 
+ 	  	<button wicket:id="nextButton">Next</button> 
+ 	  </form>
+ 	    -->
+ 	  </div>
+ 	</wicket:panel>
+ </div> <!-- end maincontent -->
+</body>
+</html>

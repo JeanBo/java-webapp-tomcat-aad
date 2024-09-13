@@ -1,0 +1,187 @@
+<wicket:panel>
+	<wicket:extend>
+		<form wicket:id="xmlForm">
+
+
+			<table>
+				<tr>
+					<td>Template Name:</td>
+					<td><input type="text" wicket:id="templateName" size="100"></td>
+				</tr>
+			</table>
+
+			<table>
+				<tr>
+					<td>Update Original XML:</td>
+					<td><input type="checkbox" wicket:id="saveXML"></td>
+					<td>Send XML:</td>
+					<td><input type="checkbox" wicket:id="sendXML"></td>
+				</tr>
+				<tr>
+					<td>Produce 650:</td>
+					<td><input type="checkbox" wicket:id="produce650"></td>
+					<td>Create Text Certificate:</td>
+					<td><input type="checkbox" wicket:id="createTextCertificate"></td>
+				</tr>
+				<tr>
+					<td>Export payments:</td>
+					<td><input type="checkbox" wicket:id="exportPayments"></td>
+					<td>Schedule Job:</td>
+					<td><input type="checkbox" wicket:id="scheduleJob"
+						title="Job will be scheduled to run during batch (only available on PROD)"></td>
+				</tr>
+				<tr>
+					<td>Force certificates:</td>
+					<td><input type="checkbox" wicket:id="forceCertificates"></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr cellspacing="3px">
+					<td>Agreement Kind:</td>
+					<td><select wicket:id="agreementKindsCombo" /></td>
+					<td>Agreement Exclusions:</td>
+					<td><input type="text" wicket:id="exclusions"></td>
+				</tr>
+				<tr>
+					<td>Agreements:</td>
+					<td><input type="text" wicket:id="agreements"></td>
+					<td>Action Indicator</td>
+					<td><select wicket:id="actionIndicatorCombo" /></td>
+				</tr>
+				<tr>
+					<td>Tax Year:</td>
+					<td><p wicket:id="taxYear" /></td>
+					<td>SARS Start date:</td>
+					<td><input type="text" wicket:id="sarsStart"></td>
+				</tr>
+
+				<tr>
+					<td>Recon Year:</td>
+					<td><input type="text" wicket:id="reconYear"></td>
+					<td>SARS End date:</td>
+					<td><input type="text" wicket:id="sarsEnd"></td>
+				</tr>
+
+				<tr>
+					<td>Recon Month:</td>
+					<td><input type="text" wicket:id="reconMonth"></td>
+					<td>Liberty Start Date:</td>
+					<td><input type="text" wicket:id="libStart"></td>
+				</tr>
+
+				<tr>
+					<td>Medical First 2 Members:</td>
+					<td><input type="text" wicket:id="medicalAidFirstTwoMembers"></td>
+					<td>Liberty End Date:</td>
+					<td><input type="text" wicket:id="libEnd"></td>
+				</tr>
+
+				<tr>
+					<td>Medical Aid Remaining Dependants:</td>
+					<td><input type="text"
+						wicket:id="medicalAidRemainingDependants"></td>
+					<td>Prior Year Start:</td>
+					<td><input type="text" wicket:id="priorStart"></td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td></td>
+					<td>Prior Year End:</td>
+					<td><input type="text" wicket:id="priorEnd"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td>Tax Codes:</td>
+					<td><p wicket:id="taxCodes" /></td>
+				</tr>
+
+
+				<!-- JEAN -->
+				<table cellpadding="5px" cellspacing="5px">
+					<tr>
+						<td>Template:</td>
+						<td><p wicket:id="templatePath" /></td>
+						<td>Log:</td>
+						<td><p wicket:id="logpath" /></td>
+					</tr>
+					<tr>
+						<td>Dev PDB:</td>
+						<td><p wicket:id="pdb" /></td>
+						<td>Agm Numbers:</td>
+						<td><p wicket:id="agmnumbers" /></td>
+					</tr>
+				</table>
+				<hr>
+
+
+			</table>
+
+			<hr>
+			<table cellspacing="3px" cellpadding="3px">
+				<tr>
+					<td nowrap valign="top">Non Tax Types:</td>
+					<td><div
+							style="display: block; word-wrap: break-word; width: 100em;">
+							<p wicket:id="nonTaxTypes" />
+						</div></td>
+				</tr>
+				<tr>
+					<td nowrap valign="top">Annual Types:</td>
+					<td><p wicket:id="annualTypes" /></td>
+				</tr>
+				<tr>
+					<td nowrap valign="top">Fixed Earnings:</td>
+					<td><p wicket:id="fixedEarnings" /></td>
+				</tr>
+				<tr>
+					<td nowrap valign="top">Fringe Benefit:</td>
+					<td><p wicket:id="fringeBenefitCombined" /></td>
+				</tr>
+				<tr>
+					<td nowrap valign="top">Fringe Benefit Service:</td>
+					<td><p wicket:id="fringeBenefitService" /></td>
+				</tr>
+				<tr>
+					<td nowrap valign="top">Fringe Benefit Loans:</td>
+					<td><p wicket:id="fringeBenefitLoans" /></td>
+				</tr>
+				<tr>
+					<td nowrap valign="top">Fringe Benefit Medical:</td>
+					<td><p wicket:id="fringeBenefitMedical" /></td>
+				</tr>
+				<tr>
+					<td nowrap valign="top">Retirement Fund Comm:</td>
+					<td><p wicket:id="retirementFundCommission" /></td>
+				</tr>
+				<tr>
+					<td nowrap valign="top">Non Retirement Fund Comm:</td>
+					<td><div
+							style="display: block; word-wrap: break-word; width: 100em;">
+							<p wicket:id="nonRetirementFundCommission" />
+						</div></td>
+				</tr>
+				<tr>
+					<td nowrap valign="top">Medical Aid Credits:</td>
+					<td><p wicket:id="medicalAidCredits" /></td>
+				</tr>
+				<tr>
+					<td nowrap valign="top">Medical Aid Contra:</td>
+					<td><p wicket:id="medicalAidContra" /></td>
+				</tr>
+				<tr>
+					<td nowrap valign="top">Income Protection EC:</td>
+					<td><p wicket:id="incomeProtectionEC" /></td>
+				</tr>
+			</table>
+			<hr>
+			<table>
+				<tr>
+					<td><input type="submit" wicket:id="submitBut"></input>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</wicket:extend>
+</wicket:panel>

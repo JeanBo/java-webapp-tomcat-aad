@@ -1,0 +1,24 @@
+<wicket:panel>
+	<div wicket:id="quotesGroup" style="margin:10px">	
+		<table>
+	  		<tbody>		
+				<tr id='dispHead'>
+					<td>Quote ID</td>
+					<td>Loan Amount</td>
+					<td>Interest Rate</td>
+					<td>Term</td>
+					<td>Payment Amount</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr wicket:id="quotes">						
+					<td id='brd' align="center"><span wicket:id="quoteId"></span></td>
+					<td id='brd' align="center"><span wicket:id="loanAmount"></span></td>
+					<td id='brd' align="center"><span wicket:id="interestRate"></span></td>
+					<td id='brd' align="center"><span wicket:id="term"></span></td>
+					<td id='brd' align="center"><span wicket:id="paymentAmount"></span></td>
+					<td id='brd' align="center"><input type="radio" wicket:id="radio"/></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	 
+</wicket:panel>

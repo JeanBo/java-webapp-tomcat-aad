@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Advanced Practice Panel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+</head>
+<body>
+<wicket:panel>
+<wicket:extend>
+
+    <div wicket:id="searchManagerWindow"/>
+    <div wicket:id="searchMemberWindow"/>
+    <div wicket:id="mangersHistoryWindow"/>
+    <div wicket:id="membersHistoryWindow"/>
+    
+	<form wicket:id="practiceForm">	
+		    <table>				
+				   <tr>
+					<td align="left" style="font-weight: bold">
+                     	<table>
+				     		<tr wicket:id="namePanel"></tr>
+				     		<tr wicket:id="datePanel"></tr>
+				     		<tr wicket:id="statusPanel"><td>Status</td></tr>
+			        	</table>
+			        </td>
+			        </tr>
+			</table>
+			
+	<hr/><br/>
+	Managers:<br/>
+	<div wicket:id="managerGrid"></div>
+	<br />
+	<input wicket:id="addManagerButton" type="button" value="Add"/>&nbsp;
+	<input wicket:id="removeManagerButton" type="button" value="Remove" >&nbsp;
+	<input wicket:id="managerHistoryButton" type="button" value="History" >
+<hr/>
+	
+					<br />
+					Members:<br />
+					<div wicket:id="membersGrid"></div>
+					<br />
+	<input wicket:id="addMemberButton" type="button" value="Add"/>&nbsp;
+	<input wicket:id="removeMemberButton" type="button" value="Remove" >&nbsp;
+	<input wicket:id="membersHistoryButton" type="button" value="History" >	
+</form>	
+</wicket:extend>
+</wicket:panel>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS_layout-window.css" rel="stylesheet" type="text/css"></link>
+
+</head>
+<body>
+ 
+ 	<wicket:panel>
+ 
+		  <div wicket:id="searchPartyWindow"></div>	
+ 	  <form wicket:id="searchForm" style="margin-bottom:3px; margin-top:10px; padding-top:0px; margin-bottom:15px">
+
+<wicket:extend>
+ 
+ 	<span class="headLabel">Request Kind</span><br/>
+		<select wicket:id="requestKind" style="width:270px" tabindex="1">
+	 	<option>Select</option>
+		</select>
+<br/>
+  		<hr/>
+		<div wicket:id="transferList"></div>
+<br />
+  		<hr/>
+		<input type="button" value="Add" wicket:id="addButton"/>&nbsp;
+		<input type="button" value="Remove" wicket:id="removeButton"/>&nbsp;
+		<input type="button" value="Upload File" wicket:id="uploadButton"/>
+		<!-- input type="button" value="Create Request" wicket:id="requestButton"/-->
+		<br />
+		<br />
+		<br />	<b>*Note for Error Code	</b>
+ <p style="color:red; margin-top: 0;">	<b>1.</b> From consultant is missing  <b>2.</b> From consultant is not same <b>3.</b> To Consultant is missing  <br />
+ 	<b>4.</b> To consultant(13-digit code) is invalid <b>5.</b> To and From consultant are same <b>6.</b> To consultant status is in-active		<br />
+ 	  		<b>7.</b> Contract number missing <b>8.</b> Repeted contract number <b>9.</b> Invalid contract number 
+ 	  		<b>10.</b> There is an outstanding request[Process Segment Transfer] needing authorisation<br />
+ 	  		<b>11.</b> From consultant may not be an organisation (for specified channel)  <b>12.</b> To consultant may not be an organisation (for specified channel)
+ 	  		<b>13.</b> To consultant branchcode or consultant code is in exclusion list.
+ 	  		<br/>
+ 	  		<br/>
+ 	  		<b>Upload warning</b> - Grid can show only 50 records, once you save/delete all records then only next 50 or remaining records will be displayed on the grid.
+</p>
+</wicket:extend>
+
+		<br />
+		
+		<br />
+	  </form>
+  		
+
+ 	</wicket:panel>
+ 	  	
+ 	  		
+</body>
+</html>

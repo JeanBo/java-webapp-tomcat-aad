@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS_layout-window.css" rel="stylesheet" type="text/css"></link>
+
+<script type="text/javascript" src="/SRSAppWeb/js/BusyIndicator.js"></script>
+<script type="text/javascript">	
+	function hideOverlay(){  		
+  		overlay(false);
+  	}  	
+    function overlay(display){      	
+		var thediv=document.getElementById('overlay');
+		if(display){
+			if (typeof Wicket != 'undefined') {
+  				Wicket.Event.subscribe('/ajax/call/done', function(jqEvent, attributes, jqXHR, errorThrown, textStatus) {
+		 			hideOverlay();
+	  			});
+  			}
+			thediv.style.display = "";		
+		} else if (display == "test") {
+			thediv.style.display = "";		
+		}else{
+			thediv.style.display = "none";		
+		}
+		return false;
+	}
+ </script>
+</head>
+<body>
+ <div id="overlay" style="display: none;"><table width='100%' height='100%'><tr><td align='center' valign='middle' width='100%' height='100%'>Please be patient, we are busy loading your request<br/><img src="/SRSAppWeb/images/loading2.gif"/></td></tr></table></div>
+ <div id="mainBorder">
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner">
+               
+         <table width="100%" class="TopBanner">
+			<tr>
+				<td width="30%" align="left">&nbsp;</td>
+	          	<td width="40%" align="center"><span id="TopBannerHeader">SRS Application</span></td>
+	          	<td width="30%" align="right">&nbsp;</td>
+			</tr>
+			<tr>
+	          	<td align="left" valign="top">&nbsp;</td>
+	          	<td align="center" valign="top"><span id="TopBannerHeader" wicket:id="pageName">Base page</span></td>
+	          	<td align="right" valign="top">
+	          		<div id="bysy_indicator" style="width:80px">
+   	    				Busy ... &nbsp;<img src="/SRSAppWeb/images/busy_indicator.gif"/>&nbsp;
+   	  				</div>
+	          	</td>
+	        </tr>
+	      </table>
+        
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+  
+  
+ <!-- Content -->
+ <div id="maincontent">
+    <span wicket:id="messages" class="feedbackPanel"></span>
+ 	<wicket:child>
+ 	</wicket:child>
+ </div> <!-- end maincontent -->
+ </div>
+</body>
+</html>

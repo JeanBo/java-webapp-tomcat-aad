@@ -1,0 +1,61 @@
+/*
+Author      : Jean Bodemer
+Date        : 27/03/2008
+Description : Contains SRS layout style information for pages
+			  that extend base page.  LAYOUT ONLY!
+Note        : Please be very carefull when changing layout 
+              properties, css frames are very temperamental.
+*/
+/**************************************** 
+ Layout related styles
+ ****************************************/
+html {
+  height: 100%;
+  overflow: hidden;
+}
+body{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%; 
+  max-height: 100%; 
+  background-color: #ffffff;    
+}
+ #framecontentTop{
+  position: absolute; 
+  top: 5px;     
+  overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/  
+  background-color: #1F2241;   
+  left: 140px; /*Set left value to WidthOfLeftFrameDiv*/
+  right: 5px;
+  width: auto;
+  height: 40px; /*Height of top frame div*/
+  overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/ 
+}
+
+#framecontentLeft { 
+  position: absolute; 
+  top: 5px;   
+  left: 5px;     
+  overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/  
+  background-color: #1F2241; 
+  width: 130px; /*Width of left frame div*/    
+  overflow: auto;    
+  bottom:  5px;   
+  max-width: 130px; 
+    
+}
+
+#maincontent{
+  position: absolute; 
+  right: 0px;
+  left: 140px; /*Set left value to WidthOfLeftFrameDiv*/
+  top: 50px; /*Set top value to HeightOfTopFrameDiv*/
+  overflow: auto; 
+  background: #ffffff;      
+  bottom: 0px;  
+  padding-right: 25px;  
+}
+#mainBorder{ 
+         
+}

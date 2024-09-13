@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Report Generation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+</head>
+<body>
+<wicket:panel>		
+	<div wicket:id="notificationWindow"/>
+	<form wicket:id="reportForm">	
+		<div style="padding: 15px 15px 15px 15px;">
+			<div style="padding-bottom:15px;" wicket:id="timeRestrictionContainer">
+				<table>
+					<tr valign="middle">
+						<td>
+							<img src="/SRSAppWeb/images/Warning_icon.png"/>
+						</td>
+						<td style="font-weight: bold;">
+							<span wicket:id="lblTimeRestriction"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<table>
+				<tr>
+					<td style="padding-right:10px; font-weight: bold;">Report Category</td>
+					<td><select wicket:id="reportCategory"/></td>
+				</tr>
+				<tr>
+					<td style="padding-right:10px; font-weight: bold;"><span wicket:id="lblReportingMonth">Month</span></td>
+					<td><select wicket:id="reportingMonth"/></td>
+				</tr>
+			</table>
+			<div style="padding: 15px 0px 15px 0px; width: 100%;"> 
+				<div wicket:id="reportingPeriods"/>
+			</div>
+			<div>
+				<span wicket:id="lblStatement" style="font-weight: bold;">Statements To Produce</span>
+			</div>
+			<div style="padding: 5px 15px 15px 15px;">
+				<span wicket:id="group"></span>
+			</div>
+			<button wicket:id="generateReport" type="submit">Generate Reports</button>
+		</div>
+	</form>	
+</wicket:panel>
+</body>
+</html>

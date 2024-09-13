@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>AstuteRepRequestPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+</head>
+<body>
+<wicket:extend>
+<table width="100%" border="0">
+	    <tr>
+	      <td>
+		    <span style="height:15px" class="headLabel">This will update all persisted calculated values for Fit and proper as well as broadcast all the data to Blueprint Professional if the party is a BBP user</span><br/>		   
+          </td>
+        </tr>
+        <tr>
+          <td align="left" valign="bottom">
+              PartyOID: <input type="text" wicket:id="partyID" title="Party OID for recalculation and broadcast"></input>&nbsp;
+              <input type="button" style="width: 120px;" wicket:id="updates" title="Will replicate a moodle trigger change for the party oid typed in" value="Submit"></input>
+          </td>
+        </tr>
+        <tr><td><br/></td></tr>
+        <tr>
+	      <td>
+		    <span style="height:15px" class="headLabel">The button below will schedule broadcasts right now for all Blueprint Professional users ONLY</span><br/>		   
+          </td>
+        </tr>
+        <tr>
+          <td align="left" valign="bottom"><input type="button" style="width: 120px;" wicket:id="bbpUpdates" title="Will replicate a moodle trigger change for all blueprint pro users" value="Broadcast"></input>
+          </td>
+        </tr>
+        <tr><td><br/></td></tr>
+        <tr>
+	      <td>
+		    <span style="height:15px" class="headLabel">The button below will schedule broadcasts right now for all parties with stored and calculated fit and proper values ONLY</span><br/>		   
+          </td>
+        </tr>
+        <tr>
+          <td align="left" valign="bottom"><input type="button" style="width: 120px;" wicket:id="allUpdates" title="Will replicate a moodle trigger change for all users requirming a recalculation of stored data" value="Broadcast"></input>
+          </td>
+        </tr>
+	  </table>
+</wicket:extend>
+</body>
+</html>

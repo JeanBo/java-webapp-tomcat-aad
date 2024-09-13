@@ -648,17 +648,17 @@ public class JeanTestPage extends BasePage {
 		this.add(form);
 		
 //		item.add(download);
-//		 
+//		ï¿½
 //		item.add(new AjaxLink<Void>("link") {
-//		    @Override
-//		    public void onClick(AjaxRequestTarget target)
-//		    {
-//		        // do whatever with the target, e.g. refresh components
-//		        target.add(...);
-//		 
-//		        // finally initiate the download
-//		        download.initiate(target);
-//		    }
+//		ï¿½ï¿½ï¿½ï¿½@Override
+//		ï¿½ï¿½ï¿½ï¿½public void onClick(AjaxRequestTarget target)
+//		ï¿½ï¿½ï¿½ï¿½{
+//		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½// do whatever with the target, e.g. refresh components
+//		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½target.add(...);
+//		ï¿½
+//		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½// finally initiate the download
+//		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½download.initiate(target);
+//		ï¿½ï¿½ï¿½ï¿½}
 //		});
 	}
 	
@@ -738,17 +738,17 @@ public class JeanTestPage extends BasePage {
 		this.add(form);
 		
 //		item.add(download);
-//		 
+//		ï¿½
 //		item.add(new AjaxLink<Void>("link") {
-//		    @Override
-//		    public void onClick(AjaxRequestTarget target)
-//		    {
-//		        // do whatever with the target, e.g. refresh components
-//		        target.add(...);
-//		 
-//		        // finally initiate the download
-//		        download.initiate(target);
-//		    }
+//		ï¿½ï¿½ï¿½ï¿½@Override
+//		ï¿½ï¿½ï¿½ï¿½public void onClick(AjaxRequestTarget target)
+//		ï¿½ï¿½ï¿½ï¿½{
+//		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½// do whatever with the target, e.g. refresh components
+//		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½target.add(...);
+//		ï¿½
+//		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½// finally initiate the download
+//		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½download.initiate(target);
+//		ï¿½ï¿½ï¿½ï¿½}
 //		});
 	}
 	

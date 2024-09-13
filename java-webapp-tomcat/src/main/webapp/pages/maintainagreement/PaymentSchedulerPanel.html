@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Payment Scheduler Panel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+</head>
+<body>
+<wicket:extend>
+	<form wicket:id="searchForm">
+	<br>
+	<br>
+	<div style="padding-top: 15px;">
+	<table width="100%">
+		<tr>
+			<td>
+				<font style="font-weight: bold;font-size: 90%">SUSPEND PAYMENT</font>
+			</td>
+		</tr>
+	</table>
+	<hr/>
+	<div wicket:id="paySchedHistory"/>
+	<table width="80%">
+		<tr>
+			<td colspan="1" width="5%"><span wicket:id="doNotPay" class="GUIFieldComponent"></span></td>
+			<td colspan="1" width="15%"><span wicket:id="lblDoNotPay" class="GUIFieldLabel"></span></td>
+			<td colspan="1" width="13%"><span wicket:id="lblRequestedBy" class="GUIFieldLabel"></span></td>
+			<td colspan="1" width="27%"><span wicket:id="requestedBy" class="GUIFieldComponent"></span></td>
+			<td colspan="1" width="15%"><span wicket:id="lblEffDateSuspend" class="GUIFieldLabel"></span></td>
+			<td colspan="1" width="25%"><span wicket:id="effDateSuspend" class="GUIFieldComponent"></span></td>
+			<td colspan="1" width="25%"><span wicket:id="dnpHistoryButton" class="GUIFieldComponent"></span></td>
+		</tr>
+	</table>
+	<table width="80%">
+		<tr>
+			<td width="5%">&nbsp;</td>
+			<td width="15%"><span wicket:id="lblComments" class="GUIFieldLabel"></span></td>
+			<td width="13%"><span wicket:id="comments" class="GUIFieldComponent"></span></td>
+			<td width="67%"> &nbsp;</td>
+		</tr>
+	</table>
+	<br>
+	<br>
+	<table width="100%">
+		<tr>
+			<td>
+				<font style="font-weight: bold;font-size: 90%">CUSTOM </font>
+			</td>
+		</tr>
+	</table>
+	<hr/>
+	<table width="80%" >
+		<tr>
+			<td colspan="1" width="13%"><span wicket:id="lblEffDateCustom" class="GUIFieldLabel"></span></td>
+			<td colspan="1" width="19%"><span wicket:id="effDateCustom" class="GUIFieldComponent"></span></td>
+			<td colspan="1" width="17%"><span wicket:id="lblPreIssueStatus" class="GUIFieldLabel"></span></td>
+			<td colspan="1" width="32%"><span wicket:id="preIssueStatus" class="GUIFieldComponent"></span></td>
+			<td colspan="1" width="10%"><span wicket:id="lblMonthEnd" class="GUIFieldLabel"></span></td>
+			<td colspan="1" width="9%"><span wicket:id="monthEnd" class="GUIFieldComponent"></span></td>
+		</tr>
+		<tr>
+			<td colspan="1" width="13%"><span wicket:id="lblCalSchedPanel" class="GUIFieldLabel"></span></td>
+			<td colspan="1" width="19%"><span wicket:id="calSchedule" class="GUIFieldComponent"></span></td>
+			<td colspan="1" width="17%"><span wicket:id="lblPayWeekly" class="GUIFieldLabel"></span></td>
+			<td colspan="1" width="32%"><span wicket:id="payWeekly" class="GUIFieldComponent"></span></td>
+			<td colspan="1" width="10%"><span wicket:id="lblPayDaily" class="GUIFieldLabel"></span></td>
+			<td colspan="1" width="9%"><span wicket:id="payDaily" class="GUIFieldComponent"></span></td>
+		</tr>
+		<tr>
+			<td colspan="4" width="81%">&nbsp;</td>
+			<td colspan="1" width="10%"><span wicket:id="lblNextDueDate" class="GUIFieldLabel"></span></td>
+			<td colspan="1" width="9%"><span wicket:id="nextDueDate" class="GUIFieldComponent"></span></td>
+		</tr>
+	</table>
+	</div>
+	<div wicket:id="paySchedulerContainer">
+		<table width="80%" >
+			<tr>
+				<td width="13%"><span wicket:id="lblAddSchedDate" class="GUIFieldLabel"></span></td>
+				<td width="87%"><span wicket:id="addSchedDate" class="GUIFieldComponent"></span></td>
+			</tr>
+			<tr>
+				<td colspan="2"><span wicket:id="paySchedCalGrid"></span></td>
+			</tr>
+		</table>
+	</div>
+	
+</form>
+</wicket:extend>
+<div wicket:id="historyPage"> </div>
+</body>
+</html>

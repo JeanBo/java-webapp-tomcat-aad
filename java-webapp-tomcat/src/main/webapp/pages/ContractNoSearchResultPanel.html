@@ -1,0 +1,65 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+
+</head>
+
+<body>
+
+ <div id="maincontent">
+	<wicket:panel>
+  		<form wicket:id="contractNoSrchResForm" >
+		<table>
+		<tr style="background-color:#f3f3f3;color: blue;"><td><label wicket:id="warningMsg"/></td></tr>
+		<hr/>
+		</table>
+		<table cellspacing="0">
+		<th colspan="6" style="background-color:#f3f3f3;font: bold" align="center">TOTALS</th>
+			<tr id='dispHead'>
+				<td>Commission</td>
+				<td>Fees</td>
+				<td>API</td>
+				<td>Policy Count</td>
+				<td>Production Credits</td>
+				<td>Blueprint Allowance</td>
+			</tr>
+			<tr>						
+				<td id='brd' align="center"><label wicket:id="commision"/></td>
+				<td id='brd' align="center"><label wicket:id="fees"/></td>
+				<td id='brd' align="center"><label wicket:id="api"/></td>
+				<td id='brd' align="center"><label wicket:id="policyCount"/></td>
+				<td id='brd'align="center"><label wicket:id="prodCredit"/></td>
+				<td id='brd'align="center"><label wicket:id="blueprintAll"/></td>
+			</tr>					
+			
+		</table><br>
+		<table cellspacing="0">
+		<th width="100%" style="background-color:#f3f3f3;font: bold;" align="center">SEARCH RESULTS</th>
+		</table>
+		<table width="100%">
+		<tr class="searchResT" style="background-color:#f3f3f3;font: bold;text-align: left;">
+			<td width="20%">Policy Reference :</td>
+		    <td width="45%" style="font:normal;"><label wicket:id="policyRef" /></td>
+		    <td width="20%">&nbsp;</td>
+		    <td width="15%" style="font:normal;">&nbsp;</td></tr>
+		</table>
+		
+		<div wicket:id="searchRes">
+		</div>
+		<br>
+		<input type="submit" value="Export to excel" wicket:id="exportBtn"/>
+		</form>
+	</wicket:panel>
+	<hr/>
+	<br/>
+  </div>
+  
+</body>
+</html>

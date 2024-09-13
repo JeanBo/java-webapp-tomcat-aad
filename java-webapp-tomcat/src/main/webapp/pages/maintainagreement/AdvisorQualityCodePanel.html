@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Advisor Quality Code Panel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+<LINK href="/SRSAppWeb/css/liberty.css"
+	rel="stylesheet" type="text/css"></Link>
+</head>
+<body>
+<wicket:extend>
+
+	<div wicket:id="calcAQCHistory"/>
+	<div wicket:id="manualAQCHistory"/>
+
+	<form wicket:id="aqcForm">
+
+	
+	<p>
+	<font style="font-weight: bold;font-size: 90%">Effective Segment:</font><span wicket:id = "segment"></span>
+	</p>
+
+		
+	<div wicket:id="dateContainer">
+		<table>
+			<tr>
+			<td>
+				<span class="headLabel">Start Date</span>
+			</td>
+			<td style="padding-left:0px">
+			   	<input wicket:id="startDate" type="text" value="09/12/2009" style="width:70px" maxlength="10"  tabindex="2"/>
+			</td>
+			<td style="padding-left:0px;">
+				<span class="headLabel">End Date</span>
+			</td>
+			<td >
+		   		<input wicket:id="endDate" type="text" value="09/12/2009" style="width:70px" maxlength="10"  tabindex="2"/>
+		   		
+			 </td>
+			 </tr>
+	    </table>
+	</div>
+		
+		<br/>
+		
+		<div wicket:id="aqcGrid"></div>
+			
+	</form>
+</wicket:extend>
+</body>
+</html>

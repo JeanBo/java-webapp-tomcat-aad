@@ -1,0 +1,420 @@
+/******************************************************************************************
+ Copied from www.blueprintonline.co.za
+ Don't change any styles in this file, rather override
+ in SRS.css.
+ ---------------------------------------------------------------------------
+ jzb0608 - 22/01/2010 - Removing some unused elements.  Refer back to version 1 in
+  						the Hierarchy stream for original.
+******************************************************************************************/
+#top {
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    text-align: left; 
+}
+#top#titletext 
+{
+    width: 100%;
+    font-family: Arial;
+    font-size: 48px;  /*02:27 PM 03/03/2006*/
+    font-weight: bold;
+    color: #e0ad12;
+    text-align:left;
+    vertical-align: middle;
+}
+#vertalign { vertical-align: middle; height: 100%; }
+/****************************************************************************/
+
+body
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    MARGIN-TOP: 3pt;
+}
+BODY#Menu
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+}
+BODY#links
+{
+    font-size: 8.5pt;
+    font-family: Verdana, Arial;
+    font-weight: bolder;
+    text-align: center;
+    color: white;
+    background-color: #1F2241;
+}
+BODY#linkMenu
+{
+    margin-top: 10;
+    background-color: #1F2241;
+}
+BODY#homePage
+{
+    margin-top: 10;
+    margin-left: 10;
+    margin-right: 10;
+    background-color: #1F2241;
+    overflow: auto;
+}
+BODY#top
+{
+    font-size: 10pt;
+    font-family: Verdana, Arial;
+    color: white;
+    font-weight: bold;
+    background-color: white;
+    margin: 0px;
+}
+BODY#banner
+{
+    font-size: 10pt;
+    font-family: Verdana, Arial;
+    color: white;
+    font-weight: bold;
+    background-color: #1F2241;
+    margin: 0px;
+}
+BODY#bottom
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    color: white;
+    font-weight: normal;
+    background-color: #1F2241;
+    margin: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+TABLE
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    border-collapse: collapse;    
+}
+TABLE#footer
+{
+    font-size: 6.5pt;
+    color: white;
+}
+TABLE#input
+{
+    border: gray 1px solid;
+    width: 90%;    
+    background-color: #E6DFD6;
+    padding: 5px;
+}
+TABLE#input95
+{
+    border: gray 1px solid;
+    width: 95%;    
+    background-color: #E6DFD6;
+    padding: 5px;
+}
+TABLE#input40
+{
+    border: gray 1px solid;
+    width: 40%;
+    border-collapse: collapse;
+    background-color: #E6DFD6;
+    padding: 5px;
+}
+TABLE#input50
+{
+    border: gray 1px solid;
+    width: 50%;
+    border-collapse: collapse;
+    background-color: #E6DFD6;
+    padding: 5px;
+}
+TABLE#input60
+{
+    border: gray 1px solid;
+    width: 60%;
+    border-collapse: collapse;
+    background-color: #E6DFD6;
+    padding: 5px;
+}
+TABLE#input80
+{
+    border: gray 1px solid;
+    width: 80%;
+    border-collapse: collapse;
+    background-color: #E6DFD6;
+    padding: 5px;
+}
+TABLE#pad1
+{
+    padding: 1px;
+    border-collapse: collapse;
+    width: 100%;
+}
+TABLE#head
+{
+    border: gray 1px solid;   
+    padding: 0px;   
+    width: 100%;    
+    border-collapse: collapse;
+    background-color: #E6DFD6;
+}
+TABLE#cc
+{
+    border: gray 2px solid;
+    width: 65%;
+    height: 50px;
+}
+TABLE#title
+{
+    font-weight: bolder;
+    font-size: 7.5pt;
+    color: white;
+}
+.Page
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+}
+.break { page-break-before: always; }
+H1, H2, H3, H4 
+{
+    font-weight: bolder;
+    font-family: Verdana, Arial;    
+}
+H1 { font-size: 12pt; text-align: center; }
+H2 { font-size: 10pt; text-align: center; }
+H2#headLeft { font-size: 10pt; text-align: left; }
+H3 { font-size: 7.5pt; text-align: center; }
+H4 { font-size: 7.5pt; text-align: left; }
+H5 { font-size: 7.5pt; text-align: left; font-style: italic; }
+TD#Hid, TR#Hid
+{
+    display: none;
+    visibility: hidden;
+}
+TABLE#BG, TD#BG { background-color: linen; }
+TR#headerRow
+{
+    font-weight: bolder;
+    color: white;
+    background-color: #04049b;
+    text-align: center;
+}
+INPUT#cancelButton, INPUT#acceptButton  
+{
+    font-family: Wingdings;
+    font-weight: bolder;
+    font-size: 20pt;
+    width: 30px;
+    cursor: hand;        
+    height: 30px;
+    text-align: center;
+}
+INPUT#cancelButton { color: red; }
+INPUT#acceptButton { color: green; }
+TD#topleftBorder
+{    
+    border-top: gray 1px solid;
+    border-left: gray 1px solid;
+    border-bottom: none;
+    border-right: none;
+}
+TD#bottomrightBorder
+{
+    border-bottom: gray 1px solid;
+    border-right: gray 1px solid;    
+    border-top: none;
+    border-left: none;    
+}
+TD#bottomBorder
+{
+    border-bottom: gray 1px solid;
+    border-right: gray 1px solid;    
+    border-top: none;
+    border-left: none;    
+}
+TD#topleftrightBorder
+{
+    border-top: gray 1px solid; 
+    border-left: gray 1px solid;
+    border-right: gray 1px solid;       
+    border-bottom: none;
+}
+TD#topleftrightbottomBorder
+{
+    border: gray 1px solid;
+}
+TD#leftbottomrightBorder
+{
+    border-left: gray 1px solid;
+    border-bottom: gray 1px solid;
+    border-right: gray 1px solid;
+    border-top: none;
+}
+TD#topleftbottomBorder
+{
+    border-top: gray 1px solid;        
+    border-left: gray 1px solid;
+    border-bottom: gray 1px solid;
+    border-right: none;
+}
+
+A
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+}
+A.link
+{
+    text-align: right;
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    color: #cfc4b8;
+}
+A.parent
+{
+    text-align: right;
+    font-size: 7.5pt;
+    color: white;
+}
+BUTTON 
+{
+    font-weight: normal;
+    font-size: 7.5pt;
+    font-family: Verdana, Arial; 
+}
+INPUT.butt, INPUT.retry, INPUT.go, INPUT.submit {
+    font-weight: normal;
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    cursor: hand;
+}
+BUTTON.bigbutt {
+    font-weight: normal;
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    cursor: hand;
+    width: 3.7cm;
+}
+INPUT.butt { height: 23px; }
+BUTTON.bigbutt { height: 1cm; }
+INPUT.retry { width: 50px; height: 20px; }
+INPUT.go { width: 25px; height: 23px; }
+INPUT.submit { height: 23px; }
+
+FIELDSET#white { color: white; }
+LEGENG#white {color: white; }
+TD#white {color: white; }
+P#white {color: white; }
+TABLE#Lscape { border-collapse: collapse; width: 1020px; }
+TR, TD
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    border-collapse: collapse;
+}
+
+TD#smFont
+{
+    font-size: 6.5pt;
+    font-family: Verdana, Arial;
+}
+TD#smFontcntr
+{
+    font-size: 6.5pt;
+    font-family: Verdana, Arial;
+    text-align: center;
+}
+TD#noDecO { text-decoration: none; }
+
+TD#right
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    border-collapse: collapse;
+    text-align: right;
+}
+TD#right100
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    border-collapse: collapse;
+    text-align: right;
+    width: 100%;
+}
+TD#right65pt
+{
+    font-size: 6.5pt;
+    font-family: Verdana, Arial;
+    border-collapse: collapse;
+    text-align: right;
+}
+TD#cntr
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    border-collapse: collapse;
+    text-align: center;
+}
+TD#pad10
+{
+    padding: 10px;
+}
+TD#cntrwhite
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    color: white;
+    border-collapse: collapse;
+    text-align: center;
+}
+TD#cppHead
+{
+    font-size: 8.5pt;
+    font-family: Verdana, Arial;
+    border-collapse: collapse;
+    text-align: center;
+    color: #1F2241;
+    font-weight: bolder;
+}
+TD#TopBanner { background-color: #1F2241; color: white; text-align: center;}
+TD#red { color: #ac1416; }
+TD#bgred { background-color: #ac1416; color: white;}
+TD#bgredb
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    border: gray 1px solid;
+    border-collapse: collapse;
+    background-color: #ac1416;
+    color: white;
+}
+TD#bggreen { background-color: #588539; color: white;}
+TD#bggreenb
+{
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    border: gray 1px solid;
+    border-collapse: collapse;
+    background-color: #588539;
+    color: white;
+}
+TD#outBanner { color: #1F2241; }
+HR { height: 1pt; color: #1F2241; }
+HR#PLM { height: 1pt; color: #8c7c70; width: 80%;}
+HR#lightgray {color: #cfc4b8; }
+TEXTAREA { font-size: 7.5pt; font-family: Verdana, Arial; }
+DIV#red { color: #ac1416; }
+SPAN#red { color: #ac1416; }
+DIV#smFont { font-size: 6.5pt; }
+DIV#smFontwhite { font-size: 6.5pt; color: white; font-family: Verdana, Arial;}
+
+A.hyper { color: #095c89; }
+.smFontred { font-size: 6.5pt; color: #ac1416; font-family: Verdana, Arial;}
+.smFont { font-size: 6.5pt; font-family: Verdana, Arial;}
+.blue {color: #1F2241; }
+.red { color: #ac1416; }
+img.bottom 
+{
+    vertical-align:text-bottom;
+}

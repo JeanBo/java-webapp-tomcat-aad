@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Business Card Details Panel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+<wicket:extend>
+	<style>
+	.halfborder { 
+		padding:5px; 
+		border-left: 1px solid grey; 
+		border-bottom: 1px solid grey;
+		border-bottom-width: 100px;   
+		border-top: 1px solid grey;
+		border-top-width: 100px;  
+	}
+	</style>
+	<form wicket:id="findAnFAForm">
+	
+	<div wicket:id="messageContainer" class="warningMessage" style="width:95%;margin-left:20px;margin-right:20px">
+		<div style="margin-left:10px" wicket:id="warningMessage">
+		You do not have the required qualifications to register
+		</div>
+	</div>
+	<div class="GUIFieldContainer">
+		<b>QUALIFICATION and PARTICIPATION</b>
+		<hr/>
+		<input wicket:id="requiredQualification" type="checkbox" checked>Has Required Qualifications</input>
+		<br/>
+		<input wicket:id="contactableThroughService" type="checkbox">I wish to be contactable through Liberty's Find an FA service</input>
+		
+	</div>
+	
+	<div class="GUIFieldContainer">
+		<b>SPOKEN LANGUAGES</b>
+		<hr/>
+		<table>
+			<tr wicket:id="spokenLanguagesRow">
+				<td wicket:id="spokenLanguagesCol" width="150">
+				
+					<input wicket:id="langCheck" type="checkbox" checked></input><span wicket:id="langDescription">English</span></td>
+				<wicket:remove>
+					<td width="150"><input type="checkbox">Afrikaans</input></td>
+					<td width="150"><input type="checkbox">Ndbele</input></td>
+				</wicket:remove>
+			</tr>
+			<wicket:remove>
+			<tr>
+				<td><input type="checkbox">Sotho</input></td>
+				<td><input type="checkbox">Zulu</input></td>
+				<td><input type="checkbox">Xhosa</input></td>
+			</tr>
+			</wicket:remove>
+		
+		</table>
+	</div>
+		
+	<div class="GUIFieldContainer">
+		<b>SERVICE LOCATIONS</b>
+		<hr/>
+		
+		<div wicket:id="serviceLocationList">
+			<table style="width: 90%; max-width: 810px;">
+				<tr>
+					<td style="min-width:10px"></td>
+					<td style="min-width:150px"> <label class="headLabel">Region</label></td>
+					<td style="min-width:150px"><label class="headLabel">Sub-Region</label></td>
+					<td style="min-width:150px"><label class="headLabel">Postal Area</label></td>
+					<td style="min-width:350px"><label class="headLabel">Postal Codes</label></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" checked></input></td>
+					<td>Gauteng</td>
+					<td>Johannesburg / Randburg / Sandton</td>
+					<td>Johannesburg</td>
+					<td>2194 - Aldarapark, Cresta, Jacanlee, Linden, Robindale, Windsor, etc. </td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" checked></input></td>
+					<td>Gauteng</td>
+					<td>Johannesburg / Randburg / Sandton</td>
+					<td>Johannesburg</td>
+					<td>2195 - Albertskroon, Blackheath, Emmarentia, Northcliff, Roosevelt, etc. </td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" checked></input></td>
+					<td>Gauteng</td>
+					<td>Johannesburg / Randburg / Sandton</td>
+					<td>Randburg</td>
+					<td>{All codes}</td>
+				</tr>
+			</table>
+		</div>
+		
+		<br/>
+		
+		<div wicket:id="addLocationContainer">
+		
+		<div  
+			style="padding:5px; border: 1px solid grey;">		
+		
+			<strong>Add Locations</strong><br/>
+			<hr style="width:90px;" align="left"/>
+		
+		
+		
+		<table style="width: 550px;">
+			<tr>
+				<td width="70px" align="right" style="padding-right:5px">
+					<label class="headLabel">Province:</label>
+				</td>
+				<td>
+					
+						<select wicket:id="provinceList" style="width:200px;">
+							<option>Province Selection</option>
+						</select>
+					
+				</td>
+				<td style="width: 100px;">
+				</td>
+			</tr>
+			<tr>
+				<td align="right" style="padding-right:6px">
+					<label class="headLabel">Region:</label>
+				</td>
+				<td>
+					<select wicket:id="regionList" style="min-width:350px">
+						<option>Region Selection</option>
+					</select>
+				</td>
+				<td>
+					<button wicket:id="addRegionButton" style="width:90px;">Add Region</button>
+				</td>
+			</tr>
+			<tr>
+				<td align="right" style="padding-right:6px">
+					<label class="headLabel">Postal Area:</label>
+				</td>
+				<td>
+					<select wicket:id="postalAreaList" style="width:350px;">
+						<option>Postal Area</option>
+					</select>
+				</td>
+				<td>
+					<button  wicket:id="addAreaButton" style="width:90px;">Add Area</button>
+				</td>
+			</tr>
+		</table>
+		
+		
+		
+		
+		<br/>
+		
+		<div wicket:id="postalCodeList">
+			<SELECT multiple="multiple" size="5" style="min-width:700px">
+				<option>2194 - Aldarapark, Cresta, Jacanlee, Linden, Robindale, Windsor, Aldarapark, Cresta, Jacanlee, Linden, Robindale, Windsor, etc. </option>
+			</SELECT>
+		</div>
+		
+		
+		
+		
+		</div>
+		
+		</div>  <!-- CLose container -->
+		
+		<br/>
+		<br/>
+		
+	</div>
+	
+	</form>
+</wicket:extend>
+</body>
+</html>
+

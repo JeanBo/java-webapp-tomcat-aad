@@ -27,8 +27,8 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 
-import org.jdom.Document;
-import org.jdom.Element;
+import org.jdom2.Document;
+import org.jdom2.Element;
 import za.co.liberty.dto.userprofiles.MenuItemDTO;
 import za.co.liberty.web.data.enums.EditStateType;
 import za.co.liberty.web.data.pages.ITabbedPageModel;
@@ -483,7 +483,7 @@ public class MenuContainer extends Panel {
 		ArrayList<MenuItem> level = new ArrayList<MenuItem>();
 		boolean response = false;
 		if(items != null && items.size() != 0){
-			for(Element item : items){				
+			for(Element item : items){
 				if(item.getName().equalsIgnoreCase("Group")){
 					if (logger.isDebugEnabled()) logger.debug("  -- Adding group " + item.getAttributeValue("ID"));
 					//group item	

@@ -1,0 +1,649 @@
+/*
+Author      : Jean Bodemer
+Date        : 27/03/2008
+Description : Contains SRS specific style information, overrides
+			  or adds div id/class versions of blueprint styles.       
+*/
+/**************************************** 
+ Styles from BPO_Styles
+ ****************************************/
+#TopBanner, #TopBannerHeader {
+  font-size: 110%;
+  background-color: #1F2241;
+  color: white;
+  text-align: left;  
+} 
+#TopBanner {
+  height: 100%;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 5px;
+}
+.TopBanner {
+  color: white;
+  font-size:100%;
+}
+.TopBanner label {
+	font-size: 90%;
+	font-style: italic;
+	font-weight: bold;
+	width:45px;
+	text-align:right;
+}
+#TopBannerHeader {
+  font-weight: bold;
+}
+
+/**************************************** 
+ Override Menu behaviour
+ ****************************************/
+.linkMenu {
+  /* border: 2px solid #aaaaff;*/  
+  padding-top: 0px;
+  padding-left: 0px;    
+}
+.linkMenu ul{ 
+  list-style-type: none;
+  text-align: right;
+  margin-left: 0px;  
+  padding-left: 0px; 
+  padding-top: 0px;  
+}
+.linkMenu li {
+  list-style-type: none;  
+  padding-bottom: 0px;
+  padding-left: 0px;    
+}
+.linkMenu a{ 
+  list-style-type: none;  
+  cursor: hand;
+  text-decoration: none;
+  font-size: 7.5pt;
+  font-family: Arial, Verdana;  
+ 
+}
+.linkMenu a:link {
+  color: white;
+}
+.linkMenu a:visited {
+  color: white;
+}
+.linkMenu a:active {
+  color: white;
+}
+.linkMenu a:hover {
+  color: #cfc4b8;
+}
+#linkMenuLine {
+  color: #8c7c70;  
+  text-align: center;
+  margin-left: 12px;
+  margin-right: 12px;
+  padding-right: 12px;
+  padding-left: 12px;
+  left: 0px;  
+}
+
+a.LMChild:link { color: #cfc4b8; }
+a.LMChild:visited { color: #cfc4b8; }
+a.LMChild:hover { color: white; }
+
+a.LMChild
+{ 
+    text-align: right;
+    font-size: 6.5pt;
+    font-family: Verdana, Arial;
+    color: white;
+    text-decoration: none;
+    color: #cfc4b8;  
+    list-style-type: none; 
+    padding-right: 8px;              
+}
+a.LMChildSelect
+{
+	/* text-decoration: underline; */
+	font-style: italic;
+	font-weight: bolder;
+	
+}
+
+.childLM
+{
+    font-size: 7.5pt;
+    font-family: Arial, Verdana;
+    color: #cfc4b8;
+    text-align: center;
+    font-weight: bolder;
+    text-decoration: none;
+    display: none;     
+}
+
+A.LMChildTab
+{
+    font-style: italic; 
+}
+
+
+/**************************************** 
+ Tabpanel
+ ****************************************/
+.tabpanel .tab-row ul {
+   float: left;
+   width:100%;
+   background: url( /SRSAppWeb/images/tabs/tab_bottom.gif ) repeat-x bottom; 
+   line-height:normal; 
+   margin: 0;
+   padding: 0;
+   list-style-type: none;      
+}
+.tabpanel .tab-row li {
+    float: left;
+    font-family: verdana, arial, sans-serif;
+    font-size: 7px;
+    font-weight: bold;
+    padding: 5px 0 4px 0;
+    background-color: #eef4f1;
+    border-top: 1px solid #e0ede9;
+    border-bottom: 1px solid #e0ede9;
+	margin-bottom:10px;
+    white-space: nowrap;
+    float: left;        
+    list-style-type: none;	
+    margin: 0;
+    padding: 0;     
+    width:auto;
+    min-width:auto;
+    
+}
+.tabpanel .tab-row a:link, .tabpanel .tab-row a:visited {
+    float: left;        
+    background: #f3f3f3;
+    font-size: 7pt;
+    font-family: Verdana, Arial; 
+    line-height: 14px;
+    padding: 0px 10px 0px 10px;
+    margin-right: 0px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #666;
+    display: block;
+}
+.tabpanel .tab-row li.selected a:link, .tabpanel .tab-row a:visited.active {
+     background: #fff;
+     color: #000;
+}
+.tabpanel .tab-row a:hover {
+    background: #fff;
+    display: inline;
+}
+
+
+/**************************************** 
+ Error
+ ****************************************/
+.error {
+  color:red;
+  font-weight:bold
+}
+.error ul{
+  list-style-type: square;
+  margin-left:15px;
+}
+.error li {
+  /*
+  width: 100%;
+  padding-bottom: 0;
+  */
+}
+
+/* Error page specific style */
+.errorPageLabel {
+	min-width:100px;
+	max-width:100px;
+	text-align:right;
+	padding-right:10px;
+}
+
+.errorForm p{
+  clear: left;
+  margin: 0;
+  margin-bottom:4px;
+  padding: 2px;
+  padding-left: 140px; /*width of left column containing the label elements*/
+ }
+.errorForm label{
+  font-weight: bold;
+  float: left;
+  margin-left: -140px; /*width of left column*/
+  padding-left:1px;
+  width: 130px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+  background-color: #EEEEEE;    
+}
+.errorMessage {
+  border: 2px solid red;
+  width:100%;
+  padding:5px;
+  margin-top:10px;
+  margin-bottom:20px;
+  color:red;
+}
+
+.errorResolutionMessage {
+  color:green;
+  padding-bottom:20px
+}
+
+/**************************************** 
+ Warning message
+ ****************************************/
+.warningMessage {
+  border: 1px solid orange;
+  width:90%;
+  padding:5px;
+  margin-top:10px;
+  margin-bottom:10px;
+  vertical-align:centre;
+  color:orange;
+}
+
+/**************************************** 
+ Messages feedbackPanel
+ ****************************************/
+.feedbackPanel {
+  font-weight:bold
+}
+.feedbackPanel ul{
+  list-style-type: square;
+  margin-left:15px;
+  margin-top:0px;
+  margin-bottom:0px;
+}
+.feedbackPanelERROR {
+   color:red;
+}
+.feedbackPanelINFO {
+  color:green;
+}
+.feedbackPanelWARNING {
+  color:#993300;
+}
+
+/**************************************** 
+ Form styles
+ ****************************************/
+.formDivider {
+	border-top: 2px solid #1F2241;	
+	padding-top : 10px;	
+	padding-right: 10px;
+}
+.formDividerLight {
+	border-top: 1px solid #1F2241;	
+	padding-top : 10px;	
+	padding-right: 10px;
+}
+.number { 
+  text-align:right;
+}
+.number input {
+  text-align:right;
+}
+.button {
+  font-size: 7.5pt;
+  font-family: Verdana, Arial;
+}
+.fieldview {
+/*  border: 1px solid gray;
+  padding:3px;
+  background-color: #f0f0f0;*/ /* #ebebeb;*/
+  border: 1px dashed silver;
+  width:100%;
+  padding:3px;
+  background-color: #fbfbfb; /*  #f0f0f0 #ebebeb;*/
+  font-weight:normal;
+  font-size:8pt;
+  font-color:silver;
+  text-align:left;
+}
+.cssformDivider {
+  width: 99%;
+  height: 1px;
+  border-bottom: 1px solid #1F2241;
+}
+.cssform {
+ /* border-bottom: 1px dashed gray;
+  border-top: 1px dashed gray; */
+  margin-top:10px;
+  margin-right:20px;
+  padding-top:10px;
+  padding-bottom:10px;
+  width: 90%;
+}
+.cssform p{
+  clear: left;
+  margin: 0;
+  padding: 5px 0 8px 0;
+  padding-left: 185px; /*width of left column containing the label elements*/
+  height: 1%;
+}
+.cssform label{
+  font-weight: bold;
+  float: left;
+  margin-left: -185px; /*width of left column*/
+  width: 180px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+.cssform.left{
+  font-weight: normal;
+  margin-left:-185px; /*width of left column*/
+}
+
+.cssform input {
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+}
+.cssform.calculate {
+    background-color: #eaefef;
+}
+
+.cssform input[type="text"]{ /*width of text boxes. IE6 does not understand this attribute*/
+  width: 180px;
+}
+.cssform textarea{
+  width: 250px;  
+}
+.cssform.verySmallCol {
+	width:100px;
+	height:100%;
+}
+.cssform.smallCol {
+	width:140px;
+	height:100%;
+}
+.cssform.col {
+	width:180px;
+	height:100%;
+}
+.cssform.largeCol {
+	width:240px;
+	height:100%;
+}
+.cssform.veryLargeCol {
+	width:300px;
+	height:100%;
+}
+.cssform.veryVeryLargeCol {
+	width:360px;
+	height:100%;
+}
+.cssform.variableCol {
+	width:100%;
+}
+
+/*.threepxfix class below:
+Targets IE6- ONLY. Adds 3 pixel indent for multi-line form contents.
+to account for 3 pixel bug: http://www.positioniseverything.net/explorer/threepxtest.html
+*/
+* html .threepxfix{
+  margin-left: 3px;
+}
+/* Form component styles */
+input {
+ font-size: 7.5pt;
+ font-family: Verdana, Arial;
+}
+select {
+ font-size: 7.5pt;
+ font-family: Verdana, Arial;
+}
+/**************************************** 
+ Wicket - Wizard layout
+ ****************************************/
+.wicketExtensionsWizardInnerTable {
+	width: 98%;/*600px;*/
+	margin-left:1%;
+	margin-right:1%;
+	border: thin solid #1F2241;
+}
+.wicketExtensionsWizardHeaderRow {
+	height: 20px;
+}
+.wicketExtensionsWizardHeader {
+	border: thin solid #1F2241;
+}
+.wicketExtensionsWizardView {
+	border: thin solid #1F2241;
+}
+.wicketExtensionsWizardViewInner {
+	margin: 10 10 10 10;
+	width:100%;
+}
+.wicketExtensionsWizardViewRow {
+	height: 140px;
+}
+.wicketExtensionsWizardButtonBar {
+	text-align: right;
+}
+.wicketExtensionsWizardButtonBar input {
+	width: 80px;
+	font-weight: normal;
+    font-size: 7.5pt;
+    font-family: Verdana, Arial; 
+}
+.wicketExtensionsWizardHeaderTitle {
+	margin: 10 5 10 15;
+	font-weight: bold;
+	font-size: 120%;
+}
+.wicketExtensionsWizardHeaderSummary {
+	margin: 10 5 5 5;
+	font-style: italic;
+}
+/*Added by Pritam for Search Result*/
+.searchResT {
+	border-color: white;
+}
+
+.searchResT th{
+	font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    font-weight: bolder;
+    color: white;
+    background-color: #E6C256;
+    text-align: center;
+}
+
+.searchResT tr td{
+	font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    border: gray 1px solid;
+    border-collapse: collapse;
+}
+
+.tableCol_small {
+	  width:80px;
+	}
+	
+.tableCol_med {
+	  width:100px;
+	}
+	
+.tableCol_large {
+	  width:150px;
+	}
+	
+.colAlignCentre {
+  text-align:centre;
+ }
+
+
+/**************************************** 
+ Table layouts
+ ****************************************/
+.srsTable table {
+    font-size: 7.5pt;
+    font-family: Verdana, Arial;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.srsTable th {
+	border: gray 1px solid;
+    font-weight: bolder;
+    color: white;
+    background-color: #E6C256;
+    text-align: center;
+}
+.srsTable td {
+    border: gray 1px solid;
+    border-collapse: collapse;
+    height:22px;
+}
+
+table.filterTable {
+	font-size: 5pt;
+ 	margin-left:4px; 
+ 	margin-bottom:8px;
+ 	width:99%;
+}
+
+table.filterTable td {
+	padding-left:4px;
+	padding-top:1px;
+}
+
+/**************************************** 
+ Auto complete box
+ ****************************************/
+div.wicket-aa {
+	font-size: 8pt;
+  	font-family: Verdana, Arial;    
+	background-color: white;
+	border-width: 1px;
+	border-color: #cccccc;
+	border-style: solid;
+	padding: 2px;
+	margin: 1px 0 0 0;
+	text-align:left;
+		
+	height:146px;
+    overflow-y: scroll;
+
+    white-space: nowrap;
+    z-index: 10;	
+}
+
+div.wicket-aa ul { 
+    list-style:none;
+    padding: 
+    2px; margin:0; 
+}
+div.wicket-aa ul li.selected { 
+  background-color: #bcd5f7; 
+  padding: 2px; 
+  margin:0; 
+}
+
+span.red{	
+	color: red;	
+}
+
+/**************************************** 
+ Busy indicator style
+ ****************************************/
+#bysy_indicator {
+  display: none;
+  float: right;
+  background: white;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  z-index: 1000;
+  width: 100%;
+  font-weight: bold;
+  font-size: 1em;
+  color : black;
+}
+/**************************************** 
+ Context Panel specific style
+ ****************************************/
+.contextTable.headLabel {
+	font-size: 6.5pt;
+	font-family: Verdana, Arial;
+	font-weight:bold;
+	font-style:italic;
+	padding-left:1px;
+}
+
+.contextTable td {
+    vertical-align:top;
+}
+
+.contextTable select {
+	font-size: 6.5pt;
+	font-family: Verdana, Arial;
+	width: 120px;
+}
+
+.headLabel {
+	font-size: 6.5pt;
+	font-family: Verdana, Arial;
+	font-weight:bold;
+	font-style:italic;
+	padding-left:1px;
+}
+
+/*
+* Overlay style
+*/
+#overlay {
+	z-index: 10000;
+	filter: alpha(opacity=65); /*older IE*/
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=65); /* IE */
+	-moz-opacity: .65; /*older Mozilla*/
+	-khtml-opacity: 0.65;   /*older Safari*/
+	opacity: 0.65;   /*supported by current Mozilla, Safari, and Opera*/
+	background-color:#000000;
+	position:absolute; top:0px; left:0px; width:100%; height:100%; color:#FFFFFF; text-align:center; vertical-align:middle;
+	
+}
+.wicketExtensionsWizardOuterTable{
+ 	width: 100%;
+ 	height: 100%;
+ }
+ 
+/**
+  * GUI Component Style
+  */
+.GUIFieldLabel {
+	font-weight:bold;
+	width: inherit;
+	min-width: 150px;
+}
+
+.GUIFieldComponent {
+	padding-left: 15px; 
+}
+
+.GUIFieldPanel {
+}
+
+.GUIFieldContainer {
+	margin-top: 15px;
+	padding: 15px 15px 15px 15px; 
+}
+
+.GUIFieldContainer b {
+	font-weight: bold;
+	font-size: 90%;
+	text-transform: uppercase;
+}
+
+input.checkbox {
+    height: 10px;
+    width: 10px;
+    font-size: 50%;
+}
+
+.underlineTotal {
+  border-bottom: 3px double black;;
+  border-top: 1px black solid
+}
+

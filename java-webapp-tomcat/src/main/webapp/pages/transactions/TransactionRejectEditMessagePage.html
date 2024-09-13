@@ -1,0 +1,101 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+<wicket:extend>  
+<!-- <div wicket:id="searchPartyWindow"></div> -->
+<table class="contextTable" width="100%" border="0" style="cell-padding;margin-bottom:5px">	
+	<tr>
+		  <td width="11%"><span class="headLabel">Request Kind:</span></td> 
+	   	  <td width="27%">
+	   		<span wicket:id="requestKind">122121211</span>
+	      </td>
+	      
+		  <td width="10%"><span class="headLabel">Reject ID:</span></td> 
+	   	  <td width="15%">
+	   		<span wicket:id="rejectId">2010/01/05</span>
+	      </td>
+	      
+	      <td width="10%"><span class="headLabel">Agmt No:</span></td> 
+	   	  <td width="27%">
+	   		<span wicket:id="agreementNr">612</span>
+	      </td>
+	</tr>
+	<tr>
+		  <td width="11%" valign="top"><span class="headLabel">Contract Number:</span></td> 
+	   	  <td width="27%" valign="top">
+	   		<span wicket:id="contractNr">N/A</span>
+	      </td>
+	      
+	      <td width="10%" valign="top"><span class="headLabel">Time:</span></td> 
+	   	  <td width="15%" valign="top">
+	   		<span wicket:id="time">N/A</span>
+	      </td>
+
+             <td width="10%" valign="top"><span class="headLabel">Source System</span></td> 
+	   	  <td width="27%" valign="top">
+	   		<span wicket:id="sourceSystem">Asset Under Management</span>
+	      </td>
+	</tr>
+
+	<tr>
+		  <td width="11%"><span class="headLabel">Name:</span></td> 
+	   	  <td width="27%">
+	   		<span wicket:id="partyName">John Doe</span>
+	      </td>
+	      
+	      <td width="10%" valign="top"><span class="headLabel">Agreement Status:</span></td> 
+	   	  <td width="15%" valign="top">
+	   		<span wicket:id="agreementStatus">ClosedToNB</span>
+	      </td>
+	      
+	      <td width="10%" valign="top"><span class="headLabel">Consultant Code:</span></td> 
+	   	  <td width="27%" valign="top">
+	   		<span wicket:id="consCode">1111111111111</span>
+	      </td>
+	</tr>
+		<tr>
+		  <td width="11%" valign="top"><span class="headLabel">Error Message:</span></td> 
+	   	  <td width="27%" valign="top"><b>
+	   		<span wicket:id="errorMessage">Error description here</span></b>
+	      </td>
+	      
+	      <td width="10%" valign="top"><span class="headLabel">Batch ID:</span></td> 
+	   	  <td width="15%" valign="top">
+	   		<span wicket:id="batchId">PYK1802</span>
+	      </td>
+
+             <td width="10%" valign="top"><span class="headLabel">Batch Line Nr:</span></td> 
+	   	  <td width="27%" valign="top">
+	   		<span wicket:id="batchLineNr">120</span>
+	      </td>
+	</tr>
+</table>
+
+<br/>	
+<div class="formDivider"/>
+		
+<form wicket:id="pageForm">
+	<div wicket:id="fieldsPanel"></div>
+	
+	
+	<div wicket:id="editmessage"></div>
+	 
+	<div wicket:id="errorMessages" class="feedbackPanel"></div>
+	
+	<hr/>
+	<table>
+		<tr><td>
+		<button wicket:id="saveButton">Save</button>
+		<button type="button" wicket:id="cancelButton" style="margin-left:50px">Cancel Reject</button>
+		</td></tr>
+	</table>
+</form>
+
+</wicket:extend>
+</body>
+</html>

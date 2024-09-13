@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Agreement Details Panel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="GENERATOR" content="Rational Application Developer">
+  <wicket:link>
+		<script type="text/javascript" src="/SRSAppWeb/js/jquery.js"></script>
+		<script type="text/javascript" src="/SRSAppWeb/js/jquery.blockui.js"></script>
+	</wicket:link>
+</head>
+<body>
+<wicket:extend>
+
+	
+	<form wicket:id="searchForm">
+	
+	<br/>
+	<div class="GUIFieldContainer">
+		<b>Agreement Details</b>
+		<hr/>
+		<table>
+			<tr>
+				<td valign="top">
+					<table><tr wicket:id="leftPanel"/></table>
+				</td>
+				<td valign="top">
+					<table><tr wicket:id="rightPanel"/></table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!-- <div wicket:id="earlyDebitsContainer" class="GUIFieldContainer">
+		<b>EARLY DEBITS</b>
+		<hr/>
+		<table cellspacing="2px">
+			<tr>
+				<td valign="top">
+					<table><tr wicket:id="earlyDebitsPanel"/></table>
+				</td>
+			</tr>
+		</table>
+	</div> -->
+	<div wicket:id="authLimitsContainer" class="GUIFieldContainer">
+		<b>AUTHORISATION LIMTS</b>
+		<hr/>
+		<table cellspacing="2px;">
+			<tr>
+				<td valign="top">
+					<table><tr wicket:id="preauthPanel"/></table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div wicket:id="fitAndProperContainer" class="GUIFieldContainer">
+		<b>FIT AND PROPER WAIVERS</b>
+		<hr/>
+		<table cellspacing="2px;">
+			<tr>
+				<td valign="middle">
+					<table><tr height="25px;" wicket:id="fitPropLeftPanel"/></table>
+				</td>
+				<td valign="middle">
+					<table><tr  height="25px;" wicket:id="fitPropRightPanel"/></table>
+				</td>
+			</tr>
+		</table>
+	</div>
+		<div wicket:id="agreementHierarcyAdd"></div>
+	</form>
+</wicket:extend>
+</body>
+</html>

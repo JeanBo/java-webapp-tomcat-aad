@@ -1,0 +1,86 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+</head>
+
+<body>
+
+ <div id="maincontent">
+	<wicket:panel>
+  		<form wicket:id="dpeExtractForm" >
+		
+		<table width="100%">
+		<hr/>
+		<tr>
+		  <td colspan="1" width="170px">
+		  <font color="red">*</font><span wicket:id="lblQualityCentreId">Quality Centre Id:</span></td>
+		  <td colspan="1"><div style="padding-bottom: 5px"> 
+   			<div wicket:id="qualityCentreId"></div></div>
+   			</td>
+   		</tr>
+   		<tr><td colspan="2" align="center" style="background-color:#f3f3f3;"><font style="font-style: italic;font-weight: bold">
+		SEARCH CRITERIA</font></td></tr>
+		</table>
+		<table>
+		<tr>
+		<td><span wicket:id="lblCommKinds">Commission Kinds:</span></td>
+		<td><div wicket:id="commKinds"></div></td>
+		</tr>
+		<tr>
+		<td><span wicket:id="lblAgreementKinds">Agreement Kinds:</span></td>
+		<td><div wicket:id="agreementKinds"></div></td>
+		</tr>
+		<tr>
+		<td><span wicket:id="lblProductReferences">Product references:</span></td>
+		<td><div wicket:id="productReferences"></div></td>
+		</tr>
+		<tr>
+		<td><span wicket:id="lblAgreementNumbers">Agreement Numbers:</span></td>
+		<td><div wicket:id="agreementNumbers"></div></td>
+		</tr>
+		<tr>
+		<td><span wicket:id="lblBenefitTypes">Benefit Types:</span></td>
+		<td><div wicket:id="benefitTypes"></div></td>
+		</tr>
+		<tr>
+		<td><span wicket:id="lblPremiumFrequencies">Premium Frequencies:</span></td>
+		<td><div wicket:id="premiumFrequencies"></div></td>
+		</tr>
+		<tr>
+		<td><span wicket:id="lblContrIncrIndicators">Contribution Incr. Indicators:</span></td>
+		<td><div wicket:id="contrIncrIndicators"></div></td>
+		</tr>
+		</table>
+		<hr>
+		<table width="80%">
+		<tr>
+		<td><span wicket:id="lblDateType">Date Type:</span></td>
+		<td><div wicket:id="dateType"></div></td>&nbsp;&nbsp;
+		<td><span wicket:id="lblDateFrom">Date From:</span></td>
+		<td><div wicket:id="dateFrom"></div></td>&nbsp;&nbsp;
+		<td><span wicket:id="lblDateTo">Date To:</span></td>
+		<td><div wicket:id="dateTo"></div></td> 
+		</tr>
+		</table>
+		<hr>
+		<table width="100%">
+		<tr><td width="10%"><span wicket:id="lblEmailId">Email id :</span></td><td width="90%"><div wicket:id="emailId"></div></td></tr>
+		</table>
+		<table align="center">
+		<div wicket:id="generateBtn"></div>
+		</table>
+		</form>
+	</wicket:panel>
+	<hr/>
+ </div>
+  
+</body>
+</html>

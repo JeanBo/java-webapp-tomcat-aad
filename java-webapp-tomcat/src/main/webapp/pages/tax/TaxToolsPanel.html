@@ -1,0 +1,41 @@
+<wicket:panel>		   
+
+<br/>
+<br/>
+<hr/>
+<br/>
+
+<form wicket:id="xmlForm">
+
+<table cellpadding="5px" cellspacing="5px">	
+	<tr>
+		<td width="200" align="right" class="GUIFieldLabel">Queue Manager:</td>
+		<td width="200"><span wicket:id="queueManager">LMD1USRS</span></td>
+		<td width="200" align="right" class="GUIFieldLabel">Queue:</td>
+		<td width="200"><span wicket:id="queueName">LQ.LPB.PENDINGXML</span></td>
+	</tr>
+	
+	<tr>
+		<td align="right" class="GUIFieldLabel">Messages on Queue:</td><td><span wicket:id="queueCount">1300</span></td>
+		<td align="right">
+			<div wicket:id="backupModalWindow"/>
+			<input wicket:id="backupButton" type="button" value="Backup to File"/> 
+		</td>
+		<td align="left"><input wicket:id="clearButton" type="button" value="Clear the Queue"/> </td>
+	</tr>
+	
+	
+	<div wicket:id="clearModalWindow"/>
+</table>
+
+<br/>
+<hr/>
+
+<!-- <table>
+<tr><td><input type="submit" value="submit" wicket:id="submit"></td></tr>
+</table>
+ -->
+ 
+</form>
+
+</wicket:panel>

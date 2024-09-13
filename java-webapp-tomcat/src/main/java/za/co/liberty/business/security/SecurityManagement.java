@@ -22,9 +22,9 @@ import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
 
-import com.ibm.websphere.security.CustomRegistryException;
-import com.ibm.websphere.security.EntryNotFoundException;
-import com.ibm.websphere.security.UserRegistry;
+//import com.ibm.websphere.security.CustomRegistryException;
+//import com.ibm.websphere.security.EntryNotFoundException;
+//import com.ibm.websphere.security.UserRegistry;
 
 import za.co.liberty.database.DBAccessor;
 import za.co.liberty.dto.security.SecurityPageActionDTO;
@@ -947,31 +947,31 @@ public class SecurityManagement implements ISecurityManagement {
 	 * @throws InvalidUserIdException
 	 */
 	public List<String> getTamRolesForUacfId(String uacfID) throws InvalidUserIdException , CommunicationException{
-		String userName = null;
-		try {
-			InitialContext ctx = new InitialContext();		
-			UserRegistry userRegistry = (UserRegistry) ctx.lookup("UserRegistry");			
-			userName = userRegistry.getUserDisplayName("cn="
-					+ uacfID + ",O=LIBERTY");
-			List<String> list = userRegistry.getGroupsForUser("cn="+uacfID+ ",O=LIBERTY");
-			List<String> newList = new ArrayList<String>();
-			if (list!=null && list.size()>0) {
-				for (String s : list) {
-					newList.add(extractRoleNameFromTamRole(s));
-				}
-			}
-			return newList;
-			
-		} catch (NamingException e) {			
-			throw new CommunicationException(e);
-		} catch (EntryNotFoundException e) {
-			throw new InvalidUserIdException("User("+uacfID+") not found on TAM");
-		} catch (CustomRegistryException e) {
-			throw new CommunicationException(e);
-		} catch (RemoteException e) {
-			throw new CommunicationException(e);
-		}
-
+//		String userName = null;
+//		try {
+//			InitialContext ctx = new InitialContext();
+//			UserRegistry userRegistry = (UserRegistry) ctx.lookup("UserRegistry");
+//			userName = userRegistry.getUserDisplayName("cn="
+//					+ uacfID + ",O=LIBERTY");
+//			List<String> list = userRegistry.getGroupsForUser("cn="+uacfID+ ",O=LIBERTY");
+//			List<String> newList = new ArrayList<String>();
+//			if (list!=null && list.size()>0) {
+//				for (String s : list) {
+//					newList.add(extractRoleNameFromTamRole(s));
+//				}
+//			}
+//			return newList;
+//
+//		} catch (NamingException e) {
+//			throw new CommunicationException(e);
+//		} catch (EntryNotFoundException e) {
+//			throw new InvalidUserIdException("User("+uacfID+") not found on TAM");
+//		} catch (CustomRegistryException e) {
+//			throw new CommunicationException(e);
+//		} catch (RemoteException e) {
+//			throw new CommunicationException(e);
+//		}
+		return Collections.emptyList();
 	}
 	
 	/**
@@ -983,25 +983,26 @@ public class SecurityManagement implements ISecurityManagement {
 	 * @throws InvalidUserIdException
 	 */
 	public String userExistsOnTam(String uacfID) throws InvalidUserIdException , CommunicationException{
-		String userName = null;
-		try {
-			InitialContext ctx = new InitialContext();		
-			UserRegistry userRegistry = (UserRegistry) ctx.lookup("UserRegistry");			
-			userName = userRegistry.getUserDisplayName("cn="
-					+ uacfID + ",O=LIBERTY");			
-		} catch (NamingException e) {			
-			throw new CommunicationException(e);
-		} catch (EntryNotFoundException e) {
-			throw new InvalidUserIdException("User("+uacfID+") not found on TAM");
-		} catch (CustomRegistryException e) {
-			throw new CommunicationException(e);
-		} catch (RemoteException e) {
-			throw new CommunicationException(e);
-		}
-		if(userName == null || userName.equals("")){
-			throw new InvalidUserIdException("User("+uacfID+") not found on TAM");
-		}
-		return userName;
+//		String userName = null;
+//		try {
+//			InitialContext ctx = new InitialContext();
+//			UserRegistry userRegistry = (UserRegistry) ctx.lookup("UserRegistry");
+//			userName = userRegistry.getUserDisplayName("cn="
+//					+ uacfID + ",O=LIBERTY");
+//		} catch (NamingException e) {
+//			throw new CommunicationException(e);
+//		} catch (EntryNotFoundException e) {
+//			throw new InvalidUserIdException("User("+uacfID+") not found on TAM");
+//		} catch (CustomRegistryException e) {
+//			throw new CommunicationException(e);
+//		} catch (RemoteException e) {
+//			throw new CommunicationException(e);
+//		}
+//		if(userName == null || userName.equals("")){
+//			throw new InvalidUserIdException("User("+uacfID+") not found on TAM");
+//		}
+//		return userName;
+		return uacfID;
 	}
 	
 	/**

@@ -1,0 +1,105 @@
+<!--Force IE6 into quirks mode with this comment tag-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+
+</head>
+<body>
+ <!-- Left -->
+  <div id="framecontentLeft">
+    <div style="padding-top: 10px">
+      <center><img src="/SRSAppWeb/images/bpo/Liberty_SRS_New.gif" border="0" alt=""/></center>
+    </div>
+
+	<div class="linkMenu" id="menucontainer" >
+	  <ul>
+	    <hr id="linkMenuLine"/>
+		
+			<li>
+			  <a wicket:id="menuitem" href="../../app/Home/">
+			  Home</a>
+			</li>
+			<hr id="linkMenuLine"/>
+		
+			<li>
+			  <a wicket:id="menuitem" href="../../app/ContractNoEnquiyPage/">
+			  Contract Number Enquiry</a>
+			</li>
+			<hr id="linkMenuLine"/>
+		
+			<li>
+			  <a wicket:id="menuitem" href="../../app/OldSRS/">
+			  Old SRS</a>
+			</li>
+			<hr id="linkMenuLine"/>
+		
+	  </ul>
+	</div>
+  </div> <!-- end framecontentLeft -->
+
+  <!-- Top -->
+  <div id="framecontentTop">
+      <div id="TopBanner">
+        <p align="center">
+          <span id="TopBannerHeader">SRS Application</span>
+          <br/><span wicket:id="pageName"></span>
+        </p>
+      </div> <!-- end TopBanner -->
+  </div> <!-- end framecontentTop -->
+   <!-- Content -->
+ <div id="maincontent">
+
+	<wicket:panel>
+		<div class="errorMessage">
+			<img src="/SRSAppWeb/images/Warning_icon.png" style="float:left;"/>
+			<div style="margin-left:50px" wicket:id="errorType">
+			An unexpected system error occurred while trying to process your request.<br/>
+			</div>
+		</div>
+		
+		<div class="errorResolutionMessage">
+			Use the incident nr as your reference if you wish to report this error.
+		</div>
+				
+		<div class="errorForm" >
+			<p>
+				<label>Incident Nr:</label>
+				<span wicket:id="incidentReference">ERR-08/09/03-08:52:10</span>
+			</p>
+			<p>
+				<label>Error Message:</label>
+				<span wicket:id="errorMessage">
+				bla bla bla bbb bla
+				</span>
+			</p>
+			<p>
+				<label>Caused by Message:</label>
+				<span wicket:id="technicalMessage">Some technical Message</span>
+			</p>
+			<p>
+				<label>Page:</label>
+				<span wicket:id="pageName">AgreementPage.class</span>
+			</p>
+			
+			<p wicket:id="moreDiv">
+					<label>Error Cause:</label>
+					<!-- white-space:pre;overflow:auto; -->
+					<textarea wicket:id="causeText" rows="22" style="width:100%;margin-right:10px">
+					</textarea>
+			</p>
+
+		</div>
+
+	</wicket:panel>
+	
+	</div>
+
+</body>
+</html>

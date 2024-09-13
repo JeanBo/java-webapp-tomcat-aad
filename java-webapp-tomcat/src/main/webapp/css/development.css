@@ -1,0 +1,225 @@
+/*
+Description : Temporary style sheet which is used to
+              overide other styles while developing.
+                
+*/
+
+/**************************************** 
+ Older styles 
+ ****************************************/
+/*
+.highlight {color:#E17000}
+.subdued {color:#999}
+.success {color:#390;font-weight:bold}
+.caption {color:#999;font-size:11px}
+.date {font-weight: bold; font-size:82%;color:#bbb;display:block;letter-spacing: 1px}
+*/
+
+/* Layout Definition */
+
+/* Menu item Definition */
+.wireframemenu{
+  position: absolute;
+  border: 1px solid #C0C0C0;
+  background-color: #eae9e9;
+  /*  background-color: #F4F3F9;*/
+  border-bottom-width: 0;
+  width: 180px;
+}
+
+* html .wireframemenu{ /*IE only rule. Original menu width minus all left/right paddings */
+  width: 174px;
+}
+
+.wireframemenu ul{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.wireframemenu a{
+  font: bold 13px Verdana;
+  padding: 4px 3px;
+  display: block;
+  width: 100%; /*Define width for IE6's sake*/
+  color: #595959;
+  text-decoration: none;
+  border-bottom: 1px solid #C0C0C0;
+}
+
+.wireframemenu a:visited{
+  color: #595959;
+}
+
+html>body .wireframemenu a{ /*Non IE rule*/
+width: auto;
+}
+
+.wireframemenu a:hover{
+  /* background-color: #F8FBBD; */
+  background-color: #FFFFFE;
+  color: black;
+}
+
+/* Field / Form / Font styles */
+/*
+.labelcell { 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ color: #3670A7; 
+ background-color: transparent; 
+ width: 220px; 
+} 
+
+.fieldcell { 
+ background-color: #F2F7FB; 
+ color: #000000; 
+ text-align: right; 
+ margin-right: 0px; 
+ padding-right: 0px; 
+} 
+
+.smalllabelcell { 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: transparent; 
+ color: #3670A7; 
+ width: 100px; 
+} 
+
+fieldcell input { 
+ width: 200px; 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: #D7E5F2; 
+ border:1px solid #B4D6E6;
+ background: url(/SRSAppWeb/images/textboxbg.jpg) repeat-x;
+ color: #102132; 
+ border: 1px solid #284279; 
+ margin-right: 0px; 
+} 
+
+.smallfieldcell { 
+ background-color: #F2F7FB; 
+ color: #000000; 
+ text-align: right; 
+  
+}
+.smallfieldcellError { 
+ background-color: #ff8080; 
+ color: #000000; 
+ text-align: right; 
+  
+}
+
+.smallfieldcell input { 
+ width: 100px; 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: #D7E5F2; 
+ color: #102132; 
+ border: 1px solid #284279; 
+} 
+
+.smallfieldcell select { 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: #D7E5F2; 
+ color: #102132; 
+ border: 1px solid #284279; 
+}
+
+.button input { 
+width: 100px; 
+ font: 11px Verdana, Geneva, Arial, Helvetica, sans-serif; 
+ background-color: #b0d7fd; 
+ color: #102132; 
+ border: 1px solid #284279; 
+ margin-left: 12px; 
+ margin-top: 3px; 
+ margin-bottom: 2px;
+ float: right;
+}
+*/
+/*
+.foorm {
+	border: 1px solid #B4D6E6; 
+	background-color: #FAFAFA;
+	vertical-align: baseline;
+	width: 95%;
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+.foorm label {
+	display:block;
+	font-weight:bold;
+	margin:5px 0;
+	color: #333333;
+}
+.foorm input {
+	padding: 0 3px;
+	border:1px solid #B4D6E6;
+	background: url(/SRSAppWeb/images/textboxbg.jpg) repeat-x;
+	height: 25px;
+	line-height: 25px;
+}
+.foorm select {
+	border:1px solid #B4D6E6;
+	width: 100px;
+}
+.foorm textarea {
+	width:95%;
+	padding:2px;
+	border:1px solid #B4D6E6;
+	height:100px;
+	display: inline;
+	margin: 0 0 5px 0; 
+}
+.foorm input.button { 
+	height: 24px;
+	border: 0; 
+	background: #034f8a url(/SRSAppWeb/images/buttonbg.jpg) repeat-x;
+	color: White;
+	font-weight: bold;
+}
+
+/* TAB PANEL STYLES */
+/* VARIATION 1 TAB PANEL STYLES */
+div.tabpanel1 div.tab-row{
+  float:left;
+  width:100%;
+  background:#DAE0D2 url("/SRSAppWeb/images/tabs/tabs1/bg.gif") repeat-x bottom;
+  line-height:normal;
+  }
+
+div.tabpanel1 div.tab-row ul {
+  margin:0;
+  padding:10px 10px 0;
+  list-style:none;
+  }
+  
+div.tabpanel1 div.tab-row li {
+  float:left;
+  background:url("/SRSAppWeb/images/tabs/tabs1/left.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 9px;
+  }
+  
+div.tabpanel1 div.tab-row a {
+  display:block;
+  background:url("/SRSAppWeb/images/tabs/tabs1/right.gif") no-repeat right top;
+  padding:5px 15px 4px 6px;
+  text-decoration:none;
+  font-weight:bold;
+  color:#765;
+  white-space:nowrap;
+  }
+  
+div.tabpanel1 div.tab-row a:hover {
+  color:#333;
+  }
+  
+div.tabpanel1 div.tab-row li.selected {
+  background-image:url("/SRSAppWeb/images/tabs/tabs1/left_on.gif");
+  }
+  
+div.tabpanel1 div.tab-row li.selected a {
+  background-image:url("/SRSAppWeb/images/tabs/tabs1/right_on.gif");
+  color:#333;
+  padding-bottom:5px;
+  }

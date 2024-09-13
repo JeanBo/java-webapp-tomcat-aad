@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>SRS Application</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link href="/SRSAppWeb/css/BPO_Style.css" rel="stylesheet"
+	type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS.css" rel="stylesheet" type="text/css"></link>
+<link href="/SRSAppWeb/css/SRS layout.css" rel="stylesheet"
+	type="text/css"></link>
+<link href="/SRSAppWeb/css/dialog_box.css" rel="stylesheet"
+	type="text/css"></link>
+
+<script type="text/javascript" src="/SRSAppWeb/js/BusyIndicator.js"></script>
+<script type="text/javascript" src="/SRSAppWeb/js/dialog_box.js"></script>
+
+</head>
+
+<body>
+<div id="overlay" style="display: none;">
+<table width='100%' height='100%'>
+	<tr>
+		<td align='center' valign='middle' width='100%' height='100%'>Please
+		be patient, we are busy loading your request<br />
+		<img src="/SRSAppWeb/images/loading2.gif" /></td>
+	</tr>
+</table>
+</div>
+<div id="mainBorder"><!-- Left -->
+<div id="framecontentLeft">
+<div style="padding-top: 10px">
+<center><img src="/SRSAppWeb/images/bpo/Liberty_SRS_New.gif"
+	border="0" alt="" /></center>
+</div>
+<div wicket:id="menucontainer">
+<div class="linkMenu">
+<ul>
+	<hr id="linkMenuLine" />
+	<li><a href="#agreement">Agreements</a></li>
+	<hr id="linkMenuLine" />
+	<li><a href="#party">Party</a></li>
+	<hr id="linkMenuLine" />
+	<li><a href="#transaction">Transactions</a></li>
+	<hr id="linkMenuLine" />
+</ul>
+</div>
+<!-- end linkMenu --></div>
+<!-- end menucontainer --></div>
+<!-- end framecontentLeft --> <!-- Top -->
+<div id="framecontentTop">
+<div id="TopBanner">
+<table width="100%" class="TopBanner">
+	<tr>
+		<td width="30%" align="left"><label wicket:id="userIdLabel">User:</label>
+		<span wicket:id="userId">JZB0608</span></td>
+		<td width="40%" align="center"><span id="TopBannerHeader">SRS
+		Application <i><span wicket:id="systemMode"></span></i></span></td>
+		<td width="30%" align="right"><label
+			wicket:id="applicationVersionLabel">Version:</label> <span
+			wicket:id="applicationVersion" class="TopBanner_Info">4.0.0</span></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top"><label wicket:id="serverNameLabel">Server:</label>
+		<span wicket:id="serverName">jzb0608</span></td>
+		<td align="center" valign="top"><span id="TopBannerHeader"
+			wicket:id="pageName">Base page</span></td>
+		<td align="right" valign="top">
+		<div id="bysy_indicator" style="width:80px">Busy ... &nbsp;<img
+			src="/SRSAppWeb/images/busy_indicator.gif" />&nbsp;</div>
+		</td>
+	</tr>
+</table>
+</div>
+<!-- end TopBanner --></div>
+<!-- end framecontentTop --> <!-- Content -->
+<div id="maincontent"><span wicket:id="messages" class="feedbackPanel"></span>
+
+<wicket:extend>
+<table cellpadding = "2" cellspacing="2">
+	<tr><td valign="top">
+			<table style="border: 1px solid #eee" >
+				<tr><td>
+	  			  <div wicket:id="hierarchyTree" class="tree"></div>
+				</td></tr>
+			</table>
+		</td>
+	    <td valign="top">
+			<div wicket:id="hierarchyTreeNodeInfo"></div>
+			<div wicket:id="displayNodeDetail"></div>
+	    </td></tr>	
+</table>
+</wicket:extend></div>
+<!-- end maincontent --></div>
+</body>
+</html>

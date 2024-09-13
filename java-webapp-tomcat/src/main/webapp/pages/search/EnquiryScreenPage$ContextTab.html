@@ -1,0 +1,50 @@
+<html>
+<br />
+<wicket:panel>
+	<form wicket:id="searchForm">
+	<table width="100%">
+		<tr>
+			<td><select wicket:id="contextType">
+				<option>a</option>
+				<option>b</option>
+			</select></td>
+			<td><select wicket:id="requestCategory">
+				<option>a</option>
+				<option>b</option>
+			</select></td>
+			<td><select wicket:id="requestKind">
+				<option>a</option>
+				<option>b</option>
+			</select></td>
+			<td><select wicket:id="requestStatus">
+				<option>a</option>
+				<option>b</option>
+			</select></td>
+		</tr>
+		<tr>
+			<td><select wicket:id="agreementKind">
+				<option>a</option>
+				<option>b</option>
+			</select></td>
+			<td><select wicket:id="periodType">
+				<option>a</option>
+				<option>b</option>
+			</select></td>
+			<td><select wicket:id="period">
+				<option>a</option>
+				<option>b</option>
+			</select></td>
+			<td><input type="text" wicket:id="startDate" /> <input
+				type="text" wicket:id="endDate" /></td>
+		</tr>
+		<tr>
+			<td colspan="4"><input type="submit" value="Search" /></td>
+		</tr>
+	</table>
+	</form>
+	<table width="100%" class="dataview" cellspacing="0" wicket:id="requestResultTable">
+		[table]
+	</table>
+
+</wicket:panel>
+</html>

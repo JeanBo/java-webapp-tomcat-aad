@@ -1,0 +1,77 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link href="/SRSAppWeb/css/BPO_Style.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/SRS.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/SRS layout.css"	rel="stylesheet" type="text/css"></link>
+		<link href="/SRSAppWeb/css/development.css"	rel="stylesheet" type="text/css"></link>
+	</head>
+
+	<body>
+		 <div id="maincontent">
+			<wicket:panel>
+			<wicket:extend>
+				<div wicket:id="xmlMessageWindow"></div>
+				<div wicket:id="editMessageWindow"></div>
+				
+				<form wicket:id="rejectsSearchForm">
+					<table>
+						<tr>
+							<td width="200px">
+								<span class="headLabel">From</span><br/>
+								<input wicket:id="fromDate" type = "text"/>
+								
+							</td>
+							<td  width="200px">
+								<span class="headLabel">To</span><br/>
+								<input wicket:id="toDate" type="text"/>
+							
+							</td>
+							
+							<td style="padding-left:10px">
+								<span class="headLabel">Request Kind</span><br/>
+								<select wicket:id="transactionType"></select>
+							</td>
+							<td style="padding-left:10px">
+								<span class="headLabel">Flag</span><br/>
+								<select wicket:id="flagType"></select>
+							</td>
+							<td style="padding-left:10px">
+								<span class="headLabel">Component Id</span><br/>
+								<select wicket:id = "componentId" style="width:170px"></select>
+							</td>
+							
+						</tr>
+						
+						
+						<tr>
+							<td>
+								<span class="headLabel">Contract/Scheme Number</span><br/>
+								<input wicket:id="contractNumber" type = "text"/>
+							</td>
+							<td>
+								<span class="headLabel">Agreement Number Type</span><br/>
+								<select wicket:id = "agreementType" style="width:170px"></select>
+							</td>
+							
+							<td colspan="3" style="padding-left:10px">
+								<span class="headLabel">Agreement Number</span><br/>
+								<input wicket:id="agreementNr" type = "text"/>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-top:20px" colspan="5">
+								<button wicket:id="search" type="submit">Search</button>
+							</td>
+						</tr>
+					</table>
+					<br/>
+					<div class="formDividerLight" />
+				</form>
+				<div wicket:id="searchResultPanel" style="width:100%;font-size: 8pt; font-family: Calibri, Arial;"></div>
+				
+				</wicket:extend>
+			</wicket:panel>
+		</div>
+	</body>
+</html>	
