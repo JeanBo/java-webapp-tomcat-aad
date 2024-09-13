@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Message xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	noNamespaceSchemaLocation="integration.xsd" systemId="localhost"
+	applicationId="SRS" timeStamp="2021-01-07T15:16:51" userId="SRS"
+	moduleId="" componentId="Group Ipp or Astute">
+	<CrfActionGroup></CrfActionGroup>
+	<COMMAND>
+		<ProcessVariableEarningOrDeductionRequest>
+			<aEarningOrDeduction>
+				<EarningOrDeduction>
+					<earningType>9999</earningType>
+					<thirteenDigitConsultantCode>4290104290061</thirteenDigitConsultantCode>
+					<startDate>2021-01-07</startDate>
+					<description>Astute Dec 1927                                   </description>
+					<amount>
+						<amount>000000007.050</amount>
+						<currencyCode>Rand</currencyCode>
+					</amount>
+				</EarningOrDeduction>
+			</aEarningOrDeduction>
+		</ProcessVariableEarningOrDeductionRequest>
+	</COMMAND>
+</Message>

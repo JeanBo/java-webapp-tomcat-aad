@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<Message xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	noNamespaceSchemaLocation="integration.xsd" systemId="localhost"
+	applicationId="SRS" timeStamp="2021-07-01T12:59:25" userId="SRS"
+	moduleId="" componentId="Blueprint Corporate Allowance">
+	<CrfActionGroup></CrfActionGroup>
+	<COMMAND>
+		<DistributePolicyEarningsRequest>
+			<aPreTransaction>
+				<PreTransaction>
+					<commissionKind>40</commissionKind>
+					<compassCode>388909</compassCode>
+					<productReference>95</productReference>
+					<movementEffectiveDate>2021-07-01</movementEffectiveDate>
+					<movementCode>02</movementCode>
+					<amount>
+						<amount>100</amount>
+						<currencyCode>Rand</currencyCode>
+					</amount>
+					<policyNumber>0030111029</policyNumber>
+					<premiumFrequency>1</premiumFrequency>
+					<contributionIncreaseIndicator>0</contributionIncreaseIndicator>
+					<policyStartDate>2021-07-01</policyStartDate>
+					<growthPensionIndicator>false</growthPensionIndicator>
+					<balanceofFYIndicator>false</balanceofFYIndicator>
+					<numberOfMonths>0</numberOfMonths>
+					<lifeAssuredName>PAT SMITH PLANT HIRE CC                           </lifeAssuredName>
+					<benefitType>0</benefitType>
+					<description></description>
+					<requestedDate>2021-07-01</requestedDate>
+					<commissionDiscountFactor>0</commissionDiscountFactor>
+					<guardBankFundCode></guardBankFundCode>
+					<compassTransactionCode></compassTransactionCode>
+					<compassMovementTransactionCode></compassMovementTransactionCode>
+					<policyInForceIndicator>2</policyInForceIndicator>
+					<GLCompanyCode>LLAL</GLCompanyCode>
+					<CommissionFrequency>0</CommissionFrequency>
+					<SourceSystemReference></SourceSystemReference>
+					<BusinessUnit>LLA</BusinessUnit>
+				</PreTransaction>
+			</aPreTransaction>
+		</DistributePolicyEarningsRequest>
+	</COMMAND>
+</Message>

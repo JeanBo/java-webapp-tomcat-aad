@@ -1,0 +1,206 @@
+package za.co.liberty.web.pages;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.NamingException;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.wicket.RequestCycle;
+import org.apache.wicket.Response;
+import org.apache.wicket.ajax.AbstractAjaxTimerBehavior;
+import org.apache.wicket.ajax.AjaxEventBehavior;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.extensions.ajax.markup.html.tabs.AjaxTabbedPanel;
+import org.apache.wicket.extensions.markup.html.tabs.AbstractTab;
+import org.apache.wicket.extensions.markup.html.tabs.ITab;
+import org.apache.wicket.extensions.markup.html.tabs.TabbedPanel;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.protocol.http.WebResponse;
+import org.apache.wicket.request.target.basic.RedirectRequestTarget;
+import org.apache.wicket.request.target.resource.ResourceStreamRequestTarget;
+import org.apache.wicket.util.file.File;
+import org.apache.wicket.util.io.IOUtils;
+import org.apache.wicket.util.resource.AbstractResourceStream;
+import org.apache.wicket.util.resource.AbstractResourceStreamWriter;
+import org.apache.wicket.util.resource.FileResourceStream;
+import org.apache.wicket.util.resource.IResourceStream;
+import org.apache.wicket.util.resource.IResourceStreamWriter;
+import org.apache.wicket.util.resource.StringResourceStream;
+import org.apache.wicket.util.time.Duration;
+
+import za.co.liberty.business.guicontrollers.request.IRequestEnquiryGuiController;
+import za.co.liberty.business.webservice.sbi.ISBIDocumentLocationManagement;
+import za.co.liberty.dto.agreement.request.RequestEnquiryRowDTO;
+import za.co.liberty.dto.gui.request.RequestEnquiryDTO;
+import za.co.liberty.dto.userprofiles.ContextDTO;
+import za.co.liberty.dto.userprofiles.ISessionUserProfile;
+import za.co.liberty.dto.userprofiles.TeamDTO;
+import za.co.liberty.exceptions.data.DataNotFoundException;
+import za.co.liberty.helpers.lookup.ServiceLocator;
+import za.co.liberty.interfaces.agreements.requests.RequestDateType;
+import za.co.liberty.interfaces.agreements.requests.RequestKindType;
+import za.co.liberty.interfaces.agreements.requests.RequestStatusType;
+import za.co.liberty.interfaces.gui.request.RequestEnquiryContextType;
+import za.co.liberty.interfaces.services.SBIDocumentType;
+import za.co.liberty.web.data.enums.ContextType;
+import za.co.liberty.web.data.enums.EditStateType;
+import za.co.liberty.web.pages.BasePage;
+import za.co.liberty.web.pages.request.model.RequestEnquiryModel;
+import za.co.liberty.web.system.SRSAuthWebSession;
+import za.co.liberty.web.wicket.markup.html.tabs.CachingTab;
+
+/**
+ * <p>This page deals with all searches relating to Requests and also allows
+ * for the approval of them.</p>
+ * 
+ * @author JZB0608 - 24 Nov 2009
+ *
+ */
+public class TestBinaryPage extends BasePage {
+
+	private static final long serialVersionUID = -3659488245709157662L;
+
+	private transient IRequestEnquiryGuiController guiController;
+		
+	
+	/**
+	 * Default constructor.
+	 *
+	 */
+	public TestBinaryPage() {
+		this.setEditState(EditStateType.VIEW, null);
+		//   \\BPMOB02\BPO\6B10CA2D-FCAC-46BC-8CE3-58F031E5617B1.PDF
+		
+//		add(new AjaxEventBehavior("onload") {
+//
+//			private static final long serialVersionUID = 1L;
+//
+//			@Override
+//			protected void onEvent(AjaxRequestTarget ajaxTarget) {
+////				FileResourceStream s = new FileResourceStream(new File("c:\\tst.pdf"));
+				
+//		add(new AbstractAjaxTimerBehavior(Duration.milliseconds(500)) {
+//			private static final long serialVersionUID = 1L;
+//
+//			/**
+//			 * @see org.apache.wicket.ajax.AbstractAjaxTimerBehavior#onTimer(org.apache.wicket.ajax.AjaxRequestTarget)
+//			 */
+//			protected void onTimer(AjaxRequestTarget target) {
+//				System.out.println("onload event");
+//				
+//				IResourceStream s = new AbstractResourceStreamWriter() {
+//					
+//					private static final long serialVersionUID = 1L;
+//
+//					public void write(OutputStream os) {
+//						System.out.println("Starting write");
+//						try {
+//							FileInputStream is = new FileInputStream(new File("C:\\tst.pdf"));
+//							IOUtils.copy(is, os);
+//							this.close();
+//						} catch (FileNotFoundException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						} catch (IOException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//						System.out.println("Done");
+//					}
+//				};
+//				
+//				
+//				RequestCycle.get().setRedirect(true);
+//		    	RequestCycle.get().setRequestTarget(new ResourceStreamRequestTarget(s, "test.pdf"));
+//
+//			}
+			
+//		});
+		
+		
+//		ResourceStreamRequestTarget target = new ResourceStreamRequestTarget(new StringResourceStream(
+//				builder.toString(), "text/plain"));
+//		target.setFileName(fileName);
+//    	RequestCycle.get().setRequestTarget(target);
+	    	
+//	}
+		System.out.println("starting page");
+	   
+		try {
+			ISBIDocumentLocationManagement service = ServiceLocator.lookupService(ISBIDocumentLocationManagement.class);
+		
+			final URI uri = service.retrieveDocument(SBIDocumentType.INFOSLIP_DOCUMENT,
+					"TEST", 630006056);
+			
+//	    byte[] data;
+		
+//			data = IOUtils.toByteArray(new FileInputStream(new File("C:\\tst.pdf")));
+//			 IResourceStream resourceStream = new MyApiResourceStream(data);
+//			IResourceStream s = new AbstractResourceStreamWriter() {
+//			
+//			private static final long serialVersionUID = 1L;
+//
+//			public void write(OutputStream os) {
+//				System.out.println("Starting write");
+//				try {
+//					FileInputStream is = new FileInputStream(new File(uri));
+//					IOUtils.copy(is, os);
+//					this.close();
+//				} catch (FileNotFoundException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				System.out.println("Done");
+//			}
+//			};
+		
+			
+			try {
+				FileInputStream is = new FileInputStream(new File(uri));
+				getRequestCycle().getResponse().setContentType("application/ifs");
+				((WebResponse)getRequestCycle().getResponse()).setAttachmentHeader("your.ifs");
+				IOUtils.copy(is, getRequestCycle().getResponse().getOutputStream());
+				is.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    
+	   
+		} catch (NamingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (DataNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+	@Override
+	public String getPageName() {
+		return "Test screen";
+	}
+
+	@Override
+	public ContextType getContextTypeRequired() {
+		return ContextType.AGREEMENT;
+	}
+
+}
+
+

@@ -1,0 +1,207 @@
+package za.co.liberty.web.pages.businesscard;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.Authenticator;
+import java.net.InetSocketAddress;
+import java.net.PasswordAuthentication;
+import java.net.Proxy;
+import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import org.apache.http.HttpHost;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.wicket.PageParameters;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.image.Image;
+import org.apache.wicket.markup.html.image.resource.DynamicImageResource;
+
+public class MapPage extends WebPage {
+	
+	public static void main(String [] args) {
+		try {
+			
+			Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("fw", 80));
+			
+			
+			
+			final String authUser = "liberty\\jzb0608";
+			final String authPassword = "nice try";
+			Authenticator.setDefault(
+			   new Authenticator() {
+			      public PasswordAuthentication getPasswordAuthentication() {
+			         return new PasswordAuthentication(
+			               authUser, authPassword.toCharArray());
+			      }
+			   }
+			);
+
+//			System.setProperty("http.proxyUser", authUser);
+//			System.setProperty("http.proxyPassword", authPassword);
+//			System.setProperty("http.proxyPort", "80");
+//			System.setProperty("http.proxyHost", "fw");
+			
+			URL url = new URL("https://maps.googleapis.com/maps/api/staticmap?center=-26.11647,27.98482&zoom=16&size=600x600&maptype=roadmap&markers=color:red|label:C|-26.11647,27.98482&key=AIzaSyAt6pD5wzXYgH7xsyvQ4IQ-ghJCbfF5egc");
+			url = new URL(
+					"http://www.chop.co.za");
+		
+			System.out.println(url);
+			
+			InputStream in = url.openConnection(proxy).getInputStream();
+			
+			if (true) {
+				InputStreamReader is = new InputStreamReader(in);
+				StringBuilder sb=new StringBuilder();
+				BufferedReader br = new BufferedReader(is);
+				String read = br.readLine();
+
+				while(read != null) {
+				    //System.out.println(read);
+//				    sb.append(read);
+					System.out.println(read);
+				    read =br.readLine();
+				    
+				}
+
+				
+			}
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public MapPage() {
+		this(null);
+	}
+	
+	public MapPage(PageParameters parms) {
+		
+		String tmpCoordinates="-26.11647,27.98482";
+		String tmpOtherAuth = null;
+		int tmpMethod = 0;
+		if (parms!=null) {
+			if (parms.getKey("coordinates")!=null) {
+				tmpCoordinates = parms.getString("coordinates");
+			}
+			if (parms.getKey("otherauth")!=null) {
+				tmpOtherAuth = parms.getString("otherauth");
+			}
+			if (parms.getKey("method")!=null) {
+				tmpMethod = parms.getInt("method");
+			}
+		}
+		
+		final String coordinates=tmpCoordinates;
+		final String otherAuth = tmpOtherAuth;
+		final int method = tmpMethod;
+		System.out.println("Passed coordinates " + coordinates + "  ,otherauth!=null =" + (otherAuth!=null) + "  ,method="+method);
+		
+		DynamicImageResource resource = new DynamicImageResource() {
+			
+			@Override
+			protected byte[] getImageData() {
+					
+//					String urlString = "https://maps.googleapis.com/maps/api/staticmap?center=" + coordinates +
+//							"&zoom=16&size=600x600&maptype=roadmap&markers=color:red|label:C|" + coordinates +
+//							"&key=AIzaSyAt6pD5wzXYgH7xsyvQ4IQ-ghJCbfF5egc";
+					String urlString = "https://maps.googleapis.com/maps/api/staticmap";
+					
+					Logger.getLogger("org.apache.http").setLevel(Level.DEBUG);
+					Logger.getLogger("org.apache.http.wire").setLevel(Level.DEBUG);
+
+
+					/*
+					 * Define the proxy server
+					 */
+					HttpHost proxy = new HttpHost("proxy",new Integer(8080));
+					CloseableHttpClient httpclient = HttpClients.custom()
+									.setRoutePlanner(new DefaultProxyRoutePlanner(proxy))
+									.build();
+					        
+					/**
+					 * Build the URL and do the call
+					 */
+				    try {
+					    HttpHost target = new HttpHost("maps.googleapis.com", 443, "https");
+					    
+					    /*
+					     * Build parameters
+					     */
+					    List<NameValuePair> params = new LinkedList<NameValuePair>();					    
+					    params.add(new BasicNameValuePair("center", coordinates));
+					    params.add(new BasicNameValuePair("zoom", "16"));
+					    params.add(new BasicNameValuePair("size", "600x600"));
+					    params.add(new BasicNameValuePair("maptype", "roadmap"));
+					    params.add(new BasicNameValuePair("markers", "color:red|" + coordinates));
+					    params.add(new BasicNameValuePair("key", "AIzaSyAt6pD5wzXYgH7xsyvQ4IQ-ghJCbfF5egc"));
+					    String paramString = URLEncodedUtils.format(params, "utf-8");
+
+					    
+					   /*
+					    * 
+					    */
+					    RequestConfig config = RequestConfig.custom()
+				                .setProxy(proxy)
+				                .build();
+				            
+				        HttpGet httpget = new HttpGet(urlString + "?" + paramString);					
+				        httpget.setConfig(config);
+				        
+				        System.out.println("Executing request " + httpget.getRequestLine() + " to " + target + " via " + proxy);
+				        CloseableHttpResponse response = httpclient.execute(target, httpget);
+				        try {
+			                System.out.println("----------------------------------------");
+			                System.out.println(response.getStatusLine());
+		                
+			                return toImageData(ImageIO.read(response.getEntity().getContent()));
+			            } finally {
+			                response.close();
+			            }
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						throw new RuntimeException(e);
+					} finally {
+			            try {
+							httpclient.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+			        }
+				        
+						
+
+			}
+		};
+//		resource.setFormat("image/png");
+		
+		add(new Image("map", resource));
+		
+		
+//		PackageResourceReference resourceReference = 
+//	            new PackageResourceReference(getClass(), "staticmap_large.png");
+//		add(new Image("map", resourceReference));
+	}
+	
+	
+	
+	
+}

@@ -1,0 +1,62 @@
+package za.co.liberty.web.pages;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.wicket.ajax.AbstractAjaxTimerBehavior;
+import org.apache.wicket.ajax.AjaxEventBehavior;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.protocol.http.WebRequest;
+import org.apache.wicket.request.target.basic.RedirectRequestTarget;
+import org.apache.wicket.util.time.Duration;
+
+/**
+ * This page shows a busy sign while it is loading the passed URL/page in the
+ * background.
+ * 
+ * @author JZB0608 - 17 Mar 2010
+ *
+ */
+public class RedirectingPage extends WebPage {
+
+	private static final long serialVersionUID = 1L;
+	
+	private String redirectUrl; 
+	
+	public RedirectingPage(String redirectUrl) {
+		this.redirectUrl = redirectUrl;
+		
+		add(new AjaxEventBehavior("onload") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void onEvent(AjaxRequestTarget target) {
+				getRequestCycle().setRedirect(true);
+				getRequestCycle().setRequestTarget(new RedirectRequestTarget(
+						RedirectingPage.this.redirectUrl));
+			}
+			
+		});
+		add(new AbstractAjaxTimerBehavior(Duration.milliseconds(500)) {
+			private static final long serialVersionUID = 1L;
+
+			/**
+			 * @see org.apache.wicket.ajax.AbstractAjaxTimerBehavior#onTimer(org.apache.wicket.ajax.AjaxRequestTarget)
+			 */
+			protected void onTimer(AjaxRequestTarget target) {
+				WebRequest webRequest = (WebRequest) getRequestCycle().getRequest();
+				HttpServletRequest httpServletRequest = webRequest.getHttpServletRequest();
+			
+				//TODO jzb0608 - support https dynamically
+				String t = "http://" + httpServletRequest.getServerName() + ":" + httpServletRequest.getServerPort();
+				
+				getRequestCycle().setRequestTarget(new RedirectRequestTarget(t+
+						RedirectingPage.this.redirectUrl));
+				getRequestCycle().setRedirect(true);
+			}
+
+		});
+	}
+	
+}

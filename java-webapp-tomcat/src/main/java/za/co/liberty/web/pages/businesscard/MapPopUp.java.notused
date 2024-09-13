@@ -1,0 +1,153 @@
+package za.co.liberty.web.pages.businesscard;
+
+import java.awt.Dimension;
+import java.io.Serializable;
+
+import org.apache.wicket.Page;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow.MaskType;
+
+/**
+ * Generic dialog panel that has a context panel and button panel at the bottom.  
+ * 
+ * @author JZB0608 - Oct 2014
+ *
+ */
+public abstract class MapPopUp implements Serializable {
+	
+	/* Constants */
+	private static final long serialVersionUID = 1;
+	
+	/* Attributes */
+	private boolean isSaveCookie;
+	private MapPage mapPage = null;
+	
+	
+	/**
+	 * Default constructor.  Cookies are not saved 
+	 */
+	public MapPopUp() {
+		this(false);
+	}
+	
+	/**
+	 * If true a cookie will be saved holding re-size info for window.
+	 * 
+	 * @param saveCookie
+	 */
+	public MapPopUp(boolean saveCookie) {
+		this.isSaveCookie = saveCookie;
+	}
+	
+		
+	/**
+	 * The title of the pop-up window.  A default is provided.
+	 * 
+	 * @return
+	 */
+	public String getWindowTitle() {
+		return "Map";
+	}
+	
+	/**
+	 * Name of the cookie.  A default is provided.  Note that all windows
+	 * that have the same cookie name will have the same size information
+	 * stored.
+	 * 
+	 * @return
+	 */
+	public String getCookieName() {
+		return "MAP_CONTEXT_WINDOW" + this.hashCode();
+	}
+	
+//	/** 
+//	 * Get the options
+//	 * 
+//	 * @return
+//	 */
+//	public ContextSearchPageOptions getSearchPageOptions() {
+//		return new ContextSearchPageOptions(getWindowTitle());
+//	}
+	
+//	/**
+//	 * Create the search page. Override this if you 
+//	 * want to pass different options or create a different
+//	 * search page.
+//	 * 
+//	 * @param window
+//	 * @return
+//	 */
+//	public MapPage createMapPage(ModalWindow window) {
+//		return new MapPage() {
+//
+//
+//			@Override
+//			public String getPageName() {
+//				return getWindowTitle();
+//			}
+//
+//			@Override
+//			public String getDailogMessage() {
+//				return getDialogMessage();
+//			}
+//		};
+//		// remember to change this to getOptions
+//	}
+	
+	public abstract String getDialogMessage();
+	
+	/**
+	 * Create the modal window
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public ModalWindow createModalWindow(String id) {
+		final ModalWindow window = new ModalWindow(id);
+		
+		window.setTitle(getWindowTitle());
+		
+		if (isSaveCookie) {
+			window.setCookieName(getCookieName());
+		}
+		
+		// Create the page
+		window.setPageCreator(new ModalWindow.PageCreator() {
+			private static final long serialVersionUID = 1L;
+			public Page createPage() {
+				return new MapPage();
+			}
+		});
+		
+		// Close window call back
+		window.setWindowClosedCallback(new ModalWindow.WindowClosedCallback() {
+			private static final long serialVersionUID = 1L;
+			
+			public void onClose(AjaxRequestTarget target) {
+				System.out.println("WindowsClosedCallBack");
+			}
+			
+		});
+
+		// Initialise window settings
+		Dimension initD = getInitialWindowDimension();
+		Dimension minD = getMinimumWindowDimension();
+		window.setMinimalHeight( minD.height);
+		window.setInitialHeight( initD.height);
+		window.setMinimalWidth( minD.width);
+		window.setInitialWidth( initD.width);
+		window.setMaskType(MaskType.SEMI_TRANSPARENT);
+		window.setCssClassName(ModalWindow.CSS_CLASS_GRAY);
+		return window;
+	}
+
+	public Dimension getMinimumWindowDimension() {
+		return new Dimension(600, 600 );
+	}
+	
+	public Dimension getInitialWindowDimension() {
+		return new Dimension(600, 600 );
+	}
+
+}

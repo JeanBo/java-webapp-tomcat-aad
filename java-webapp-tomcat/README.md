@@ -19,7 +19,7 @@ Create and build your app with the following command:
 * run the docker image with:  docker run -p 8080:8080 jeanbod/tomcat-webapp:8.5
 * you can change/ add users by editing the following file:  src/main/tomcat/tomcat-users.xml 
 * access the counter app with the following url: http://localhost:8080/java-webapp-tomcat
-* you can access the secret part of the app (see the web.xml) by accessing the following url: http://localhost:8080/java-webapp-tomcat/secure
+* you can access the secret part of the app (see the web.xml) by accessing the following url: http://localhost:8080/java-webapp-tomcat
 * you can find the username password info in the tomcat-users.xml file, default demo/demo123
 
 ## How does it work

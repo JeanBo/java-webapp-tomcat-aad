@@ -1,0 +1,27 @@
+
+
+
+
+mvn install:install-file -Dfile=C:\CCProjects\java-webapp-tomcat-aad\java-webapp-tomcat\src\main\webapp\WEB-INF\lib\SRSBusinessExceptions.jar -DgroupId=za.co.liberty.test -DartifactId=<artifact-id> -Dversion=6.0.0 -Dpackaging=SRSBusinessExceptions
+
+    AccountEJB.jar
+    commIntLIB.jar
+    CommonBusLib.jar
+    FtxEJB.jar
+    IAARuleEngineBus.jar
+    IAASecurityBus.jar
+    LibAgreementEJB.jar
+    LibAgreementKIND.jar
+    PartyEJB.jar
+    RatingBusEJB.jar
+    SInfraIntEJB.jar
+    SInfraUtilLIB.jar
+    SRSBusEJB.jar
+    SRSBusinessExceptions.jar
+    SRSBusinessLayer.jar
+    SRSBusLIB.jar
+    SRSDataTransferObjects.jar
+    SRSHelpers.jar
+    SRSInterfaces.jar
+    SRSPersistentLayer.jar
+SRSUtilLIB.jar

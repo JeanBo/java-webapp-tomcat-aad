@@ -1,0 +1,63 @@
+<MenuItemConfig version="1">
+	<!--  Group name is the name to display for the group -->
+	<MenuItem ID="HOME"/>
+	<MenuItem ID="LOGOFF"/>
+	<MenuItem ID="OLD_SRS"/>
+	
+	<Group name="Admin" ID="ADMIN">
+	<!-- ID should be the same as the Internal Menu Name configuration on the menu item screen-->
+		<MenuItem ID="ADMIN_MENU_ITEM"/>
+		<MenuItem ID="ADMIN_ROLES"/>
+		<MenuItem ID="ADMIN_RULES"/>
+		<MenuItem ID="ADMIN_USER_PROFILE"/>
+		<MenuItem ID="TEAM_ADMIN_MENU"/>
+		<MenuItem ID="REQUEST_CATEGORY"/>
+		<MenuItem ID="TimedRoleUpdate"/>
+		<MenuItem ID="COMMUNICATION_SCHEDULER"/>
+		<MenuItem ID="ASTUTE_DELTAS_REQUEST"/>
+		<MenuItem ID="FIT_AND_PROPER_BROADCAST_REQUEST"/>
+        <MenuItem ID="SEGMENT_ADMIN"/>
+		<MenuItem ID="SEGMENT_NAME_ADMIN"/>
+		<MenuItem ID="DIFF_FACTOR"/>
+		<MenuItem ID="FRANCHISE_TEMPLATE"/>
+		<MenuItem ID="MI_TABLES"/>		
+	</Group>
+	<Group name="Agreement" ID="AGREEMENT">	
+		<MenuItem ID="AGREEMENT_MAINTAIN"/>
+		<MenuItem ID="FIT_AND_PROPER"/>
+		<MenuItem ID="SALES_BC_LINKING"/>
+	</Group>
+	<Group name="Person/ Organisation" ID="PARTY">	
+		<MenuItem ID="MAINTAIN_PARTY"/>	
+		<MenuItem ID="BUSINESSCARD_DETAILS_PAGE"/>	
+		<MenuItem ID="ADVANCED_PRACTICE_PAGE"/>						
+	</Group>
+	<Group name="Hierarchy" ID="HIERARCHY">	
+		<MenuItem ID="Hierarchy"/>
+		<MenuItem ID="HIERARCHY_TREE_VIEW"/>					
+	</Group>
+	<Group name="Enquiry" ID="ENQUIRY">
+		<MenuItem ID="ENQUIRY_CONTRACT_NO"/>
+		<MenuItem ID="CommissionStatements"/>
+		<MenuItem ID="REQUEST_STATUS_ENQUIRY"/>
+		<MenuItem ID="AGREEMENT_PRIVILEGE"/>
+	</Group>
+	<Group name="Core" ID="Core">
+		<MenuItem ID="Contract_Transfer"/>
+		<MenuItem ID="Book_Transfer"/>
+		<MenuItem ID="Segmented_Transfer"/>		
+		<MenuItem ID="CORE_REPORT"/>				
+	</Group>
+	<Group name="Earning Admin" ID="EARNINGADMIN">
+	   <MenuItem ID="REL_FE"/>
+	</Group>
+	<Group name="TAX" ID="TAX">
+	   <MenuItem ID="TAX_XML"/>
+	   <MenuItem ID="TAX_TOOLS"/>
+	</Group>
+	<Group name="Transactions" ID="TRANSACTIONS">
+	   <MenuItem ID="Policy_Transactions"/>
+	   <MenuItem ID="Generic_Transactions"/>
+	   <MenuItem ID="Transaction_Rejects"/>
+	</Group>
+</MenuItemConfig>
