@@ -109,6 +109,10 @@
 					<groupId>adaptx</groupId>
 					<artifactId>adaptx</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>xerces</groupId>
+					<artifactId>xerces</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>

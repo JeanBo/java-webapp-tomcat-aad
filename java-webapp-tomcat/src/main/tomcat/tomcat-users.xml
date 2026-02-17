@@ -10,5 +10,8 @@
   <user username="both" password="welcome12345" roles="tomcat,role1"/>
   <user username="role1" password="welcome12345" roles="role1"/>
   <user username="demo" password="demo123" roles="demo"/>                                                                                                     
-  <user username="chris" password="demo123" roles="demo"/>                                                                                                     
+  <user username="chris" password="demo123" roles="demo"/>
+
+  <user username="admin" password="password" roles="manager-gui"/>
+
 </tomcat-users> 
