@@ -20,6 +20,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 //import com.ibm.websphere.security.CustomRegistryException;
@@ -76,7 +77,8 @@ import za.co.liberty.xml.queries.Query;
  */
 @Stateless(name = "SecurityManagement")
 public class SecurityManagement implements ISecurityManagement {
-	
+
+
 	/*
 	 * Static map holding SessionUserID object for uacf-id's
 	 */
@@ -210,7 +212,7 @@ public class SecurityManagement implements ISecurityManagement {
 	private static final Logger logger = Logger.getLogger(SecurityManagement.class);
 	
 	public SecurityManagement() {
-//		logger.setLevel(Level.DEBUG);
+		logger.setLevel(Level.DEBUG);
 	}
 	
 	/**
@@ -1015,13 +1017,16 @@ public class SecurityManagement implements ISecurityManagement {
 		RuleType[] ruleTypes = RuleType.getPartyRules(ApplicableEditState.MODIFY);
 		SessionUserProfileDTO currentUserObj = ((SessionUserProfileDTO)currentUser);
 		if(!hasOneRuleOfTypes(currentUserObj,ruleTypes)){
+			logger.warn("return false as it has one of the rules! " + ruleTypes);
 			return false;
 		}
 		//check for the modify party with agreement rule, we then validate this separatly as it has too much data to keep in one list
 		for(RuleType rule : currentUserObj.ruleListMap.keySet()){
 
 		}			
-		return ((SessionUserProfileDTO)currentUser).ruleValidator.validate(partyoid,ruleTypes);		
+		boolean result =  ((SessionUserProfileDTO)currentUser).ruleValidator.validate(partyoid,ruleTypes);
+		logger.warn("check ruleValidator for partyOid " + partyoid + " rule types " + ruleTypes);
+		return result;
 	}	 
 	
 	/**
@@ -1396,38 +1401,21 @@ public class SecurityManagement implements ISecurityManagement {
 
 		
 		long count = 2000;
-		
-//		// Add all items in array
-//		for (String str : FIXED_PANEL_ARRAY) {	
-//			count++;
-//		// Party tab specifics
-//			// This one is the base security for some of those panels
-//			MenuItemDTO d = new MenuItemDTO();
-//			d.setMenuItemID(count);
-//			d.setDbKey(d.getMenuItemID());
-//			d.setMenuItemDescription("Base panel");
-//			d.setMenuItemName("auto");
-//			d.setAddAccess(true);
-//			d.setModifyAccess(true);
-//			d.setEnabled(true);
-//			d.setImplClazz(str);
-//			menuItemsList.add(d);	
-//		
-//		}
+
 				
 		for (int i = 0; i < FIXED_PANEL_ARRAY.length; ++i) {
 			MenuItemDTO d = new MenuItemDTO();
-			d.setMenuItemID(Long.getLong(FIXED_MENU_ITEMS[i][0]));
+			d.setMenuItemID(Long.getLong(FIXED_PANEL_ARRAY[i][0]));
 			d.setDbKey(d.getMenuItemID());
-			d.setMenuItemDescription(FIXED_MENU_ITEMS[i][2]);
-			d.setMenuItemName(FIXED_MENU_ITEMS[i][1]);
+			d.setMenuItemDescription(FIXED_PANEL_ARRAY[i][2]);
+			d.setMenuItemName(FIXED_PANEL_ARRAY[i][1]);
 			d.setAddAccess(true);
 			d.setModifyAccess(true);
 			d.setEnabled(true);
 			d.setPanel(true);
-			d.setImplClazz(FIXED_MENU_ITEMS[i][3]);
+			d.setImplClazz(FIXED_PANEL_ARRAY[i][3]);
 			menuItemsList.add(d);
-			System.out.println ("Added menu " + d);
+			System.out.println ("Added panel " + d);
 		}
 		
 		return menuItemsList;

@@ -1,20 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE web-app
-      PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-      "http://java.sun.com/dtd/web-app_2_3.dtd">
-
-<web-app>
-    <display-name>Wicket Examples</display-name>
-    <filter>
-        <filter-name>HelloWorldApplication</filter-name>
-        <filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5" metadata-complete="true">
+    <display-name>SRSAppWeb</display-name>
+    <servlet>
+        <servlet-name>SRSAppWeb</servlet-name>
+        <servlet-class>
+            org.apache.wicket.protocol.http.WicketServlet
+        </servlet-class>
         <init-param>
-          <param-name>applicationClassName</param-name>
-          <param-value>wicket.examples.helloworld.HelloWorldApplication</param-value>
+            <param-name>applicationClassName</param-name>
+            <param-value>za.co.liberty.web.system.SRSApplication</param-value>
         </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>HelloWorldApplication</filter-name>
+        <init-param>
+            <param-name>wicket.configuration</param-name>
+            <param-value>deployment</param-value>
+        </init-param>
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SRSAppWeb</servlet-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </servlet-mapping>
+    <security-constraint>
+        <display-name>ResourceCollection</display-name>
+        <web-resource-collection>
+            <web-resource-name>ResourceCollection</web-resource-name>
+            <description>ResourceCollectionDescr</description>
+            <url-pattern>/*</url-pattern>
+            <http-method>
+                GET</http-method>
+            <http-method>
+                PUT</http-method>
+            <http-method>
+                POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description></description>
+            <role-name>GUI</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+    <security-role>
+        <description></description>
+        <role-name>GUI</role-name>
+    </security-role>
 </web-app>

@@ -6,7 +6,7 @@
          <fileSet>
              <directory>target</directory>
              <includes>
-                 <include>java-webapp-tomcat.war</include>
+                 <include>SRSAppWeb.war</include>
              </includes>
              <fileMode>0644</fileMode>
           </fileSet>

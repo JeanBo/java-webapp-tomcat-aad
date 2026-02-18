@@ -10,3 +10,9 @@ RemoteSystemsTempFiles/
 pf-requestservice/requests/request*
 /java-webapp-tomcat-aad/nbproject/
 acs-kubernetes/acs-template/backup/
+/.idea/.gitignore
+/.idea/java-webapp-tomcat-aad.iml
+/.idea/material_theme_project_new.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml

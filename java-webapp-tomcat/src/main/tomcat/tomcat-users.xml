@@ -5,10 +5,17 @@
               version="1.0">
   <role rolename="demo"/>
   <role rolename="tomcat"/>
-  <role rolename="role1"/>
-  <user username="tomcat" password="welcome12345" roles="tomcat"/>
-  <user username="both" password="welcome12345" roles="tomcat,role1"/>
-  <user username="role1" password="welcome12345" roles="role1"/>
+  <role rolename="GUI"/>
+  <role rolename="srsrulerole1"/>
+  <role rolename="srsrulerole3"/>
+  <role rolename="srsrulerole5"/>
+  <role rolename="srsrulerole11"/>
+  <role rolename="srsrulerole14"/>
+  <role rolename="srsrulerole3"/>
+  <user username="admin" password="jean" roles="tomcat,demo"/>
+  <user username="srs1802" password="liberty" roles="GUI,srsrulerole1,srsrulerole3,srsrulerole5,srsrulerole11,srsrulerole14"/>
+  <user username="srs1510" password="liberty" roles="GUI,srsrulerole1,srsrulerole3,srsrulerole5,srsrulerole11,srsrulerole14"/>
+  <user username="srs2412" password="liberty" roles="GUI,srsrulerole1,srsrulerole3,srsrulerole5,srsrulerole11,srsrulerole14"/>
   <user username="demo" password="demo123" roles="demo"/>                                                                                                     
   <user username="chris" password="demo123" roles="demo"/>
 

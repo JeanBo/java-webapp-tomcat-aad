@@ -16,11 +16,16 @@ A simple java webapp that demonstrates the following:
 Create and build your app with the following command:
 * mvn clean install docker:build
 * this will create a docker image named: jeanbod/tomcat-webapp:8.5 (see pom.xml, the docker-maven-plugin part)
-* run the docker image with:  docker run -p 8080:8080 jeanbod/tomcat-webapp:8.5
+* run the docker image with:  
+* 
+* docker run --name AppWebTest -p 8080:8080 jeanbod/tomcat-webapp:8.5
+*
+* docker rm AppWebTest
+*
 * you can change/ add users by editing the following file:  src/main/tomcat/tomcat-users.xml 
-* access the counter app with the following url: http://localhost:8080/java-webapp-tomcat
-* you can access the secret part of the app (see the web.xml) by accessing the following url: http://localhost:8080/java-webapp-tomcat
-* you can find the username password info in the tomcat-users.xml file, default demo/demo123
+* access the SRSAppWeb app with the following url: http://localhost:8080/SRSAppWeb
+* you can find the username password info in the tomcat-users.xml file, default is SRS1802 with 
+* password liberty.
 
 ## How does it work
 

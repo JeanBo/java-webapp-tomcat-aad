@@ -501,13 +501,17 @@
 		<resources>
 			<resource>
 				<directory>src\main\java</directory>
-				<includes><include>**/*.html</include></includes>
+				<includes>
+					<include>**/*.html</include>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
 				<excludes><exclude>**/*.java</exclude></excludes>
 			</resource>
 		</resources>
 
 
-		<finalName>java-webapp-tomcat</finalName>
+		<finalName>SRSAppWeb</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
